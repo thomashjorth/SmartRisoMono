@@ -1,18 +1,16 @@
 ﻿var VisualizeApp = angular.module('VisualizeApp', ['ngRoute']);
 
-VisualizeApp.controller('GaugeController', GaugeController);
-VisualizeApp.controller('GraphController', GraphController);
 
 var configFunction = function ($routeProvider) {
 
     $routeProvider.
         when('/chart/gauge', {
             templateUrl: 'visualization/gauge',
-            controller: GaugeController
+            controller: 'GaugeController'
         })
         .when('/chart/graph', {
             templateUrl:'visualization/graph',
-            controller: GraphController
+            controller: 'GraphController'
         });
 }
 configFunction.$inject = ['$routeProvider'];

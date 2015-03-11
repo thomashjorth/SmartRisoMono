@@ -70,6 +70,7 @@
     <Folder Include="Scripts\Controllers\" />
     <Folder Include="Scripts\Visualization\" />
     <Folder Include="Views\Visualization\" />
+    <Folder Include="Scripts\Services\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -95,12 +96,13 @@
     <Content Include="Views\Visualization\Graph.cshtml" />
     <Content Include="Views\Visualization\Gauge.cshtml" />
     <Content Include="Content\Site.min.css" />
+    <Content Include="Scripts\Services\AppService.js" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
-        <XspParameters Port="0" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+        <XspParameters Port="9001" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
