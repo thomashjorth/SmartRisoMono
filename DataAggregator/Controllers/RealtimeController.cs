@@ -7,22 +7,26 @@ using System.Web.Http;
 
 namespace DataAggregator.Controllers
 {
-    public class RealtimeController : ApiController
-    {
-        // GET: api/Realtime/5
-        public string Get(string id)
-        {
-            return WS.DownloadXML(id);
-        }
+	public class RealtimeController : ApiController
+	{
+		// GET: api/Realtime/5
+		public HttpResponseMessage Get(string id)
+		{
 
-        // POST: api/Realtime
-        public void Post([FromBody]string value)
-        {
-        }
+			var response = Request.CreateResponse (HttpStatusCode.Created, Utils.JSONUtil.ToJSON(Double.Parse (WS.DownloadXML (id))));
+			response.Headers.Add("Access-Control-Allow-Origin", "*");
+			response.Headers.Add("Access-Control-Allow-Methods", "GET");
+			return response;
+		}
 
-        // PUT: api/Realtime/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-    }
+		// POST: api/Realtime
+		public void Post([FromBody]string value)
+		{
+		}
+
+		// PUT: api/Realtime/5
+		public void Put(int id, [FromBody]string value)
+		{
+		}
+	}
 }
