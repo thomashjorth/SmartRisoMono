@@ -1,7 +1,6 @@
 ﻿VisualizeApp.controller('GraphController', 
 	function ($scope) {
-		$.getScript("../Visualization/Graph.js", function () {});
-
+		
 		drawGraph();
 		updateValueGraph(1);
 		updateValueGraph(4);

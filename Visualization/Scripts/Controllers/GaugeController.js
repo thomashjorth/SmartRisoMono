@@ -1,6 +1,5 @@
 ﻿VisualizeApp.controller('GaugeController', function ($scope, $http, AppService) {
-    $.getScript("../Visualization/Gauge.js", function () { });
-
+    
     drawGauge(-2, 2, "Power");
     updateValue(-0.44);
 

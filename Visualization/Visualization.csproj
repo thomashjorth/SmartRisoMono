@@ -2312,6 +2312,9 @@
     <Content Include="Scripts\Libraries\jquery-1.11.2.min.js" />
     <Content Include="Scripts\Libraries\d3\d3.js" />
     <Content Include="Scripts\Libraries\d3\d3.min.js" />
+    <Content Include="Scripts\Controllers\d3GraphController.js" />
+    <Content Include="Views\Home\d3Graph.css" />
+    <Content Include="Views\Visualization\d3Graph.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
