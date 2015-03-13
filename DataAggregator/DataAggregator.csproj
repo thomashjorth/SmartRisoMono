@@ -105,7 +105,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\WS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\JSONUtil.cs" />
     <Compile Include="Controllers\AggregationController.cs" />
@@ -114,6 +113,7 @@
     <Compile Include="Models\DER.cs" />
     <Compile Include="Models\SimpleStatistics.cs" />
     <Compile Include="Utils\Configuration.cs" />
+    <Compile Include="Utils\WS.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -165,7 +165,7 @@
     </VisualStudio>
     <MonoDevelop>
       <Properties>
-        <XspParameters Port="0" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+        <XspParameters Port="8084" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>

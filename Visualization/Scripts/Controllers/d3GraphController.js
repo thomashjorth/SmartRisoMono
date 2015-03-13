@@ -1,4 +1,4 @@
-﻿VisualizeApp.controller('d3GraphController', ['$scope','$interval', function($scope, $interval){
+﻿VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', function($scope, $interval){
     $scope.salesData=[
         {hour: 1,sales: 54},
         {hour: 2,sales: 66},
@@ -14,10 +14,21 @@
 
     $interval(function(){
         var hour=$scope.salesData.length+1;
-        var sales= Math.round(Math.random() * 100);
+        var sales= 0;
+        $http.get('http://127.0.0.1:8084/api/Aggregation/AvgActivePower').
+        success(function(data) {
+            sales = data;
+        });
         $scope.salesData.push({hour: hour, sales:sales});
     }, 1000, 10);
 }]);
+
+function NewReading($scope, $http) {
+    $http.get('http://127.0.0.1:8084/api/Aggregation/AvgActivePower').
+        success(function(data) {
+            $scope.reading = data;
+        });
+}
 
 VisualizeApp.directive('linearChart', function($parse, $window){
    return{

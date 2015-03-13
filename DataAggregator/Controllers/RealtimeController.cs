@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using DataAggregator.Utils;
 
 namespace DataAggregator.Controllers
 {
@@ -12,8 +11,9 @@ namespace DataAggregator.Controllers
 		// GET: api/Realtime/5
 		public HttpResponseMessage Get(string id)
 		{
+			var response = Request.CreateResponse (HttpStatusCode.Created, Utils.JSONUtil.ToJSON(
 
-			var response = Request.CreateResponse (HttpStatusCode.Created, Utils.JSONUtil.ToJSON(Double.Parse (WS.DownloadXML (id))));
+			Double.Parse (Utils.WS.DownloadXML (id,"localhost","8085"))));
 			response.Headers.Add("Access-Control-Allow-Origin", "*");
 			response.Headers.Add("Access-Control-Allow-Methods", "GET");
 			return response;

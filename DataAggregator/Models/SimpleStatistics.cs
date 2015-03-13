@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Xml;
 using System.Collections.Generic;
 using DataAggregator.Models;
+using DataAggregator.Utils;
+
 namespace DataAggregator.Models
 {
 	static class SimpleStatistics
@@ -11,7 +12,7 @@ namespace DataAggregator.Models
 			string value;
 			int count = 0;
 			foreach (DER d in ders) {
-				value = WS.DownloadXML ("getActivePower", d.hostname, d.port);
+				value = Utils.WS.DownloadXML ("getActivePower", d.hostname, d.port);
 				if(!value.Equals("NAN")){
 					sum += Double.Parse(value);
 					count++;

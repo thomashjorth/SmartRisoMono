@@ -11,7 +11,7 @@
 			return $http({
 				method: "get",
 				//headers: headers,
-				url: "http://127.0.0.1:9002/api/Realtime/getActivePower"
+				url: "http://127.0.0.1:8084/api/Realtime/getActivePower"
 			});
 		};
 	}
