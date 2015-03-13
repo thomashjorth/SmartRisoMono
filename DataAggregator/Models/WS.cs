@@ -20,20 +20,21 @@ namespace DataAggregator
 	//public enum GenericLoadWSPUSH { pauseSchedule, setActiveOperatingMode, setActivePSchedule, setActiveQSchedule, setConstantP/{p}, setConstantQ/{q}, setInactivePValue/{d}, setInactiveQValue/{d}, setPAutocorrelation/{a}, setPMean/{m}, setPStdDeviation/{s}, setP_U_Characteristics, setP_f_Characteristics, setQAutocorrelation/{a}, setQMean/{m}, setQStdDeviation/{s}, setQ_U_Characteristics, setQ_f_Characteristics, startSchedule, stopSchedule, startLoad, stopLoad, };
 
 
-	public class WS
+	public static class WS
 	{ 
-		private static string port = "8080";
-		private static string hostname = "localhost";
-
 		private static string Client = "GenericLoadWS";
 
-		public static string DownloadXML(string function)
+		public static string DownloadXML(string function, string hostname, string port)
 		{
 			string url = "http://" + hostname + ":" + port + "/" + Client + "/" + function;
 			string xml;
 			using (var webClient = new WebClient())
-			{
-				xml = webClient.DownloadString(url);
+			{try{
+					xml = webClient.DownloadString(url);
+				}
+				catch{
+					return "NAN";
+				}
 			}
 
 			XDocument doc = XDocument.Parse(xml);
@@ -41,6 +42,12 @@ namespace DataAggregator
 			var value = doc.Root.Element("value").Value;
 			var timestamp = doc.Root.Element("timestampMicros").Value;
 			return value;
+		}
+		public static string DownloadXML(string function)
+		{
+
+
+			return DownloadXML (function, "localhost", "8080");
 		}
 	}
 }

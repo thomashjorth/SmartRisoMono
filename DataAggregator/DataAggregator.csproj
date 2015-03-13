@@ -98,6 +98,7 @@
     <Reference Include="System.Web.WebPages.Razor">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\RealtimeController.cs" />
@@ -107,6 +108,11 @@
     <Compile Include="Models\WS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\JSONUtil.cs" />
+    <Compile Include="Controllers\AggregationController.cs" />
+    <Compile Include="Controllers\CirclePackingController.cs" />
+    <Compile Include="Models\Circle.cs" />
+    <Compile Include="Models\DER.cs" />
+    <Compile Include="Models\SimpleStatistics.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
