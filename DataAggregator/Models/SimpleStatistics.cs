@@ -12,14 +12,18 @@ namespace DataAggregator.Models
 			string value;
 			int count = 0;
 			foreach (DER d in ders) {
-				value = Utils.WS.DownloadXML ("getActivePower", d.hostname, d.port);
+				
+				value = Utils.WS.DownloadXML ("getActivePower", d.hostname, d.port).Replace('.',',');
+				System.Diagnostics.Debug.WriteLine ("parse: " + Double.Parse(value));
 				if(!value.Equals("NAN")){
 					sum += Double.Parse(value);
+					System.Diagnostics.Debug.WriteLine ("sum: "  + sum);
 					count++;
 				}
 
 			}
-			return sum / count;
+			System.Diagnostics.Debug.WriteLine (sum + " " + Math.Round (sum / count, 2));
+			return sum/count;
 		}
 	}
 }

@@ -74,6 +74,7 @@
     <Folder Include="Scripts\Libraries\" />
     <Folder Include="Scripts\Libraries\angular-1.3.1\" />
     <Folder Include="Scripts\Libraries\d3\" />
+    <Folder Include="Scripts\Directives\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -2315,6 +2316,7 @@
     <Content Include="Scripts\Controllers\d3GraphController.js" />
     <Content Include="Views\Home\d3Graph.css" />
     <Content Include="Views\Visualization\d3Graph.cshtml" />
+    <Content Include="Scripts\Directives\d3GraphDirective.js" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

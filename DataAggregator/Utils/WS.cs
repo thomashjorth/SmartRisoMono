@@ -41,7 +41,7 @@ namespace DataAggregator.Utils
 
 			var value = doc.Root.Element("value").Value;
 			var timestamp = doc.Root.Element("timestampMicros").Value;
-			return value;
+			return value.Substring(0,4);
 		}
 		public static string DownloadXML(string function)
 		{
