@@ -11,7 +11,7 @@ namespace DataAggregator.Controllers
 		// GET: api/Realtime/5
 		public HttpResponseMessage Get(string id)
 		{
-			var response = Request.CreateResponse (HttpStatusCode.Created, Utils.JSONUtil.ToJSON(
+			var response = Request.CreateResponse (HttpStatusCode.Created,Newtonsoft.Json.JsonConvert.SerializeObject(
 				WS.DownloadXML (id,"localhost","8085")));
 			//Double.Parse (Utils.WS.DownloadXML (id,"localhost","8085"))));
 			response.Headers.Add("Access-Control-Allow-Origin", "*");

@@ -1,12 +1,12 @@
 ﻿VisualizeApp.directive('linearChart', function($parse, $window){
    return{
       restrict:'EA',
-      template:"<svg width='850' height='200'></svg>",
+      template:"<svg width='400' height='200'></svg>",
        link: function(scope, elem, attrs){
            var exp = $parse(attrs.chartData);
 
            var salesDataToPlot=exp(scope);
-           var padding = 20;
+           var padding = 40;
            var pathClass="path";
            var xScale, yScale, xAxisGen, yAxisGen, lineFun;
 
@@ -23,15 +23,11 @@
 
                xScale = d3.scale.linear()
                    .domain([salesDataToPlot[0].hour, salesDataToPlot[salesDataToPlot.length-1].hour])
-                   .range([padding + 5, rawSvg.attr("width") - padding]);
+                   .range([padding+10, rawSvg.attr("width")]);
 
                yScale = d3.scale.linear()
-                   .domain([d3.min(salesDataToPlot, function (d) {
-                       return d.sales;
-                   }), d3.max(salesDataToPlot, function (d) {
-                       return d.sales;
-                   })])
-                   .range([rawSvg.attr("height") - padding, 0]);
+                   .domain([-1, 1])
+                   .range([rawSvg.attr("height") - padding, 20]);
 
                xAxisGen = d3.svg.axis()
                    .scale(xScale)
@@ -49,8 +45,7 @@
                    })
                    .y(function (d) {
                        return yScale(d.sales);
-                   })
-                   .interpolate("basis");
+                   });
            }
          
          function drawLineChart() {
@@ -59,12 +54,12 @@
 
                svg.append("svg:g")
                    .attr("class", "x axis")
-                   .attr("transform", "translate(0,180)")
+                   .attr("transform", "translate(-10,90)")
                    .call(xAxisGen);
 
                svg.append("svg:g")
                    .attr("class", "y axis")
-                   .attr("transform", "translate(20,0)")
+                   .attr("transform", "translate(40,0)")
                    .call(yAxisGen);
 
                svg.append("svg:path")
@@ -74,21 +69,25 @@
                        "stroke-width": 2,
                        "fill": "none",
                        "class": pathClass
-                   });
+                   })
+                   .attr("transform", "translate(-10,0)");
            }
 
            function redrawLineChart() {
 
                setChartParameters();
-
+               // Shows all data
                svg.selectAll("g.y.axis").call(yAxisGen);
-
                svg.selectAll("g.x.axis").call(xAxisGen);
-
+               svg.selectAll("path.line").remove();
                svg.selectAll("."+pathClass)
                    .attr({
                        d: lineFun(salesDataToPlot)
                    });
+               svg.selectAll(".tick").each(function (d, i) {
+        			if ( i == 0 ) {
+            		this.remove();
+        			}});
            }
 
            drawLineChart();
