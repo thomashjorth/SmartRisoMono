@@ -8,9 +8,9 @@ var configFunction = function ($routeProvider) {
             templateUrl: 'visualization/gauge',
             controller: 'GaugeController'
         })
-        .when('/chart/graph', {
-            templateUrl:'visualization/graph',
-            controller: 'GraphController'
+        .when('/chart/d3graph', {
+            templateUrl:'visualization/d3graph',
+            controller: 'd3GraphController'
         });
 }
 configFunction.$inject = ['$routeProvider'];

@@ -4,10 +4,10 @@
     ];
 
     $interval(function(){
-        var hour=$scope.salesData.length+1;
-        var sales= AppService.getMethodRealtime("AvgActivePower")
+        var h=$scope.salesData.length+1;
+        AppService.getMethodAggregation("AvgActivePower")
     		.success(function (response){
+    		$scope.salesData.push({hour: h, sales:JSON.parse(response)});
     	});
-        $scope.salesData.push({hour: hour, sales:sales});
     }, 1000);
 }]);

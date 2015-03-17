@@ -3,9 +3,11 @@
     drawGauge(-2, 2, "Power");
     updateValue(-0.44);
 
-    AppService.getMethod("getActivePower")
+   
+
+    AppService.getMethodRealtime("getActivePower")
     	.success(function (response){
-    		alert(response);
+    		updateValue(response);
     	});
 	}
 );

@@ -6,7 +6,9 @@ using System.Web.Mvc;
 using System.Web.Http;
 using DataAggregator.Models;
 using System.IO;
+using System.Net.Http;
 using System.Runtime.Serialization.Json;
+using System.Net;
 
 namespace DataAggregator.Controllers
 {
@@ -17,16 +19,21 @@ namespace DataAggregator.Controllers
 		};
 		
 		// GET: hostname:port/api/Aggregation/id
-		public string Get(string id)
+		public HttpResponseMessage Get(string id)
 		{
 			List<DER> ders = Utils.Configuration.DerConfig ();
 
 			if (id == functions.ElementAt (0)) {
-				return Utils.JSONUtil.ToJSON(ders);
+				var response = Request.CreateResponse (HttpStatusCode.Created,Newtonsoft.Json.JsonConvert.SerializeObject(ders));
+				response.Headers.Add("Access-Control-Allow-Origin", "*");
+				response.Headers.Add("Access-Control-Allow-Methods", "GET");
+				return response;
 			} 
 			if (id == functions.ElementAt (1)) {
-				
-				return ""+SimpleStatistics.AvgActivePower(ders);
+				var response = Request.CreateResponse (HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject(SimpleStatistics.AvgActivePower(ders)));
+				response.Headers.Add("Access-Control-Allow-Origin", "*");
+				response.Headers.Add("Access-Control-Allow-Methods", "GET");
+				return response;
 			} 
 
 
@@ -36,9 +43,11 @@ namespace DataAggregator.Controllers
 				foreach (string s in functions) {
 					output = output + " : " + s;
 				}
-				return id + " : is not a function supported by this Web Service. Try: " + output;
+				var response = Request.CreateResponse (HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject(id + " : is not a function supported by this Web Service. Try: " + output));
+				response.Headers.Add("Access-Control-Allow-Origin", "*");
+				response.Headers.Add("Access-Control-Allow-Methods", "GET");
+				return response;
 			}
-		//	NetworkAggregation netA = new NetworkAggregation ("../DERs.xml");
 
 		}
 	}}

@@ -14,6 +14,7 @@ namespace DataAggregator.Models
 			foreach (DER d in ders) {
 				
 				value = Utils.WS.DownloadXML ("getActivePower", d.hostname, d.port).Replace('.',',');
+
 				System.Diagnostics.Debug.WriteLine ("parse: " + Double.Parse(value));
 				if(!value.Equals("NAN")){
 					sum += Double.Parse(value);

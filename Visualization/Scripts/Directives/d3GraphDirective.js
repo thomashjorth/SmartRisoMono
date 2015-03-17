@@ -26,7 +26,9 @@
                    .range([padding + 5, rawSvg.attr("width") - padding]);
 
                yScale = d3.scale.linear()
-                   .domain([0, d3.max(salesDataToPlot, function (d) {
+                   .domain([d3.min(salesDataToPlot, function (d) {
+                       return d.sales;
+                   }), d3.max(salesDataToPlot, function (d) {
                        return d.sales;
                    })])
                    .range([rawSvg.attr("height") - padding, 0]);
@@ -34,7 +36,7 @@
                xAxisGen = d3.svg.axis()
                    .scale(xScale)
                    .orient("bottom")
-                   .ticks(salesDataToPlot.length - 1);
+                   .ticks(10);
 
                yAxisGen = d3.svg.axis()
                    .scale(yScale)

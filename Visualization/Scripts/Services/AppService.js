@@ -4,7 +4,7 @@
 		this.getMethodRealtime = function(id){
 			return $http({
 				method: "get",
-				url: "http://127.0.0.1:8084/api//Realtime/getActivePower"
+				url: "http://127.0.0.1:8084/api/Realtime/getActivePower"
 			});
 		}
 
