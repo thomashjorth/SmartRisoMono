@@ -2,28 +2,35 @@
 using System.Collections.Generic;
 using DataAggregator.Models;
 using DataAggregator.Utils;
+using System.IO;
+using Newtonsoft.Json;
+using DataModel;
 
 namespace DataAggregator.Models
 {
 	static class SimpleStatistics
 	{
 		public static double AvgActivePower(List<DER> ders){
+			
 			double sum = 0.0;
 			string value;
 			int count = 0;
 			foreach (DER d in ders) {
 				
-				value = Utils.WS.DownloadXML ("getActivePower", d.hostname, d.port).Replace('.',',');
-
-				System.Diagnostics.Debug.WriteLine ("parse: " + Double.Parse(value));
+				value = WS.DownloadXML ("getActivePower", d.hostname, d.port);
 				if(!value.Equals("NAN")){
-					sum += Double.Parse(value);
-					System.Diagnostics.Debug.WriteLine ("sum: "  + sum);
-					count++;
+					using (var sr = new StringReader(value))
+					using (var jr = new JsonTextReader(sr))
+					{
+						var js = new JsonSerializer();
+						var composite = js.Deserialize<CompositeMeasurement>(jr);
+						sum += composite.value;
+						count++;
+					}
+
 				}
 
 			}
-			System.Diagnostics.Debug.WriteLine (sum + " " + Math.Round (sum / count, 2));
 			return sum/count;
 		}
 	}

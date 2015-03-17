@@ -29,6 +29,8 @@ namespace DataAggregator.Controllers
 				response.Headers.Add("Access-Control-Allow-Methods", "GET");
 				return response;
 			} 
+
+			// "AvgActivePower"
 			if (id == functions.ElementAt (1)) {
 				var response = Request.CreateResponse (HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject(SimpleStatistics.AvgActivePower(ders)));
 				response.Headers.Add("Access-Control-Allow-Origin", "*");

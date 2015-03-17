@@ -12,8 +12,8 @@ namespace DataAggregator.Controllers
 		public HttpResponseMessage Get(string id)
 		{
 			var response = Request.CreateResponse (HttpStatusCode.Created, Utils.JSONUtil.ToJSON(
-
-			Double.Parse (Utils.WS.DownloadXML (id,"localhost","8085"))));
+				Utils.WS.DownloadXML (id,"localhost","8085")));
+			//Double.Parse (Utils.WS.DownloadXML (id,"localhost","8085"))));
 			response.Headers.Add("Access-Control-Allow-Origin", "*");
 			response.Headers.Add("Access-Control-Allow-Methods", "GET");
 			return response;

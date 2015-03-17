@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Xml.Linq;
-
+using DataModel;
+using System.Globalization;
 namespace DataAggregator.Utils
 {
 	public enum GenericLoadWSGET { getNodeConfiguration, getActiveOperatingMode, getActivePSchedules, 
@@ -39,9 +40,20 @@ namespace DataAggregator.Utils
 
 			XDocument doc = XDocument.Parse(xml);
 
-			var value = doc.Root.Element("value").Value;
-			var timestamp = doc.Root.Element("timestampMicros").Value;
-			return value.Substring(0,4);
+			CompositeMeasurement activePower = new CompositeMeasurement ();			
+			activePower.value 			= Double.Parse(
+				doc.Root.Element("value").Value.Replace(',', '.'), 
+				CultureInfo.InvariantCulture
+			);
+			System.Diagnostics.Debug.Write (Double.Parse(doc.Root.Element	("value").Value.Substring (0, 4)));
+			activePower.timestampMicros = long.Parse(doc.Root.Element	("timestampMicros").Value);
+			activePower.timePrecision 	= short.Parse(doc.Root.Element	("timePrecision").Value);
+			activePower.quality 		= byte.Parse(doc.Root.Element	("quality").Value);
+			activePower.validity 		= byte.Parse(doc.Root.Element	("validity").Value);
+			activePower.source 			= byte.Parse(doc.Root.Element	("source").Value);
+			string res = Newtonsoft.Json.JsonConvert.SerializeObject(activePower);
+			//return doc.Root.Element("value").Value.Substring (0, 4);
+			return res;
 		}
 		public static string DownloadXML(string function)
 		{
