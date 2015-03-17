@@ -1,22 +1,14 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
+﻿using System.Collections.Generic;
 
 namespace DataAggregator
 {
-	[DataContract(Namespace = "")] 
-	internal class Circle
+	public class Circle
 	{
-		[DataMember]
-		internal string name;
+		public string name;
 
-		[DataMember]
-		internal int size;
+		public int size;
 
-		[DataMember]
-		internal List<Circle> children; 
+		public List<Circle> children; 
 	}
 }
 

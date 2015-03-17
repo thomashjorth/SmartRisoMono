@@ -25,7 +25,7 @@ namespace DataAggregator.Controllers
 			c1.children = new List<Circle>{ };
 			c.children.Add (c1);
 
-			return Utils.JSONUtil.ToJSON(c);
+			return Newtonsoft.Json.JsonConvert.SerializeObject(c);
 		}
     }
 }

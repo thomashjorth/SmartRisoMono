@@ -1,56 +1,51 @@
-﻿<html>
-<head>
-	<link rel="stylesheet" type="text/css" src="d3Graph.css">
-	<script src="../../Scripts/Libraries/angular-1.3.1/angular.min.js"></script>
-	<script src="../../Scripts/Libraries/angular-1.3.1/angular-route.min.js"></script>
+﻿
 
-	<script src="../../Scripts/Libraries/jquery-1.11.2.min.js"></script>
+<style>
+.axis path,
+.axis line{
+  fill: none;
+  stroke:black;
+  shape-rendering:crispEdge;
+}
 
-	<script src="../../Scripts/Libraries/d3/d3.min.js"></script>
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+.axis text{
+  font-family: sans-serif;
+  font-size: 10px;
+}
 
-	<style>
-	.axis path,
-	.axis line{
-	  fill: none;
-	  stroke:black;
-	  shape-rendering:crispEdge;
-	}
+h1{
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+}
+.tick
+{
+  stroke-dasharray: 1, 2;
+}
+</style>
 
-	.axis text{
-	  font-family: sans-serif;
-	  font-size: 10px;
-	}
+<h2>Welcome to ASP.NET MVC @ViewData["Version"] on @ViewData["Runtime"]!</h2>
 
-	h1{
-	  font-family: sans-serif;
-	  font-weight: bold;
-	  font-size: 16px;
-	}
-	.tick
-	{
-	  stroke-dasharray: 1, 2;
-	}
-	</style>
+<div id="visualization">
+	<div ng-include="'Visualization/d3Graph'"></div>
+</div>
 
-	<script type="text/javascript" src="../../Scripts/Visualization/Gauge.js"></script>
-	<script type="text/javascript" src="../../Scripts/Visualization/Graph.js"></script>
+<script src="../../Scripts/Libraries/angular-1.3.1/angular.min.js"></script>
+<script src="../../Scripts/Libraries/angular-1.3.1/angular-route.min.js"></script>
 
-	<script type="text/javascript" src="../../Scripts/app.js"></script>
-	<script type="text/javascript" src="../../Scripts/Services/AppService.js"></script>
-	<script type="text/javascript" src="../../Scripts/Controllers/GraphController.js"></script>
-	<script type="text/javascript" src="../../Scripts/Controllers/GaugeController.js"></script>
-	<script type="text/javascript" src="../../Scripts/Controllers/d3GraphController.js"></script>
-	<script type="text/javascript" src="../../Scripts/Directives/d3GraphDirective.js"></script>
-</head>
-<body>
-	<h2>Welcome to ASP.NET MVC @ViewData["Version"] on @ViewData["Runtime"]!</h2>
+<script src="../../Scripts/Libraries/jquery-1.11.2.min.js"></script>
 
-	<div id="visualization">
-	</div>
+<script src="../../Scripts/Libraries/d3/d3.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
-	<div ng-controller="d3GraphController">
-	  	<div linear-chart chart-data="salesData"></div>
-	</div>
-</body>
-</html>
+<script type="text/javascript" src="../../Scripts/Visualization/Gauge.js"></script>
+<script type="text/javascript" src="../../Scripts/Visualization/Graph.js"></script>
+
+<script type="text/javascript" src="../../Scripts/app.js"></script>
+<script type="text/javascript" src="../../Scripts/Services/AppService.js"></script>
+<script type="text/javascript" src="../../Scripts/Controllers/GraphController.js"></script>
+<script type="text/javascript" src="../../Scripts/Controllers/GaugeController.js"></script>
+<script type="text/javascript" src="../../Scripts/Controllers/d3GraphController.js"></script>
+<script type="text/javascript" src="../../Scripts/Directives/d3GraphDirective.js"></script>
+
+
