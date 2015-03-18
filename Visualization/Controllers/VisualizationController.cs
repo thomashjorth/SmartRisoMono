@@ -23,5 +23,10 @@ namespace Visualization.Controllers
 		{
 			return View();
 		}
+		// GET: Visualization
+		public ActionResult d3Gauge()
+		{
+			return View();
+		}
 	}
 }

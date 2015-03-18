@@ -2316,6 +2316,9 @@
     <Content Include="Scripts\Controllers\d3GraphController.js" />
     <Content Include="Views\Visualization\d3Graph.cshtml" />
     <Content Include="Scripts\Directives\d3GraphDirective.js" />
+    <Content Include="Scripts\Directives\d3GaugeDirective.js" />
+    <Content Include="Scripts\Controllers\d3GaugeController.js" />
+    <Content Include="Views\Visualization\d3Gauge.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

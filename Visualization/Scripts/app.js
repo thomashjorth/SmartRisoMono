@@ -13,6 +13,6 @@
 //            controller: 'd3GraphController'
 //        });
 //}
-configFunction.$inject = ['$routeProvider'];
+//configFunction.$inject = ['$routeProvider'];
 
-VisualizeApp.config(configFunction);
+//VisualizeApp.config(configFunction);

@@ -3,21 +3,22 @@
       restrict:'EA',
       template:"<svg width='400' height='200'></svg>",
        link: function(scope, elem, attrs){
-           var exp = $parse(attrs.chartData);
+			var exp = $parse(attrs.chartData);
 
-           var salesDataToPlot=exp(scope);
-           var padding = 40;
-           var pathClass="path";
-           var xScale, yScale, xAxisGen, yAxisGen, lineFun;
+			var salesDataToPlot=exp(scope);
+			var padding = 40;
+			var pathClass="path";
+			var xScale, yScale, xAxisGen, yAxisGen, lineFun;
 
-           var d3 = $window.d3;
-           var rawSvg=elem.find('svg');
-           var svg = d3.select(rawSvg[0]);
+			var d3 = $window.d3;
+			var rawSvg=elem.find('svg');
+			var svg = d3.select(rawSvg[0]);
 
-           scope.$watchCollection(exp, function(newVal, oldVal){
-               salesDataToPlot=newVal;
-               redrawLineChart();
-           });
+
+			scope.$watchCollection(exp, function(newVal, oldVal){
+				salesDataToPlot=newVal;
+				redrawLineChart();
+			});
 
            function setChartParameters(){
 
