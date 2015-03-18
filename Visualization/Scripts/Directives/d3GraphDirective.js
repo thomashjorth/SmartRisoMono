@@ -5,7 +5,7 @@
        link: function(scope, elem, attrs){
 			var exp = $parse(attrs.chartData);
 
-			var salesDataToPlot=exp(scope);
+			var dataToPlot=exp(scope);
 			var padding = 40;
 			var pathClass="path";
 			var xScale, yScale, xAxisGen, yAxisGen, lineFun;
@@ -16,14 +16,14 @@
 
 
 			scope.$watchCollection(exp, function(newVal, oldVal){
-				salesDataToPlot=newVal;
+				dataToPlot=newVal;
 				redrawLineChart();
 			});
 
            function setChartParameters(){
 
                xScale = d3.scale.linear()
-                   .domain([salesDataToPlot[0].hour, salesDataToPlot[salesDataToPlot.length-1].hour])
+                   .domain([dataToPlot[0].timestamp, dataToPlot[dataToPlot.length-1].timestamp])
                    .range([padding+10, rawSvg.attr("width")]);
 
                yScale = d3.scale.linear()
@@ -42,10 +42,10 @@
 
                lineFun = d3.svg.line()
                    .x(function (d) {
-                       return xScale(d.hour);
+                       return xScale(d.timestamp);
                    })
                    .y(function (d) {
-                       return yScale(d.sales);
+                       return yScale(d.value);
                    });
            }
          
@@ -65,7 +65,7 @@
 
                svg.append("svg:path")
                    .attr({
-                       d: lineFun(salesDataToPlot),
+                       d: lineFun(dataToPlot),
                        "stroke": "blue",
                        "stroke-width": 2,
                        "fill": "none",
@@ -83,7 +83,7 @@
                svg.selectAll("path.line").remove();
                svg.selectAll("."+pathClass)
                    .attr({
-                       d: lineFun(salesDataToPlot)
+                       d: lineFun(dataToPlot)
                    });
                svg.selectAll(".tick").each(function (d, i) {
         			if ( i == 0 ) {

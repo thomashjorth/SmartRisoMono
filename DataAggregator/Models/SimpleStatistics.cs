@@ -10,11 +10,12 @@ namespace DataAggregator.Models
 {
 	static class SimpleStatistics
 	{
-		public static double AvgActivePower(List<DER> ders){
+		public static CompositeMeasurement AvgActivePower(List<DER> ders){
 			
 			double sum = 0.0;
 			string value;
 			int count = 0;
+			long lastTimestamp = 0;
 			foreach (DER d in ders) {
 				
 				value = WS.DownloadXML ("getActivePower", d.hostname, d.port);
@@ -25,13 +26,18 @@ namespace DataAggregator.Models
 						var js = new JsonSerializer();
 						var composite = js.Deserialize<CompositeMeasurement>(jr);
 						sum += composite.value;
+						lastTimestamp = composite.timestampMicros;
 						count++;
 					}
 
 				}
 
 			}
-			return sum/count;
+			CompositeMeasurement returnVal = new CompositeMeasurement ();
+			returnVal.value = sum / count;
+			returnVal.timestampMicros = lastTimestamp;
+
+			return returnVal;
 		}
 	}
 }

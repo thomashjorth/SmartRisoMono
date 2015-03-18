@@ -2313,11 +2313,11 @@
     <Content Include="Scripts\Libraries\jquery-1.11.2.min.js" />
     <Content Include="Scripts\Libraries\d3\d3.js" />
     <Content Include="Scripts\Libraries\d3\d3.min.js" />
-    <Content Include="Scripts\Controllers\d3GraphController.js" />
     <Content Include="Views\Visualization\d3Graph.cshtml" />
     <Content Include="Scripts\Directives\d3GraphDirective.js" />
     <Content Include="Scripts\Directives\d3GaugeDirective.js" />
     <Content Include="Scripts\Controllers\d3GaugeController.js" />
+    <Content Include="Scripts\Controllers\d3GraphController.js" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
