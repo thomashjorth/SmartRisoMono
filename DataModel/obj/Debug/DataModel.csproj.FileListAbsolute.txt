@@ -1,0 +1,4 @@
+C:\Users\AY\Documents\GitHub\SmartRisoMono\DataModel\bin\Debug\DataModel.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\DataModel\bin\Debug\DataModel.pdb
+C:\Users\AY\Documents\GitHub\SmartRisoMono\DataModel\obj\Debug\DataModel.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\DataModel\obj\Debug\DataModel.pdb

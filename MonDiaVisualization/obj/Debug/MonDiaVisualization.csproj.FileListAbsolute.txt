@@ -1,0 +1,17 @@
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\bin\MonDiaVisualization.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\bin\MonDiaVisualization.pdb
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\bin\System.Web.Helpers.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\bin\System.Web.Mvc.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\bin\System.Web.Razor.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\bin\System.Web.WebPages.Deployment.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\bin\System.Web.WebPages.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\bin\System.Web.WebPages.Razor.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\bin\System.Web.Razor.xml
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\bin\System.Web.Helpers.xml
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\bin\System.Web.WebPages.Deployment.xml
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\bin\System.Web.WebPages.xml
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\bin\System.Web.WebPages.Razor.xml
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\bin\System.Web.Mvc.xml
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\obj\Debug\MonDiaVisualization.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\obj\Debug\MonDiaVisualization.pdb
+C:\Users\AY\Documents\GitHub\SmartRisoMono\MonDiaVisualization\obj\Debug\MonDiaVisualization.csprojResolveAssemblyReference.cache

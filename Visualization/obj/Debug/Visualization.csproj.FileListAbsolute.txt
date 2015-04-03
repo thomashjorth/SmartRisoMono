@@ -1,0 +1,17 @@
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\bin\test.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\bin\test.pdb
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\bin\System.Web.Helpers.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\bin\System.Web.Mvc.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\bin\System.Web.Razor.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\bin\System.Web.WebPages.Deployment.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\bin\System.Web.WebPages.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\bin\System.Web.WebPages.Razor.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\bin\System.Web.Razor.xml
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\bin\System.Web.Helpers.xml
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\bin\System.Web.WebPages.xml
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\bin\System.Web.WebPages.Deployment.xml
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\bin\System.Web.WebPages.Razor.xml
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\bin\System.Web.Mvc.xml
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\obj\Debug\Visualization.csprojResolveAssemblyReference.cache
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\obj\Debug\test.dll
+C:\Users\AY\Documents\GitHub\SmartRisoMono\Visualization\obj\Debug\test.pdb

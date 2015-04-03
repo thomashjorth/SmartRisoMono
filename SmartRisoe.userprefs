@@ -1,6 +1,11 @@
-﻿<Properties StartupItem="Visualization\Visualization.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="htmlfile" />
-  <MonoDevelop.Ide.Workbench />
+﻿<Properties StartupItem="MonDiaVisualization\MonDiaVisualization.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="ChromeHTML" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonDiaVisualization\Views\Home\Index.cshtml">
+    <Files>
+      <File FileName="Visualization\Views\Home\Index.cshtml" Line="29" Column="1" />
+      <File FileName="MonDiaVisualization\Views\Home\Index.cshtml" Line="25" Column="94" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

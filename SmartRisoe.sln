@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAggregator", "DataAggre
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\DataModel.csproj", "{30342368-B74C-4D53-8E84-0E507D8821D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDiaVisualization", "MonDiaVisualization\MonDiaVisualization.csproj", "{837A7FE5-350F-4BC8-A0E8-20ADE342263C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5B740E7D-3928-40C0-93B7-D6EEDF409FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B740E7D-3928-40C0-93B7-D6EEDF409FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B740E7D-3928-40C0-93B7-D6EEDF409FEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{837A7FE5-350F-4BC8-A0E8-20ADE342263C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{837A7FE5-350F-4BC8-A0E8-20ADE342263C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{837A7FE5-350F-4BC8-A0E8-20ADE342263C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{837A7FE5-350F-4BC8-A0E8-20ADE342263C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B0F201EF-D1D7-47FB-876D-757B1253920B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B0F201EF-D1D7-47FB-876D-757B1253920B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0F201EF-D1D7-47FB-876D-757B1253920B}.Release|Any CPU.ActiveCfg = Release|Any CPU
