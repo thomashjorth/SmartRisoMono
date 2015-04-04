@@ -9,12 +9,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDiaVisualization", "MonDiaVisualization\MonDiaVisualization.csproj", "{837A7FE5-350F-4BC8-A0E8-20ADE342263C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonDiaExample", "MonDiaExample\MonDiaExample.csproj", "{1D38E9E0-EFED-4D58-8CAF-4B5AAE2091AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D38E9E0-EFED-4D58-8CAF-4B5AAE2091AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D38E9E0-EFED-4D58-8CAF-4B5AAE2091AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D38E9E0-EFED-4D58-8CAF-4B5AAE2091AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D38E9E0-EFED-4D58-8CAF-4B5AAE2091AE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{30342368-B74C-4D53-8E84-0E507D8821D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{30342368-B74C-4D53-8E84-0E507D8821D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30342368-B74C-4D53-8E84-0E507D8821D3}.Release|Any CPU.ActiveCfg = Release|Any CPU

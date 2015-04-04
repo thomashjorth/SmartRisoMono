@@ -1,9 +1,8 @@
-﻿<Properties StartupItem="MonDiaVisualization\MonDiaVisualization.csproj">
+﻿<Properties StartupItem="MonDiaExample\MonDiaExample.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="ChromeHTML" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="MonDiaVisualization\Views\Home\Index.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="MonDiaExample\Scripts\app.js">
     <Files>
-      <File FileName="Visualization\Views\Home\Index.cshtml" Line="29" Column="1" />
-      <File FileName="MonDiaVisualization\Views\Home\Index.cshtml" Line="25" Column="94" />
+      <File FileName="MonDiaExample\Scripts\app.js" Line="17" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
