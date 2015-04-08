@@ -28,5 +28,9 @@ namespace Visualization.Controllers
 		{
 			return View();
 		}
+		public ActionResult d3Pie()
+		{
+			return View();
+		}
 	}
 }

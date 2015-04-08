@@ -2318,6 +2318,10 @@
     <Content Include="Scripts\Directives\d3GaugeDirective.js" />
     <Content Include="Scripts\Controllers\d3GaugeController.js" />
     <Content Include="Scripts\Controllers\d3GraphController.js" />
+    <Content Include="Views\Visualization\d3Gauge.cshtml" />
+    <Content Include="Scripts\Controllers\d3PieController.js" />
+    <Content Include="Scripts\Directives\d3PieDirective.js" />
+    <Content Include="Views\Visualization\d3Pie.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
