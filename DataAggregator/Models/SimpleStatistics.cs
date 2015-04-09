@@ -39,6 +39,44 @@ namespace DataAggregator.Models
 
 			return returnVal;
 		}
+
+		public static List<LabeledInstance> AllActivePower(List<DER> ders){
+
+			List<LabeledInstance> res = new List<LabeledInstance> ();
+			string value;
+			Random rnd = new Random();
+
+			foreach (DER d in ders) {
+
+				value = WS.DownloadXML ("getActivePower", d.hostname, d.port);
+				System.Diagnostics.Debug.Write (value);
+				if(!value.Equals("NAN")){
+					using (var sr = new StringReader(value))
+					using (var jr = new JsonTextReader(sr))
+					{
+						var js = new JsonSerializer();
+						var composite = js.Deserialize<CompositeMeasurement>(jr);
+						res.Add(	new LabeledInstance(
+							d.hostname+" : " + d.port , 
+						//	composite.value));
+							rnd.Next(1, 13)));
+						System.Diagnostics.Debug.Write (res.Count);
+					}
+				}
+			}
+			return res;
+		}
+
+
+	}
+
+	public class LabeledInstance{
+		public LabeledInstance(string l, double i){
+			label = l;
+			instances = i;
+		}
+		public string label;
+		public double instances;
 	}
 }
 

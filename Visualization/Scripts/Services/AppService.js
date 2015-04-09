@@ -11,7 +11,7 @@
 		this.getMethodAggregation = function(id){
 			return $http({
 				method: "get",
-				url: "http://127.0.0.1:8084/api/Aggregation/AvgActivePower"
+				url: "http://127.0.0.1:8084/api/Aggregation/"+id
 			});
 		};
 	}

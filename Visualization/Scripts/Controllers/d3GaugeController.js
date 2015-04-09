@@ -6,7 +6,6 @@
         var h=Math.floor(Date.now()/1000)-$scope.firstTime;
         AppService.getMethodRealtime("getActivePower")
 			.success(function (response){
-				//alert(response);
 	    		$scope.CompositeMeasurement ={v: JSON.parse(response).value, timestamp:h};
     	});
     }, 1000);
