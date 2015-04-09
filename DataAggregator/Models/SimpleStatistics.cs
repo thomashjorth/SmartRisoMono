@@ -40,11 +40,13 @@ namespace DataAggregator.Models
 			return returnVal;
 		}
 
-		public static List<LabeledInstance> AllActivePower(List<DER> ders){
+
+
+		public static List<LabeledInstance> AllActivePower(List<DER> ders, int f){
 
 			List<LabeledInstance> res = new List<LabeledInstance> ();
 			string value;
-			Random rnd = new Random();
+			//Random rnd = new Random();
 
 			foreach (DER d in ders) {
 
@@ -56,10 +58,23 @@ namespace DataAggregator.Models
 					{
 						var js = new JsonSerializer();
 						var composite = js.Deserialize<CompositeMeasurement>(jr);
-						res.Add(	new LabeledInstance(
-							d.hostname+" : " + d.port , 
-						//	composite.value));
-							rnd.Next(1, 13)));
+						if (f == 1) {
+							if (composite.value > 0) {
+								res.Add(	new LabeledInstance(
+									d.hostname+" : " + d.port , 
+									composite.value));
+							}
+
+						}else if(f == -1){
+							if (composite.value < 0) {
+								res.Add(	new LabeledInstance(
+									d.hostname+" : " + d.port , 
+									composite.value*-1));
+							}
+						}
+
+
+						//	rnd.Next(1, 13)));
 						System.Diagnostics.Debug.Write (res.Count);
 					}
 				}

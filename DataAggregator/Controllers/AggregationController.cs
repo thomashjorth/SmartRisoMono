@@ -15,7 +15,7 @@ namespace DataAggregator.Controllers
     public class AggregationController : ApiController
     {
 		List<string> functions = new List<string> { 
-			"DeviceList", "AvgActivePower", "AllActivePower"
+			"DeviceList", "AvgActivePower", "AllPosActivePower", "AllNegActivePower"
 		};
 		
 		// GET: hostname:port/api/Aggregation/id
@@ -37,11 +37,23 @@ namespace DataAggregator.Controllers
 				response.Headers.Add("Access-Control-Allow-Methods", "GET");
 				return response;
 			} 
-			// "AllActivePower"
+			// "AllPosActivePower"
 			if (id == functions.ElementAt (2)) {
 				var response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject(
-						SimpleStatistics.AllActivePower(ders)
+						SimpleStatistics.AllActivePower(ders, 1)
+					)
+				);
+				response.Headers.Add("Access-Control-Allow-Origin", "*");
+				response.Headers.Add("Access-Control-Allow-Methods", "GET");
+
+				return response;
+			} 
+			// "AllNegActivePower"
+			if (id == functions.ElementAt (3)) {
+				var response = Request.CreateResponse (
+					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject(
+						SimpleStatistics.AllActivePower(ders, -1)
 					)
 				);
 				response.Headers.Add("Access-Control-Allow-Origin", "*");

@@ -5,12 +5,7 @@
        link: function (scope, elem, attrs) {
            var cDim, jhw_pie, canv, self, svg, rawSvg, d3, exp, data
 
-
-
-
-
-
-           function relax() {
+           function draw() {
 
                d3 = $window.d3;
                d3.select("svg").selectAll("*").remove();
@@ -187,17 +182,15 @@
                        labelForLine = d3.select(labelElements[i]);
                        return labelForLine.attr("y");
                    });
-                   setTimeout(relax,20)
+                   setTimeout(draw,20)
                }
            }
 
-           relax();
+           draw();
 
            scope.$watch('labelInstance', function (v) {
                data=v;
-               console.log("newVal");
-               console.log(v);
-               relax();
+               draw();
            });
 
 
