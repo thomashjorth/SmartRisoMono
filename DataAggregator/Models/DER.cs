@@ -1,36 +1,116 @@
-using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
+using System.Net;
+using System.Xml.Linq;
+
 namespace DataAggregator.Models
 {
-	[DataContract]
+
+	public enum WSInterface {
+		GenericLoadWS, NAN
+
+	};
+
+	public class App{
+		public string Name;
+		public bool Status;
+
+
+		public App(string name, bool status){
+			Name = name;
+			Status = status;
+		}
+		
+	}
+
+
+
 	public class DER{
-		[DataMember]
 
-		internal string hostname;
+		public DER(string hostname, string port, string type){
+			Hostname = hostname;
+			Port = port;
+			Type = type;
+			Apps = appNames();
+			WsInterface = determineWsInterface ().ToString();
+		}
+		public DER(string hostname, string port){
+			Hostname = hostname;
+			Port = port;
+			Apps = appNames();
+			WsInterface = determineWsInterface ().ToString();
+		}
 
-		[DataMember]
-		internal string port;
+		public string Hostname;
 
-		[DataMember]
-		internal string type;
+		public string Port;
 
-		[DataMember]
-		internal string role;
+		public string Type;
 
-		public static List<DER> DeserialiseDerJsonList(string json){
-			DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(List<DER>));
+		public List<App> Apps;
 
-			MemoryStream stream = new MemoryStream();
-			StreamWriter writer = new StreamWriter(stream);
-			writer.Write(json);
-			writer.Flush();
-			stream.Position = 0;
+		public string WsInterface;
 
-			List<DER> list = (List<DER>)ser.ReadObject(stream);
-			return list;
+		private List<App> appNames(){
+			List<App> apps = new List<App> ();
+			string url = "http://" + Hostname+":8084/AppViewWSServer/getNumberOfApps";
+			string xml;
+			using (var webClient = new WebClient())
+			{try{
+					xml = webClient.DownloadString(url);
+				}
+				catch{
+					return apps;
+				}
+			}
+
+
+			try{
+				XDocument doc = XDocument.Parse(xml);	
+				int numberOfApps =int.Parse(doc.Element("integer").Value);
+				string urlApp;
+
+				for (int i = 0; i < numberOfApps; i++) {
+					
+
+					urlApp = "http://" + Hostname+":8084/AppViewWSServer/getApp/"+i;
+
+					using (var webClient = new WebClient())
+					{try{
+							
+						
+							xml = webClient.DownloadString(urlApp);			
+							XDocument doc2 = XDocument.Parse(xml);
+							bool status = false;
+							if(doc2.Root.Attribute("status").Value.Equals("Running"))
+							{
+								status = true;
+							}
+							apps.Add (
+								new App(
+									
+									doc2.Root.Attribute("name").Value
+									,status)
+							);
+						}
+						catch{
+							apps.Add(new App("NAN1 :"+urlApp,false));
+						}
+					}
+
+				}
+			}catch{
+				apps.Add (new App("NAN2",false));
+			}
+			return apps;
+		}
+
+		private WSInterface determineWsInterface(){
+			foreach (App app in Apps) {
+				if (app.Name.Contains ("Dumpload")) {
+					return WSInterface.GenericLoadWS;
+				} 
+			}
+			return WSInterface.NAN;
 		}
 	}
 

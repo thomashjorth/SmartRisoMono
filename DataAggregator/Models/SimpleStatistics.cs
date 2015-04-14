@@ -18,7 +18,7 @@ namespace DataAggregator.Models
 			long lastTimestamp = 0;
 			foreach (DER d in ders) {
 				
-				value = WS.DownloadXML ("getActivePower", d.hostname, d.port);
+				value = WS.DownloadXML ("GenericLoadWS","getActivePower", d.Hostname, d.Port,ParseType.CompositeMeasurement);
 				if(!value.Equals("NAN")){
 					using (var sr = new StringReader(value))
 					using (var jr = new JsonTextReader(sr))
@@ -50,7 +50,7 @@ namespace DataAggregator.Models
 
 			foreach (DER d in ders) {
 
-				value = WS.DownloadXML ("getActivePower", d.hostname, d.port);
+				value = WS.DownloadXML (d.WsInterface, "getActivePower", d.Hostname, d.Port,ParseType.CompositeMeasurement);
 				System.Diagnostics.Debug.Write (value);
 				if(!value.Equals("NAN")){
 					using (var sr = new StringReader(value))
@@ -61,14 +61,14 @@ namespace DataAggregator.Models
 						if (f == 1) {
 							if (composite.value > 0) {
 								res.Add(	new LabeledInstance(
-									d.hostname+" : " + d.port , 
+									d.Hostname+" : " + d.Port , 
 									composite.value));
 							}
 
 						}else if(f == -1){
 							if (composite.value < 0) {
 								res.Add(	new LabeledInstance(
-									d.hostname+" : " + d.port , 
+									d.Hostname+" : " + d.Port , 
 									composite.value*-1));
 							}
 						}

@@ -4,14 +4,14 @@
 		this.getMethodRealtime = function(id){
 			return $http({
 				method: "get",
-				url: "http://127.0.0.1:8084/api/Realtime/getActivePower"
+				url: "http://127.0.0.1:9001/api/Realtime/getActivePower"
 			});
 		}
 
 		this.getMethodAggregation = function(id){
 			return $http({
 				method: "get",
-				url: "http://127.0.0.1:8084/api/Aggregation/"+id
+				url: "http://127.0.0.1:9001/api/Aggregation/"+id
 			});
 		};
 	}

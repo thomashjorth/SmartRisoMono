@@ -36,9 +36,9 @@
                cDim = {
                    height: 400,
                    width: 400,
-                   innerRadius: 50,
-                   outerRadius: 150,
-                   labelRadius: 175
+                   innerRadius: 0,
+                   outerRadius: 100,
+                   labelRadius: 100
                };
 
                // Set the size of our SVG element

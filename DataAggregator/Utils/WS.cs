@@ -20,24 +20,13 @@ namespace DataAggregator.Utils
 		isLoadOn, hasFan, isFanRunning, getTemperature, hasTemperatureMeasurement };
 	//public enum GenericLoadWSPUSH { pauseSchedule, setActiveOperatingMode, setActivePSchedule, setActiveQSchedule, setConstantP/{p}, setConstantQ/{q}, setInactivePValue/{d}, setInactiveQValue/{d}, setPAutocorrelation/{a}, setPMean/{m}, setPStdDeviation/{s}, setP_U_Characteristics, setP_f_Characteristics, setQAutocorrelation/{a}, setQMean/{m}, setQStdDeviation/{s}, setQ_U_Characteristics, setQ_f_Characteristics, startSchedule, stopSchedule, startLoad, stopLoad, };
 
+	public enum ParseType{
+		CompositeMeasurement
+	}
 
 	public static class WS
 	{ 
-		private static string Client = "GenericLoadWS";
-
-		public static string DownloadXML(string function, string hostname, string port)
-		{
-			string url = "http://" + hostname + ":" + port + "/" + Client + "/" + function;
-			string xml;
-			using (var webClient = new WebClient())
-			{try{
-					xml = webClient.DownloadString(url);
-				}
-				catch{
-					return "NAN";
-				}
-			}
-
+		public static CompositeMeasurement ParseXmlCompositeMeasurement(string xml){
 			XDocument doc = XDocument.Parse(xml);
 
 			CompositeMeasurement activePower = new CompositeMeasurement ();			
@@ -51,7 +40,25 @@ namespace DataAggregator.Utils
 			activePower.quality 		= byte.Parse(doc.Root.Element	("quality").Value);
 			activePower.validity 		= byte.Parse(doc.Root.Element	("validity").Value);
 			activePower.source 			= byte.Parse(doc.Root.Element	("source").Value);
-			string res = Newtonsoft.Json.JsonConvert.SerializeObject(activePower);
+			return activePower;
+
+		}
+		public static string DownloadXML(string Interface, string function, string hostname, string port, ParseType parseAs)
+		{
+			string url = "http://" + hostname + ":" + port + "/" + Interface + "/" + function;
+			string xml;
+			using (var webClient = new WebClient())
+			{try{
+					xml = webClient.DownloadString(url);
+				}
+				catch{
+					return "NAN";
+				}
+			}
+			string res = "NAN";
+			if(parseAs == ParseType.CompositeMeasurement){
+				res = Newtonsoft.Json.JsonConvert.SerializeObject (ParseXmlCompositeMeasurement (xml));
+			}
 			//return doc.Root.Element("value").Value.Substring (0, 4);
 			return res;
 		}
@@ -59,7 +66,7 @@ namespace DataAggregator.Utils
 		{
 
 
-			return DownloadXML (function, "localhost", "8080");
+			return DownloadXML ("GenericLoadWS",function, "localhost", "8080",ParseType.CompositeMeasurement);
 		}
 	}
 }

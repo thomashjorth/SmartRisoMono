@@ -17,11 +17,11 @@ namespace DataAggregator.Controllers
 		List<string> functions = new List<string> { 
 			"DeviceList", "AvgActivePower", "AllPosActivePower", "AllNegActivePower"
 		};
-		
+
 		// GET: hostname:port/api/Aggregation/id
 		public HttpResponseMessage Get(string id)
 		{
-			List<DER> ders = Utils.Configuration.DerConfig ();
+			List<DER> ders = Utils.Configuration.DerConfig (true);
 
 			if (id == functions.ElementAt (0)) {
 				var response = Request.CreateResponse (HttpStatusCode.Created,Newtonsoft.Json.JsonConvert.SerializeObject(ders));
