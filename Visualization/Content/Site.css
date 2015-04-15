@@ -1,0 +1,88 @@
+﻿
+html{
+	height: 95%;
+}
+
+body{
+	height: 100%;
+	width: 90%;
+	margin: 0 auto;
+}
+
+div {
+	width: 100%;
+	height: 100%;
+}
+
+path.slice{
+	stroke-width:2px;
+}
+
+polyline{
+	opacity: .3;
+	stroke: black;
+	stroke-width: 2px;
+	fill: none;
+}
+
+#visualization
+{
+	height: 100%;
+	width:70%;
+	float: left;
+	margin: 1%;
+}
+
+#leftPanel
+{
+	height: 100%;
+	width:14%;
+	background-color: black;
+	float: left;
+	margin: 1%;
+}
+
+#rightPanel
+{
+	height: 100%;
+	width: 10%;
+	background-color: black;
+	float: left;
+	margin: 1%;
+}
+
+#boxAll{
+	height: 100%;
+	position:relative;
+}
+
+.box{
+	width: 48%;
+	height: 29%;
+	/*background-color: black;*/
+	float: left;
+	margin: 1%;
+}
+
+#box1, #box3, #box5{
+	float: left;
+}
+#box2, #box4, #box6{
+	float: right;
+}
+#boxBottom{
+	background-color: black;
+	width: 100%;
+	height: 5%;
+	position:absolute; 
+	bottom:0;
+}
+
+svg{
+	display: block;
+  	margin: auto;
+}
+.controllerGauge{
+	width: 50%;
+	float: left;
+﻿}

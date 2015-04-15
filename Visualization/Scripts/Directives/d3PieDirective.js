@@ -1,200 +1,220 @@
-﻿VisualizeApp.directive('d3PieDirective', function($parse, $window){
+VisualizeApp.directive('d3PieDirective', function($parse, $window){
    return {
        restrict: 'AEC',
-       template: "<svg width='400' height='400'></svg>",
+       template: "<svg></svg>",
        link: function (scope, elem, attrs) {
-           var cDim, jhw_pie, canv, self, svg, rawSvg, d3, exp, data
+            var exp = $parse(attrs.chartData);
 
-           function draw() {
+            var PieChart=exp(scope);
 
-               d3 = $window.d3;
-               d3.select("svg").selectAll("*").remove();
-               rawSvg = elem.find('svg');
-               svg = d3.select(rawSvg[0]);
-               canv = angular.element('<svg><g id="canvas"><g id="art" /><g id="labels" /></g></svg>');
-               rawSvg.append(canv);
-               data = scope.labelInstance;
-               svg = d3.select("svg");
-               canvas = d3.select("#canvas");
-               art = d3.select("#art");
-               labels = d3.select("#labels");
+            var d3 = $window.d3;
+            var rawSvg=elem.find('svg');
+            var svg = d3.select(rawSvg[0]);
 
-               // Create the pie layout function.
-               // This function will add convenience
-               // data to our existing data, like
-               // the start angle and end angle
-               // for each data element.
-               jhw_pie = d3.layout.pie();
-               jhw_pie.value(function (d, i) {
-                   // Tells the layout function what
-                   // property of our data object to
-                   // use as the value.
-                   return d.instances;
-               });
+            var color;
 
-               // Store our chart dimensions
-               cDim = {
-                   height: 400,
-                   width: 400,
-                   innerRadius: 0,
-                   outerRadius: 100,
-                   labelRadius: 100
-               };
+            scope.$watchCollection(exp, function(newVal, oldVal){
+                PieChart=newVal;
 
-               // Set the size of our SVG element
-               svg.attr({
-                   height: cDim.height,
-                   width: cDim.width
-               });
+                var list = [];
+                for (var i = 0; i < newVal.length; i++) {
+                    list.push(PieChart[i].label)
+                };
+                color = d3.scale.category20()
+                    .domain(list);
 
-               // This translate property moves the origin of the group's coordinate
-               // space to the center of the SVG element, saving us translating every
-               // coordinate individually.
-               canvas.attr("transform", "translate(" + (cDim.width / 2) + "," + (cDim.width / 2) + ")");
+                change(color.domain().map(function(label){
+                        return { label: label }
+                    }).sort(function(a,b) {
+                        return d3.ascending(a.label, b.label);
+                    }));
+            });
 
+            var width = ($('.box').outerHeight()*0.95)*2.13,
+            height = $('.box').outerHeight()*0.95,
+            radius = Math.min(width, height) / 2;
 
-               pied_data = jhw_pie(data);
+            svg
+                .attr("width", width)
+                .attr("height", height);
 
-               // The pied_arc function we make here will calculate the path
-               // information for each wedge based on the data set. This is
-               // used in the "d" attribute.
-               pied_arc = d3.svg.arc()
-                   .innerRadius(50)
-                   .outerRadius(150);
+            var g = svg.append("g")
+                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+            g.append("g")
+                .attr("class", "slices");
+            g.append("g")
+                .attr("class", "labels");
+            g.append("g")
+                .attr("class", "lines");
 
-               // This is an ordinal scale that returns 10 predefined colors.
-               // It is part of d3 core.
-               pied_colors = d3.scale.category10();
+            var pie = d3.layout.pie()
+                .sort(null)
+                .value(function(d) {
 
-               // Let's start drawing the arcs.
-               enteringArcs = art.selectAll(".wedge").data(pied_data).enter();
+                    for (var i = 0; i < PieChart.length; i++) {
+                        if(PieChart[i].label == d.label)
+                            return PieChart[i].value;
+                    };
+                });
 
-               enteringArcs.append("path")
-                   .attr("class", "wedge")
-                   .attr("d", pied_arc)
-                   .style("fill", function (d, i) {
-                       return pied_colors(i);
-                   });
+            var arc = d3.svg.arc()
+                .outerRadius(radius * 0.8)
+                .innerRadius(radius * 0.4);
 
-               // Now we'll draw our label lines, etc.
-               enteringLabels = labels.selectAll(".label").data(pied_data).enter();
-               labelGroups = enteringLabels.append("g").attr("class", "label");
-               labelGroups.append("circle").attr({
-                   x: 0,
-                   y: 0,
-                   r: 2,
-                   fill: "#000",
-                   transform: function (d, i) {
-                       centroid = pied_arc.centroid(d);
-                       return "translate(" + pied_arc.centroid(d) + ")";
-                   },
-                   'class': "label-circle"
-               });
+            var outerArc = d3.svg.arc()
+                .innerRadius(radius * 0.9)
+                .outerRadius(radius * 0.9);
 
-               // "When am I ever going to use this?" I said in
-               // 10th grade trig.
-               textLines = labelGroups.append("line").attr({
-                   x1: function (d, i) {
-                       return pied_arc.centroid(d)[0];
-                   },
-                   y1: function (d, i) {
-                       return pied_arc.centroid(d)[1];
-                   },
-                   x2: function (d, i) {
-                       centroid = pied_arc.centroid(d);
-                       midAngle = Math.atan2(centroid[1], centroid[0]);
-                       x = Math.cos(midAngle) * cDim.labelRadius;
-                       return x;
-                   },
-                   y2: function (d, i) {
-                       centroid = pied_arc.centroid(d);
-                       midAngle = Math.atan2(centroid[1], centroid[0]);
-                       y = Math.sin(midAngle) * cDim.labelRadius;
-                       return y;
-                   },
-                   'class': "label-line"
-               });
+            var key = function(d){ return d.data.label; };
 
-               textLabels = labelGroups.append("text").attr({
-                   x: function (d, i) {
-                       centroid = pied_arc.centroid(d);
-                       midAngle = Math.atan2(centroid[1], centroid[0]);
-                       x = Math.cos(midAngle) * cDim.labelRadius;
-                       sign = (x > 0) ? 1 : -1
-                       labelX = x + (5 * sign)
-                       return labelX;
-                   },
-                   y: function (d, i) {
-                       centroid = pied_arc.centroid(d);
-                       midAngle = Math.atan2(centroid[1], centroid[0]);
-                       y = Math.sin(midAngle) * cDim.labelRadius;
-                       return y;
-                   },
-                   'text-anchor': function (d, i) {
-                       centroid = pied_arc.centroid(d);
-                       midAngle = Math.atan2(centroid[1], centroid[0]);
-                       x = Math.cos(midAngle) * cDim.labelRadius;
-                       return (x > 0) ? "start" : "end";
-                   },
-                   'class': 'label-text'
-               }).text(function (d) {
-                   return d.data.label
-               });
+            function mergeWithFirstEqualZero(first, second){
+                var secondSet = d3.set(); second.forEach(function(d) { secondSet.add(d.label); });
 
-               alpha = 0.5;
-               spacing = 12;
-               again = false;
-               textLabels.each(function (d, i) {
-                   a = this;
-                   da = d3.select(a);
-                   y1 = da.attr("y");
-                   textLabels.each(function (d, j) {
-                       b = this;
-                       // a & b are the same element and don't collide.
-                       if (a == b) return;
-                       db = d3.select(b);
-                       // a & b are on opposite sides of the chart and
-                       // don't collide
-                       if (da.attr("text-anchor") != db.attr("text-anchor")) return;
-                       // Now let's calculate the distance between
-                       // these elements.
-                       y2 = db.attr("y");
-                       deltaY = y1 - y2;
+                var onlyFirst = first
+                    .filter(function(d){ return !secondSet.has(d.label) })
+                    .map(function(d) { return {label: d.label, value: 0}; });
+                return d3.merge([ second, onlyFirst ])
+                    .sort(function(a,b) {
+                        return d3.ascending(a.label, b.label);
+                    });
+            }
 
-                       // Our spacing is greater than our specified spacing,
-                       // so they don't collide.
-                       if (Math.abs(deltaY) > spacing) return;
+            function change(data) {
+                //var duration = +document.getElementById("duration").value;
+                var data0 = svg.select(".slices").selectAll("path.slice")
+                    .data().map(function(d) { return d.data });
+                if (data0.length == 0) data0 = data;
+                var was = mergeWithFirstEqualZero(data, data0);
+                var is = mergeWithFirstEqualZero(data0, data);
 
-                       // If the labels collide, we'll push each
-                       // of the two labels up and down a little bit.
-                       again = true;
-                       sign = deltaY > 0 ? 1 : -1;
-                       adjust = sign * alpha;
-                       da.attr("y",+y1 + adjust);
-                       db.attr("y",+y2 - adjust);
-                   });
-               });
-               // Adjust our line leaders here
-               // so that they follow the labels.
-               if(again) {
-                   labelElements = textLabels[0];
-                   textLines.attr("y2",function(d,i) {
-                       labelForLine = d3.select(labelElements[i]);
-                       return labelForLine.attr("y");
-                   });
-                   setTimeout(draw,20)
-               }
-           }
+                /* ------- SLICE ARCS -------*/
 
-           draw();
+                var slice = svg.select(".slices").selectAll("path.slice")
+                    .data(pie(was), key);
 
-           scope.$watch('labelInstance', function (v) {
-               data=v;
-               draw();
-           });
+                slice.enter()
+                    .insert("path")
+                    .attr("class", "slice")
+                    .style("fill", function(d) { return color(d.data.label); })
+                    .each(function(d) {
+                        this._current = d;
+                    });
 
+                slice = svg.select(".slices").selectAll("path.slice")
+                    .data(pie(is), key);
 
-       }
-   }
+                slice       
+                    .transition().duration(1000)
+                    .attrTween("d", function(d) {
+                        var interpolate = d3.interpolate(this._current, d);
+                        var _this = this;
+                        return function(t) {
+                            _this._current = interpolate(t);
+                            return arc(_this._current);
+                        };
+                    });
+
+                slice = svg.select(".slices").selectAll("path.slice")
+                    .data(pie(data), key);
+
+                slice
+                    .exit().transition().delay(1000).duration(0)
+                    .remove();
+
+                /* ------- TEXT LABELS -------*/
+
+                var text = svg.select(".labels").selectAll("text")
+                    .data(pie(was), key);
+
+                text.enter()
+                    .append("text")
+                    .style("font-size", height/12 + "px")
+                    .attr("dy", ".35em")
+                    .style("opacity", 0)
+                    .text(function(d) {
+                        return d.data.label;
+                    })
+                    .each(function(d) {
+                        this._current = d;
+                    });
+                
+                function midAngle(d){
+                    return d.startAngle + (d.endAngle - d.startAngle)/2;
+                }
+
+                text = svg.select(".labels").selectAll("text")
+                    .data(pie(is), key);
+
+                text.transition().duration(1000)
+                    .style("opacity", function(d) {
+                        return d.data.value == 0 ? 0 : 1;
+                    })
+                    .attrTween("transform", function(d) {
+                        var interpolate = d3.interpolate(this._current, d);
+                        var _this = this;
+                        return function(t) {
+                            var d2 = interpolate(t);
+                            _this._current = d2;
+                            var pos = outerArc.centroid(d2);
+                            pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+                            return "translate("+ pos +")";
+                        };
+                    })
+                    .styleTween("text-anchor", function(d){
+                        var interpolate = d3.interpolate(this._current, d);
+                        return function(t) {
+                            var d2 = interpolate(t);
+                            return midAngle(d2) < Math.PI ? "start":"end";
+                        };
+                    });
+                
+                text = svg.select(".labels").selectAll("text")
+                    .data(pie(data), key);
+
+                text
+                    .exit().transition().delay(1000)
+                    .remove();
+
+                /* ------- SLICE TO TEXT POLYLINES -------*/
+
+                var polyline = svg.select(".lines").selectAll("polyline")
+                    .data(pie(was), key);
+                
+                polyline.enter()
+                    .append("polyline")
+                    .style("opacity", 0)
+                    .each(function(d) {
+                        this._current = d;
+                    });
+
+                polyline = svg.select(".lines").selectAll("polyline")
+                    .data(pie(is), key);
+                
+                polyline.transition().duration(1000)
+                    .style("opacity", function(d) {
+                        return d.data.value == 0 ? 0 : .5;
+                    })
+                    .attrTween("points", function(d){
+                        this._current = this._current;
+                        var interpolate = d3.interpolate(this._current, d);
+                        var _this = this;
+                        return function(t) {
+                            var d2 = interpolate(t);
+                            _this._current = d2;
+                            var pos = outerArc.centroid(d2);
+                            pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
+                            return [arc.centroid(d2), outerArc.centroid(d2), pos];
+                        };          
+                    });
+                
+                polyline = svg.select(".lines").selectAll("polyline")
+                    .data(pie(data), key);
+                
+                polyline
+                    .exit().transition().delay(1000)
+                    .remove();
+            };
+        }
+    }    
 });
 

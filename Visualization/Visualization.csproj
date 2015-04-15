@@ -2322,6 +2322,7 @@
     <Content Include="Scripts\Controllers\d3PieController.js" />
     <Content Include="Scripts\Directives\d3PieDirective.js" />
     <Content Include="Views\Visualization\d3Pie.cshtml" />
+    <Content Include="Content\Site.css" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
