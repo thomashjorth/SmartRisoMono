@@ -1,0 +1,20 @@
+﻿<div ng-controller="d3GraphController" >
+  <h1>Avg Active Power: last 10 Values</h1>
+  <div id="d3graph" class="d3chart graph" linear-chart chart-data="values" ng-init="init('10','AvgActivePower','Aggregation')"></div>
+</div>
+<div ng-controller="d3GraphController" >
+  <h1>Single Active Power: last 10 Values</h1>
+  <div id="d3graph" class="d3chart graph2" linear-chart chart-data="values" ng-init="init('10','notdsfdsfdf','Realtime')"></div>
+</div>
+<div ng-controller="d3GraphController" >
+  <h1>Single Active Power: last 10 Qualities</h1>
+  <div id="d3graph" class="d3chart graph3" linear-chart chart-data="qualities" ng-init="init('10','notdsfdsfdf','Realtime')"></div>
+</div>
+<div ng-controller="d3GraphController" >
+   <h1>Single Active Power: last 10 Sources</h1>
+  <div id="d3graph" class="d3chart graph4" linear-chart chart-data="sources" ng-init="init('10','notdsfdsfdf','Realtime')"></div>
+</div>
+<div ng-controller="d3GraphController" >
+<h1>Avg Active Power: last 120 Values</h1>
+  <div id="d3graph" class="d3chart graphValues120" linear-chart chart-data="values" ng-init="init('120','AvgActivePower','Aggregation')"></div>
+</div>

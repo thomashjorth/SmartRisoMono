@@ -9,16 +9,6 @@ namespace Visualization.Controllers
 	public class VisualizationController : Controller
 	{
 		// GET: Visualization
-		public ActionResult Gauge()
-		{
-			return View();
-		}
-		// GET: Visualization
-		public ActionResult Graph()
-		{
-			return View();
-		}
-		// GET: Visualization
 		public ActionResult d3Graph()
 		{
 			return View();
@@ -29,6 +19,10 @@ namespace Visualization.Controllers
 			return View();
 		}
 		public ActionResult d3Pie()
+		{
+			return View();
+		}
+		public ActionResult d3Bar()
 		{
 			return View();
 		}

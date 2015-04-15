@@ -17,7 +17,7 @@
 			var self = this;
 			var config = 
 			{
-				size: $('#box1').outerHeight()*0.95,
+				size: $('.box').outerHeight()*0.95,
 				label: 'Power',
 				min: -1,
 				max: 1,
@@ -32,7 +32,6 @@
 			function configure(configuration)
 			{
 				this.config = configuration;
-;
 
 				this.config.raduis = this.config.size*0.90 / 2;
 				this.config.cx = this.config.size*0.97 / 2;

@@ -12,9 +12,7 @@
     $interval(function(){
         AppService.getMethodAggregation("AllActivePower")
             .success(function (response){
-                alert(JSON.parse(labelInstance));
-
-                $scope.labelInstance = JSON.parse(LabeledInstance);
+                $scope.LabeledInstance = JSON.parse(LabeledInstance);
 
             });
     }, 1000);
