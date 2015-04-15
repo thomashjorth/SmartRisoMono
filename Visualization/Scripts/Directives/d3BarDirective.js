@@ -10,10 +10,17 @@
             var d3 = $window.d3;
             var rawSvg=elem.find('svg');
             var svg = d3.select(rawSvg[0]);
+            var x, y;
 
             var margin = {top: ($('.box').outerHeight()*0.95)*0.06, right: ($('.box').outerHeight()*0.95)*0.02, bottom: ($('.box').outerHeight()*0.95)*0.02, left: ($('.box').outerHeight()*0.95)*0.16},
                 width = ($('.box').outerHeight()*0.95)*1.92 - margin.left - margin.right,
-                height = $('.box').outerHeight()*0.95 - margin.top - margin.bottom;
+                height = $('.box').outerHeight()*0.95 - margin.top - margin.bottom,
+                xValue = function(d) { return d[0]; },
+                yValue = function(d) { return d[1]; },
+                xScale = d3.scale.ordinal(),
+                yScale = d3.scale.linear(),
+                yAxis = d3.svg.axis().scale(yScale).orient("left"),
+                xAxis = d3.svg.axis().scale(xScale);
 
 
             svg 
@@ -22,16 +29,25 @@
             var g = svg.append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
             g.append("g")
-                .attr("class", "xaxisBar x axis");
+                .attr("class", "bars");
             g.append("g")
-                .attr("class", "yaxisBar y axis");
+                .attr("class", "y axis");
+            g.append("g")
+                .attr("class", "x axis");
+            g.append("g")
+                .attr("class", "x axis zero");
+
             scope.$watchCollection(exp, function(newVal, oldVal){
                 BarChart=newVal;
 
                 var data = [];
                 for (var i = 0; i < newVal.length; i++) {
-                    data.push(BarChart[i].value)
+                    data.push([BarChart[i].label, BarChart[i].value])
                 };
+
+                data = data.map(function(d, i) {
+                    return [xValue.call(data, d, i), yValue.call(data, d, i)];
+                });
 
                 if(newVal == oldVal){
                     draw(data)
@@ -40,90 +56,76 @@
                 }
             });
 
-            function draw (data) {
-                var y0 = Math.max(Math.abs(d3.min(data)), Math.abs(d3.max(data)));
+            function X(d) {
+                return xScale(d[0]);
+            }
 
-                var y = d3.scale.linear()
-                    .domain([-y0, y0])
-                    .range([height,0])
+            function Y0() {
+                return yScale(0);
+            }
+
+            function Y(d) {
+                return yScale(d[1]);
+            }
+
+            function draw (data) {
+                var y0 = d3.max(data.map(function(d) { return Math.abs(d[1]);}));
+                xScale
+                    .domain(data.map(function(d) { return d[0];} ))
+                    .rangeRoundBands([0, width - margin.left - margin.right], 0.2);
+                yScale
+                    .domain([-y0,y0])
+                    .range([height - margin.top - margin.bottom, 0])
                     .nice();
 
-                var x = d3.scale.ordinal()
-                    .domain(d3.range(data.length))
-                    .rangeRoundBands([0, width], .2);
+                var bar = g.select(".bars").selectAll(".bar").data(data);
+                bar.enter().append("rect");
+                bar.exit().remove();
+                bar.attr("class", function(d, i) { return d[1] < 0 ? "bar negative" : "bar positive"; })
+                    .attr("x", function(d) { return X(d); })
+                    .attr("y", function(d, i) { return d[1] < 0 ? Y0() : Y(d); })
+                    .attr("width", xScale.rangeBand())
+                    .attr("height", function(d, i) { return Math.abs( Y(d) - Y0() ); });
 
-                var yAxis = d3.svg.axis()
-                    .scale(y)
-                    .orient("left");
+                g.select(".x.axis")
+                    .attr("transform", "translate(0," + (height - margin.top - margin.bottom) + ")")
+                    .call(xAxis.orient("bottom"));
 
-                g.selectAll(".bar")
-                    .data(data)
-                  .enter().append("rect")
-                    .attr("class", function(d) { return d < 0 ? "bar negative" : "bar positive"; })
-                    .attr("y", function(d) { return y(Math.max(0, d)); })
-                    .attr("x", function(d, i) { return x(i); })
-                    .attr("height", function(d) { return Math.abs(y(d) - y(0)); })
-                    .attr("width", x.rangeBand());
+                g.select(".x.axis.zero")
+                    .attr("transform", "translate(0," + Y0() + ")")
+                    .call(xAxis.tickFormat("").tickSize(0));
 
-                g.append("g")
-                    .attr("class", "xaxisBar x axis")
+                g.select(".y.axis")
                     .call(yAxis);
-
-                g.append("g")
-                    .attr("class", "yaxisBar y axis")
-                    .append("line")
-                    .attr("y1", y(0))
-                    .attr("y2", y(0))
-                    .attr("x1", 0)
-                    .attr("x2", width);
+                
             }
 
             function redraw (data) {
-                var y0 = Math.max(Math.abs(d3.min(data)), Math.abs(d3.max(data)));
+                var y0 = d3.max(data.map(function(d) { return Math.abs(d[1]);}));
 
-                var y = d3.scale.linear()
-                    .domain([-y0, y0])
-                    .range([height,0])
+                xScale
+                    .domain(data.map(function(d) { return d[0];} ))
+                    .rangeRoundBands([0, width - margin.left - margin.right], 0.2);
+
+                yScale
+                    .domain([-y0,y0])
+                    .range([height - margin.top - margin.bottom, 0])
                     .nice();
 
-                var x = d3.scale.ordinal()
-                    .domain(d3.range(data.length))
-                    .rangeRoundBands([0, width], .2);
+                var bar = g.selectAll("rect").data(data)
+                .transition().duration(500)
+                .attr("class", function(d, i) { return d[1] < 0 ? "bar negative" : "bar positive"; })
+                    .attr("x", function(d) { return X(d); })
+                    .attr("y", function(d, i) { return d[1] < 0 ? Y0() : Y(d); })
+                    .attr("width", xScale.rangeBand())
+                    .attr("height", function(d, i) { return Math.abs( Y(d) - Y0() ); });
 
-                var yAxis = d3.svg.axis()
-                    .scale(y)
-                    .orient("left");
+                g.select(".x.axis.zero")
+                    .attr("transform", "translate(0," + Y0() + ")")
+                    .call(xAxis.tickFormat("").tickSize(0));
 
-                g.selectAll("rect")
-                    .data(data)
-                    .transition().duration(500)
-                    .attr("class", function(d) { return d < 0 ? "bar negative" : "bar positive"; })
-                    .attr("y", function(d) { return y(Math.max(0, d)); })
-                    .attr("x", function(d, i) { return x(i); })
-                    .attr("height", function(d) { return Math.abs(y(d) - y(0)); });
-
-                $(".xaxisBar")
-                    .remove();
-
-                $(".yaxisBar")
-                    .remove();
-
-                g.append("g")
-                    .attr("class", "xaxisBar x axis");
-                g.append("g")
-                    .attr("class", "yaxisBar y axis");
-
-                g.append("g")
-                    .attr("class", "xaxisBar x axis")
+                g.select(".y.axis")
                     .call(yAxis);
-
-                g.append("g")
-                    .attr("class", "yaxisBar y axis")
-                    .append("line")
-                    .attr("y1", y(0))
-                    .attr("y2", y(0))
-                    .attr("x1", 0)
-                    .attr("x2", width);
             }
         }
     }    

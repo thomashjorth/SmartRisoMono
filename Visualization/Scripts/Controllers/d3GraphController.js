@@ -13,13 +13,13 @@
 
     $interval(function(){
         var h=Math.floor(Date.now()/1000)-$scope.firstTime;
-
-                if($scope.values.length > $scope.chartLength){
-                    $scope.values.shift();
-                    }
-                $scope.values.push({timestamp: h, value: Math.random()-0.5});
-        
-
+        AppService.getMethodRealtime($scope.method)
+            .success(function (response){
+            if($scope.values.length > $scope.chartLength){
+                $scope.values.shift();
+                }
+            $scope.values.push({timestamp: h, value: Math.random()-0.5});
+        });
     }, 1000);
 }]);
 
