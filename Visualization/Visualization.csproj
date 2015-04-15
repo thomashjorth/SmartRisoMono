@@ -68,7 +68,6 @@
     <Folder Include="Models\" />
     <Folder Include="Scripts\" />
     <Folder Include="Scripts\Controllers\" />
-    <Folder Include="Scripts\Visualization\" />
     <Folder Include="Views\Visualization\" />
     <Folder Include="Scripts\Services\" />
     <Folder Include="Scripts\Libraries\" />
@@ -95,10 +94,6 @@
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\Controllers\GaugeController.js" />
     <Content Include="Scripts\Controllers\GraphController.js" />
-    <Content Include="Scripts\Visualization\Gauge.js" />
-    <Content Include="Scripts\Visualization\Graph.js" />
-    <Content Include="Views\Visualization\Graph.cshtml" />
-    <Content Include="Views\Visualization\Gauge.cshtml" />
     <Content Include="Content\Site.min.css" />
     <Content Include="Scripts\Services\AppService.js" />
     <Content Include="Scripts\Libraries\angular-1.3.1\angular-animate.js" />

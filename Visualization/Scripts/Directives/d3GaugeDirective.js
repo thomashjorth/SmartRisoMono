@@ -1,7 +1,7 @@
-﻿VisualizeApp.directive('d3GaugeDirective', function($parse, $window){
+﻿﻿VisualizeApp.directive('d3GaugeDirective', function($parse, $window){
    return{
       restrict:'AEC',
-      template:"<svg width='400' height='400'></svg>",
+      template:"<svg></svg>",
        link: function(scope, elem, attrs){
 			var exp = $parse(attrs.chartData);
 
@@ -15,10 +15,9 @@
 			var svg = d3.select(rawSvg[0]);
 
 			var self = this;
-
 			var config = 
 			{
-				size: 200,
+				size: $('#box1').outerHeight()*0.95,
 				label: 'Power',
 				min: -1,
 				max: 1,
@@ -33,12 +32,11 @@
 			function configure(configuration)
 			{
 				this.config = configuration;
+;
 
-				this.config.size = this.config.size * 0.9;
-
-				this.config.raduis = this.config.size * 0.97 / 2;
-				this.config.cx = this.config.size / 2;
-				this.config.cy = this.config.size / 2;
+				this.config.raduis = this.config.size*0.90 / 2;
+				this.config.cx = this.config.size*0.97 / 2;
+				this.config.cy = this.config.size*0.97 / 2;
 
 				this.config.min = undefined != configuration.min ? configuration.min : 0; 
 				this.config.max = undefined != configuration.max ? configuration.max : 100; 
@@ -56,8 +54,11 @@
          
 			function render()
 			{
-				this.body = svg//d3.select("#" + this.placeholderName)
-					.append("svg:svg")
+				this.body = svg
+					.attr("width", this.config.size)
+					.attr("height", this.config.size);
+
+				this.body.append("svg:svg")
 					.attr("class", "gauge")
 					.attr("width", this.config.size)
 					.attr("height", this.config.size);
@@ -289,4 +290,3 @@
        }
    };
 });
-
