@@ -1,23 +1,28 @@
 ﻿VisualizeApp.controller('d3BarController', ['$scope','$interval', '$http', 'AppService', function($scope, $interval, $http, AppService, d3BarDirective){
-    $scope.data = {config: {title: "test"}, LabeledInstance: [
-        {label: 'Star Wars', value: 10},
-        {label: 'Lost In Space', value: -28},
-        {label: 'the Boston Pops', value: -2},
-        {label: 'Indiana Jones', value: 5},
-        {label: 'Potter', value: 7},
-        {label: 'Jaws',  value: -5},
-        {label: 'Lincoln', value: 15}
-    ]};
+    $scope.init = function(host, port, aggregation, resource, titleHeading, valueMin, valueMax)
+    {
+
+        $scope.dataHost = host;
+        $scope.dataPort = port;
+        $scope.dataAggregation = aggregation;
+        $scope.dataResource = resource;
+        $scope.title = titleHeading;
+        $scope.valueMin = valueMin;
+        $scope.valueMax = valueMax;
+
+
+    };
+
+
 
     $interval(function(){
-        $scope.data = {config: {title: "test"}, LabeledInstance: [
-            {label: 'Star Wars', value: 27},
-            {label: 'Lost In Space', value: 3},
-            {label: 'the Boston Pops', value: -20},
-            {label: 'Indiana Jones', value: 15},
-            {label: 'Potter', value: -7},
-            {label: 'Jaws',  value: -10},
-            {label: 'Lincoln', value: 100}
-        ]};
+        var h=Math.floor(Date.now()/1000)-$scope.firstTime;
+        AppService.getData($scope.dataHost,$scope.dataPort,$scope.dataAggregation,$scope.dataResource)
+            .success(function (response){
+
+                $scope.data =
+                {config: {label: $scope.title}, LabeledInstance: JSON.parse(response) };
+
+            });
     }, 1000);
 }]);

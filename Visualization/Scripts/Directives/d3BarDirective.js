@@ -48,8 +48,8 @@
                 data = data.map(function(d, i) {
                     return [xValue.call(data, d, i), yValue.call(data, d, i)];
                 });
-
-                if(newVal == oldVal){
+                if(oldVal == null){
+               		
                     draw(data)
                 }else {
                     redraw(data)

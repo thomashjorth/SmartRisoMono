@@ -44,7 +44,7 @@ namespace DataAggregator.Models
 
 
 
-		public static List<LabeledInstance> AllActivePower(List<DER> ders, int f){
+		public static List<LabeledInstance> AllActivePower(List<DER> ders){
 
 			List<LabeledInstance> res = new List<LabeledInstance> ();
 			string value;
@@ -52,40 +52,30 @@ namespace DataAggregator.Models
 
 			foreach (DER d in ders) {
 
-				value = WS.DownloadXML (d.WsInterface, "getActivePower", d.Hostname, d.Port,ParseType.CompositeMeasurement);
+				value = WS.DownloadXML (d.WsInterface, "getActivePower", d.Hostname, d.Port, ParseType.CompositeMeasurement);
 				System.Diagnostics.Debug.Write (value);
-				if(!value.Equals("NAN")){
-					using (var sr = new StringReader(value))
-					using (var jr = new JsonTextReader(sr))
-					{
-						var js = new JsonSerializer();
-						var composite = js.Deserialize<CompositeMeasurement>(jr);
-						if (f == 1) {
-							if (composite.value > 0) {
-								res.Add(	new LabeledInstance(
-									d.Hostname+" : " + d.Port , 
-									composite.value));
-							}
-
-						}else if(f == -1){
-							if (composite.value < 0) {
-								res.Add(	new LabeledInstance(
-									d.Hostname+" : " + d.Port , 
-									composite.value*-1));
-							}
-						}
-
-
-						//	rnd.Next(1, 13)));
-						System.Diagnostics.Debug.Write (res.Count);
+				if (!value.Equals ("NAN")) {
+					using (var sr = new StringReader (value))
+					using (var jr = new JsonTextReader (sr)) {
+						var js = new JsonSerializer ();
+						var composite = js.Deserialize<CompositeMeasurement> (jr);
+						res.Add (new LabeledInstance (
+							d.Hostname + " : " + d.Port, 
+							composite.value));
+			
+							
 					}
+
+
+					//	rnd.Next(1, 13)));
+					System.Diagnostics.Debug.Write (res.Count);
+				
+
 				}
+
 			}
 			return res;
-		}
-
-
 	}
 
-}
+	}}
 

@@ -2319,6 +2319,7 @@
     <Content Include="Scripts\Controllers\d3BarController.js" />
     <Content Include="Views\Visualization\d3Bar.cshtml" />
     <Content Include="Scripts\Directives\d3BarDirective.js" />
+    <Content Include="Views\Visualization\sideBar.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

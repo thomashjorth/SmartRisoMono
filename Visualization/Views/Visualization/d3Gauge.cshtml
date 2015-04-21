@@ -1,6 +1,6 @@
 ﻿<div class="controllerGauge" ng-controller="d3GaugeController" >
-  <div id="d3gauge" class="d3gauge gauge" d3-gauge-directive chart-data="data"></div>
+  <div class="d3gauge gauge" d3-gauge-directive chart-data="data" ng-init="init('localhost','9001','Aggregation','AvgActivePower','Test Heading',-1,1)"></div>
 </div>	
 <div class="controllerGauge" ng-controller="d3GaugeController" >
-  <div id="d3gauge" class="d3gauge gauge" d3-gauge-directive chart-data="data"></div>
+  <div class="d3gauge gauge" d3-gauge-directive chart-data="data" ng-init="init('localhost','9001','Realtime','getActivePower','Test Heading',-2,2)"></div>
 </div>	

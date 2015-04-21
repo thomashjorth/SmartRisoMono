@@ -8,8 +8,8 @@
         $scope.dataResource = resource;
         $scope.title = titleHeading;
         $scope.xTicks = xticks;
-        $scope.yMin = ymin;
-        $scope.yMax = ymax;
+        $scope.valueMin = ymin;
+        $scope.valueMax = ymax;
 
         $scope.data={config: {unit: titleHeading, xTicks: xticks, yMin: ymin, yMax: ymax}, values: [
             {timestamp: 0,value: 0}
