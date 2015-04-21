@@ -24,7 +24,7 @@
                 if($scope.data.values.length > $scope.xTicks){
                     $scope.data.values.shift();
                 }
-                $scope.data.values.push({timestamp: h, value: Math.random()-0.5});
+                $scope.data.values.push({timestamp: h, value: JSON.parse(response).value});
                 $scope.data = {config: {unit: $scope.title, xTicks: $scope.xTicks, yMin: $scope.yMin, yMax: $scope.yMax}, values: $scope.data.values};
             });
     }, 1000);
