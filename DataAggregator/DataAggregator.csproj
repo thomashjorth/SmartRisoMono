@@ -106,12 +106,13 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\AggregationController.cs" />
-    <Compile Include="Controllers\CirclePackingController.cs" />
-    <Compile Include="Models\Circle.cs" />
     <Compile Include="Models\DER.cs" />
     <Compile Include="Models\SimpleStatistics.cs" />
     <Compile Include="Utils\Configuration.cs" />
     <Compile Include="Utils\WS.cs" />
+    <Compile Include="Controllers\EEIController.cs" />
+    <Compile Include="Models\LabeledInstance.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -126,10 +127,13 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
+    <Content Include="Images\washer.jpg" />
+    <Content Include="Images\plug.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Utils\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

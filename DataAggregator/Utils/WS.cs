@@ -26,7 +26,7 @@ namespace DataAggregator.Utils
 
 	public static class WS
 	{ 
-		public static CompositeMeasurement ParseXmlCompositeMeasurement(string xml){
+		private static CompositeMeasurement ParseXmlCompositeMeasurement(string xml){
 			XDocument doc = XDocument.Parse(xml);
 
 			CompositeMeasurement activePower = new CompositeMeasurement ();			
@@ -56,18 +56,13 @@ namespace DataAggregator.Utils
 				}
 			}
 			string res = "NAN";
-			if(parseAs == ParseType.CompositeMeasurement){
+			if (parseAs == ParseType.CompositeMeasurement) {
 				res = Newtonsoft.Json.JsonConvert.SerializeObject (ParseXmlCompositeMeasurement (xml));
 			}
 			//return doc.Root.Element("value").Value.Substring (0, 4);
 			return res;
 		}
-		public static string DownloadXML(string function)
-		{
 
-
-			return DownloadXML ("GenericLoadWS",function, "localhost", "8080",ParseType.CompositeMeasurement);
-		}
 	}
 }
 

@@ -18,7 +18,9 @@ namespace DataAggregator.Models
 			long lastTimestamp = 0;
 			foreach (DER d in ders) {
 				
-				value = WS.DownloadXML ("GenericLoadWS","getActivePower", d.Hostname, d.Port,ParseType.CompositeMeasurement);
+				value = WS.DownloadXML ("GenericLoadWS","getActivePower", 
+					d.Hostname, d.Port,
+					ParseType.CompositeMeasurement);
 				if(!value.Equals("NAN")){
 					using (var sr = new StringReader(value))
 					using (var jr = new JsonTextReader(sr))
@@ -85,13 +87,5 @@ namespace DataAggregator.Models
 
 	}
 
-	public class LabeledInstance{
-		public LabeledInstance(string l, double i){
-			label = l;
-			instances = i;
-		}
-		public string label;
-		public double instances;
-	}
 }
 
