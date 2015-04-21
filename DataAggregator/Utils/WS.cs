@@ -30,10 +30,10 @@ namespace DataAggregator.Utils
 			XDocument doc = XDocument.Parse(xml);
 
 			CompositeMeasurement activePower = new CompositeMeasurement ();			
-			activePower.value 			= Double.Parse(
+			activePower.value 			= Math.Round(Double.Parse(
 				doc.Root.Element("value").Value.Replace(',', '.'), 
 				CultureInfo.InvariantCulture
-			);
+			),2);
 			System.Diagnostics.Debug.Write (Double.Parse(doc.Root.Element	("value").Value.Substring (0, 4)));
 			activePower.timestampMicros = long.Parse(doc.Root.Element	("timestampMicros").Value);
 			activePower.timePrecision 	= short.Parse(doc.Root.Element	("timePrecision").Value);
