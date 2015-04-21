@@ -113,6 +113,11 @@
     <Compile Include="Controllers\EEIController.cs" />
     <Compile Include="Models\LabeledInstance.cs" />
     <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\PageConfigurationController.cs" />
+    <Compile Include="Models\VisualizationConfig.cs" />
+    <Compile Include="Models\GraphConfig.cs" />
+    <Compile Include="Models\PageConfig.cs" />
+    <Compile Include="Models\PagesConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -134,6 +139,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Utils\" />
     <Folder Include="Images\" />
+    <Folder Include="PageConfigurations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
