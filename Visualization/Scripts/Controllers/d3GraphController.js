@@ -11,7 +11,7 @@
         $scope.yMin = ymin;
         $scope.yMax = ymax;
 
-        $scope.data={config: {unit: $scope.title}, values: [
+        $scope.data={config: {unit: titleHeading, xTicks: xticks, yMin: ymin, yMax: ymax}, values: [
             {timestamp: 0,value: 0}
         ]};
   	};
@@ -25,7 +25,7 @@
                     $scope.data.values.shift();
                 }
                 $scope.data.values.push({timestamp: h, value: Math.random()-0.5});
-                $scope.data = {config: {unit: $scope.title}, values: $scope.data.values};
+                $scope.data = {config: {unit: $scope.title, xTicks: $scope.xTicks, yMin: $scope.yMin, yMax: $scope.yMax}, values: $scope.data.values};
             });
     }, 1000);
 

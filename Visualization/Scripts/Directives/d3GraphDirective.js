@@ -35,14 +35,21 @@
                    .domain([dataToPlot.values[0].timestamp, dataToPlot.values[dataToPlot.values.length-1].timestamp])
                    .range([0, width]);
 
+               var min = dataToPlot.config.yMin, max = dataToPlot.config.yMax;
+               if(dataToPlot.config.yMin == null)
+                  min = d3.min(dataToPlot.values, function (d) { return d.value;});
+               if(dataToPlot.config.yMax == null)
+                  max = d3.max(dataToPlot.values, function (d) { return d.value;});
+
                yScale = d3.scale.linear()
-                   .domain([d3.min(dataToPlot.values, function (d) { return d.value;}), d3.max(dataToPlot.values, function (d) { return d.value;})])
+                   .domain([min, max])
                    .range([height-10, 10]);
+
 
                xAxisGen = d3.svg.axis()
                    .scale(xScale)
                    .orient("bottom")
-                   .ticks(10);
+                   .ticks(dataToPlot.config.xTicks);
 
                yAxisGen = d3.svg.axis()
                    .scale(yScale)
