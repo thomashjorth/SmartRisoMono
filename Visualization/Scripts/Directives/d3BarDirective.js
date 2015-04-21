@@ -41,8 +41,8 @@
                 BarChart=newVal;
 
                 var data = [];
-                for (var i = 0; i < newVal.length; i++) {
-                    data.push([BarChart[i].label, BarChart[i].value])
+                for (var i = 0; i < newVal.LabeledInstance.length; i++) {
+                    data.push([BarChart.LabeledInstance[i].label, BarChart.LabeledInstance[i].value])
                 };
 
                 data = data.map(function(d, i) {

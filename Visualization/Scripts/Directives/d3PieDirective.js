@@ -17,8 +17,8 @@ VisualizeApp.directive('d3PieDirective', function($parse, $window){
                 PieChart=newVal;
 
                 var list = [];
-                for (var i = 0; i < newVal.length; i++) {
-                    list.push(PieChart[i].label)
+                for (var i = 0; i < newVal.LabeledInstance.length; i++) {
+                    list.push(PieChart.LabeledInstance[i].label)
                 };
                 color = d3.scale.category20()
                     .domain(list);
@@ -51,9 +51,9 @@ VisualizeApp.directive('d3PieDirective', function($parse, $window){
                 .sort(null)
                 .value(function(d) {
 
-                    for (var i = 0; i < PieChart.length; i++) {
-                        if(PieChart[i].label == d.label)
-                            return PieChart[i].value;
+                    for (var i = 0; i < PieChart.LabeledInstance.length; i++) {
+                        if(PieChart.LabeledInstance[i].label == d.label)
+                            return PieChart.LabeledInstance[i].value;
                     };
                 });
 
