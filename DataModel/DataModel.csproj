@@ -33,6 +33,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="iec61850\CompositeMeasurement.cs" />
     <Compile Include="iec61850\CompositeData.cs" />
+    <Compile Include="iec61850\GPSL.cs" />
+    <Compile Include="iec61850\TSTP.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

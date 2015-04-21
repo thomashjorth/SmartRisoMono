@@ -1,4 +1,4 @@
-﻿VisualizeApp.directive('linearChart', function($parse, $window){
+﻿VisualizeApp.directive('d3GraphDirective', function($parse, $window){
    return{
       restrict:'EA',
       template:"<svg></svg>",

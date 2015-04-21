@@ -10,6 +10,10 @@ namespace DataModel
 		{
 			
 		}
+		public CompositeMeasurement (double val) 
+		{
+			value = val;
+		}
 
 	}
 }

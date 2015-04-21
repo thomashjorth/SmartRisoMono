@@ -1,18 +1,11 @@
 ﻿VisualizeApp.service('AppService', ['$http',
 	function ($http){
 
-		this.getMethodRealtime = function(id){
+		this.getData = function(host, port, apiController, id){
 			return $http({
 				method: "get",
-				url: "http://127.0.0.1:9001/api/Realtime/getActivePower"
+				url: "http://"+host+":"+port+"/api/"+apiController+"/"+id
 			});
 		}
-
-		this.getMethodAggregation = function(id){
-			return $http({
-				method: "get",
-				url: "http://127.0.0.1:9001/api/Aggregation/"+id
-			});
-		};
 	}
 ]);
