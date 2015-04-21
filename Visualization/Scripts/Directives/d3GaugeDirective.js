@@ -5,7 +5,7 @@
        link: function(scope, elem, attrs){
 			var exp = $parse(attrs.chartData);
 
-			var CompositeMeasurementToGauge=exp(scope);
+			var data=exp(scope);
 			//var padding = 40;
 			//var pathClass="path";
 			//var xScale, yScale, xAxisGen, yAxisGen, lineFun;
@@ -25,7 +25,22 @@
 			}
 
 			scope.$watchCollection(exp, function(newVal, oldVal){
-				CompositeMeasurementToGauge=newVal;
+				data=newVal;
+
+				if(newVal == oldVal){
+					config = 
+					{
+						size: $('.box').outerHeight()*0.95,
+						label: data.config.label,
+						min: data.config.min,
+						max: data.config.max,
+						minorTicks: 5
+					}
+
+					configure(config);
+					render();
+				}
+
 				redraw();
 			});
 
@@ -239,7 +254,7 @@
 			{
 				var pointerContainer = this.body.select(".pointerContainer");
 
-				pointerContainer.selectAll("text").text(CompositeMeasurementToGauge.v);
+				pointerContainer.selectAll("text").text(data.CompositeMeasurement.v);
 
 				var pointer = pointerContainer.selectAll("path");
 				pointer.transition()
@@ -249,10 +264,10 @@
 					//.attr("transform", function(d) 
 					.attrTween("transform", function()
 					{
-						//alert(CompositeMeasurementToGauge.v);
-						var pointerValue = CompositeMeasurementToGauge.v;
-						if (CompositeMeasurementToGauge.v > self.config.max) pointerValue = self.config.max + 0.02*self.config.range;
-						else if (CompositeMeasurementToGauge.v < self.config.min) pointerValue = self.config.min - 0.02*self.config.range;
+						//alert(data.CompositeMeasurement.v);
+						var pointerValue = data.CompositeMeasurement.v;
+						if (data.CompositeMeasurement.v > self.config.max) pointerValue = self.config.max + 0.02*self.config.range;
+						else if (data.CompositeMeasurement.v < self.config.min) pointerValue = self.config.min - 0.02*self.config.range;
 						var targetRotation = (valueToDegrees(pointerValue) - 90);
 						var currentRotation = self._currentRotation || targetRotation;
 						self._currentRotation = targetRotation;
@@ -283,9 +298,6 @@
 							y: this.config.cy - this.config.raduis * factor * Math.sin(valueToRadians(value)) 		
 				};
 			}
-
-			configure(config);
-			render();
        }
    };
 });

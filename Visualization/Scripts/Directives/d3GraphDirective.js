@@ -32,11 +32,11 @@
            function setChartParameters(){
 
                xScale = d3.scale.linear()
-                   .domain([dataToPlot[0].timestamp, dataToPlot[dataToPlot.length-1].timestamp])
+                   .domain([dataToPlot.values[0].timestamp, dataToPlot.values[dataToPlot.values.length-1].timestamp])
                    .range([0, width]);
 
                yScale = d3.scale.linear()
-                   .domain([d3.min(dataToPlot, function (d) { return d.value;}), d3.max(dataToPlot, function (d) { return d.value;})])
+                   .domain([d3.min(dataToPlot.values, function (d) { return d.value;}), d3.max(dataToPlot.values, function (d) { return d.value;})])
                    .range([height-10, 10]);
 
                xAxisGen = d3.svg.axis()
@@ -64,29 +64,30 @@
 
                svg.append("svg:g")
                    .attr("class", "x axis")
-                   .attr("transform", "translate(60," + Math.round(height-0) + ")")
+                   .attr("transform", "translate(40," + Math.round(height-0) + ")")
                    .call(xAxisGen);
 
                svg.append("svg:g")
                    .attr("class", "y axis")
-                   .attr("transform", "translate(50,0)")
+                   .attr("transform", "translate(40,0)")
                    .call(yAxisGen)
                     .append("text")
                         .attr("transform", "rotate(-90)")
                         .attr("y", 6)
                         .attr("dy", ".71em")
                         .style("text-anchor", "end")
-                        .text("Price ($)");
+                        .text(dataToPlot.config.unit);
 
                svg.append("svg:path")
                    .attr({
-                       d: lineFun(dataToPlot),
+                       d: lineFun(dataToPlot.values),
                        "stroke": "blue",
                        "stroke-width": 2,
                        "fill": "none",
                        "class": pathClass
                    })
-                   .attr("transform", "translate(60,0)");
+                   .attr("transform", "translate(40,0)");
+
            }
 
            function redrawLineChart() {
@@ -98,7 +99,7 @@
                svg.selectAll("path.line").remove();
                svg.selectAll("."+pathClass)
                    .attr({
-                       d: lineFun(dataToPlot)
+                       d: lineFun(dataToPlot.values)
                    });
                svg.selectAll(".tick").each(function (d, i) {
                     if ( i == 0 ) {

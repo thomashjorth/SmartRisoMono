@@ -7,19 +7,17 @@
         $scope.controller = controller;
   	};
 
-    $scope.values=[
+    $scope.data={config: {unit: "test"}, values: [
         {timestamp: 0,value: 0}
-    ];
+    ]};
 
     $interval(function(){
         var h=Math.floor(Date.now()/1000)-$scope.firstTime;
-        AppService.getMethodRealtime($scope.method)
-            .success(function (response){
-            if($scope.values.length > $scope.chartLength){
-                $scope.values.shift();
-                }
-            $scope.values.push({timestamp: h, value: Math.random()-0.5});
-        });
+        if($scope.data.values.length > $scope.chartLength){
+            $scope.data.values.shift();
+        }
+        $scope.data.values.push({timestamp: h, value: Math.random()-0.5});
+        $scope.data = {config: {unit: "test"}, values: $scope.data.values};
     }, 1000);
 }]);
 
