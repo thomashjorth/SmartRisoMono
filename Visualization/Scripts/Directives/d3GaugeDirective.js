@@ -255,7 +255,7 @@
 				//alert("#" + data.config.PlaceHolder + " " +data.CompositeMeasurement.v);
 				var pointerContainer = d3.select("#"+data.config.PlaceHolder);
 
-				pointerContainer.select("text").text(data.CompositeMeasurement.v);
+				pointerContainer.select(".pointerContainer").select("text").text(data.CompositeMeasurement.v);
 
 				var pointer = pointerContainer.select("path");
 				pointer.transition()
