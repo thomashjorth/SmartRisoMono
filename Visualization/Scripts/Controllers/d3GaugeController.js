@@ -26,5 +26,5 @@
 	    		$scope.data ={config: {label: $scope.title, min: $scope.valueMin, max: $scope.valueMax, PlaceHolder: $scope.placeHolder}, CompositeMeasurement: {v: JSON.parse(response).value, timestamp:h} };
 
     	});
-    }, 5000);
+    }, 1000);
 }]);

@@ -27,7 +27,7 @@ VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', 'Ap
                 $scope.data.values.push({timestamp: h, value: JSON.parse(response).value});
                 $scope.data = {config: {unit: $scope.title, xTicks: $scope.xTicks, yMin: $scope.valueMin, yMax: $scope.valueMax}, values: $scope.data.values};
             });
-    }, 1000000);
+    }, 1000);
 
 }]);
 
