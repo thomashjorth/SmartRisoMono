@@ -193,4 +193,8 @@
       <Name>DataModel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="PageConfigurations\pageConf.json" />
+    <None Include="PageConfigurations\singlePageAll.json" />
+  </ItemGroup>
 </Project>

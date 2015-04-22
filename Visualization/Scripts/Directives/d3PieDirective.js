@@ -53,7 +53,7 @@ VisualizeApp.directive('d3PieDirective', function($parse, $window){
 
                     for (var i = 0; i < PieChart.LabeledInstance.length; i++) {
                         if(PieChart.LabeledInstance[i].label == d.label)
-                            return PieChart.LabeledInstance[i].value;
+                            return Math.abs(PieChart.LabeledInstance[i].value);
                     };
                 });
 
