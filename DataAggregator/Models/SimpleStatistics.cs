@@ -18,7 +18,7 @@ namespace DataAggregator.Models
 			long lastTimestamp = 0;
 			foreach (DER d in ders) {
 				
-				value = WS.DownloadXML ("GenericLoadWS","getActivePower", 
+				value = WS.DownloadXML (d.Interface+"WS","getActivePower", 
 					d.Hostname, d.Port,
 					ParseType.CompositeMeasurement);
 				if(!value.Equals("NAN")){
@@ -52,7 +52,7 @@ namespace DataAggregator.Models
 
 			foreach (DER d in ders) {
 
-				value = WS.DownloadXML (d.WsInterface, "getActivePower", d.Hostname, d.Port, ParseType.CompositeMeasurement);
+				value = WS.DownloadXML (d.Interface+"WS", "getActivePower", d.Hostname, d.Port, ParseType.CompositeMeasurement);
 				System.Diagnostics.Debug.Write (value);
 				if (!value.Equals ("NAN")) {
 					using (var sr = new StringReader (value))

@@ -24,10 +24,9 @@ namespace DataAggregator.Controllers
 			FileStream fileStream;
 			Image image;
 			MemoryStream memoryStream;
-
-			if(id.Equals("WashingMachine")){
+			try{
 				 result = new HttpResponseMessage(HttpStatusCode.OK);
-				 filePath = HostingEnvironment.MapPath("~/Images/washer.jpg");
+				filePath = HostingEnvironment.MapPath("~/Images/"+id+".jpg");
 				 fileStream = new FileStream(filePath, FileMode.Open);
 				 image = Image.FromStream(fileStream);
 				 memoryStream = new MemoryStream();
@@ -35,17 +34,17 @@ namespace DataAggregator.Controllers
 				result.Content = new ByteArrayContent(memoryStream.ToArray());
 				result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
 				return result;
+			}catch{
+				result = new HttpResponseMessage (HttpStatusCode.OK);
+				filePath = HostingEnvironment.MapPath ("~/Images/plug.jpg");
+				fileStream = new FileStream (filePath, FileMode.Open);
+				image = Image.FromStream (fileStream);
+				memoryStream = new MemoryStream ();
+				image.Save (memoryStream, ImageFormat.Jpeg);
+				result.Content = new ByteArrayContent (memoryStream.ToArray ());
+				result.Content.Headers.ContentType = new MediaTypeHeaderValue ("image/jpeg");
+				return result;
 			}
-			 result = new HttpResponseMessage(HttpStatusCode.OK);
-			 filePath = HostingEnvironment.MapPath("~/Images/plug.jpg");
-			 fileStream = new FileStream(filePath, FileMode.Open);
-			 image = Image.FromStream(fileStream);
-			 memoryStream = new MemoryStream();
-			image.Save(memoryStream, ImageFormat.Jpeg);
-			result.Content = new ByteArrayContent(memoryStream.ToArray());
-			result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
-			return result;
-
 		}
     }
 }

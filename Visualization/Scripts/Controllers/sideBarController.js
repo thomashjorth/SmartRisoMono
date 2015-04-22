@@ -1,14 +1,25 @@
 ﻿VisualizeApp.controller('sideBarController', ['$scope','$interval', '$http', 'AppService', function($scope, $interval, $http, AppService){
+$scope.init = function(host, port, aggregation, resource)
+    {
+        $scope.dataHost = host;
+        $scope.dataPort = port;
+        $scope.dataAggregation = aggregation;
+        $scope.dataResource = resource;
 
+    };
+
+
+
+    $scope.image = "Plug";
      $interval(function(){
-        var h=Math.floor(Date.now()/1000)-$scope.firstTime;
+     var lastResponse;
         AppService.getData($scope.dataHost,$scope.dataPort,$scope.dataAggregation,$scope.dataResource)
             .success(function (response){
-                if($scope.data.values.length > $scope.xTicks){
-                    $scope.data.values.shift();
-                }
-                $scope.data.values.push({timestamp: h, value: JSON.parse(response).value});
-                $scope.data = {config: {unit: $scope.title, xTicks: $scope.xTicks, yMin: $scope.valueMin, yMax: $scope.valueMax}, values: $scope.data.values};
-            });
-    }, 1000);
+
+            if(lastResponse != response){
+            	$scope.Ders = JSON.parse(response)
+        		lastResponse = response;
+            	}
+           });
+    }, 3000);
 }]);

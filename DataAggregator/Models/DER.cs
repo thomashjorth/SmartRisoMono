@@ -6,10 +6,10 @@ namespace DataAggregator.Models
 {
 
 	public enum Type {
-		NAN, GenericLoadWS
+		NAN, GenericLoad
 	};
 	public enum Role {
-		PowerConsumerWS, NAN
+		PowerConsumer, NAN
 	};
 
 	public class App{
@@ -33,7 +33,7 @@ namespace DataAggregator.Models
 			Hostname = hostname;
 			Port = port;
 			Apps = appNames();
-			WsInterface = "NAN";
+			Interface = "NAN";
 			determineWsInterface ();
 		}
 		public HashSet<string> Types = new HashSet<string>();
@@ -43,9 +43,11 @@ namespace DataAggregator.Models
 
 		public string Port;
 
+		public string Overall;
+
 		public List<App> Apps;
 
-		public string WsInterface;
+		public string Interface;
 
 		private List<App> appNames(){
 			List<App> apps = new List<App> ();
@@ -100,11 +102,11 @@ namespace DataAggregator.Models
 		private void determineWsInterface(){
 			foreach (App app in Apps) {
 				if (app.Name.Contains ("Dumpload")) {
-					Types.Add (Type.GenericLoadWS.ToString());
-					WsInterface= Type.GenericLoadWS.ToString();
+					Types.Add (Type.GenericLoad.ToString());
+					Interface= Type.GenericLoad.ToString();
 				}else if(app.Name.Contains ("Mobile load WS")){
-					Types.Add (Type.GenericLoadWS.ToString());
-					WsInterface= Type.GenericLoadWS.ToString();
+					Types.Add (Type.GenericLoad.ToString());
+					Interface= Type.GenericLoad.ToString();
 				} 
 			}
 		}
