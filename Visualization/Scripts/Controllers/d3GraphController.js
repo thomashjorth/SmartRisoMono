@@ -24,13 +24,8 @@ VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', 'Ap
                 if($scope.data.values.length > $scope.xTicks){
                     $scope.data.values.shift();
                 }
-<<<<<<< Upstream, based on origin/master
                 $scope.data.values.push({timestamp: h, value: JSON.parse(response).value});
-                $scope.data = {config: {unit: $scope.title, xTicks: $scope.xTicks, yMin: $scope.yMin, yMax: $scope.yMax}, values: $scope.data.values};
-=======
-                $scope.data.values.push({timestamp: h, value: Math.random()-0.5});
                 $scope.data = {config: {unit: $scope.title, xTicks: $scope.xTicks, yMin: $scope.valueMin, yMax: $scope.valueMax}, values: $scope.data.values};
->>>>>>> ca07fe4 * d3BarController.js: works with real data
             });
     }, 1000000);
 
