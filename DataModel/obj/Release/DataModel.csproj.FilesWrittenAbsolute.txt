@@ -1,0 +1,5 @@
+/Users/Hjorth/SmartRisoMono/DataModel/obj/Release/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/Users/Hjorth/SmartRisoMono/DataModel/bin/Release/DataModel.dll.mdb
+/Users/Hjorth/SmartRisoMono/DataModel/bin/Release/DataModel.dll
+/Users/Hjorth/SmartRisoMono/DataModel/obj/Release/DataModel.dll
+/Users/Hjorth/SmartRisoMono/DataModel/obj/Release/DataModel.dll.mdb
