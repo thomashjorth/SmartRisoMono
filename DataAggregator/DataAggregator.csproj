@@ -114,10 +114,13 @@
     <Compile Include="Models\LabeledInstance.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\PageConfigurationController.cs" />
-    <Compile Include="Models\VisualizationConfig.cs" />
-    <Compile Include="Models\GraphConfig.cs" />
-    <Compile Include="Models\PageConfig.cs" />
-    <Compile Include="Models\PagesConfig.cs" />
+    <Compile Include="Models\Configuration\BarConfig.cs" />
+    <Compile Include="Models\Configuration\GaugeConfig.cs" />
+    <Compile Include="Models\Configuration\GraphConfig.cs" />
+    <Compile Include="Models\Configuration\PageConfig.cs" />
+    <Compile Include="Models\Configuration\PagesConfig.cs" />
+    <Compile Include="Models\Configuration\PieConfig.cs" />
+    <Compile Include="Models\Configuration\VisualizationConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -140,6 +143,7 @@
     <Folder Include="Utils\" />
     <Folder Include="Images\" />
     <Folder Include="PageConfigurations\" />
+    <Folder Include="Models\Configuration\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
