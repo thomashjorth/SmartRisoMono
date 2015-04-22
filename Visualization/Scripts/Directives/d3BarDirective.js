@@ -48,8 +48,8 @@
                 data = data.map(function(d, i) {
                     return [xValue.call(data, d, i), yValue.call(data, d, i)];
                 });
+
                 if(oldVal == null){
-               		
                     draw(data)
                 }else {
                     redraw(data)
@@ -69,12 +69,19 @@
             }
 
             function draw (data) {
-                var y0 = d3.max(data.map(function(d) { return Math.abs(d[1]);}));
+                var yMin = BarChart.config.min, yMax = BarChart.config.max;
+                if(BarChart.config.min == null)
+                    yMin = -d3.max(data.map(function(d) { return Math.abs(d[1]);}));
+                if(BarChart.config.max == null)
+                    yMax = d3.max(data.map(function(d) { return Math.abs(d[1]);}));
+
+
+
                 xScale
                     .domain(data.map(function(d) { return d[0];} ))
                     .rangeRoundBands([0, width - margin.left - margin.right], 0.2);
                 yScale
-                    .domain([-y0,y0])
+                    .domain([yMin,yMax])
                     .range([height - margin.top - margin.bottom, 0])
                     .nice();
 
@@ -101,14 +108,18 @@
             }
 
             function redraw (data) {
-                var y0 = d3.max(data.map(function(d) { return Math.abs(d[1]);}));
+                var yMin = BarChart.config.min, yMax = BarChart.config.max;
+                if(BarChart.config.min == null)
+                    yMin = -d3.max(data.map(function(d) { return Math.abs(d[1]);}));
+                if(BarChart.config.max == null)
+                    yMax = d3.max(data.map(function(d) { return Math.abs(d[1]);}));
 
                 xScale
                     .domain(data.map(function(d) { return d[0];} ))
                     .rangeRoundBands([0, width - margin.left - margin.right], 0.2);
 
                 yScale
-                    .domain([-y0,y0])
+                    .domain([yMin,yMax])
                     .range([height - margin.top - margin.bottom, 0])
                     .nice();
 

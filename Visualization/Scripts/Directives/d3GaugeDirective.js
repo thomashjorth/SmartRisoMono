@@ -6,14 +6,11 @@
 			var exp = $parse(attrs.chartData);
 
 			var data=exp(scope);
-			//var padding = 40;
-			//var pathClass="path";
-			//var xScale, yScale, xAxisGen, yAxisGen, lineFun;
 
 			var d3 = $window.d3;
 			var rawSvg=elem.find('svg');
 			var svg = d3.select(rawSvg[0]);
-
+			var _currentRotation;
 			var self = this;
 			var config = 
 			{
@@ -27,7 +24,7 @@
 			scope.$watchCollection(exp, function(newVal, oldVal){
 				data=newVal;
 
-				if(newVal == oldVal){
+				if(oldVal == null){
 					config = 
 					{
 						size: $('.box').outerHeight()*0.95,
@@ -64,69 +61,72 @@
 				this.config.redColor 	= configuration.redColor || "#DC3912";
 
 				this.config.transitionDuration = configuration.transitionDuration || 500;
+
+				svg = svg.attr("id", data.config.PlaceHolder);
 			}
          
 			function render()
 			{
 				this.body = svg
-					.attr("width", this.config.size)
-					.attr("height", this.config.size);
+					.attr("class", data.config.PlaceHolder)
+					.attr("width", config.size)
+					.attr("height", config.size);
 
 				this.body.append("svg:svg")
 					.attr("class", "gauge")
-					.attr("width", this.config.size)
-					.attr("height", this.config.size);
+					.attr("width", config.size)
+					.attr("height", config.size);
 
 				this.body.append("svg:circle")
-					.attr("cx", this.config.cx)
-					.attr("cy", this.config.cy)
-					.attr("r", this.config.raduis)
+					.attr("cx", config.cx)
+					.attr("cy", config.cy)
+					.attr("r", config.raduis)
 					.style("fill", "#ccc")
 					.style("stroke", "#000")
 					.style("stroke-width", "0.5px");
 
 				this.body.append("svg:circle")
-					.attr("cx", this.config.cx)
-					.attr("cy", this.config.cy)
-					.attr("r", 0.9 * this.config.raduis)
+					.attr("cx", config.cx)
+					.attr("cy", config.cy)
+					.attr("r", 0.9 * config.raduis)
 					.style("fill", "#fff")
 					.style("stroke", "#e0e0e0")
 					.style("stroke-width", "2px");
 
-				for (var index in this.config.greenZones)
+				for (var index in config.greenZones)
 				{
-					drawBand(this.config.greenZones[index].from, this.config.greenZones[index].to, self.config.greenColor);
+					drawBand(config.greenZones[index].from, config.greenZones[index].to, self.config.greenColor);
 				}
 
-				for (var index in this.config.yellowZones)
+				for (var index in config.yellowZones)
 				{
-					drawBand(this.config.yellowZones[index].from, this.config.yellowZones[index].to, self.config.yellowColor);
+					drawBand(config.yellowZones[index].from, config.yellowZones[index].to, self.config.yellowColor);
 				}
 
-				for (var index in this.config.redZones)
+				for (var index in config.redZones)
 				{
-					drawBand(this.config.redZones[index].from, this.config.redZones[index].to, self.config.redColor);
+					drawBand(config.redZones[index].from, config.redZones[index].to, self.config.redColor);
 				}
 
-				if (undefined != this.config.label)
+				if (undefined != config.label)
 				{
-					var fontSize = Math.round(this.config.size / 9);
+					var fontSize = Math.round(config.size / 9);
 					this.body.append("svg:text")
-						.attr("x", this.config.cx)
-						.attr("y", this.config.cy / 2 + fontSize / 2)
+						.attr("x", config.cx)
+						.attr("y", config.cy / 2 + fontSize / 2)
 						.attr("dy", fontSize / 2)
 						.attr("text-anchor", "middle")
-						.text(this.config.label)
+						.text(config.label)
 						.style("font-size", fontSize + "px")
 						.style("fill", "#333")
 						.style("stroke-width", "0px");
 				}
 
-				var fontSize = Math.round(this.config.size / 16);
-				var majorDelta = this.config.range / (this.config.majorTicks - 1);
-				for (var major = this.config.min; major <= this.config.max; major += majorDelta)
+				var fontSize = Math.round(config.size / 16);
+				var majorDelta = config.range / (config.majorTicks - 1);
+				for (var major = config.min; major <= config.max; major += majorDelta)
 				{
-					var minorDelta = majorDelta / this.config.minorTicks;
+					var minorDelta = majorDelta / config.minorTicks;
 					for (var minor = major + minorDelta; minor < Math.min(major + majorDelta, this.config.max); minor += minorDelta)
 					{
 						var point1 = valueToPoint(minor, 0.75);
@@ -152,7 +152,7 @@
 						.style("stroke", "#333")
 						.style("stroke-width", "2px");
 
-					if (major == this.config.min || major == this.config.max)
+					if (major == config.min || major == config.max)
 					{
 						var point = valueToPoint(major, 0.63);
 
@@ -160,7 +160,7 @@
 							.attr("x", point.x)
 							.attr("y", point.y)
 							.attr("dy", fontSize / 3)
-							.attr("text-anchor", major == this.config.min ? "start" : "end")
+							.attr("text-anchor", major == config.min ? "start" : "end")
 							.text(major)
 							.style("font-size", fontSize + "px")
 							.style("fill", "#333")
@@ -168,9 +168,9 @@
 					}
 				}
 
-				var pointerContainer = this.body.append("svg:g").attr("class", "pointerContainer");
+				var pointerContainer = this.body.append("g").attr("class", "pointerContainer").attr("id", data.config.PlaceHolder);
 
-				var midValue = (this.config.min + this.config.max) / 2;
+				var midValue = (config.min + config.max) / 2;
 
 				var pointerPath = buildPointerPath(midValue);
 
@@ -189,20 +189,20 @@
 					.style("fill-opacity", 0.7)
 
 				pointerContainer.append("svg:circle")
-					.attr("cx", this.config.cx)
-					.attr("cy", this.config.cy)
-					.attr("r", 0.12 * this.config.raduis)
+					.attr("cx", config.cx)
+					.attr("cy", config.cy)
+					.attr("r", 0.12 * config.raduis)
 					.style("fill", "#4684EE")
 					.style("stroke", "#666")
 					.style("opacity", 1);
 
-				var fontSize = Math.round(this.config.size / 10);
+				var fontSize = Math.round(config.size / 10);
 				pointerContainer.selectAll("text")
 					.data([midValue])
 					.enter()
 					.append("svg:text")
-					.attr("x", this.config.cx)
-					.attr("y", this.config.size - this.config.cy / 4 - fontSize)
+					.attr("x", config.cx)
+					.attr("y", config.size - config.cy / 4 - fontSize)
 					.attr("dy", fontSize / 2)
 					.attr("text-anchor", "middle")
 					.style("font-size", fontSize + "px")
@@ -214,13 +214,13 @@
 
 			function buildPointerPath(value)
 			{
-				var delta = this.config.range / 13;
+				var delta = config.range / 13;
 
 				var head = valueToPointInner(value, 0.85);
 				var head1 = valueToPointInner(value - delta, 0.12);
 				var head2 = valueToPointInner(value + delta, 0.12);
 
-				var tailValue = value - (this.config.range * (1/(270/360)) / 2);
+				var tailValue = value - (config.range * (1/(270/360)) / 2);
 				var tail = valueToPointInner(tailValue, 0.28);
 				var tail1 = valueToPointInner(tailValue - delta, 0.12);
 				var tail2 = valueToPointInner(tailValue + delta, 0.12);
@@ -230,8 +230,8 @@
 				function valueToPointInner(value, factor)
 				{
 					var point = valueToPoint(value, factor);
-					point.x -= this.config.cx;
-					point.y -= this.config.cy;
+					point.x -= config.cx;
+					point.y -= config.cy;
 					return point;
 				}
 			}
@@ -245,18 +245,19 @@
 					.attr("d", d3.svg.arc()
 					.startAngle(valueToRadians(start))
 					.endAngle(valueToRadians(end))
-					.innerRadius(0.65 * this.config.raduis)
-					.outerRadius(0.85 * this.config.raduis))
-					.attr("transform", function() { return "translate(" + self.config.cx + ", " + self.config.cy + ") rotate(270)" });
+					.innerRadius(0.65 * config.raduis)
+					.outerRadius(0.85 * config.raduis))
+					.attr("transform", function() { return "translate(" + config.cx + ", " + config.cy + ") rotate(270)" });
 			}
 
 			function redraw(transitionDuration)
 			{
-				var pointerContainer = this.body.select(".pointerContainer");
+				//alert("#" + data.config.PlaceHolder + " " +data.CompositeMeasurement.v);
+				var pointerContainer = d3.select("#"+data.config.PlaceHolder);
 
-				pointerContainer.selectAll("text").text(data.CompositeMeasurement.v);
+				pointerContainer.select("text").text(data.CompositeMeasurement.v);
 
-				var pointer = pointerContainer.selectAll("path");
+				var pointer = pointerContainer.select("path");
 				pointer.transition()
 					.duration(undefined != transitionDuration ? transitionDuration : this.config.transitionDuration)
 					//.delay(0)
@@ -264,18 +265,17 @@
 					//.attr("transform", function(d) 
 					.attrTween("transform", function()
 					{
-						//alert(data.CompositeMeasurement.v);
 						var pointerValue = data.CompositeMeasurement.v;
-						if (data.CompositeMeasurement.v > self.config.max) pointerValue = self.config.max + 0.02*self.config.range;
-						else if (data.CompositeMeasurement.v < self.config.min) pointerValue = self.config.min - 0.02*self.config.range;
+						if (data.CompositeMeasurement.v > config.max) pointerValue = config.max + 0.02*config.range;
+						else if (data.CompositeMeasurement.v < config.min) pointerValue = config.min - 0.02*config.range;
 						var targetRotation = (valueToDegrees(pointerValue) - 90);
-						var currentRotation = self._currentRotation || targetRotation;
-						self._currentRotation = targetRotation;
+						var currentRotation = _currentRotation || targetRotation;
+						_currentRotation = targetRotation;
 
 						return function(step) 
 						{
 							var rotation = currentRotation + (targetRotation-currentRotation)*step;
-							return "translate(" + self.config.cx + ", " + self.config.cy + ") rotate(" + rotation + ")"; 
+							return "translate(" + config.cx + ", " + config.cy + ") rotate(" + rotation + ")"; 
 						}
 					});
 			}
@@ -284,7 +284,7 @@
 			{
 				// thanks @closealert
 				//return value / this.config.range * 270 - 45;
-				return value / this.config.range * 270 - (this.config.min / this.config.range * 270 + 45);
+				return value / config.range * 270 - (config.min / config.range * 270 + 45);
 			}
 
 			function valueToRadians(value)
@@ -294,8 +294,8 @@
 
 			function valueToPoint(value, factor)
 			{
-				return { 	x: this.config.cx - this.config.raduis * factor * Math.cos(valueToRadians(value)),
-							y: this.config.cy - this.config.raduis * factor * Math.sin(valueToRadians(value)) 		
+				return { 	x: config.cx - config.raduis * factor * Math.cos(valueToRadians(value)),
+							y: config.cy - config.raduis * factor * Math.sin(valueToRadians(value)) 		
 				};
 			}
        }
