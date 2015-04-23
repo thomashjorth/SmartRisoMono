@@ -35,7 +35,7 @@ polyline{
 #visualization
 {
 	height: 100%;
-	width:80%;
+	width:75%;
 	float: left;
 	margin: 1%;
 }
@@ -43,10 +43,9 @@ polyline{
 #sideBar
 {
 	height: 100%;
-	width:15%;
+	width:20%;
 	float: left;
 	margin: 1%;
-    border: 1px solid black;
     position: relative;
 }
 

@@ -1,6 +1,6 @@
 ﻿<div ng-controller="sideBarController" ng-init="init('localhost','9001','Aggregation','DeviceList')">
 <p>Devices known to Aggregator:</p>
-	<div style="overflow: auto; height:300px; width:auto" >
+	<div style="overflow: auto; height:100%; width:auto" >
    		<p ng-repeat="der in Ders">
 
    		<img src="http://{{dataHost}}:{{dataPort}}/api/Image/{{der.Interface}}" width="50%"><br>
@@ -12,6 +12,4 @@
 			</svg>
    		</p>
    		</div>
-
-	<div id="messages"></div>
 </div>	
