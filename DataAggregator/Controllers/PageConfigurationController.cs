@@ -15,12 +15,13 @@ namespace DataAggregator.Controllers
 
 			/* Example*/
 			PageConfig page0 = new PageConfig (new List<VisualizationConfig> (){  
-				new GraphConfig("localhost",8080,"Aggregation","AvgActivePower","realtime",10,-10,10),
-				new GraphConfig("localhost",8080,"Realtime","getActivePower","realtime",10,-10,10), 
-				new GaugeConfig("localhost",8080,"Realtime","getActivePower","realtime",-10,10,"gauge1"),
-				new GaugeConfig("localhost",8080,"Aggregation","AvgActivePower","avg",-1,11,"gauge2"),
-				new PieConfig("localhost",8080,"Aggregation","AvgActivePower","avg"),
-				new BarConfig("localhost",8080,"Aggregation","AvgActivePower","avg",-1,2)
+				new GraphConfig("127.0.0.1",9001,"Aggregation","AvgActivePower","realtime",10,-10,10),
+				new GraphConfig("127.0.0.1",9001,"Realtime","getActivePower","realtime",10,-10,10), 
+				//new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","realtime",-10,10,"gauge1"),
+				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",-2,2),
+				new PieConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg"),
+				new PieConfig("127.0.0.1",9001,"Aggregation","AllActivePower","get"),
+				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",-1,2)
 			});
 			PageConfig page1 = new PageConfig (new List<VisualizationConfig> (){  
 				new GraphConfig("localhost",8080,"Aggregation","AvgActivePower","Testtest",10,-10,10),
@@ -31,7 +32,9 @@ namespace DataAggregator.Controllers
 				try{
 					StreamReader file = File.OpenText (@"PageConfigurations/"+id+".json");
 					string read = file.ReadToEnd();
-					read.Replace("\\"," ");
+					read = read.Replace("\\","");
+					read = read.Remove(0,1);
+					read = read.Remove(read.Length-1,1);
 
 					response = Request.CreateResponse (
 						HttpStatusCode.Created, 
@@ -43,10 +46,7 @@ namespace DataAggregator.Controllers
 				PageConfig emptyPage = new PageConfig (new List<VisualizationConfig> (){  });
 				PagesConfig pagesEmpty = new PagesConfig(new List<PageConfig>(){emptyPage});
 					response = Request.CreateResponse (
-						HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
-						//pagesEmpty
-						pages
-						)
+						HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (pages)
 					);
 				}
 
