@@ -1,0 +1,9 @@
+﻿<div ng-controller="configController">
+	<div id="sideBar" ng-include="'Visualization/sideBar'"></div>
+
+	<div id="visualization">
+		<div id="boxAll">
+			<ng-include class="box" ng-repeat="page in include track by $index" id="{{page.id}}" src="page.VisualizationType" ng-init="init=page"></ng-include>
+		</div>
+	</div>
+</div>

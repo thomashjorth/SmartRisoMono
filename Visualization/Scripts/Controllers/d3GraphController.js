@@ -1,17 +1,8 @@
 VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', 'AppService', function($scope, $interval, $http, AppService, d3GraphDirective){
 	$scope.firstTime = Math.floor(Date.now()/1000);
-	$scope.init = function(host, port, aggregation, resource, titleHeading,xticks, ymin, ymax)
+	$scope.initialize = function()
   	{
-  		$scope.dataHost = host;
-        $scope.dataPort = port;
-        $scope.dataAggregation = aggregation;
-        $scope.dataResource = resource;
-        $scope.title = titleHeading;
-        $scope.xTicks = xticks;
-        $scope.valueMin = ymin;
-        $scope.valueMax = ymax;
-
-        $scope.data={config: {unit: titleHeading, xTicks: xticks, yMin: ymin, yMax: ymax}, values: [
+        $scope.data={config: {unit: $scope.init.TitleHeading, xTicks: $scope.init.XTicks, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax}, values: [
             {timestamp: 0,value: 0}
         ]};
   	};
@@ -19,13 +10,13 @@ VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', 'Ap
 
     $interval(function(){
         var h=Math.floor(Date.now()/1000)-$scope.firstTime;
-        AppService.getData($scope.dataHost,$scope.dataPort,$scope.dataAggregation,$scope.dataResource)
+        AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Aggregation,$scope.init.Resource)
             .success(function (response){
                 if($scope.data.values.length > $scope.xTicks){
                     $scope.data.values.shift();
                 }
                 $scope.data.values.push({timestamp: h, value: JSON.parse(response).value});
-                $scope.data = {config: {unit: $scope.title, xTicks: $scope.xTicks, yMin: $scope.valueMin, yMax: $scope.valueMax}, values: $scope.data.values};
+                $scope.data = {config: {unit: $scope.init.TitleHeading, xTicks: $scope.init.XTicks, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax}, values: $scope.data.values};
             });
     }, 1000);
 

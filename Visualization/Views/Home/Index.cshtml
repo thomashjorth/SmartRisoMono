@@ -1,17 +1,5 @@
 ﻿
-<div id="sideBar" ng-include="'Visualization/sideBar'"></div>
-
-<div id="visualization">
-	<div id="boxAll">
-		<div id="box1" class="box" ng-include="'Visualization/d3Gauge'"></div>
-		<div id="box2" class="box" ng-include="'Visualization/d3Pie'"></div>
-		<div id="box3" class="box" ng-include="'Visualization/d3Pie'"></div>
-		<div id="box4" class="box" ng-include="'Visualization/d3Graph'"></div>
-		<div id="box5" class="box" ng-include="'Visualization/d3Graph'"></div>
-		<div id="box6" class="box" ng-include="'Visualization/d3Bar'"></div>
-		<div id="boxBottom"></div>
-	</div>
-</div>
+<div id="config" ng-include="'Visualization/config'"></div>
 
 <script src="../../Scripts/Libraries/angular-1.3.1/angular.min.js"></script>
 <script src="../../Scripts/Libraries/angular-1.3.1/angular-route.min.js"></script>
@@ -23,6 +11,7 @@
 <script type="text/javascript" src="../../Scripts/app.js"></script>
 <script type="text/javascript" src="../../Scripts/Services/AppService.js"></script>
 
+<script type="text/javascript" src="../../Scripts/Controllers/configController.js"></script>
 <script type="text/javascript" src="../../Scripts/Controllers/d3GraphController.js"></script>
 <script type="text/javascript" src="../../Scripts/Controllers/d3GaugeController.js"></script>
 <script type="text/javascript" src="../../Scripts/Controllers/d3PieController.js"></script>

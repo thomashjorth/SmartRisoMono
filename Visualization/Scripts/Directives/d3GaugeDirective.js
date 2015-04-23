@@ -24,7 +24,7 @@
 			scope.$watchCollection(exp, function(newVal, oldVal){
 				data=newVal;
 
-				if(oldVal == null){
+				if(oldVal == newVal){
 					config = 
 					{
 						size: $('.box').outerHeight()*0.95,
@@ -61,8 +61,6 @@
 				this.config.redColor 	= configuration.redColor || "#DC3912";
 
 				this.config.transitionDuration = configuration.transitionDuration || 500;
-
-				svg = svg.attr("id", data.config.PlaceHolder);
 			}
          
 			function render()
@@ -255,7 +253,7 @@
 				//alert("#" + data.config.PlaceHolder + " " +data.CompositeMeasurement.v);
 				var pointerContainer = d3.select("#"+data.config.PlaceHolder);
 
-				pointerContainer.select(".pointerContainer").select("text").text(data.CompositeMeasurement.v);
+				pointerContainer.select("text").text(data.CompositeMeasurement.v);
 
 				var pointer = pointerContainer.select("path");
 				pointer.transition()
