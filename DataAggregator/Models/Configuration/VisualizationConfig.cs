@@ -22,6 +22,16 @@ namespace DataAggregator
 			UpdateInterval = updateInterval;
 		}
 
+		public VisualizationConfig (string host,int port,string aggregation,string  resource,string  titleHeading)
+		{
+
+			Host = host;
+			Port = port;
+			Aggregation = aggregation;
+			Resource = resource;
+			TitleHeading = titleHeading;
+		}
+
 		public VisualizationConfig(){
 		}
 	}
