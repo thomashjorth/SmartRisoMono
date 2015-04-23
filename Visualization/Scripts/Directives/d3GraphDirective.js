@@ -29,10 +29,11 @@
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom);
 
+           var parseDate = d3.time.format("%d-%b-%y").parse;
            function setChartParameters(){
 
-               xScale = d3.scale.linear()
-                   .domain([dataToPlot.values[0].timestamp, dataToPlot.values[dataToPlot.values.length-1].timestamp])
+               xScale = d3.time.scale()
+              //     .domain([dataToPlot.values[0].timestamp, dataToPlot.values[dataToPlot.values.length-1].timestamp])
                    .range([0, width]);
 
                var min = dataToPlot.config.yMin, max = dataToPlot.config.yMax;
@@ -58,7 +59,7 @@
 
                lineFun = d3.svg.line()
                    .x(function (d) {
-                       return xScale(d.timestamp);
+                       return xScale(parseDate(d.timestamp));
                    })
                    .y(function (d) {
                        return yScale(d.value);

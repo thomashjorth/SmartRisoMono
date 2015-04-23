@@ -10,8 +10,9 @@ namespace DataAggregator.Utils
 			if (simulatedTest) {
 				DER der = new DER ("localhost", "8080");
 				DER der2 = new DER ("localhost", "8085");
+				DER der3 = new DER ("localhost", "8090");
 				ders = new List<DER> { 
-					der, der2
+					der, der2,der3
 				};
 			} else {
 

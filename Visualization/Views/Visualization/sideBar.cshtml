@@ -1,8 +1,9 @@
 ﻿<div ng-controller="sideBarController" ng-init="init('localhost','9001','Aggregation','DeviceList')">
 	<div style="overflow: auto; height:100%; width:auto" >
    		<p ng-repeat="der in Ders">
-   		<img class="derImg" src="http://{{dataHost}}:{{dataPort}}/api/Image/{{der.Interface}}"><br>
    		{{der.Interface}} - {{der.Hostname}} : {{der.Port}}
+   		<img class="derImg" src="http://{{dataHost}}:{{dataPort}}/api/Image/{{der.Interface}}"><br>
+
    			<svg ng-repeat="app in der.Apps" id="status" width="75%" height="25">
 				<circle ng-if="app.Status" cx="12.5" cy="12.5" r="10" stroke="black" stroke-width="1" fill="green" />
 				<circle ng-if="!app.Status" cx="12.5" cy="12.5" r="10" stroke="black" stroke-width="1" fill="red" />

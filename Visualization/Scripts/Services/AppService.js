@@ -7,5 +7,6 @@
 				url: "http://"+host+":"+port+"/api/"+apiController+"/"+params
 			});
 		}
+
 	}
 ]);

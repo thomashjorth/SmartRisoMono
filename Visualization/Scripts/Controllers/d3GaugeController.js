@@ -14,7 +14,6 @@
             var h=Math.floor(Date.now()/1000)-$scope.firstTime;
             AppService.getData($scope.gauge.Host,$scope.gauge.Port,$scope.gauge.Aggregation,$scope.Resource)
                 .success(function (response){
-                    alert(response);
                 $scope.data={config: {label: $scope.gauge.Unit, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID}, 
                     CompositeMeasurement: {v: JSON.parse(response).value, timestamp:h} };
 
