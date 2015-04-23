@@ -1,14 +1,12 @@
 ﻿<div ng-controller="sideBarController" ng-init="init('localhost','9001','Aggregation','DeviceList')">
-<p>Devices known to Aggregator:</p>
 	<div style="overflow: auto; height:100%; width:auto" >
    		<p ng-repeat="der in Ders">
-
-   		<img src="http://{{dataHost}}:{{dataPort}}/api/Image/{{der.Interface}}" width="50%"><br>
+   		<img class="derImg" src="http://{{dataHost}}:{{dataPort}}/api/Image/{{der.Interface}}"><br>
    		{{der.Interface}} - {{der.Hostname}} : {{der.Port}}
    			<svg ng-repeat="app in der.Apps" id="status" width="75%" height="25">
 				<circle ng-if="app.Status" cx="12.5" cy="12.5" r="10" stroke="black" stroke-width="1" fill="green" />
 				<circle ng-if="!app.Status" cx="12.5" cy="12.5" r="10" stroke="black" stroke-width="1" fill="red" />
-				<text x="25" y="18">{{app.Name}}</text>
+				<text x="25" y="18" font-size="10px">{{app.Name}}</text>
 			</svg>
    		</p>
    		</div>

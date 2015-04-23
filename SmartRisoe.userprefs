@@ -1,21 +1,6 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupItem="Visualization/Visualization.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataAggregator/Controllers/RealtimeController.cs">
-    <Files>
-      <File FileName="Visualization/Scripts/Controllers/sideBarController.js" Line="1" Column="1" />
-      <File FileName="Visualization/Views/Visualization/sideBar.cshtml" Line="1" Column="1" />
-      <File FileName="Visualization/Controllers/VisualizationController.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Controllers/AggregationController.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Models/DER.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Controllers/ImageController.cs" Line="12" Column="17" />
-      <File FileName="DataAggregator/Models/SimpleStatistics.cs" Line="1" Column="1" />
-      <File FileName="Visualization/Scripts/Directives/d3BarDirective.js" Line="1" Column="1" />
-      <File FileName="Visualization/Scripts/Controllers/d3GaugeController.js" Line="1" Column="1" />
-      <File FileName="Visualization/Views/Visualization/d3Graph.cshtml" Line="3" Column="7" />
-      <File FileName="Visualization/Views/Visualization/d3Gauge.cshtml" Line="6" Column="7" />
-      <File FileName="DataAggregator/Controllers/RealtimeController.cs" Line="12" Column="43" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

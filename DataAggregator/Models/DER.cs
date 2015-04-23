@@ -83,7 +83,7 @@ namespace DataAggregator.Models
 							apps.Add (
 								new App(
 									
-									doc2.Root.Attribute("name").Value
+									doc2.Root.Attribute("name").Value.Replace(" interface","")
 									,status)
 							);
 						}
