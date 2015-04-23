@@ -122,7 +122,6 @@
     <Compile Include="Models\Configuration\PieConfig.cs" />
     <Compile Include="Models\Configuration\VisualizationConfig.cs" />
     <Compile Include="Models\Configuration\SideBarConfig.cs" />
-    <Compile Include="Models\Configuration\VizualizationFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
