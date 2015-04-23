@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DataAggregator
 {
@@ -21,11 +22,12 @@ namespace DataAggregator
 	}
 
 	public class GaugesConfig : VisualizationConfig{
-		public GaugeConfig Gauge1;
-		public GaugeConfig Gauge2;
+
+		public List<GaugeConfig> Gauges;
+
 		public GaugesConfig(GaugeConfig g1, GaugeConfig g2) : base(){
-			Gauge1 = g1;
-			Gauge2 = g2;
+			Gauges = new List<GaugeConfig>(){g1,g2};
+
 		}
 
 	}
