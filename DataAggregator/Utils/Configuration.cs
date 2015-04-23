@@ -1,6 +1,9 @@
 ﻿using System;
 using DataAggregator.Models;
 using System.Collections.Generic;
+using System.Configuration;
+
+
 namespace DataAggregator.Utils
 {
 	public static class Configuration
@@ -8,12 +11,22 @@ namespace DataAggregator.Utils
 		public static List<DER> DerConfig(bool simulatedTest){
 			List<DER> ders;
 			if (simulatedTest) {
-				DER der = new DER ("localhost", "8080");
+				/*DER der = new DER ("localhost", "8080");
 				DER der2 = new DER ("localhost", "8085");
 				DER der3 = new DER ("localhost", "8090");
 				ders = new List<DER> { 
 					der, der2,der3
-				};
+				};*/
+				ders = new List<DER> (){ };
+				string dersString;
+				dersString = ConfigurationManager.AppSettings["Ders"];
+
+				string[] dersArray = dersString.Split(',');
+				List<string> dersList = new List<string> (dersArray);
+				foreach(string d in dersList){
+					string[] hostPort = d.Split (':');
+					ders.Add(new DER(hostPort[0],hostPort[1]));
+				}
 			} else {
 
 				ders = new List<DER> {
