@@ -9,7 +9,11 @@ namespace DataAggregator.Controllers
 	public class RealtimeController : ApiController
 	{
 		// GET: api/Realtime/5
-		public HttpResponseMessage Get([FromUri] string host, [FromUri] string port, [FromUri] string wsInterface, [FromUri] string resource)
+		public HttpResponseMessage Get(
+			[FromUri] string host, 
+			[FromUri] string port, 
+			[FromUri] string wsInterface, 
+			[FromUri] string resource)
 		{
 			HttpResponseMessage response;
 			/* Example use
@@ -23,8 +27,8 @@ namespace DataAggregator.Controllers
 			 * &
 			 * resource=ActivePower
 			*/
-			if (resource == "ActivePower") {
-				response = Request.CreateResponse (HttpStatusCode.Created, WS.DownloadXML (wsInterface, "get"+resource, host, port, ParseType.CompositeMeasurement));
+			if (resource == "getActivePower") {
+				response = Request.CreateResponse (HttpStatusCode.Created, WS.DownloadXML (wsInterface, resource, host, port, ParseType.CompositeMeasurement));
 			} else {
 				response = Request.CreateResponse (HttpStatusCode.Created, "NAN1");
 

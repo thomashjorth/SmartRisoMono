@@ -19,13 +19,22 @@ namespace DataAggregator.Controllers
 				new GraphConfig("127.0.0.1",9001,"Realtime","getActivePower","realtime",10,-10,10,15), 
 				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",-2,2),
 				new PieConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg"),
-				new PieConfig("127.0.0.1",9001,"Aggregation","AllActivePower","get"),
+				new GaugesConfig(
+					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","realtime",-10,10,"gauge1", 
+						new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower","")),
+					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","realtime",-10,10,"gauge1", 
+						new VisualizationConfig("127.0.0.1",8085,"GenericLoadWS","getActivePower",""))),
 				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",-1,2)
 			});
 			PageConfig page1 = new PageConfig (new List<VisualizationConfig> (){  
 				new GraphConfig("localhost",8080,"Aggregation","AvgActivePower","Testtest",10,-10,10,15),
 				new GraphConfig("localhost",8080,"Realtime","getActivePower","realtime",10,-10,10,15),
-				new GaugesConfig(new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","realtime",-10,10,"gauge1"),new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","realtime",-10,10,"gauge1"),"2 gauges!")}
+				new GaugesConfig(
+					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","realtime",-10,10,"gauge1", 
+						new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower","")),
+					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","realtime",-10,10,"gauge1", 
+						new VisualizationConfig("127.0.0.1",8085,"GenericLoadWS","getActivePower","")))
+					}
 			);
 			PagesConfig pages = new PagesConfig(new List<PageConfig>(){page0});
 

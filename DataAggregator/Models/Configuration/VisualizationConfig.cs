@@ -2,7 +2,7 @@
 
 namespace DataAggregator
 {
-	public abstract class VisualizationConfig
+	public class VisualizationConfig
 	{
 		public String Host;
 		public int Port;
@@ -21,8 +21,7 @@ namespace DataAggregator
 			TitleHeading = titleHeading;
 		}
 
-		public VisualizationConfig(string  titleHeading){
-			TitleHeading = titleHeading;
+		public VisualizationConfig(){
 		}
 	}
 
