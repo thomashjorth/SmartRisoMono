@@ -11,7 +11,7 @@ namespace DataAggregator
 		public VisualizationConfig DER;
 
 		public GaugeConfig (string host, int port, string aggregation, string resource, string titleHeading, 
-			double valueMin, double valueMax, string id, VisualizationConfig der) : base(host, port, aggregation, resource, titleHeading)
+			double valueMin, double valueMax, string id, VisualizationConfig der, int updateIterval) : base(host, port, aggregation, resource, titleHeading, updateIterval)
 		{
 			DER = der;
 			ID = id;

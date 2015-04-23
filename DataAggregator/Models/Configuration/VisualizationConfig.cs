@@ -10,8 +10,8 @@ namespace DataAggregator
 		public string Resource;
 		public string TitleHeading;
 		public string VisualizationType;
-
-		public VisualizationConfig (string host,int port,string aggregation,string  resource,string  titleHeading)
+		public int UpdateInterval;
+		public VisualizationConfig (string host,int port,string aggregation,string  resource,string  titleHeading, int updateInterval)
 		{
 			
 			Host = host;
@@ -19,6 +19,7 @@ namespace DataAggregator
 			Aggregation = aggregation;
 			Resource = resource;
 			TitleHeading = titleHeading;
+			UpdateInterval = updateInterval;
 		}
 
 		public VisualizationConfig(){
