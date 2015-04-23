@@ -17,6 +17,7 @@ namespace DataAggregator.Controllers
 			PageConfig page0 = new PageConfig (new List<VisualizationConfig> (){  
 				new GraphConfig("127.0.0.1",9001,"Aggregation","AvgActivePower","realtime",10,-10,10,15),
 				new GraphConfig("127.0.0.1",9001,"Realtime","getActivePower","realtime",10,-10,10,15), 
+		
 				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",-2,2),
 				new PieConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg"),
 				new GaugesConfig("127.0.0.1",9001,"Realtime","getActivePower","realtime",
