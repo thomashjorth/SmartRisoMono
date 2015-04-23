@@ -5,12 +5,12 @@
     //$scope.controller = "Realtime";
     //$scope.config = "getActivePower";
     $scope.controller = "PageConfiguration";
-    $scope.config = "singlePageAll";
+    $scope.config = "pageConf";
 
     AppService.getData($scope.dataHost,$scope.dataPort,$scope.controller,$scope.config)
 			.success(function (response){
 				var config = JSON.parse(response);
-
+				
 				var include = [];
 
 				for(var i = 0; i < config.Pages[0].Page.length; i ++){

@@ -9,13 +9,12 @@ namespace DataAggregator
 		public double ValueMax;
 		public string ID;
 		public VisualizationConfig DER;
-		public string Unit;
-		public GaugeConfig (string unit, double valueMin, double valueMax, string id, VisualizationConfig der)
+
+		public GaugeConfig (string host, int port, string aggregation, string resource, string titleHeading, 
+			double valueMin, double valueMax, string id, VisualizationConfig der) : base(host, port, aggregation, resource, titleHeading)
 		{
-			Unit = unit;
 			DER = der;
 			ID = id;
-
 			ValueMin = valueMin;
 			ValueMax = valueMax;
 		}
@@ -26,7 +25,7 @@ namespace DataAggregator
 
 		public List<GaugeConfig> Gauges;
 
-		public GaugesConfig( string host, int port, string aggregation, string resource, string titleHeading, GaugeConfig g1, GaugeConfig g2) : base(host, port, aggregation, resource, titleHeading){
+		public GaugesConfig(GaugeConfig g1, GaugeConfig g2) : base(){
 			VisualizationType = "d3Gauge";
 			Gauges = new List<GaugeConfig>(){g1,g2};
 

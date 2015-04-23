@@ -1,18 +1,22 @@
 ﻿VisualizeApp.controller('d3GaugeController', ['$scope','$interval', '$http', 'AppService', function($scope, $interval, $http, AppService, d3GaugeDirective){
 	$scope.firstTime = Math.floor(Date.now()/1000);
-
-	$scope.initialize = function()
+	$scope.initialize = function(gauge)
   	{
-
-        $scope.data={config: {label: $scope.init.TitleHeading, min: $scope.init.ValueMin, max: $scope.init.ValueMax, PlaceHolder: $scope.init.ID},
+        $scope.gauge = $scope.init.Gauges[gauge];
+        
+        $scope.data={config: {label: $scope.gauge.Unit, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID},
             CompositeMeasurement: {v: 0,timestamp: $scope.firstTime} };
+
+        $scope.Resource = "?host="+$scope.gauge.DER.Host+"&port="+$scope.gauge.DER.Port
+            +"&wsInterface="+$scope.gauge.DER.Aggregation+"&resource="+$scope.gauge.DER.Resource;
     
         $interval(function(){
             var h=Math.floor(Date.now()/1000)-$scope.firstTime;
-            AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Aggregation,$scope.init.Resource)
+            AppService.getData($scope.gauge.Host,$scope.gauge.Port,$scope.gauge.Aggregation,$scope.Resource)
                 .success(function (response){
-
-                $scope.data ={config: {label: $scope.init.TitleHeading, min: $scope.init.ValueMin, max: $scope.init.ValueMax, PlaceHolder: $scope.init.ID}, CompositeMeasurement: {v: JSON.parse(response).value, timestamp:h} };
+                    alert(response);
+                $scope.data={config: {label: $scope.gauge.Unit, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID}, 
+                    CompositeMeasurement: {v: JSON.parse(response).value, timestamp:h} };
 
             });
         }, 1000);

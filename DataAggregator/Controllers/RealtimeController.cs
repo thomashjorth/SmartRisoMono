@@ -17,15 +17,7 @@ namespace DataAggregator.Controllers
 		{
 			HttpResponseMessage response;
 			/* Example use
-			 * http://127.0.0.1:9001/api/Realtime/
-			 * ?
-			 * host=localhost
-			 * &
-			 * port=8080
-			 * &
-			 * wsInterface=GenericLoadWS
-			 * &
-			 * resource=ActivePower
+			 * http://127.0.0.1:9001/api/Realtime/?host=localhost&port=8080&wsInterface=GenericLoadWS&resource=getActivePower
 			*/
 			if (resource == "getActivePower") {
 				response = Request.CreateResponse (HttpStatusCode.Created, WS.DownloadXML (wsInterface, resource, host, port, ParseType.CompositeMeasurement));
