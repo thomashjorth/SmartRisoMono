@@ -5,8 +5,6 @@ $scope.init = function(host, port, aggregation, resource)
         $scope.dataPort = port;
         $scope.dataAggregation = aggregation;
         $scope.dataResource = resource;
-
-<<<<<<< Upstream, based on origin/master
     };
 
 
@@ -23,6 +21,4 @@ $scope.init = function(host, port, aggregation, resource)
             	}
            });
     }, 3000);
-=======
->>>>>>> bd5874a * Site.css: * test.dll.mdb: * Visualization.csproj: * test.dll: * Index.cshtml: * test.dll.mdb: * d3Pie.cshtml: * d3Bar.cshtml: * config.cshtml: * d3Graph.cshtml: * d3Gauge.cshtml: * d3GaugeDirective.js: * VisualizationController.cs: * d3PieController.js: * d3BarController.js: * configController.js: * d3GaugeController.js: * sideBarController.js: * d3GraphController.js: * Visualization.csproj.FilesWrittenAbsolute.txt: 
 }]);

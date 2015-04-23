@@ -33,12 +33,9 @@ namespace Visualization.Controllers
 		{
 			return View();
 		}
-<<<<<<< Upstream, based on origin/master
-=======
 
 		public ActionResult config(){
 			return View();
 		}
->>>>>>> bd5874a * Site.css: * test.dll.mdb: * Visualization.csproj: * test.dll: * Index.cshtml: * test.dll.mdb: * d3Pie.cshtml: * d3Bar.cshtml: * config.cshtml: * d3Graph.cshtml: * d3Gauge.cshtml: * d3GaugeDirective.js: * VisualizationController.cs: * d3PieController.js: * d3BarController.js: * configController.js: * d3GaugeController.js: * sideBarController.js: * d3GraphController.js: * Visualization.csproj.FilesWrittenAbsolute.txt: 
 	}
 }
