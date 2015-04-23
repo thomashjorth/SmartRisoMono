@@ -9,9 +9,26 @@ namespace DataAggregator.Controllers
 	public class RealtimeController : ApiController
 	{
 		// GET: api/Realtime/5
-		public HttpResponseMessage Get(string id)
+		public HttpResponseMessage Get([FromUri] string host, [FromUri] string port, [FromUri] string wsInterface, [FromUri] string resource)
 		{
-			var response = Request.CreateResponse (HttpStatusCode.Created,WS.DownloadXML ("GenericLoadWS",id,"localhost","8080",ParseType.CompositeMeasurement));
+			HttpResponseMessage response;
+			/* Example use
+			 * http://127.0.0.1:9001/api/Realtime/
+			 * ?
+			 * host=localhost
+			 * &
+			 * port=8080
+			 * &
+			 * wsInterface=GenericLoadWS
+			 * &
+			 * resource=ActivePower
+			*/
+			if (resource == "ActivePower") {
+				response = Request.CreateResponse (HttpStatusCode.Created, WS.DownloadXML (wsInterface, "get"+resource, host, port, ParseType.CompositeMeasurement));
+			} else {
+				response = Request.CreateResponse (HttpStatusCode.Created, "NAN1");
+
+			}
 			//Double.Parse (Utils.WS.DownloadXML (id,"localhost","8085"))));
 			response.Headers.Add("Access-Control-Allow-Origin", "*");
 			response.Headers.Add("Access-Control-Allow-Methods", "GET");

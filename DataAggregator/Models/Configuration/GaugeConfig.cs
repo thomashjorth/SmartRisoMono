@@ -2,7 +2,7 @@
 
 namespace DataAggregator
 {
-	public class GaugeConfig : VisualizationConfig
+	public  class GaugeConfig : VisualizationConfig
 	{
 		public double ValueMin;
 		public double ValueMax;
