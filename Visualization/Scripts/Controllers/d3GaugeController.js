@@ -17,11 +17,7 @@ VisualizeApp.controller('d3GaugeController', ['$scope','$interval', '$http', 'Ap
             var h=Math.floor(Date.now()/1000)-$scope.firstTime;
             AppService.getData($scope.gauge.Host,$scope.gauge.Port,$scope.gauge.Aggregation,$scope.Resource)
                 .success(function (response){
-<<<<<<< Upstream, based on origin/master
-                $scope.data={config: {label: $scope.gauge.Unit, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID}, 
-=======
                 $scope.data={config: {label: $scope.gauge.TitleHeading, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID}, 
->>>>>>> 0e62d72 sd
                     CompositeMeasurement: {v: JSON.parse(response).value, timestamp:h} };
 
             });

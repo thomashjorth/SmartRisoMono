@@ -33,7 +33,8 @@
            function setChartParameters(){
 
                xScale = d3.time.scale()
-              //     .domain([dataToPlot.values[0].timestamp, dataToPlot.values[dataToPlot.values.length-1].timestamp])
+                   .domain([dataToPlot.values[0].timestamp, dataToPlot.values[dataToPlot.values.length-1].timestamp])
+              //     .domain(d3.extent(dataToPlot, function(d) { return d.timestamp; }))
                    .range([0, width]);
 
                var min = dataToPlot.config.yMin, max = dataToPlot.config.yMax;
@@ -50,7 +51,8 @@
                xAxisGen = d3.svg.axis()
                    .scale(xScale)
                    .orient("bottom")
-                   .ticks(dataToPlot.config.xTicks);
+                   .ticks(4)//dataToPlot.config.xTicks);
+                   .tickFormat(d3.time.format('%X'));
 
                yAxisGen = d3.svg.axis()
                    .scale(yScale)
@@ -59,7 +61,7 @@
 
                lineFun = d3.svg.line()
                    .x(function (d) {
-                       return xScale(parseDate(d.timestamp));
+                       return xScale(d.timestamp);
                    })
                    .y(function (d) {
                        return yScale(d.value);
@@ -111,7 +113,7 @@
                    });
                svg.selectAll(".tick").each(function (d, i) {
                     if ( i == 0 ) {
-                    this.remove();
+                    //this.remove();
                     }});
            }
 
