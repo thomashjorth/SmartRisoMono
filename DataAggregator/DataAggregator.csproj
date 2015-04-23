@@ -138,6 +138,11 @@
     <Content Include="Images\washer.jpg" />
     <Content Include="Images\plug.jpg" />
     <Content Include="Images\GenericLoad.jpg" />
+    <Content Include="Images\FlexHouse.jpg" />
+    <Content Include="Images\sun.jpg" />
+    <Content Include="Images\GaiaWindTurbine.jpg" />
+    <Content Include="Images\VRBBattery.jpg" />
+    <Content Include="Images\GridComponent.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
