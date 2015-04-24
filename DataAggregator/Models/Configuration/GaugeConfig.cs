@@ -7,16 +7,17 @@ namespace DataAggregator
 	{
 		public double ValueMin;
 		public double ValueMax;
-		public string ID;
+		public string ID, Unit;
 		public VisualizationConfig DER;
 
 		public GaugeConfig (string host, int port, string aggregation, string resource, string titleHeading, 
-			double valueMin, double valueMax, string id, VisualizationConfig der, int updateIterval) : base(host, port, aggregation, resource, titleHeading, updateIterval)
+			double valueMin, double valueMax, string id, VisualizationConfig der, int updateIterval, string unit) : base(host, port, aggregation, resource, titleHeading, updateIterval)
 		{
 			DER = der;
 			ID = id;
 			ValueMin = valueMin;
 			ValueMax = valueMax;
+			Unit = unit;
 		}
 
 	}

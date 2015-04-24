@@ -49,7 +49,7 @@
                     return [xValue.call(data, d, i), yValue.call(data, d, i)];
                 });
 
-                if(oldVal == null){
+                if(oldVal == null || BarChart.LabeledInstance.length != oldVal.LabeledInstance.length){
                     draw(data)
                 }else {
                     redraw(data)

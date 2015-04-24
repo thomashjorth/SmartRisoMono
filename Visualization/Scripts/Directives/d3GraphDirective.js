@@ -51,7 +51,7 @@
                xAxisGen = d3.svg.axis()
                    .scale(xScale)
                    .orient("bottom")
-                   .ticks(4)//dataToPlot.config.xTicks);
+                   .ticks(dataToPlot.config.xTicks)
                    .tickFormat(d3.time.format('%X'));
 
                yAxisGen = d3.svg.axis()

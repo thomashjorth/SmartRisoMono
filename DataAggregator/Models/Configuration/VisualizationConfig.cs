@@ -6,29 +6,29 @@ namespace DataAggregator
 	{
 		public String Host;
 		public int Port;
-		public string Aggregation;
-		public string Resource;
+		public string Device;
+		public string Method;
 		public string TitleHeading;
 		public string VisualizationType;
 		public int UpdateInterval;
-		public VisualizationConfig (string host,int port,string aggregation,string  resource,string  titleHeading, int updateInterval)
+		public VisualizationConfig (string host,int port,string device,string method,string  titleHeading, int updateInterval)
 		{
 			
 			Host = host;
 			Port = port;
-			Aggregation = aggregation;
-			Resource = resource;
+			Device = device;
+			Method = method;
 			TitleHeading = titleHeading;
 			UpdateInterval = updateInterval;
 		}
 
-		public VisualizationConfig (string host,int port,string aggregation,string  resource,string  titleHeading)
+		public VisualizationConfig (string host,int port,string device,string  method,string  titleHeading)
 		{
 
 			Host = host;
 			Port = port;
-			Aggregation = aggregation;
-			Resource = resource;
+			Device = device;
+			Method = method;
 			TitleHeading = titleHeading;
 		}
 
