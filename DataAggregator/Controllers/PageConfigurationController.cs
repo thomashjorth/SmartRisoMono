@@ -30,9 +30,9 @@ namespace DataAggregator.Controllers
 			});
 			PageConfig page1 = new PageConfig (new List<VisualizationConfig> (){ 
 				new GaugesConfig(
-					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","Title",-10,10,"gauge1", 
+					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","Title",-10,10,"gauge5", 
 						new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower",""),1000,"unit"),
-					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","Title",-10,10,"gauge2", 
+					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","Title",-10,10,"gauge6", 
 						new VisualizationConfig("127.0.0.1",8085,"GenericLoadWS","getActivePower",""),1000,"unit")),
 				new GraphConfig("127.0.0.1",9001,"Aggregation","AvgActivePower","Title",4,-10,10,15,
 					null,1000,"unit"),
