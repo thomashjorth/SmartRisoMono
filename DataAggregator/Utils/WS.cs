@@ -18,14 +18,17 @@ namespace DataAggregator.Utils
 		isPControllable, isPStepped, isSchedulePaused, isQControllable, isQStepped, isReactiveLoad, 
 		isResistiveLoad, isScheduleExecuting, hasFFeedback, hasPFeedback, hasQFeedback, hasUFeedback, 
 		isLoadOn, hasFan, isFanRunning, getTemperature, hasTemperatureMeasurement };
+
+	public enum GenericPriceWSGET { getCurrentPrice,getDailyPriceAverage,getEnergyUnit,getMonetaryUnit,getScriptName,getUpdateInterval };
 	//public enum GenericLoadWSPUSH { pauseSchedule, setActiveOperatingMode, setActivePSchedule, setActiveQSchedule, setConstantP/{p}, setConstantQ/{q}, setInactivePValue/{d}, setInactiveQValue/{d}, setPAutocorrelation/{a}, setPMean/{m}, setPStdDeviation/{s}, setP_U_Characteristics, setP_f_Characteristics, setQAutocorrelation/{a}, setQMean/{m}, setQStdDeviation/{s}, setQ_U_Characteristics, setQ_f_Characteristics, startSchedule, stopSchedule, startLoad, stopLoad, };
 
 	public enum ParseType{
-		CompositeMeasurement
+		CompositeMeasurement, String, Double
 	}
 
 	public static class WS
 	{ 
+		
 		private static CompositeMeasurement ParseXmlCompositeMeasurement(string xml){
 			XDocument doc = XDocument.Parse(xml);
 
@@ -43,6 +46,18 @@ namespace DataAggregator.Utils
 			return activePower;
 
 		}
+
+		private static string ParseXmlString(string xml){
+			XDocument doc = XDocument.Parse(xml);
+			string xmlString =doc.Element("string").Value;
+			return xmlString;
+		}
+
+		private static double ParseXmlDouble(string xml){
+			XDocument doc = XDocument.Parse(xml);
+			double xmlDouble =double.Parse(doc.Element("double").Value);
+			return xmlDouble;
+		}
 		public static string DownloadXML(string Interface, string function, string hostname, string port, ParseType parseAs)
 		{
 			string url = "http://" + hostname + ":" + port + "/" + Interface + "/" + function;
@@ -56,8 +71,16 @@ namespace DataAggregator.Utils
 				}
 			}
 			string res = "NAN";
+			try{
 			if (parseAs == ParseType.CompositeMeasurement) {
 				res = Newtonsoft.Json.JsonConvert.SerializeObject (ParseXmlCompositeMeasurement (xml));
+			} else if (parseAs == ParseType.String) {
+				res = Newtonsoft.Json.JsonConvert.SerializeObject (ParseXmlString (xml));
+			}else if (parseAs == ParseType.Double) {
+				res = Newtonsoft.Json.JsonConvert.SerializeObject (ParseXmlDouble (xml));
+				}
+			}catch{
+				return res;
 			}
 			//return doc.Root.Element("value").Value.Substring (0, 4);
 			return res;

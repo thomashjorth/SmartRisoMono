@@ -6,7 +6,7 @@ namespace DataAggregator.Models
 {
 
 	public enum Type {
-		NAN, GenericLoad
+		NAN, GenericLoad, GenericPrice
 	};
 	public enum Role {
 		PowerConsumer, NAN
@@ -107,6 +107,9 @@ namespace DataAggregator.Models
 				}else if(app.Name.Contains ("Mobile load WS")){
 					Types.Add (Type.GenericLoad.ToString());
 					Interface= Type.GenericLoad.ToString();
+				} else if(app.Name.Contains ("Price signal server")){
+					Types.Add (Type.GenericPrice.ToString());
+					Interface= Type.GenericPrice.ToString();
 				} 
 			}
 		}

@@ -1,5 +1,5 @@
 ﻿<div ng-controller="sideBarController" ng-init="init('localhost','9001','Aggregation','DeviceList')">
-	<div style="overflow: auto; height:100%; width:auto" >
+	<div style="overflow: auto; height:100%; width:auto">
    		<p ng-repeat="der in Ders">
    		{{der.Interface}} - {{der.Hostname}} : {{der.Port}}
    		<img ng-if="der.Interface != 'NAN'" class="derImg" src="http://{{dataHost}}:{{dataPort}}/api/Image/{{der.Interface}}"><br>
