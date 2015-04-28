@@ -22,6 +22,6 @@
                 }
 
             });
-        }, 10000);
+        }, $scope.init.UpdateInterval);
     };
 }]);

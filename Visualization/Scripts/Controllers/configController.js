@@ -1,5 +1,6 @@
 ﻿VisualizeApp.controller('configController', ['$scope','$interval', '$http', 'AppService', '$route', '$routeParams', '$location', function($scope, $interval, $http, AppService, $route, $routeParams, $location){
     $scope.params = $location.absUrl().split("?");
+    $scope.config = "sd";
     if($scope.params.length > 1){
     	$scope.params = $scope.params[1].split("&")
     	$scope.slides = [];
@@ -8,16 +9,17 @@
 	    	if(p[0] == "slide"){
 	    		$scope.slides.push(parseInt(p[1]));
 	    	}
+	    	else if(p[0] == "config"){
+    			$scope.config = p[1];
+	    	}
 	    }
 	}
 
     $scope.dataHost = "localhost";
     $scope.dataPort = "9001";
-    //$scope.controller = "Realtime";
-    //$scope.config = "getActivePower";
     $scope.controller = "PageConfiguration";
-    $scope.config = "sd";
     $scope.current = 0;
+    $scope.paused = false;
 
     AppService.getData($scope.dataHost,$scope.dataPort,$scope.controller,$scope.config)
 			.success(function (response){
@@ -56,17 +58,62 @@
 					}
 				}
 				include[$scope.current].Current = true;
-					alert(JSON.stringify(include[$scope.current].Current));
 				$scope.config = slides;
 				$scope.include = include;
-				$scope.loaded = true;
+				$("#slide"+$scope.current).css("fontSize", "x-large");
+				if(include.length > 1){
+					$interval(function(){ 
+						if($scope.paused == false){
+							$scope.include[$scope.current].Current = false;
+							$("#slide"+$scope.current).css("fontSize", "medium");
 
-					alert(JSON.stringify($scope.include[$scope.current]));
-
-				$interval(function(){ 
-					$scope.include[0].Current = !$scope.include[0].Current;
-					$scope.include[1].Current = !$scope.include[1].Current;
-		        }, 30000);
+							if($scope.current == $scope.include.length-1){
+								$scope.current = 0;
+							}
+							else
+								$scope.current++;
+							$scope.include[$scope.current].Current = true;
+							$("#slide"+$scope.current).css("fontSize", "x-large");
+						}
+			        }, 30000);
+				}
     	});
+	
 
+	$scope.controls = function(control) {
+		if(control == "back"){
+			$scope.include[$scope.current].Current = false;
+			$("#slide"+$scope.current).css("fontSize", "medium");
+			if($scope.current == 0)
+				$scope.current = $scope.include.length-1;
+			else
+				$scope.current = $scope.current-1;
+			$scope.include[$scope.current].Current = true;
+			$("#slide"+$scope.current).css("fontSize", "x-large");
+		}
+		else if(control == "pause"){
+			if($scope.paused)
+				$scope.paused = false;
+			else
+				$scope.paused = true;
+		}
+		else if(control == "next"){
+			$scope.include[$scope.current].Current = false;
+			$("#slide"+$scope.current).css("fontSize", "medium");
+			if($scope.current == $scope.include.length-1)
+				$scope.current = 0;
+			else
+				$scope.current = $scope.current+1;
+			$scope.include[$scope.current].Current = true;
+			$("#slide"+$scope.current).css("fontSize", "x-large");
+		}
+	};
+
+	$scope.slide = function(index){
+		$scope.include[$scope.current].Current = false;
+		$("#slide"+$scope.current).css("fontSize", "medium");
+		$scope.current = index;
+		$scope.include[$scope.current].Current = true;
+		$("#slide"+$scope.current).css("fontSize", "x-large");
+	}
 }]);

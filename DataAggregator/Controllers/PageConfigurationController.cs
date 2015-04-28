@@ -16,9 +16,9 @@ namespace DataAggregator.Controllers
 			/* Example */
 			PageConfig page0 = new PageConfig (new List<VisualizationConfig> (){  
 				new GraphConfig("127.0.0.1",9001,"Aggregation","AvgActivePower","Title",4,-10,10,15,
-					null,1000,"unit"),
+					null,10000,"unit"),
 				new GraphConfig("127.0.0.1",9001,"Realtime","getActivePower","Title",4,-10,10,15,
-					new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower",""),1000,"unit"), 
+					new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower",""),10000,"unit"), 
 				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",-2,2,10000,"unit"),
 				new PieConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",10000),
 				new GaugesConfig(
@@ -35,7 +35,7 @@ namespace DataAggregator.Controllers
 					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","Title",-10,10,"gauge6", 
 						new VisualizationConfig("127.0.0.1",8085,"GenericLoadWS","getActivePower",""),1000,"unit")),
 				new GraphConfig("127.0.0.1",9001,"Aggregation","AvgActivePower","Title",4,-10,10,15,
-					null,1000,"unit"),
+					null,10000,"unit"),
 				new GaugesConfig(
 					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","Title",-10,10,"gauge3", 
 						new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower",""),1000,"unit"),

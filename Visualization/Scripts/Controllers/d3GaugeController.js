@@ -21,6 +21,6 @@ VisualizeApp.controller('d3GaugeController', ['$scope','$interval', '$http', 'Ap
                     CompositeMeasurement: {v: JSON.parse(response).value, timestamp:h} };
 
             });
-        }, 1000);
+        }, $scope.gauge.UpdateInterval);
     };
 }]);

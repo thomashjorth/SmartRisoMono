@@ -29,7 +29,7 @@ VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', 'Ap
                 $scope.data.values.push({timestamp: JSON.parse(response).timestampMicros/1000, value: JSON.parse(response).value});
                 $scope.data = {config: {unit: $scope.init.Unit, xTicks: $scope.init.XTicks, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax}, values: $scope.data.values};
             });
-        }, 1000);
+        }, $scope.init.UpdateInterval);
   	};
 
 }]);

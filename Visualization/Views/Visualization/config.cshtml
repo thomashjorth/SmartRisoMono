@@ -1,9 +1,15 @@
 ﻿<div ng-controller="configController">
 	<div id="sideBar" ng-include="'Visualization/sideBar'"></div>
 
-	<div id="visualization" ng-repeat="pages in include track by $index" ng-show="pages.Current">
-		<div id="boxAll">
+	<div id="visualization">
+		<div id="boxAll" ng-repeat="pages in include track by $index" ng-show="pages.Current">
 			<ng-include class="box" ng-repeat="page in pages track by $index" id="{{page.id}}" src="page.VisualizationType" ng-init="init=page"></ng-include>
+		</div>
+		<div id="boxBottom">
+			<div class="chooser" ng-repeat="pages in include track by $index" id="slide{{$index}}" ng-click="slide($index)">{{$index+1}}</div>
+			<img class="controls" src="http://icons.iconarchive.com/icons/icons8/ios7/128/Media-Controls-Play-icon.png" width="30px" height="30px" ng-click="controls('next')">
+			<img class="controls" src="http://icons.iconarchive.com/icons/icons8/ios7/512/Media-Controls-Pause-icon.png" width="30px" height="30px"  ng-click="controls('pause')">
+			<img id="back" class="controls" src="http://icons.iconarchive.com/icons/icons8/ios7/128/Media-Controls-Play-icon.png" width="30px" height="30px" ng-click="controls('back')">
 		</div>
 	</div>
 </div>

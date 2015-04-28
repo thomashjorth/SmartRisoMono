@@ -16,6 +16,6 @@
                 $scope.data = {config: {label: $scope.init.Unit, min: $scope.init.ValueMin, max: $scope.init.ValueMax}, 
                     LabeledInstance: JSON.parse(response) };
             });
-        }, 10000);
+        }, $scope.init.UpdateInterval);
     };
 }]);
