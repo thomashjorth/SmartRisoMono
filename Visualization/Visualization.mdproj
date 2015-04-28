@@ -7,7 +7,7 @@
     <ProjectGuid>{524CB2CB-F33B-4978-9BBA-7A2BFED5A37F}</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Default|AnyCPU' ">
-    <OutputPath>.\</OutputPath>
+    <OutputPath>.</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Views\" />
@@ -15,7 +15,6 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Views\Home\Index.html" />
     <None Include="Views\Visualization\config.html" />
     <None Include="Views\Visualization\d3Bar.html" />
     <None Include="Views\Visualization\d3Gauge.html" />
@@ -2427,5 +2426,6 @@
     <None Include="Scripts\Libraries\d3\d3.js" />
     <None Include="Scripts\Libraries\d3\d3.min.js" />
     <None Include="Scripts\Services\AppService.js" />
+    <None Include="Index.html" />
   </ItemGroup>
 </Project>
