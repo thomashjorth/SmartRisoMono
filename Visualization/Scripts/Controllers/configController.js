@@ -10,6 +10,7 @@
 	    		$scope.slides.push(parseInt(p[1]));
 	    	}
 	    	else if(p[0] == "config"){
+	    	alert(p[1]);
     			$scope.config = p[1];
 	    	}
 	    }

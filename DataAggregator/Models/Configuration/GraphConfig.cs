@@ -7,7 +7,10 @@ namespace DataAggregator
 		public int XTicks, ValueMin, ValueMax, XLength;
 		public VisualizationConfig DER;
 		public string Unit;
-		public GraphConfig ( string host, int port, string aggregation, string resource, string titleHeading, int xTicks, int yMin, int yMax, int xLength, VisualizationConfig der, int updateIterval, string unit) : base(host, port, aggregation, resource,titleHeading, updateIterval)
+		public GraphConfig ( string host, int port, string aggregation, string resource, string titleHeading, 
+			int xTicks, int yMin, int yMax, int xLength, VisualizationConfig der, 
+			int updateIterval, string unit) : base(host, port, aggregation, 
+				resource,titleHeading, updateIterval)
 		{
 			VisualizationType = "d3Graph";
 			XTicks = xTicks;

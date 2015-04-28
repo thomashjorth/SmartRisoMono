@@ -34,6 +34,17 @@ namespace DataAggregator
 
 		public VisualizationConfig(){
 		}
+
+		public VisualizationConfig(string host, int port){
+			Host = host;
+			Port = port;
+		}
+
+		public VisualizationConfig(string host, int port, int updateInterval){
+			Host = host;
+			Port = port;
+			UpdateInterval = updateInterval;
+		}
 	}
 
 }

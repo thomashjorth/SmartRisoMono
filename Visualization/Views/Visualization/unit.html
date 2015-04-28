@@ -1,0 +1,13 @@
+﻿<div ng-controller="unitController" >
+  <div id="unit" class="unit unit" chart-data="data" ng-init="initialize()">
+        <p>
+      {{Der.Interface}} - {{Der.Hostname}} : {{Der.Port}}
+      <img ng-if="Der.Interface != 'NAN'" class="derImg" src="http://{{dataHost}}:{{dataPort}}/api/Image/{{image}}"><br>
+      <svg ng-repeat="app in Der.Apps" id="status" width="75%" height="25">
+          <circle ng-if="app.Status" cx="12.5" cy="12.5" r="10" stroke="black" stroke-width="1" fill="green" />
+          <circle ng-if="!app.Status" cx="12.5" cy="12.5" r="10" stroke="black" stroke-width="1" fill="red" />
+          <text x="25" y="18" font-size="10px">{{app.Name}}</text>
+      </svg>
+        </p>
+  </div>
+</div>	

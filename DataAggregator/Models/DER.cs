@@ -29,7 +29,7 @@ namespace DataAggregator.Models
 	public class DER{
 
 	
-		public DER(string hostname, string port){
+		public  DER(string hostname, string port){
 			Hostname = hostname;
 			Port = port;
 			Apps = appNames();

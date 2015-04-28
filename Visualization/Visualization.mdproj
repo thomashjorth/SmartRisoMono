@@ -2427,5 +2427,7 @@
     <None Include="Scripts\Libraries\d3\d3.min.js" />
     <None Include="Scripts\Services\AppService.js" />
     <None Include="Index.html" />
+    <None Include="Scripts\Controllers\unitController.js" />
+    <None Include="Views\Visualization\unit.html" />
   </ItemGroup>
 </Project>
