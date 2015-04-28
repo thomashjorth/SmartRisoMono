@@ -33,7 +33,7 @@
 					for(var j = 0; j < slides.Pages.length; j ++){
 						for(var i = 0; i < slides.Pages[j].Page.length; i ++){
 							slides.Pages[j].Page[i].id="box"+(i+1);
-							slides.Pages[j].Page[i].VisualizationType="Visualization/"+slides.Pages[j].Page[i].VisualizationType;
+							slides.Pages[j].Page[i].VisualizationType="Views/Visualization/"+slides.Pages[j].Page[i].VisualizationType +".html";
 							n.push(slides.Pages[j].Page[i]);
 						}
 						n.Current=false;
@@ -49,7 +49,7 @@
 					for(var j = 0; j < $scope.slides.length; j ++){
 						for(var i = 0; i < slides[j].Page.length; i ++){
 							slides[j].Page[i].id="box"+(i+1);
-							slides[j].Page[i].VisualizationType="Visualization/"+slides[j].Page[i].VisualizationType;
+							slides[j].Page[i].VisualizationType="Views/Visualization/"+slides[j].Page[i].VisualizationType +".html";
 							n.push(slides[j].Page[i]);
 						}
 						n.Current=false;

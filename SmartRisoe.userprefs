@@ -1,9 +1,9 @@
-﻿<Properties GitUserInfo="UsingGIT" StartupItem="Visualization/Visualization.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+﻿<Properties GitUserInfo="UsingGIT" StartupItem="DataAggregator/DataAggregator.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="/usr/bin/google-chrome-stable" />
   <MonoDevelop.Ide.Workbench ActiveDocument="DataAggregator/Models/DER.cs">
     <Files>
       <File FileName="DataAggregator/Controllers/AggregationController.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Models/DER.cs" Line="87" Column="18" />
+      <File FileName="DataAggregator/Models/DER.cs" Line="2" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
