@@ -10,7 +10,6 @@
 	    		$scope.slides.push(parseInt(p[1]));
 	    	}
 	    	else if(p[0] == "config"){
-	    	alert(p[1]);
     			$scope.config = p[1];
 	    	}
 	    }
@@ -21,7 +20,6 @@
     $scope.controller = "PageConfiguration";
     $scope.current = 0;
     $scope.paused = false;
-
     AppService.getData($scope.dataHost,$scope.dataPort,$scope.controller,$scope.config)
 			.success(function (response){
 				var config = JSON.parse(response);
@@ -63,7 +61,7 @@
 				$scope.include = include;
 				$("#slide"+$scope.current).css("fontSize", "x-large");
 				if(include.length > 1){
-					$interval(function(){ 
+					$interval(function(){
 						if($scope.paused == false){
 							$scope.include[$scope.current].Current = false;
 							$("#slide"+$scope.current).css("fontSize", "medium");
@@ -93,10 +91,12 @@
 			$("#slide"+$scope.current).css("fontSize", "x-large");
 		}
 		else if(control == "pause"){
-			if($scope.paused)
+			if($scope.paused){
 				$scope.paused = false;
-			else
+			}
+			else{
 				$scope.paused = true;
+			}
 		}
 		else if(control == "next"){
 			$scope.include[$scope.current].Current = false;
@@ -116,5 +116,21 @@
 		$scope.current = index;
 		$scope.include[$scope.current].Current = true;
 		$("#slide"+$scope.current).css("fontSize", "x-large");
+	}
+
+
+	document.addEventListener("keydown", keyDownTextField, false);
+
+	function keyDownTextField(e) {
+		var keyCode = e.keyCode;
+		if (keyCode == 39) {
+			$scope.controls('next');
+		}
+		else if(keyCode == 37){
+			$scope.controls('back');
+		}
+		else if(keyCode == 32){
+			$scope.controls('pause');
+		}
 	}
 }]);

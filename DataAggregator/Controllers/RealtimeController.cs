@@ -59,8 +59,14 @@ namespace DataAggregator.Controllers
 		}
 
 		// PUT: api/Realtime/5
-		public void Put(int id, [FromBody]string value)
+		public void Put(
+			[FromUri] string host, 
+			[FromUri] string port, 
+			[FromUri] string wsInterface, 
+			[FromUri] string resource, 
+			[FromBody]string value)
 		{
+
 		}
 	}
 }
