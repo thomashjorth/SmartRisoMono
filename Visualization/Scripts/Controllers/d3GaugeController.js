@@ -4,7 +4,7 @@ VisualizeApp.controller('d3GaugeController', ['$scope','$interval', '$http', 'Ap
   	{
         $scope.gauge = $scope.init.Gauges[gauge];
         
-        $scope.data={config: {label: $scope.gauge.Unit, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID},
+        $scope.data={config: {label: $scope.gauge.Unit, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID, title: $scope.gauge.TitleHeading},
             CompositeMeasurement: {v: 0,timestamp: $scope.firstTime} };
 
         if($scope.gauge.DER != null){
@@ -17,7 +17,7 @@ VisualizeApp.controller('d3GaugeController', ['$scope','$interval', '$http', 'Ap
             var h=Math.floor(Date.now()/1000)-$scope.firstTime;
             AppService.getData($scope.gauge.Host,$scope.gauge.Port,$scope.gauge.Device,$scope.Method)
                 .success(function (response){
-                $scope.data={config: {label: $scope.gauge.Unit, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID}, 
+                $scope.data={config: {label: $scope.gauge.Unit, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID, title: $scope.gauge.TitleHeading}, 
                     CompositeMeasurement: {v: JSON.parse(response).value, timestamp:h} };
 
             });

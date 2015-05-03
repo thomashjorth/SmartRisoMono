@@ -111,10 +111,24 @@
 					var fontSize = Math.round(config.size / 9);
 					this.body.append("svg:text")
 						.attr("x", config.cx)
-						.attr("y", config.cy / 2 + fontSize / 2)
+						.attr("y", (config.cy / 2 + fontSize / 2)*2.6)
 						.attr("dy", fontSize / 2)
 						.attr("text-anchor", "middle")
 						.text(config.label)
+						.style("font-size", fontSize + "px")
+						.style("fill", "#333")
+						.style("stroke-width", "0px");
+				}
+
+				if (undefined != data.config.title)
+				{
+					var fontSize = Math.round(config.size / 9);
+					this.body.append("svg:text")
+						.attr("x", config.cx)
+						.attr("y", (config.cy / 2 + fontSize / 2))
+						.attr("dy", fontSize / 2)
+						.attr("text-anchor", "middle")
+						.text(data.config.title)
 						.style("font-size", fontSize + "px")
 						.style("fill", "#333")
 						.style("stroke-width", "0px");
@@ -200,7 +214,7 @@
 					.enter()
 					.append("svg:text")
 					.attr("x", config.cx)
-					.attr("y", config.size - config.cy / 4 - fontSize)
+					.attr("y", (config.size - config.cy / 4 - fontSize)*0.85)
 					.attr("dy", fontSize / 2)
 					.attr("text-anchor", "middle")
 					.style("font-size", fontSize + "px")

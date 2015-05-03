@@ -88,6 +88,15 @@
                         .style("text-anchor", "end")
                         .text(dataToPlot.config.unit);
 
+               svg.append("svg:g")
+                   .attr("class", "title")
+                   .attr("transform", "translate(100,0)")
+                   .append("text")
+                        .attr("y", 6)
+                        .attr("dy", ".71em")
+                        .style("text-anchor", "end")
+                        .text(dataToPlot.config.title);
+
                svg.append("svg:path")
                    .attr({
                        d: lineFun(dataToPlot.values),

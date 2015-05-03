@@ -2,7 +2,7 @@ VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', 'Ap
 	$scope.firstTime = Math.floor(Date.now());
 	$scope.initialize = function()
   	{
-        $scope.data={config: {unit: $scope.init.Unit, xTicks: $scope.init.XTicks, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax}, values: [
+        $scope.data={config: {unit: $scope.init.Unit, xTicks: $scope.init.XTicks, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax, title: $scope.init.TitleHeading}, values: [
             {timestamp: $scope.firstTime/1000,value: 0}
         ]};
 
@@ -15,7 +15,7 @@ VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', 'Ap
         AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,$scope.Method)
                 .success(function (response){
 
-                $scope.data = {config: {unit: $scope.init.Unit, xTicks: $scope.init.XTicks, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax}, values: [{timestamp: JSON.parse(response).timestampMicros/1000, value: JSON.parse(response).value}]};
+                $scope.data = {config: {unit: $scope.init.Unit, xTicks: $scope.init.XTicks, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax, title: $scope.init.TitleHeading}, values: [{timestamp: JSON.parse(response).timestampMicros/1000, value: JSON.parse(response).value}]};
             });
 
         $interval(function(){
@@ -27,7 +27,7 @@ VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', 'Ap
                 }
 
                 $scope.data.values.push({timestamp: JSON.parse(response).timestampMicros/1000, value: JSON.parse(response).value});
-                $scope.data = {config: {unit: $scope.init.Unit, xTicks: $scope.init.XTicks, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax}, values: $scope.data.values};
+                $scope.data = {config: {unit: $scope.init.Unit, xTicks: $scope.init.XTicks, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax, title: $scope.init.TitleHeading}, values: $scope.data.values};
             });
         }, $scope.init.UpdateInterval);
   	};

@@ -46,6 +46,8 @@ VisualizeApp.directive('d3PieDirective', function($parse, $window){
                 .attr("class", "labels");
             g.append("g")
                 .attr("class", "lines");
+            g.append("g")
+                .attr("class", "title");
 
             var pie = d3.layout.pie()
                 .sort(null)
@@ -213,6 +215,17 @@ VisualizeApp.directive('d3PieDirective', function($parse, $window){
                 polyline
                     .exit().transition().delay(1000)
                     .remove();
+
+
+                svg.select(".title").select("text")
+                    .remove();
+                svg.select(".title")
+                   .attr("transform", "translate(10,-10)")
+                   .append("text")
+                        .attr("y", 6)
+                        .attr("dy", ".71em")
+                        .style("text-anchor", "end")
+                        .text(PieChart.config.label);
             };
         }
     }    

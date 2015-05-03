@@ -5,7 +5,7 @@
         AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,$scope.init.Method)
             .success(function (response){
 
-                $scope.data = {config: {label: $scope.init.Unit, min: $scope.init.ValueMin, max: $scope.init.ValueMax}, 
+                $scope.data = {config: {label: $scope.init.Unit, min: $scope.init.ValueMin, max: $scope.init.ValueMax, title: $scope.init.TitleHeading}, 
                     LabeledInstance: JSON.parse(response) };
 
             });
@@ -13,7 +13,7 @@
             var h=Math.floor(Date.now()/1000)-$scope.firstTime;
             AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,$scope.init.Method)
                 .success(function (response){
-                $scope.data = {config: {label: $scope.init.Unit, min: $scope.init.ValueMin, max: $scope.init.ValueMax}, 
+                $scope.data = {config: {label: $scope.init.Unit, min: $scope.init.ValueMin, max: $scope.init.ValueMax, title: $scope.init.TitleHeading}, 
                     LabeledInstance: JSON.parse(response) };
             });
         }, $scope.init.UpdateInterval);
