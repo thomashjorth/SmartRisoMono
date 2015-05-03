@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Data
 {
@@ -6,7 +7,9 @@ namespace Data
 	{
 		public static void Main (string[] args)
 		{
-			Console.WriteLine ("Hello World!");
+			PowerReadingCollector powerCollector = new PowerReadingCollector();
+			Thread powerThread = new Thread(powerCollector.DoWork);
+			powerThread.Start();
 		}
 	}
 }

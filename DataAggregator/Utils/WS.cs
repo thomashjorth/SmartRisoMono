@@ -29,7 +29,7 @@ namespace DataAggregator.Utils
 	public static class WS
 	{ 
 		
-		private static CompositeMeasurement ParseXmlCompositeMeasurement(string xml){
+		public static CompositeMeasurement ParseXmlCompositeMeasurement(string xml){
 			XDocument doc = XDocument.Parse(xml);
 
 			CompositeMeasurement activePower = new CompositeMeasurement ();			
