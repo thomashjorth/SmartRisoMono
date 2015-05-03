@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\Data
 EndProject
 Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "Visualization", "Visualization\Visualization.mdproj", "{524CB2CB-F33B-4978-9BBA-7A2BFED5A37F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{1FA92EE2-5895-46AE-9555-82AC82050130}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,6 +16,12 @@ Global
 		Default|Any CPU = Default|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FA92EE2-5895-46AE-9555-82AC82050130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FA92EE2-5895-46AE-9555-82AC82050130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FA92EE2-5895-46AE-9555-82AC82050130}.Default|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FA92EE2-5895-46AE-9555-82AC82050130}.Default|Any CPU.Build.0 = Debug|Any CPU
+		{1FA92EE2-5895-46AE-9555-82AC82050130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FA92EE2-5895-46AE-9555-82AC82050130}.Release|Any CPU.Build.0 = Release|Any CPU
 		{30342368-B74C-4D53-8E84-0E507D8821D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{30342368-B74C-4D53-8E84-0E507D8821D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30342368-B74C-4D53-8E84-0E507D8821D3}.Default|Any CPU.ActiveCfg = Debug|Any CPU
