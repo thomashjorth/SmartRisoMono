@@ -41,7 +41,6 @@
     <None Include="packages.config" />
     <None Include="Data\WashingMachine\Power\20150414.csv" />
     <None Include="Data\WashingMachine\Power\20150415.csv" />
-    <None Include="Data\WashingMachine\Power\20150503.csv" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />

@@ -11,16 +11,22 @@ namespace Data
 	{
 		private bool SaveReadings(StringBuilder sb){
 			try{
-				File.AppendAllText (@"../../Data/Washingmachine/Power/" + DateTime.Now.ToString ("yyyyMMdd") + ".csv", sb.ToString ());
+				Console.WriteLine("Appending: " + @"../../Data/WashingMachine/Power/" + DateTime.Now.ToString ("yyyyMMdd") + ".csv");
+				File.AppendAllText (@"../../Data/WashingMachine/Power/" + DateTime.Now.ToString ("yyyyMMdd") + ".csv", sb.ToString ());
 				return true;
 			}catch{
 				if(
 					!File.Exists(
-						@"../../Data/Washingmachine/Power/" + DateTime.Now.ToString ("yyyyMMdd") + ".csv"
+						@"../../Data/WashingMachine/Power/" + DateTime.Now.ToString ("yyyyMMdd") + ".csv"
 					)
+
 				){
+					Console.WriteLine("New: " + @"../../Data/Washingmachine/Power/" + DateTime.Now.ToString ("yyyyMMdd") + ".csv");
+
 					File.Create (@"../../Data/Washingmachine/Power/" + DateTime.Now.ToString ("yyyyMMdd") + ".csv"
 					);
+					File.AppendAllText (@"../../Data/WashingMachine/Power/" + DateTime.Now.ToString ("yyyyMMdd") + ".csv", "TIMESTAMP;POWER");
+
 				}
 				Console.WriteLine ("sleeps and tries again");
 				Thread.Sleep (50);
@@ -36,6 +42,7 @@ namespace Data
 			while (!_shouldStop)
 			{
 				double[] readingDl = Utils.downloadReading ();
+
 				sb.AppendLine (readingDl[0]/1000+";"+readingDl[1]); 
 							
 					Thread.Sleep(1000);
