@@ -10,22 +10,24 @@ namespace Data
 	public class PowerReadingCollector
 	{
 		private bool SaveReadings(StringBuilder sb){
+
+			string homePath = (Environment.OSVersion.Platform == PlatformID.Unix || 
+				Environment.OSVersion.Platform == PlatformID.MacOSX)
+				? Environment.GetEnvironmentVariable("HOME")
+				: Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
+			
+			string powerSaveDir = homePath + "/DataAggregatorData/WashingMachine/Power/";
 			try{
-				Console.WriteLine("Appending: " + @"../../Data/WashingMachine/Power/" + DateTime.Now.ToString ("yyyyMMdd") + ".csv");
-				File.AppendAllText (@"../../Data/WashingMachine/Power/" + DateTime.Now.ToString ("yyyyMMdd") + ".csv", sb.ToString ());
+				
+				File.AppendAllText (powerSaveDir + DateTime.Now.ToString ("yyyyMMdd") + ".csv", sb.ToString ());
+				Console.WriteLine("Appending: " + powerSaveDir + DateTime.Now.ToString ("yyyyMMdd") + ".csv");
 				return true;
 			}catch{
-				if(
-					!File.Exists(
-						@"../../Data/WashingMachine/Power/" + DateTime.Now.ToString ("yyyyMMdd") + ".csv"
-					)
-
-				){
-					Console.WriteLine("New: " + @"../../Data/Washingmachine/Power/" + DateTime.Now.ToString ("yyyyMMdd") + ".csv");
-
-					File.Create (@"../../Data/Washingmachine/Power/" + DateTime.Now.ToString ("yyyyMMdd") + ".csv"
-					);
-					File.AppendAllText (@"../../Data/WashingMachine/Power/" + DateTime.Now.ToString ("yyyyMMdd") + ".csv", "TIMESTAMP;POWER");
+				if(!File.Exists(powerSaveDir + DateTime.Now.ToString ("yyyyMMdd") + ".csv"))
+				{
+					Console.WriteLine("New: " + powerSaveDir + DateTime.Now.ToString ("yyyyMMdd") + ".csv");
+					File.Create (powerSaveDir + DateTime.Now.ToString ("yyyyMMdd") + ".csv");
+					File.AppendAllText (powerSaveDir + DateTime.Now.ToString ("yyyyMMdd") + ".csv", "TIMESTAMP;POWER");
 
 				}
 				Console.WriteLine ("sleeps and tries again");
@@ -42,9 +44,9 @@ namespace Data
 			while (!_shouldStop)
 			{
 				double[] readingDl = Utils.downloadReading ();
-
-				sb.AppendLine (readingDl[0]/1000+";"+readingDl[1]); 
-							
+				if (readingDl.Length != 0) {
+					sb.AppendLine (readingDl [0] / 1000 + ";" + readingDl [1]); 
+				}		
 					Thread.Sleep(1000);
 					count++;
 					if (count==5) {
