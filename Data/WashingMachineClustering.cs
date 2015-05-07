@@ -7,17 +7,24 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using DataAggregator.Models;
+using DataAggregator;
 
 namespace Data
 {
 	public class WashingMachineClustering
 	{
+		string homePath = (Environment.OSVersion.Platform == PlatformID.Unix ||
+			Environment.OSVersion.Platform == PlatformID.MacOSX)
+			? Environment.GetEnvironmentVariable ("HOME")
+			: Environment.ExpandEnvironmentVariables ("%HOMEDRIVE%%HOMEPATH%");
 		public void DoWork()
 		{
 			
 			while (!_shouldStop)
 			{
-				ApplianceClustering (3);
+				string[] Lines = File.ReadAllLines(homePath+"/DataAggregatorData/WashingMachine/settings.csv");
+				int numberOfPrograms = int.Parse(Lines[0].Split(new char[] { ';' })[1]);
+				ApplianceClustering (numberOfPrograms);
 				Thread.Sleep (10000);
 			}
 			Console.WriteLine("Collection Stopped");
@@ -97,10 +104,7 @@ namespace Data
 			DateTime epoch = new DateTime (1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 			// Get Home Path
 
-			string homePath = (Environment.OSVersion.Platform == PlatformID.Unix ||
-			                  Environment.OSVersion.Platform == PlatformID.MacOSX)
-				? Environment.GetEnvironmentVariable ("HOME")
-				: Environment.ExpandEnvironmentVariables ("%HOMEDRIVE%%HOMEPATH%");
+			
 			
 			List<double> powerConcat = loadCSV (homePath, 1);
 			List<double> timeConcat = loadCSV (homePath, 0);
@@ -116,6 +120,16 @@ namespace Data
 			KMeans	kmean = new KMeans (2, Distance.Euclidean);
 			kmean.Compute (powerInput);
 
+
+			List<double> onOffCen = new List<double>{ };
+			foreach (double[] c in kmean.Clusters.Centroids) {
+				onOffCen.Add (c [0]);
+			}
+			onOffCen.Sort ();
+			File.Delete (homePath + "/DataAggregatorData/WashingMachine/centroidsOnOff.json");	
+			File.AppendAllText (homePath+"/DataAggregatorData/WashingMachine/centroidsOnOff.json", "On;"+onOffCen[0]+"\nOff;"+onOffCen[1]);
+			
+
 			int duration = 0;
 			double powerForDuration = 0.0;
 			int currentClass = -1;
@@ -127,7 +141,7 @@ namespace Data
 				if (currentClass != kmean.Clusters.Nearest (powerInput [p])) {
 					currentClass = kmean.Clusters.Nearest (powerInput [p]);
 					res0 += currentClass + "; " + duration + "; " + powerForDuration / 1000 / 60 / 60 / 60 + " " + epoch.AddSeconds (timeConcat [p] / 1000) + " " + TimeSpan.FromSeconds (duration) + "\n";
-					if (duration != 0) {
+					if (duration > 180) {
 						preparedData.Add (new double[]{ powerForDuration / duration, powerForDuration });
 					}
 					duration = 0;
@@ -137,7 +151,7 @@ namespace Data
 				powerForDuration = powerForDuration + powerConcat [p];
 			}
 			res0 += currentClass + "; " + duration + "; " + powerForDuration / 1000 / 60 / 60 / 60 + " " + epoch.AddSeconds (timeConcat.Last () / 1000) + " " + TimeSpan.FromSeconds (duration) + "\n";
-			preparedData.Add (new double[]{ powerForDuration/duration, powerForDuration });
+			preparedData.Add (new double[]{ duration, powerForDuration });
 			Console.WriteLine (res0);
 
 			// CLustering with k=4
@@ -168,10 +182,10 @@ namespace Data
 			// Saving Json with Power Centroids
 			List<LabeledInstance> centroidWithLabel = new List<LabeledInstance>{};
 			centroidWithLabel.Add(new LabeledInstance ("Standby + Other", centroidsPower [0]));
-			centroidWithLabel.Add(new LabeledInstance ("40 Half", centroidsPower [1]));
-			centroidWithLabel .Add(new LabeledInstance ("60 Half", centroidsPower[2]));
+			centroidWithLabel.Add(new LabeledInstance ("Low", centroidsPower [1]));
+			centroidWithLabel .Add(new LabeledInstance ("Middle", centroidsPower[2]));
 			if (numberOfPrograms == 4) {
-				centroidWithLabel.Add (new LabeledInstance ("60 Full", centroidsPower [3]));
+				centroidWithLabel.Add (new LabeledInstance ("High", centroidsPower [3]));
 			}
 			string cenJSON = Newtonsoft.Json.JsonConvert.SerializeObject (centroidWithLabel);
 			File.Delete (homePath + "/DataAggregatorData/WashingMachine/centroidsPower.json");
@@ -180,21 +194,48 @@ namespace Data
 			// Saving Json with Energy Centroids
 			List<LabeledInstance> centroidWithLabelEnergy = new List<LabeledInstance>{};
 			centroidWithLabelEnergy.Add(new LabeledInstance ("Standby + Other", centroidsEnergy [0]/60/60/1000000));
-			centroidWithLabelEnergy.Add(new LabeledInstance ("40 Half", centroidsEnergy [1]/60/60/1000000));
-			centroidWithLabelEnergy .Add(new LabeledInstance ("60 Half", centroidsEnergy[2]/60/60/1000000));
+			centroidWithLabelEnergy.Add(new LabeledInstance ("Low", centroidsEnergy [1]/60/60/1000000));
+			centroidWithLabelEnergy .Add(new LabeledInstance ("Middle", centroidsEnergy[2]/60/60/1000000));
 			if (numberOfPrograms == 4) {
-				centroidWithLabelEnergy.Add (new LabeledInstance ("60 Full", centroidsEnergy [3] / 60 / 60 / 1000000));
+				centroidWithLabelEnergy.Add (new LabeledInstance ("High", centroidsEnergy [3] / 60 / 60 / 1000000));
 			}
 			string cenJSONEnergy = Newtonsoft.Json.JsonConvert.SerializeObject (centroidWithLabelEnergy);
 			File.Delete (homePath + "/DataAggregatorData/WashingMachine/centroidsEnergy.json");
 			File.AppendAllText (homePath+"/DataAggregatorData/WashingMachine/centroidsEnergy.json", cenJSONEnergy);
 
+			EEI eei = new EEI (7,new double[]{
+				centroidsEnergy [1]/60/60/1000000,
+				centroidsEnergy [2]/60/60/1000000,
+				centroidsEnergy [3]/60/60/1000000});
+			Console.WriteLine("Score: " + eei.EeiScore());
+			Console.WriteLine("AEC: " + eei.AEC());
+			Console.WriteLine("SAEC: " + eei.SAEC());
+			Console.WriteLine ("Rating" + eei.Rating());
+
+			EEI eei2 = new EEI (7,new double[]{
+				centroidsEnergy [3]/60/60/1000000,
+				centroidsEnergy [3]/60/60/1000000,
+				centroidsEnergy [3]/60/60/1000000});
+			Console.WriteLine("Score: " + eei2.EeiScore());
+			Console.WriteLine("AEC: " + eei2.AEC());
+			Console.WriteLine("SAEC: " + eei2.SAEC());
+			Console.WriteLine ("Rating" + eei2.Rating());
+
+			EEI eei3 = new EEI (7,new double[]{
+				centroidsEnergy [2]/60/60/1000000,
+				centroidsEnergy [2]/60/60/1000000,
+				centroidsEnergy [3]/60/60/1000000});
+			Console.WriteLine("Score: " + eei3.EeiScore());
+			Console.WriteLine("AEC: " + eei3.AEC());
+			Console.WriteLine("SAEC: " + eei3.SAEC());
+			Console.WriteLine ("Rating" + eei3.Rating());
+
 			// Saving count of programs detected
 			List<LabeledInstance> programsCountJSON = new List<LabeledInstance>{};
-			programsCountJSON.Add(new LabeledInstance("40 Half",0));
-			programsCountJSON.Add(new LabeledInstance("60 Half",0));
+			programsCountJSON.Add(new LabeledInstance("Low",0));
+			programsCountJSON.Add(new LabeledInstance("Middle",0));
 			if (numberOfPrograms == 4) {
-				programsCountJSON.Add (new LabeledInstance ("60 Full", 0));
+				programsCountJSON.Add (new LabeledInstance ("High", 0));
 			}
 			foreach (double[] data in preparedData) {
 				if (kmean2.Clusters.Centroids[kmean2.Clusters.Nearest (data)][0] == centroidsPower [1]) {

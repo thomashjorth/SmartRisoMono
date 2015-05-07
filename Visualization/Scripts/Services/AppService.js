@@ -7,6 +7,12 @@
 				url: "http://"+host+":"+port+"/api/"+apiController+"/"+params
 			});
 		}
+		this.putData = function(host, port, apiController, params){
+			return $http({
+				method: "put",
+				url: "http://"+host+":"+port+"/api/"+apiController+"/"+params
+			});
+		}
 
 	}
 ]);

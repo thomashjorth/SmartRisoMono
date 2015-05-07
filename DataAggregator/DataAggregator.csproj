@@ -125,6 +125,7 @@
     <Compile Include="Controllers\DERController.cs" />
     <Compile Include="Models\Configuration\UnitConfig.cs" />
     <Compile Include="Controllers\WashingCycleController.cs" />
+    <Compile Include="Models\EEI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />

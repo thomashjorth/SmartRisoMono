@@ -59,6 +59,15 @@ namespace DataAggregator.Controllers
 
 			PagesConfig pages = new PagesConfig(new List<PageConfig>(){page0,page1});
 
+			PageConfig page3 = new PageConfig (new List<VisualizationConfig> (){ 
+
+				new PieConfig("127.0.0.1",9001,"WashingCycle","Count","Count",2000),
+				new PieConfig("127.0.0.1",9001,"WashingCycle","PowerCentroid","Power",2000),
+				new PieConfig("127.0.0.1",9001,"WashingCycle","EnergyCentroid","Energy (kWh)",2000),
+				new BarConfig("127.0.0.1",9001,"WashingCycle","Count","Programs",0,10,2000,"Count")});
+				
+			PagesConfig pagesWashingMachine = new PagesConfig(new List<PageConfig>(){page3});
+
 				try{
 					StreamReader file = File.OpenText (@"PageConfigurations/"+id+".json");
 					string read = file.ReadToEnd();
@@ -76,7 +85,7 @@ namespace DataAggregator.Controllers
 				PageConfig emptyPage = new PageConfig (new List<VisualizationConfig> (){  });
 				PagesConfig pagesEmpty = new PagesConfig(new List<PageConfig>(){emptyPage});
 					response = Request.CreateResponse (
-						HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (pages)
+					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (pagesWashingMachine)
 					);
 				}
 
