@@ -124,7 +124,7 @@
     <Compile Include="Models\Configuration\SideBarConfig.cs" />
     <Compile Include="Controllers\DERController.cs" />
     <Compile Include="Models\Configuration\UnitConfig.cs" />
-    <Compile Include="Controllers\WashingCycles.cs" />
+    <Compile Include="Controllers\WashingCycleController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
