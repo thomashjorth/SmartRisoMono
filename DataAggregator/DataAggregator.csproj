@@ -126,6 +126,8 @@
     <Compile Include="Models\Configuration\UnitConfig.cs" />
     <Compile Include="Controllers\WashingCycleController.cs" />
     <Compile Include="Models\EEI.cs" />
+    <Compile Include="Models\Configuration\TableConfig.cs" />
+    <Compile Include="Models\TwoDTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />

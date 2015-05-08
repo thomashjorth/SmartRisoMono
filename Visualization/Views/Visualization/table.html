@@ -1,0 +1,19 @@
+﻿<div ng-controller="tableController" >
+  <div id="table" class="table table" ng-init="initialize()">
+  <h4>Latest Detected Programs</h4>
+    <table>
+    		<td>Date</td><td>Program</td>
+  		<tr ng-repeat="row in Table| filter:searchText| limitTo:4">
+    		<td>{{row.FirstField}}</td>
+   			<td>{{row.SecondField}}</td>
+  		</tr>
+	</table>
+	<label>Search: <input ng-model="searchText" placeholder="Low, Middle, High, Standby, 15-04, 2015" size="40"><br>
+      <!--<svg ng-repeat="app in Der.Apps" id="status" height="15%">
+          <circle ng-if="app.Status" cx="50%" cy="50%" r="50%" stroke="black" stroke-width="1" fill="green" />
+          <circle ng-if="!app.Status" cx="5%" cy="50%" r="4%" stroke="black" stroke-width="1" fill="red" />
+          <text x="10%" y="63%" font-size="12px">{{app.Name}}</text>
+      </svg>-->
+       
+  </div>
+</div>	

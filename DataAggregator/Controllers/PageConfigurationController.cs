@@ -60,11 +60,22 @@ namespace DataAggregator.Controllers
 			PagesConfig pages = new PagesConfig(new List<PageConfig>(){page0,page1});
 
 			PageConfig page3 = new PageConfig (new List<VisualizationConfig> (){ 
-
+				
 				new PieConfig("127.0.0.1",9001,"WashingCycle","Count","Count",2000),
 				new PieConfig("127.0.0.1",9001,"WashingCycle","PowerCentroid","Power",2000),
 				new PieConfig("127.0.0.1",9001,"WashingCycle","EnergyCentroid","Energy (kWh)",2000),
-				new BarConfig("127.0.0.1",9001,"WashingCycle","Count","Programs",0,10,2000,"Count")});
+				new BarConfig("127.0.0.1",9001,"WashingCycle","Count","Programs Count",0,10,2000,"Count"),
+				new BarConfig("127.0.0.1",9001,"EEI","?id=AEC&situation=ALL","Programs AEC",0,400,2000,"Count"),
+				new BarConfig("127.0.0.1",9001,"EEI","?id=Score&situation=ALL","Programs Score",0,100,2000,"Count"),
+				new GraphConfig("127.0.0.1",9001,"Realtime","getActivePower","Power 15s",4,0,1,15,
+					new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower",""),2000,"mW"),
+				new GraphConfig("127.0.0.1",9001,"Realtime","getActivePower","Power 48h",4,0,1,3600*48,
+					new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower",""),2000,"mW"),
+				new TableConfig("127.0.0.1",9001,"WashingCycle","Discovered","Detected",2000)
+				}
+				
+
+			);
 				
 			PagesConfig pagesWashingMachine = new PagesConfig(new List<PageConfig>(){page3});
 

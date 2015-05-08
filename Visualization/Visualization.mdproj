@@ -2429,5 +2429,7 @@
     <None Include="Index.html" />
     <None Include="Scripts\Controllers\unitController.js" />
     <None Include="Views\Visualization\unit.html" />
+    <None Include="Views\Visualization\table.html" />
+    <None Include="Scripts\Controllers\tableController.js" />
   </ItemGroup>
 </Project>

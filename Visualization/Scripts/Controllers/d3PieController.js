@@ -15,6 +15,7 @@
             var h=Math.floor(Date.now()/1000)-$scope.firstTime;
             AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,$scope.init.Method)
                 .success(function (response){
+
                 if(JSON.parse(response).length == 1 && JSON.parse(response)[0].value == 0){
                     
                 }else{

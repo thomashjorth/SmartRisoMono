@@ -51,6 +51,8 @@ namespace DataAggregator.Controllers
 				openFile = "/DataAggregatorData/WashingMachine/centroidsPower.json";
 			}else if (id.Equals ("EnergyCentroid")) {
 				openFile = "/DataAggregatorData/WashingMachine/centroidsEnergy.json";
+			}else if (id.Equals ("Discovered")) {
+				openFile = "/DataAggregatorData/WashingMachine/discoveredCycles.json";
 			}
 			
 			HttpResponseMessage response;

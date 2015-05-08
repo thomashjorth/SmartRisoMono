@@ -134,6 +134,9 @@ namespace Data
 			double powerForDuration = 0.0;
 			int currentClass = -1;
 			List<double[]> preparedData = new List<double[]>{ };
+
+			List<TwoDTable> discoveredCycles = new List<TwoDTable> (){ };
+
 			string res0 = "";
 			res0 += "Class;Duration;PowerkWh\n";
 			for (int p = 0; p < powerInput.Length; p++) {
@@ -143,6 +146,7 @@ namespace Data
 					res0 += currentClass + "; " + duration + "; " + powerForDuration / 1000 / 60 / 60 / 60 + " " + epoch.AddSeconds (timeConcat [p] / 1000) + " " + TimeSpan.FromSeconds (duration) + "\n";
 					if (duration > 180) {
 						preparedData.Add (new double[]{ powerForDuration / duration, powerForDuration });
+						discoveredCycles.Add(new TwoDTable(epoch.AddSeconds (timeConcat [p] / 1000).ToString(),"Standby"));
 					}
 					duration = 0;
 					powerForDuration = 0.0;
@@ -151,7 +155,6 @@ namespace Data
 				powerForDuration = powerForDuration + powerConcat [p];
 			}
 			res0 += currentClass + "; " + duration + "; " + powerForDuration / 1000 / 60 / 60 / 60 + " " + epoch.AddSeconds (timeConcat.Last () / 1000) + " " + TimeSpan.FromSeconds (duration) + "\n";
-			preparedData.Add (new double[]{ duration, powerForDuration });
 			Console.WriteLine (res0);
 
 			// CLustering with k=4
@@ -179,13 +182,49 @@ namespace Data
 			centroidsPower.Sort ();
 			centroidsEnergy.Sort ();
 
+			EEI eeiEU = new EEI (7,new double[]{
+				centroidsEnergy [1]/60/60/1000000,
+				centroidsEnergy [2]/60/60/1000000,
+				centroidsEnergy [3]/60/60/1000000});
+			Console.WriteLine("Score: " + eeiEU.EeiScore());
+			Console.WriteLine("AEC: " + eeiEU.AEC());
+			Console.WriteLine("SAEC: " + eeiEU.SAEC());
+			Console.WriteLine ("Rating" + eeiEU.Rating());
+
+			EEI eeiHIGH = new EEI (7,new double[]{
+				centroidsEnergy [3]/60/60/1000000,
+				centroidsEnergy [3]/60/60/1000000,
+				centroidsEnergy [3]/60/60/1000000});
+			Console.WriteLine("Score: " + eeiHIGH.EeiScore());
+			Console.WriteLine("AEC: " + eeiHIGH.AEC());
+			Console.WriteLine("SAEC: " + eeiHIGH.SAEC());
+			Console.WriteLine ("Rating" + eeiHIGH.Rating());
+
+			EEI eeiMIDDLE = new EEI (7,new double[]{
+				centroidsEnergy [2]/60/60/1000000,
+				centroidsEnergy [2]/60/60/1000000,
+				centroidsEnergy [2]/60/60/1000000});
+			Console.WriteLine("Score: " + eeiMIDDLE.EeiScore());
+			Console.WriteLine("AEC: " + eeiMIDDLE.AEC());
+			Console.WriteLine("SAEC: " + eeiMIDDLE.SAEC());
+			Console.WriteLine ("Rating" + eeiMIDDLE.Rating());
+
+			EEI eeiLOW = new EEI (7,new double[]{
+				centroidsEnergy [1]/60/60/1000000,
+				centroidsEnergy [1]/60/60/1000000,
+				centroidsEnergy [1]/60/60/1000000});
+			Console.WriteLine("Score: " + eeiLOW.EeiScore());
+			Console.WriteLine("AEC: " + eeiLOW.AEC());
+			Console.WriteLine("SAEC: " + eeiLOW.SAEC());
+			Console.WriteLine ("Rating" + eeiLOW.Rating());
+
 			// Saving Json with Power Centroids
 			List<LabeledInstance> centroidWithLabel = new List<LabeledInstance>{};
-			centroidWithLabel.Add(new LabeledInstance ("Standby + Other", centroidsPower [0]));
-			centroidWithLabel.Add(new LabeledInstance ("Low", centroidsPower [1]));
-			centroidWithLabel .Add(new LabeledInstance ("Middle", centroidsPower[2]));
+			centroidWithLabel.Add(new LabeledInstance ("Standby + Misc", centroidsPower [0]));
+			centroidWithLabel.Add(new LabeledInstance ("Low: " + eeiLOW.Rating(), centroidsPower [1]));
+			centroidWithLabel .Add(new LabeledInstance ("Middle: " + eeiMIDDLE.Rating(), centroidsPower[2]));
 			if (numberOfPrograms == 4) {
-				centroidWithLabel.Add (new LabeledInstance ("High", centroidsPower [3]));
+				centroidWithLabel.Add (new LabeledInstance ("High: " + eeiHIGH.Rating(), centroidsPower [3]));
 			}
 			string cenJSON = Newtonsoft.Json.JsonConvert.SerializeObject (centroidWithLabel);
 			File.Delete (homePath + "/DataAggregatorData/WashingMachine/centroidsPower.json");
@@ -194,59 +233,43 @@ namespace Data
 			// Saving Json with Energy Centroids
 			List<LabeledInstance> centroidWithLabelEnergy = new List<LabeledInstance>{};
 			centroidWithLabelEnergy.Add(new LabeledInstance ("Standby + Other", centroidsEnergy [0]/60/60/1000000));
-			centroidWithLabelEnergy.Add(new LabeledInstance ("Low", centroidsEnergy [1]/60/60/1000000));
-			centroidWithLabelEnergy .Add(new LabeledInstance ("Middle", centroidsEnergy[2]/60/60/1000000));
+			centroidWithLabelEnergy.Add(new LabeledInstance ("Low: " + eeiLOW.Rating(), centroidsEnergy [1]/60/60/1000000));
+			centroidWithLabelEnergy .Add(new LabeledInstance ("Middle: " + eeiMIDDLE.Rating(), centroidsEnergy[2]/60/60/1000000));
 			if (numberOfPrograms == 4) {
-				centroidWithLabelEnergy.Add (new LabeledInstance ("High", centroidsEnergy [3] / 60 / 60 / 1000000));
+				centroidWithLabelEnergy.Add (new LabeledInstance ("High: " + eeiHIGH.Rating(), centroidsEnergy [3] / 60 / 60 / 1000000));
 			}
 			string cenJSONEnergy = Newtonsoft.Json.JsonConvert.SerializeObject (centroidWithLabelEnergy);
 			File.Delete (homePath + "/DataAggregatorData/WashingMachine/centroidsEnergy.json");
 			File.AppendAllText (homePath+"/DataAggregatorData/WashingMachine/centroidsEnergy.json", cenJSONEnergy);
 
-			EEI eei = new EEI (7,new double[]{
-				centroidsEnergy [1]/60/60/1000000,
-				centroidsEnergy [2]/60/60/1000000,
-				centroidsEnergy [3]/60/60/1000000});
-			Console.WriteLine("Score: " + eei.EeiScore());
-			Console.WriteLine("AEC: " + eei.AEC());
-			Console.WriteLine("SAEC: " + eei.SAEC());
-			Console.WriteLine ("Rating" + eei.Rating());
 
-			EEI eei2 = new EEI (7,new double[]{
-				centroidsEnergy [3]/60/60/1000000,
-				centroidsEnergy [3]/60/60/1000000,
-				centroidsEnergy [3]/60/60/1000000});
-			Console.WriteLine("Score: " + eei2.EeiScore());
-			Console.WriteLine("AEC: " + eei2.AEC());
-			Console.WriteLine("SAEC: " + eei2.SAEC());
-			Console.WriteLine ("Rating" + eei2.Rating());
-
-			EEI eei3 = new EEI (7,new double[]{
-				centroidsEnergy [2]/60/60/1000000,
-				centroidsEnergy [2]/60/60/1000000,
-				centroidsEnergy [3]/60/60/1000000});
-			Console.WriteLine("Score: " + eei3.EeiScore());
-			Console.WriteLine("AEC: " + eei3.AEC());
-			Console.WriteLine("SAEC: " + eei3.SAEC());
-			Console.WriteLine ("Rating" + eei3.Rating());
 
 			// Saving count of programs detected
 			List<LabeledInstance> programsCountJSON = new List<LabeledInstance>{};
-			programsCountJSON.Add(new LabeledInstance("Low",0));
-			programsCountJSON.Add(new LabeledInstance("Middle",0));
+			programsCountJSON.Add(new LabeledInstance("Low: " + eeiLOW.Rating(),0));
+			programsCountJSON.Add(new LabeledInstance("Middle: " + eeiMIDDLE.Rating(),0));
 			if (numberOfPrograms == 4) {
-				programsCountJSON.Add (new LabeledInstance ("High", 0));
+				programsCountJSON.Add (new LabeledInstance ("High: " + eeiHIGH.Rating(), 0));
 			}
-			foreach (double[] data in preparedData) {
-				if (kmean2.Clusters.Centroids[kmean2.Clusters.Nearest (data)][0] == centroidsPower [1]) {
+			Console.WriteLine (preparedData.Count + " -----------" + discoveredCycles.Count);
+			for (int y=0;y<preparedData.Count;y++) {
+				if (kmean2.Clusters.Centroids[kmean2.Clusters.Nearest (preparedData[y])][0] == centroidsPower [1]) {
+					discoveredCycles[y].SecondField="Low: " + eeiLOW.Rating();
 					programsCountJSON [0].value++;
-				}else if(kmean2.Clusters.Centroids[kmean2.Clusters.Nearest (data)][0] == centroidsPower [2]){
+				}else if(kmean2.Clusters.Centroids[kmean2.Clusters.Nearest (preparedData[y])][0] == centroidsPower [2]){
 					programsCountJSON [1].value++;
+					discoveredCycles[y].SecondField="Middle: " + eeiMIDDLE.Rating();
 				}if (numberOfPrograms == 4) {
-				 if(kmean2.Clusters.Centroids[kmean2.Clusters.Nearest (data)][0] == centroidsPower [3]){
-					programsCountJSON [2].value++;
+					if(kmean2.Clusters.Centroids[kmean2.Clusters.Nearest (preparedData[y])][0] == centroidsPower [3]){
+						programsCountJSON [2].value++;
+						discoveredCycles[y].SecondField="High: " + eeiHIGH.Rating();
 					}}
 			}
+			discoveredCycles.Reverse ();
+			string discoredCyclesJson = Newtonsoft.Json.JsonConvert.SerializeObject (discoveredCycles);
+			File.Delete (homePath + "/DataAggregatorData/WashingMachine/discoveredCycles.json");
+			File.AppendAllText (homePath+"/DataAggregatorData/WashingMachine/discoveredCycles.json", discoredCyclesJson);
+
 			string programsCountJs = Newtonsoft.Json.JsonConvert.SerializeObject (programsCountJSON);
 			File.Delete (homePath + "/DataAggregatorData/WashingMachine/programsCount.json");
 			File.AppendAllText (homePath+"/DataAggregatorData/WashingMachine/programsCount.json", programsCountJs);
