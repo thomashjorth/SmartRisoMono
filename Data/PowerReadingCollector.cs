@@ -18,7 +18,7 @@ namespace Data
 			
 			string powerSaveDir = homePath + "/DataAggregatorData/WashingMachine/Power/";
 			try{
-				
+				Directory.CreateDirectory(powerSaveDir);
 				File.AppendAllText (powerSaveDir + DateTime.Now.ToString ("yyyyMMdd") + ".csv", sb.ToString ());
 				Console.WriteLine("Appending: " + powerSaveDir + DateTime.Now.ToString ("yyyyMMdd") + ".csv");
 				return true;

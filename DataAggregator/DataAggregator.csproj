@@ -210,5 +210,6 @@
     <None Include="PageConfigurations\pageConf.json" />
     <None Include="PageConfigurations\singlePageAll.json" />
     <None Include="PageConfigurations\pageConfNullGauge.json" />
+    <None Include="PageConfigurations\washingMachine.json" />
   </ItemGroup>
 </Project>

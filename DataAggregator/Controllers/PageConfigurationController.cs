@@ -63,7 +63,7 @@ namespace DataAggregator.Controllers
 				
 				new PieConfig("127.0.0.1",9001,"WashingCycle","Count","Count",2000),
 				new PieConfig("127.0.0.1",9001,"WashingCycle","PowerCentroid","Power",2000),
-				new PieConfig("127.0.0.1",9001,"WashingCycle","EnergyCentroid","Energy (kWh)",2000),
+				new PieConfig("127.0.0.1",9001,"WashingCycle","EnergyCentroid","Energy",2000),
 				new BarConfig("127.0.0.1",9001,"WashingCycle","Count","Programs Count",0,10,2000,"Count"),
 				new BarConfig("127.0.0.1",9001,"EEI","?id=AEC&situation=ALL","Programs AEC",0,400,2000,"Count"),
 				new BarConfig("127.0.0.1",9001,"EEI","?id=Score&situation=ALL","Programs Score",0,100,2000,"Count"),

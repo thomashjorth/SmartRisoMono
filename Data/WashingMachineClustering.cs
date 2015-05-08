@@ -22,10 +22,17 @@ namespace Data
 			
 			while (!_shouldStop)
 			{
+				//Thread.Sleep (30000);
+				int numberOfPrograms = 4;
+				try{
 				string[] Lines = File.ReadAllLines(homePath+"/DataAggregatorData/WashingMachine/settings.csv");
-				int numberOfPrograms = int.Parse(Lines[0].Split(new char[] { ';' })[1]);
+					 numberOfPrograms = int.Parse(Lines[0].Split(new char[] { ';' })[1]);
+				}catch(Exception e){
+					Console.WriteLine (e.ToString());
+				}
+				
 				ApplianceClustering (numberOfPrograms);
-				Thread.Sleep (10000);
+				Thread.Sleep (60000);
 			}
 			Console.WriteLine("Collection Stopped");
 		}
@@ -144,7 +151,7 @@ namespace Data
 				if (currentClass != kmean.Clusters.Nearest (powerInput [p])) {
 					currentClass = kmean.Clusters.Nearest (powerInput [p]);
 					res0 += currentClass + "; " + duration + "; " + powerForDuration / 1000 / 60 / 60 / 60 + " " + epoch.AddSeconds (timeConcat [p] / 1000) + " " + TimeSpan.FromSeconds (duration) + "\n";
-					if (duration > 180) {
+					if (duration > 5) {
 						preparedData.Add (new double[]{ powerForDuration / duration, powerForDuration });
 						discoveredCycles.Add(new TwoDTable(epoch.AddSeconds (timeConcat [p] / 1000).ToString(),"Standby"));
 					}
@@ -154,9 +161,12 @@ namespace Data
 				duration++;
 				powerForDuration = powerForDuration + powerConcat [p];
 			}
-			res0 += currentClass + "; " + duration + "; " + powerForDuration / 1000 / 60 / 60 / 60 + " " + epoch.AddSeconds (timeConcat.Last () / 1000) + " " + TimeSpan.FromSeconds (duration) + "\n";
-			Console.WriteLine (res0);
 
+			res0 += currentClass + "; " + duration + "; " + powerForDuration / 1000 / 60 / 60 / 60 + " " + epoch.AddSeconds (timeConcat.Last () / 1000) + " " + TimeSpan.FromSeconds (duration) + "\n";
+
+
+			Console.WriteLine (res0);
+			Console.WriteLine ("---------"+preparedData.Count);
 			// CLustering with k=4
 			KMeans	kmean2 = new KMeans (numberOfPrograms
 				, Distance.Euclidean);
