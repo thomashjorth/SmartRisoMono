@@ -4,10 +4,11 @@ namespace DataAggregator.Models.Configuration
 {
 	public class PieConfig : VisualizationConfig
 	{
-		
-		public PieConfig ( string host, int port, string aggregation, string parameters, string titleHeading, int updateIterval) : base(host, port, aggregation, parameters, titleHeading, updateIterval)
+		public string TitleHeading;
+		public PieConfig ( string host, int port, string device, string parameters, int updateIterval, string titleHeading) : base(host, port, device, parameters, updateIterval)
 		{
 			VisualizationType = "d3Pie";
+			TitleHeading = titleHeading;
 		}
 	}
 }

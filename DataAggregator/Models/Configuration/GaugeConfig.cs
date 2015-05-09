@@ -8,12 +8,12 @@ namespace DataAggregator.Models.Configuration
 		public double ValueMin;
 		public double ValueMax;
 		public string ID, Unit;
-		public VisualizationConfig DER;
+		public string TitleHeading;
 
-		public GaugeConfig (string host, int port, string aggregation, string parameters, string titleHeading, 
-			double valueMin, double valueMax, string id, VisualizationConfig der, int updateIterval, string unit) : base(host, port, aggregation, parameters, titleHeading, updateIterval)
+		public GaugeConfig (string host, int port, string device, string parameters, int updateIterval, string titleHeading, 
+			double valueMin, double valueMax, string id, string unit) : base(host, port, device, parameters, updateIterval)
 		{
-			DER = der;
+			TitleHeading = titleHeading;
 			ID = id;
 			ValueMin = valueMin;
 			ValueMax = valueMax;

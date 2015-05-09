@@ -5,19 +5,17 @@ namespace DataAggregator.Models.Configuration
 	public class GraphConfig : VisualizationConfig
 	{
 		public int XTicks, ValueMin, ValueMax, XLength;
-		public VisualizationConfig DER;
+		public string TitleHeading;
 		public string Unit;
-		public GraphConfig ( string host, int port, string aggregation, string parameters, string titleHeading, 
-			int xTicks, int yMin, int yMax, int xLength, VisualizationConfig der, 
-			int updateIterval, string unit) : base(host, port, aggregation, 
-				parameters,titleHeading, updateIterval)
+		public GraphConfig ( string host, int port, string device, string parameters, int updateIterval, 
+			string titleHeading, int yMin, int yMax, int xLength, string unit)
+			: base(host, port, device, parameters, updateIterval)
 		{
 			VisualizationType = "d3Graph";
-			XTicks = xTicks;
+			TitleHeading = titleHeading;
 			ValueMin = yMin;
 			ValueMax = yMax;
 			XLength = xLength;
-			DER = der;
 			Unit = unit;
 		}
 	}

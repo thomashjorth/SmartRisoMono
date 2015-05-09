@@ -7,15 +7,13 @@ namespace DataAggregator.Models.Configuration
 		public double ValueMin;
 		public double ValueMax;
 		public string Unit;
-		public BarConfig ( string host, int port, 
-			string aggregation, string parameters, 
-			string titleHeading, double valueMin, 
-			double valueMax, int updateIterval, 
-			string unit) : base(host, port, 
-				aggregation, parameters, titleHeading, 
-				updateIterval)
+		public string TitleHeading;
+		public BarConfig ( string host, int port, string device, string parameters, int updateIterval,
+			string titleHeading, double valueMin, double valueMax, string unit)
+			: base(host, port, device, parameters,	updateIterval)
 		{
 			VisualizationType = "d3Bar";
+			TitleHeading = titleHeading;
 			ValueMin = valueMin;
 			ValueMax = valueMax;
 			Unit = unit;

@@ -2,11 +2,12 @@
 {
 	public class TableConfig : VisualizationConfig
 	{
-		public VisualizationConfig DER;
-		public TableConfig ( string host, int port, string aggregation, string resource, string titleHeading, int updateIterval) 
-			: base( host, port, aggregation, resource,  titleHeading,  updateIterval)
+		public string TitleHeading;
+		public TableConfig ( string host, int port, string device, string resource, int updateIterval, string titleHeading) 
+			: base( host, port, device, resource, updateIterval)
 		{
 			VisualizationType = "table";
+			TitleHeading = titleHeading;
 		}
 	}
 }

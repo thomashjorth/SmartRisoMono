@@ -1,4 +1,4 @@
-﻿using System.Web.Http;
+using System.Web.Http;
 using System.Net.Http;
 using System.Collections.Generic;
 using System.Net;
@@ -19,39 +19,29 @@ namespace DataAggregator.Controllers
 			});*/
 
 			PageConfig page0 = new PageConfig (new List<VisualizationConfig> (){  
-				new GraphConfig("127.0.0.1",9001,"Aggregation","AvgActivePower","Title",4,-10,10,15,
-					null,10000,"unit"),
-				new GraphConfig("127.0.0.1",9001,"Realtime","getActivePower","Title",4,-10,10,15,
-					new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower",""),10000,"unit"), 
-				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",-2,2,10000,"unit"),
-				new PieConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",10000),
+				new GraphConfig("127.0.0.1",9001,"Aggregation","AvgActivePower", 10000,"Title",-10,10,15,"unit"),
+				new GraphConfig("127.0.0.1",9001,"Realtime","?host=127.0.0.1&port=8080&wsInterface=GenericLoadWS&resource=getActivePower",10000, "Title",-10,10,15,"unit"), 
+				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower",10000,"avg",-2,2,"unit"),
+				new PieConfig("127.0.0.1",9001,"Aggregation","AllActivePower",10000,"avg"),
 				new GaugesConfig(
-					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","Title",-10,10,"gauge1", 
-						new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower",""),1000,"unit"),
-					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","Title",-10,10,"gauge2", 
-						new VisualizationConfig("127.0.0.1",8085,"GenericLoadWS","getActivePower",""),1000,"unit")),
-				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",-1,2,10000,"unit"),
+					new GaugeConfig("127.0.0.1",9001,"Realtime","?host=127.0.0.1&port=8080&wsInterface=GenericLoadWS&resource=getActivePower",1000,"Title",-10,10,"gauge1","unit"),
+					new GaugeConfig("127.0.0.1",9001,"Realtime","?host=127.0.0.1&port=8085&wsInterface=GenericLoadWS&resource=getActivePower",1000,"Title",-10,10,"gauge2","unit")),
+				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower",10000,"avg",-1,2,"unit"),
 				new UnitConfig("localhost",9001,"?host=localhost&port=8080",3000),
 				new UnitConfig("localhost",9001,"?host=localhost&port=8085",3000),
 				new UnitConfig("localhost",9001,"?host=localhost&port=8090",3000)
 			});
 			PageConfig page1 = new PageConfig (new List<VisualizationConfig> (){ 
 				new GaugesConfig(
-					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","Title",-10,10,"gauge5", 
-						new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower",""),1000,"unit"),
-					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","Title",-10,10,"gauge6", 
-						new VisualizationConfig("127.0.0.1",8085,"GenericLoadWS","getActivePower",""),1000,"unit")),
-				new GraphConfig("127.0.0.1",9001,"Aggregation","AvgActivePower","Title",4,-10,10,15,
-					null,10000,"unit"),
+					new GaugeConfig("127.0.0.1",9001,"Realtime","?host=127.0.0.1&port=8085&wsInterface=GenericLoadWS&resource=getActivePower",1000,"Title",-10,10,"gauge3","unit"),
+					new GaugeConfig("127.0.0.1",9001,"Realtime","?host=127.0.0.1&port=8085&wsInterface=GenericLoadWS&resource=getActivePower",1000,"Title",-10,10,"gauge4","unit")),
+				new GraphConfig("127.0.0.1",9001,"Realtime","?host=127.0.0.1&port=8080&wsInterface=GenericLoadWS&resource=getActivePower",10000, "Title",-10,10,15,"unit"), 
+				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower",10000,"avg",-2,2,"unit"),
+				new PieConfig("127.0.0.1",9001,"Aggregation","AllActivePower",10000,"avg"),
+				new GraphConfig("127.0.0.1",9001,"Realtime","?host=127.0.0.1&port=8085&wsInterface=GenericLoadWS&resource=getActivePower",10000, "Title",-10,10,15,"unit"), 
 				new GaugesConfig(
-					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","Title",-10,10,"gauge3", 
-						new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower",""),1000,"unit"),
-					new GaugeConfig("127.0.0.1",9001,"Realtime"
-						,"getActivePower","Title",-10,10,"gauge4", 
-						new VisualizationConfig("127.0.0.1",8085,"GenericLoadWS","getActivePower",""),1000,"unit")),
-				new PieConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",10000),
-				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",-2,2,10000,"unit"),
-				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",-1,2,10000,"unit"),
+					new GaugeConfig("127.0.0.1",9001,"Realtime","?host=127.0.0.1&port=8080&wsInterface=GenericLoadWS&resource=getActivePower",1000,"Title",-10,10,"gauge5","unit"),
+					new GaugeConfig("127.0.0.1",9001,"Realtime","?host=127.0.0.1&port=8080&wsInterface=GenericLoadWS&resource=getActivePower",1000,"Title",-10,10,"gauge6","unit")),
 				new UnitConfig("localhost",9001,"?host=localhost&port=8080",3000),
 				new UnitConfig("localhost",9001,"?host=localhost&port=8085",3000),
 				new UnitConfig("localhost",9001,"?host=localhost&port=8090",3000)
@@ -61,18 +51,19 @@ namespace DataAggregator.Controllers
 
 			PageConfig page3 = new PageConfig (new List<VisualizationConfig> (){ 
 				
-				new PieConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=Count","Count",2000),
-				new PieConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=PowerCentroid","Power",2000),
-				new PieConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=EnergyCentroid","Energy",2000),
-
-				new BarConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=Count","Programs Count",0,10,2000,"Count"),
-				new BarConfig("127.0.0.1",9001,"Appliance","?item=AEC&attribute=ALL","Programs AEC",0,400,2000,"Count"),
-				new BarConfig("127.0.0.1",9001,"Appliance","?item=Score&attribute=ALL","Programs Score",0,100,2000,"Count"),
-				new GraphConfig("127.0.0.1",9001,"Realtime","getActivePower","Power 15s",4,0,1,15,
-					new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower",""),2000,"mW"),
-				new GraphConfig("127.0.0.1",9001,"Realtime","getActivePower","Power 48h",4,0,1,3600*48,
-					new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower",""),2000,"mW"),
-				new TableConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=Discovered","Detected",2000)
+				new PieConfig("127.0.0.1",9001,"WashingCycle","Count",2000,"Count"),
+				new PieConfig("127.0.0.1",9001,"WashingCycle","PowerCentroid",2000,"Power"),
+				new PieConfig("127.0.0.1",9001,"WashingCycle","EnergyCentroid",2000,"Energy"),
+				new BarConfig("127.0.0.1",9001,"WashingCycle","Count",2000,"Programs Count",0,10,"Count"),
+				new BarConfig("127.0.0.1",9001,"EEI","?id=AEC&situation=ALL",2000,"Programs AEC",0,400,"Count"),
+				new BarConfig("127.0.0.1",9001,"EEI","?id=Score&situation=ALL",2000,"Programs Score",0,100,"Count"),
+				new GraphConfig("127.0.0.1",9001,"Realtime",
+					"?host=127.0.0.1&port=8080&wsInterface=GenericLoadWS&resource=getActivePower",2000, 
+					"Power 15s",0,1,15,"mW"), 
+				new GraphConfig("127.0.0.1",9001,"Realtime",
+					"?host=127.0.0.1&port=8080&wsInterface=GenericLoadWS&resource=getActivePower",2000, 
+					"Power 48h",0,1,3600*48,"mW"), 
+				new TableConfig("127.0.0.1",9001,"WashingCycle","Discovered",2000,"Detected")
 				}
 				
 
