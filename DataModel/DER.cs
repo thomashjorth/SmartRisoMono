@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Xml.Linq;
 
-namespace DataAggregator.Models
+namespace DataModel
 {
 
 	public enum Type {

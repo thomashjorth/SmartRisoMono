@@ -3,8 +3,3 @@
 /Users/Hjorth/SmartRisoMono/DataModel/bin/Release/DataModel.dll
 /Users/Hjorth/SmartRisoMono/DataModel/obj/Release/DataModel.dll
 /Users/Hjorth/SmartRisoMono/DataModel/obj/Release/DataModel.dll.mdb
-/home/tobias/Desktop/Bachelor/Source/SmartRisoMono/DataModel/obj/Release/.NETFramework,Version=v4.0.AssemblyAttribute.cs
-/home/tobias/Desktop/Bachelor/Source/SmartRisoMono/DataModel/bin/Release/DataModel.dll.mdb
-/home/tobias/Desktop/Bachelor/Source/SmartRisoMono/DataModel/bin/Release/DataModel.dll
-/home/tobias/Desktop/Bachelor/Source/SmartRisoMono/DataModel/obj/Release/DataModel.dll
-/home/tobias/Desktop/Bachelor/Source/SmartRisoMono/DataModel/obj/Release/DataModel.dll.mdb

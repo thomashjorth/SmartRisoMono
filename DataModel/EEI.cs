@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataAggregator
+namespace DataModel
 {
 	public class EEI
 	{

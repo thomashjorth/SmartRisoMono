@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using System.Net.Http;
-using DataAggregator.Models;
 using System.Net;
 using System.Web.Hosting;
 using System.IO;

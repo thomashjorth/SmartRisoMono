@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
-using DataAggregator.Models;
-using DataAggregator.Utils;
 using System.IO;
-using Newtonsoft.Json;
-using DataModel;
 
-namespace DataAggregator.Models
+namespace DataModel
 {
 
 	public class LabeledInstance{

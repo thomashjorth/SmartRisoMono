@@ -2,6 +2,7 @@
 using DataAggregator.Models;
 using System.Collections.Generic;
 using System.Configuration;
+using DataModel;
 
 
 namespace DataAggregator.Utils

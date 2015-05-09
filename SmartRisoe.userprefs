@@ -1,16 +1,45 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupItem="DataAggregator/DataAggregator.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="/usr/bin/google-chrome-stable" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataAggregator/Controllers/PageConfigurationController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Data/WashingMachineClustering.cs">
     <Files>
-      <File FileName="DataAggregator/Controllers/AggregationController.cs" Line="1" Column="1" />
+      <File FileName="Visualization/Views/Visualization/table.html" Line="15" Column="14" />
+      <File FileName="Visualization/Views/Visualization/config.html" Line="14" Column="9" />
+      <File FileName="Visualization/Views/Visualization/d3Bar.html" Line="3" Column="7" />
+      <File FileName="Visualization/Views/Visualization/unit.html" Line="6" Column="31" />
       <File FileName="DataAggregator/Models/DER.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Controllers/RealtimeController.cs" Line="4" Column="4" />
-      <File FileName="DataAggregator/Utils/WS.cs" Line="11" Column="11" />
-      <File FileName="DataAggregator/Controllers/PageConfigurationController.cs" Line="49" Column="49" />
+      <File FileName="Visualization/Views/Visualization/d3Graph.html" Line="1" Column="1" />
+      <File FileName="Visualization/Views/Visualization/sideBar.html" Line="1" Column="1" />
+      <File FileName="Visualization/Scripts/Controllers/unitController.js" Line="13" Column="30" />
+      <File FileName="Visualization/Scripts/Controllers/tableController.js" Line="8" Column="16" />
+      <File FileName="DataAggregator/Models/Configuration/VisualizationConfig.cs" Line="14" Column="121" />
+      <File FileName="DataAggregator/Models/Configuration/TableConfig.cs" Line="12" Column="32" />
+      <File FileName="DataAggregator/Controllers/PageConfigurationController.cs" Line="94" Column="6" />
+      <File FileName="DataAggregator/Models/Configuration/GaugeConfig.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Models/Configuration/PieConfig.cs" Line="1" Column="1" />
+      <File FileName="Visualization/Scripts/Controllers/d3BarController.js" Line="11" Column="16" />
+      <File FileName="Visualization/Scripts/Controllers/d3PieController.js" Line="4" Column="8" />
+      <File FileName="Visualization/Views/Visualization/d3Pie.html" Line="1" Column="1" />
+      <File FileName="Visualization/Index.html" Line="1" Column="1" />
+      <File FileName="Visualization/Scripts/Controllers/sideBarController.js" Line="1" Column="1" />
+      <File FileName="Visualization/Scripts/Controllers/d3GaugeController.js" Line="1" Column="1" />
+      <File FileName="Visualization/Scripts/Controllers/configController.js" Line="45" Column="10" />
+      <File FileName="DataAggregator/Models/Configuration/BarConfig.cs" Line="10" Column="83" />
+      <File FileName="DataAggregator/Models/LabeledInstance.cs" Line="19" Column="3" />
+      <File FileName="DataAggregator/Models/TwoDTable.cs" Line="8" Column="10" />
+      <File FileName="DataAggregator/Models/SimpleStatistics.cs" Line="1" Column="1" />
+      <File FileName="Data/Program.cs" Line="22" Column="51" />
+      <File FileName="Data/WashingMachineClustering.cs" Line="61" Column="4" />
+      <File FileName="DataAggregator/Controllers/WashingCycleController.cs" Line="1" Column="1" />
+      <File FileName="Data/PowerReadingCollector.cs" Line="36" Column="18" />
+      <File FileName="DataAggregator/Controllers/EEIController.cs" Line="134" Column="36" />
+      <File FileName="DataAggregator/Controllers/RealtimeController.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/PageConfigurations/washingMachine.json" Line="1" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/Hjorth/SmartRisoMono/Data/WashingMachineClustering.cs" line="117" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
