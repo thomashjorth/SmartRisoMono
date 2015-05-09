@@ -107,7 +107,6 @@
     <Compile Include="Controllers\AggregationController.cs" />
     <Compile Include="Utils\Configuration.cs" />
     <Compile Include="Utils\WS.cs" />
-    <Compile Include="Controllers\EEIController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\PageConfigurationController.cs" />
     <Compile Include="Controllers\RealtimeController.cs" />
@@ -120,9 +119,9 @@
     <Compile Include="Models\Configuration\VisualizationConfig.cs" />
     <Compile Include="Controllers\DERController.cs" />
     <Compile Include="Models\Configuration\UnitConfig.cs" />
-    <Compile Include="Controllers\WashingCycleController.cs" />
     <Compile Include="Models\Configuration\TableConfig.cs" />
     <Compile Include="Utils\SimpleStatistics.cs" />
+    <Compile Include="Controllers\ApplianceController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
