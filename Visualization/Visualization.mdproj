@@ -20,7 +20,6 @@
     <None Include="Views\Visualization\d3Gauge.html" />
     <None Include="Views\Visualization\d3Graph.html" />
     <None Include="Views\Visualization\d3Pie.html" />
-    <None Include="Views\Visualization\sideBar.html" />
     <None Include="Content\Site.css" />
     <None Include="Content\Site.min.css" />
     <None Include="Scripts\app.js" />
@@ -29,7 +28,6 @@
     <None Include="Scripts\Controllers\d3GaugeController.js" />
     <None Include="Scripts\Controllers\d3GraphController.js" />
     <None Include="Scripts\Controllers\d3PieController.js" />
-    <None Include="Scripts\Controllers\sideBarController.js" />
     <None Include="Scripts\Directives\d3BarDirective.js" />
     <None Include="Scripts\Directives\d3GaugeDirective.js" />
     <None Include="Scripts\Directives\d3GraphDirective.js" />

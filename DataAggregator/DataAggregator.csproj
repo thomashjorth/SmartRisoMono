@@ -118,7 +118,6 @@
     <Compile Include="Models\Configuration\PagesConfig.cs" />
     <Compile Include="Models\Configuration\PieConfig.cs" />
     <Compile Include="Models\Configuration\VisualizationConfig.cs" />
-    <Compile Include="Models\Configuration\SideBarConfig.cs" />
     <Compile Include="Controllers\DERController.cs" />
     <Compile Include="Models\Configuration\UnitConfig.cs" />
     <Compile Include="Controllers\WashingCycleController.cs" />
