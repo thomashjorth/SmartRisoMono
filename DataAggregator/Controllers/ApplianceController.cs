@@ -8,7 +8,7 @@ using System.IO;
 
 namespace DataAggregator.Controllers
 {
-    public class EEIController : ApiController
+    public class ApplianceController : ApiController
     {
 		string homePath = (Environment.OSVersion.Platform == PlatformID.Unix || 
 			Environment.OSVersion.Platform == PlatformID.MacOSX)
@@ -17,8 +17,9 @@ namespace DataAggregator.Controllers
 
 
 		// GET: hostname:port/api/Aggregation/id
-		public HttpResponseMessage Get([FromUri] string id, [FromUri] string situation)
+		public HttpResponseMessage Get([FromUri] string item, [FromUri] string attribute)
 		{
+			string openFile = "";
 			string read = "";
 			List<LabeledInstance> programEnergy = new List<LabeledInstance>(){};
 			try {
@@ -35,44 +36,44 @@ namespace DataAggregator.Controllers
 			EEI eeiHIGH = new EEI (7, new double[]{ programEnergy [3].value, programEnergy [3].value, programEnergy [3].value });
 
 			HttpResponseMessage response;
-			if (id.Equals ("Rating")) {
+
+			if (item.Equals ("Rating")) {
 				string Rating = ""; 
 
-				if (situation.Equals ("LOW")) {
+				if (attribute.Equals ("LOW")) {
 					Rating = eeiLOW.Rating ();
-				} else if (situation.Equals ("MIDDLE")) {
+				} else if (attribute.Equals ("MIDDLE")) {
 					Rating = eeiMIDDLE.Rating ();
-				} else if (situation.Equals ("HIGH")) {
+				} else if (attribute.Equals ("HIGH")) {
 					Rating = eeiHIGH.Rating ();
-				}
-				else {
+				} else {
 					Rating = eeiEU.Rating ();
 				}
 				response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
-						Rating
-					)
+					Rating
+				)
 				);
 				response.Headers.Add ("Access-Control-Allow-Origin", "*");
 				response.Headers.Add ("Access-Control-Allow-Methods", "GET");
 
 				return response;
-			}else if (id.Equals ("Score")) {
+			} else if (item.Equals ("Score")) {
 				
 				CompositeMeasurement Score;
 
-				if (situation.Equals ("LOW")) {
+				if (attribute.Equals ("LOW")) {
 					Score = new CompositeMeasurement (eeiLOW.EeiScore ());
-				} else if (situation.Equals ("MIDDLE")) {
+				} else if (attribute.Equals ("MIDDLE")) {
 					Score = new CompositeMeasurement (eeiMIDDLE.EeiScore ());
-				} else if (situation.Equals ("HIGH")) {
+				} else if (attribute.Equals ("HIGH")) {
 					Score = new CompositeMeasurement (eeiHIGH.EeiScore ());
-				} else if (situation.Equals ("ALL")) {
+				} else if (attribute.Equals ("ALL")) {
 					List<LabeledInstance> allScore = new List<LabeledInstance> (){ };
-					allScore.Add (new LabeledInstance ("LOW: " + eeiLOW.Rating(), eeiLOW.EeiScore ()));
-					allScore.Add (new LabeledInstance ("MIDDLE: " + eeiMIDDLE.Rating(), eeiMIDDLE.EeiScore ()));
-					allScore.Add (new LabeledInstance ("HIGH: " + eeiHIGH.Rating(), eeiHIGH.EeiScore ()));
-					allScore.Add (new LabeledInstance ("EU: " + eeiEU.Rating(), eeiEU.EeiScore ()));
+					allScore.Add (new LabeledInstance ("LOW: " + eeiLOW.Rating (), eeiLOW.EeiScore ()));
+					allScore.Add (new LabeledInstance ("MIDDLE: " + eeiMIDDLE.Rating (), eeiMIDDLE.EeiScore ()));
+					allScore.Add (new LabeledInstance ("HIGH: " + eeiHIGH.Rating (), eeiHIGH.EeiScore ()));
+					allScore.Add (new LabeledInstance ("EU: " + eeiEU.Rating (), eeiEU.EeiScore ()));
 
 					response = Request.CreateResponse (
 						HttpStatusCode.Created,
@@ -81,66 +82,99 @@ namespace DataAggregator.Controllers
 					);
 					response.Headers.Add ("Access-Control-Allow-Origin", "*");
 					response.Headers.Add ("Access-Control-Allow-Methods", "GET");
+
 					return response;
 				} else {
 					Score = new CompositeMeasurement (eeiEU.EeiScore ());
 				}
 				response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
-						Score
-					)
+					Score
+				)
 				);
-				response.Headers.Add ("Access-Control-Allow-Origin", "*");
-				response.Headers.Add ("Access-Control-Allow-Methods", "GET");
 
 				return response;
-			}else if (id.Equals ("AEC")) {
+			} else if (item.Equals ("AEC")) {
 
 				CompositeMeasurement AEC;
 
-				if (situation.Equals ("LOW")) {
+				if (attribute.Equals ("LOW")) {
 					AEC = new CompositeMeasurement (eeiLOW.EeiScore ());
-				} else if (situation.Equals ("MIDDLE")) {
+				} else if (attribute.Equals ("MIDDLE")) {
 					AEC = new CompositeMeasurement (eeiMIDDLE.EeiScore ());
-				} else if (situation.Equals ("HIGH")) {
+				} else if (attribute.Equals ("HIGH")) {
 					AEC = new CompositeMeasurement (eeiHIGH.EeiScore ());
-				} else if (situation.Equals ("ALL")) {
+				} else if (attribute.Equals ("ALL")) {
 					List<LabeledInstance> allAec = new List<LabeledInstance> (){ };
-					allAec.Add (new LabeledInstance ("LOW: " + eeiLOW.Rating(), eeiLOW.AEC ()));
-					allAec.Add (new LabeledInstance ("MIDDLE: " + eeiMIDDLE.Rating(), eeiMIDDLE.AEC ()));
-					allAec.Add (new LabeledInstance ("HIGH: " + eeiHIGH.Rating(), eeiHIGH.AEC ()));
-					allAec.Add (new LabeledInstance ("EU: " + eeiEU.Rating(), eeiEU.AEC ()));
+					allAec.Add (new LabeledInstance ("LOW: " + eeiLOW.Rating (), eeiLOW.AEC ()));
+					allAec.Add (new LabeledInstance ("MIDDLE: " + eeiMIDDLE.Rating (), eeiMIDDLE.AEC ()));
+					allAec.Add (new LabeledInstance ("HIGH: " + eeiHIGH.Rating (), eeiHIGH.AEC ()));
+					allAec.Add (new LabeledInstance ("EU: " + eeiEU.Rating (), eeiEU.AEC ()));
 
 					response = Request.CreateResponse (
 						HttpStatusCode.Created,
-							Newtonsoft.Json.JsonConvert.SerializeObject (allAec)
+						Newtonsoft.Json.JsonConvert.SerializeObject (allAec)
 
 					);
-					response.Headers.Add ("Access-Control-Allow-Origin", "*");
-					response.Headers.Add ("Access-Control-Allow-Methods", "GET");
 					return response;
 				} else {
 					AEC = new CompositeMeasurement (eeiEU.EeiScore ());
 				}
 				response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
-						AEC
-					)
+					AEC
+				)
 				);
+				response.Headers.Add ("Access-Control-Allow-Origin", "*");
+				response.Headers.Add ("Access-Control-Allow-Methods", "GET");
+
+
+				return response;
+			} else if (item.Equals ("Program")) {
+				if (attribute.Equals ("Count")) {
+					openFile = "/DataAggregatorData/WashingMachine/programsCount.json";
+				} else if (attribute.Equals ("PowerCentroid")) {
+					openFile = "/DataAggregatorData/WashingMachine/centroidsPower.json";
+				} else if (attribute.Equals ("EnergyCentroid")) {
+					openFile = "/DataAggregatorData/WashingMachine/centroidsEnergy.json";
+				} else if (attribute.Equals ("Discovered")) {
+					openFile = "/DataAggregatorData/WashingMachine/discoveredCycles.json";
+				}
+				read = "";
+
+				try {
+					StreamReader file = File.OpenText (homePath + openFile);
+					read = file.ReadToEnd ();
+
+					response = Request.CreateResponse (
+						HttpStatusCode.Created, 
+						read
+
+					);
+
+				} catch (Exception e) {
+					read = e.ToString ();
+				}
+
+				response = Request.CreateResponse (
+					HttpStatusCode.Created, 
+					read
+				);
+
 				response.Headers.Add ("Access-Control-Allow-Origin", "*");
 				response.Headers.Add ("Access-Control-Allow-Methods", "GET");
 
 				return response;
-			}
-					response = Request.CreateResponse (
-					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
-					"WashingCycles <List<LabeledInstance>>, TotalCycles <CompositeMeasurement>, Rating <String>, Score <CompositeMeasurement>, AEC <CompositeMeasurement>"
-					)
-				);
-				response.Headers.Add ("Access-Control-Allow-Origin", "*");
-				response.Headers.Add ("Access-Control-Allow-Methods", "GET");
-			return response;
+			} 
+			response = Request.CreateResponse (
+				HttpStatusCode.Created, 
+				"NAN"
+			);
 
-		}
+			response.Headers.Add ("Access-Control-Allow-Origin", "*");
+			response.Headers.Add ("Access-Control-Allow-Methods", "GET");
+
+			return response;
+			}
     }
 }

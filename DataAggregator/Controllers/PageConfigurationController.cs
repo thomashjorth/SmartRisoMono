@@ -61,17 +61,19 @@ namespace DataAggregator.Controllers
 
 			PageConfig page3 = new PageConfig (new List<VisualizationConfig> (){ 
 				
-				new PieConfig("127.0.0.1",9001,"WashingCycle","Count","Count",2000),
-				new PieConfig("127.0.0.1",9001,"WashingCycle","PowerCentroid","Power",2000),
-				new PieConfig("127.0.0.1",9001,"WashingCycle","EnergyCentroid","Energy",2000),
-				new BarConfig("127.0.0.1",9001,"WashingCycle","Count","Programs Count",0,10,2000,"Count"),
-				new BarConfig("127.0.0.1",9001,"EEI","?id=AEC&situation=ALL","Programs AEC",0,400,2000,"Count"),
-				new BarConfig("127.0.0.1",9001,"EEI","?id=Score&situation=ALL","Programs Score",0,100,2000,"Count"),
+				new PieConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=Count","Count",2000),
+				new PieConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=PowerCentroid","Power",2000),
+				new PieConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=EnergyCentroid","Energy",2000),
+
+				new BarConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=Count","Programs Count",0,10,2000,"Count"),
+				new BarConfig("127.0.0.1",9001,"Appliance","?item=AEC&attribute=ALL","Programs AEC",0,400,2000,"Count"),
+				new BarConfig("127.0.0.1",9001,"Appliance","?item=Score&attribute=ALL","Programs Score",0,100,2000,"Count"),
+
 				new GraphConfig("127.0.0.1",9001,"Realtime","getActivePower","Power 15s",4,0,1,15,
 					new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower",""),2000,"mW"),
 				new GraphConfig("127.0.0.1",9001,"Realtime","getActivePower","Power 48h",4,0,1,3600*48,
 					new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower",""),2000,"mW"),
-				new TableConfig("127.0.0.1",9001,"WashingCycle","Discovered","Detected",2000)
+				new TableConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=Discovered","Detected",2000)
 				}
 				
 
@@ -96,7 +98,7 @@ namespace DataAggregator.Controllers
 				PageConfig emptyPage = new PageConfig (new List<VisualizationConfig> (){  });
 				PagesConfig pagesEmpty = new PagesConfig(new List<PageConfig>(){emptyPage});
 					response = Request.CreateResponse (
-					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (pages)
+					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (pagesWashingMachine)
 					);
 				}
 
