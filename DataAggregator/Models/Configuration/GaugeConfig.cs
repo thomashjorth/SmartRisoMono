@@ -10,8 +10,8 @@ namespace DataAggregator.Models.Configuration
 		public string ID, Unit;
 		public VisualizationConfig DER;
 
-		public GaugeConfig (string host, int port, string aggregation, string resource, string titleHeading, 
-			double valueMin, double valueMax, string id, VisualizationConfig der, int updateIterval, string unit) : base(host, port, aggregation, resource, titleHeading, updateIterval)
+		public GaugeConfig (string host, int port, string aggregation, string parameters, string titleHeading, 
+			double valueMin, double valueMax, string id, VisualizationConfig der, int updateIterval, string unit) : base(host, port, aggregation, parameters, titleHeading, updateIterval)
 		{
 			DER = der;
 			ID = id;
