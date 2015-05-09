@@ -2,7 +2,7 @@ VisualizeApp.controller('tableController', ['$scope','$interval', '$http', 'AppS
     $scope.initialize = function()
     {
    
-         AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,$scope.init.Method)
+         AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,$scope.init.Params)
             .success(function (response){
             	$scope.Table = JSON.parse(response);
             });
