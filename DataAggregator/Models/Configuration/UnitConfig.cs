@@ -5,13 +5,12 @@ namespace DataAggregator.Models.Configuration
 {
 	public class UnitConfig : VisualizationConfig
 	{
-		public VisualizationConfig DER;
-		public UnitConfig ( string host, int port, int updateIterval, VisualizationConfig der) : base(host, port, updateIterval)
+		
+		public UnitConfig ( string host, int port, string parameters,int updateIterval) : base(host, port, updateIterval)
 		{
 			VisualizationType = "unit";
-			DER = der;
 			Device = "DER";
-			Params = "?host=" + der.Host + "&port=" + der.Port;
+			Params = parameters;
 		}
 	}
 }

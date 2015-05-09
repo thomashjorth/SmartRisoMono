@@ -8,11 +8,11 @@ namespace DataAggregator.Models.Configuration
 		public double ValueMax;
 		public string Unit;
 		public BarConfig ( string host, int port, 
-			string aggregation, string resource, 
+			string aggregation, string parameters, 
 			string titleHeading, double valueMin, 
 			double valueMax, int updateIterval, 
 			string unit) : base(host, port, 
-				aggregation, resource, titleHeading, 
+				aggregation, parameters, titleHeading, 
 				updateIterval)
 		{
 			VisualizationType = "d3Bar";

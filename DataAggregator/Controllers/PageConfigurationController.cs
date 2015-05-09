@@ -31,9 +31,9 @@ namespace DataAggregator.Controllers
 					new GaugeConfig("127.0.0.1",9001,"Realtime","getActivePower","Title",-10,10,"gauge2", 
 						new VisualizationConfig("127.0.0.1",8085,"GenericLoadWS","getActivePower",""),1000,"unit")),
 				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",-1,2,10000,"unit"),
-				new UnitConfig("localhost",9001,3000,new VisualizationConfig("localhost",8080)),
-				new UnitConfig("localhost",9001,3000,new VisualizationConfig("localhost",8080)),
-				new UnitConfig("localhost",9001,3000,new VisualizationConfig("localhost",8080))
+				new UnitConfig("localhost",9001,"?host=localhost&port=8080",3000),
+				new UnitConfig("localhost",9001,"?host=localhost&port=8085",3000),
+				new UnitConfig("localhost",9001,"?host=localhost&port=8090",3000)
 			});
 			PageConfig page1 = new PageConfig (new List<VisualizationConfig> (){ 
 				new GaugesConfig(
@@ -52,9 +52,9 @@ namespace DataAggregator.Controllers
 				new PieConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",10000),
 				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",-2,2,10000,"unit"),
 				new BarConfig("127.0.0.1",9001,"Aggregation","AllActivePower","avg",-1,2,10000,"unit"),
-				new UnitConfig("localhost",9001,3000,new VisualizationConfig("localhost",8080)),
-				new UnitConfig("localhost",9001,3000,new VisualizationConfig("localhost",8080)),
-				new UnitConfig("localhost",9001,3000,new VisualizationConfig("localhost",8080))
+				new UnitConfig("localhost",9001,"?host=localhost&port=8080",3000),
+				new UnitConfig("localhost",9001,"?host=localhost&port=8085",3000),
+				new UnitConfig("localhost",9001,"?host=localhost&port=8090",3000)
 			});
 
 			PagesConfig pages = new PagesConfig(new List<PageConfig>(){page0,page1});
@@ -97,7 +97,7 @@ namespace DataAggregator.Controllers
 				PageConfig emptyPage = new PageConfig (new List<VisualizationConfig> (){  });
 				PagesConfig pagesEmpty = new PagesConfig(new List<PageConfig>(){emptyPage});
 					response = Request.CreateResponse (
-					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (pagesWashingMachine)
+					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (pages)
 					);
 				}
 
