@@ -3,8 +3,8 @@ VisualizeApp.controller('unitController', ['$scope','$interval', '$http', 'AppSe
     {
         $scope.dataHost = $scope.init.Host;
         $scope.dataPort = $scope.init.Port;
-        $scope.dataAggregation = 'DER';
-        $scope.dataResource = '?host='+$scope.init.DER.Host+'&port='+$scope.init.DER.Port;
+        $scope.dataAggregation = 'Aggregation';
+        $scope.dataResource = $scope.init.DER;
         $scope.image = "Plug";
 
         var lastResponse;
