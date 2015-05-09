@@ -27,7 +27,7 @@
 
 				var include = [];
 				var n = [];
-				if($scope.slides == undefined){
+				if($scope.slides == undefined || $scope.slides.length == 0){
 					slides=config;
 					for(var j = 0; j < slides.Pages.length; j ++){
 						for(var i = 0; i < slides.Pages[j].Page.length; i ++){

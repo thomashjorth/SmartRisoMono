@@ -5,7 +5,7 @@
 		<div id="boxAll" ng-repeat="pages in include track by $index" ng-show="pages.Current">
 			<ng-include class="box" ng-repeat="page in pages track by $index" id="{{page.id}}" src="page.VisualizationType" ng-init="init=page"></ng-include>
 		</div>
-		<div id="boxBottom">
+		<div id="boxBottom" ng-if="slides.length > 1">
 			<div class="chooser" ng-repeat="pages in include track by $index" id="slide{{$index}}" ng-click="slide($index)">{{$index+1}}</div>
 			<img class="controls" src="https://cdn0.iconfinder.com/data/icons/arrows-android-l-lollipop-icon-pack/24/next-512.png" width="30px" height="30px" ng-click="controls('next')">
 			<img class="controls pause" src="https://cdn1.iconfinder.com/data/icons/material-audio-video/20/pause-circle-outline-512.png" width="30px" height="30px" ng-show="!paused" ng-click="controls('pause')">
