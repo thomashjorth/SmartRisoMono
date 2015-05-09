@@ -110,12 +110,15 @@ namespace DataAggregator.Controllers
 					allAec.Add (new LabeledInstance ("MIDDLE: " + eeiMIDDLE.Rating (), eeiMIDDLE.AEC ()));
 					allAec.Add (new LabeledInstance ("HIGH: " + eeiHIGH.Rating (), eeiHIGH.AEC ()));
 					allAec.Add (new LabeledInstance ("EU: " + eeiEU.Rating (), eeiEU.AEC ()));
-
+				
 					response = Request.CreateResponse (
 						HttpStatusCode.Created,
 						Newtonsoft.Json.JsonConvert.SerializeObject (allAec)
 
 					);
+					response.Headers.Add ("Access-Control-Allow-Origin", "*");
+					response.Headers.Add ("Access-Control-Allow-Methods", "GET");
+
 					return response;
 				} else {
 					AEC = new CompositeMeasurement (eeiEU.EeiScore ());

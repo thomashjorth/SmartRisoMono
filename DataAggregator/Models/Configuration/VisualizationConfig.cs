@@ -4,12 +4,15 @@ namespace DataAggregator.Models.Configuration
 {
 	public class VisualizationConfig
 	{
+
+		public string VisualizationType;
 		public String Host;
 		public int Port;
 		public string Device;
+		public string Resources;
+		public string DER;
 		public string Method;
 		public string TitleHeading;
-		public string VisualizationType;
 		public int UpdateInterval;
 		public VisualizationConfig (string host,int port,string device,string method,string  titleHeading, int updateInterval)
 		{
@@ -17,7 +20,9 @@ namespace DataAggregator.Models.Configuration
 			Host = host;
 			Port = port;
 			Device = device;
+			Resources = method;
 			Method = method;
+			DER = method;
 			TitleHeading = titleHeading;
 			UpdateInterval = updateInterval;
 		}
@@ -28,7 +33,9 @@ namespace DataAggregator.Models.Configuration
 			Host = host;
 			Port = port;
 			Device = device;
+			Resources = method;
 			Method = method;
+			DER = method;
 			TitleHeading = titleHeading;
 		}
 

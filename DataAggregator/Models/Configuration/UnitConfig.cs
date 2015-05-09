@@ -11,7 +11,7 @@ namespace DataAggregator.Models.Configuration
 			VisualizationType = "unit";
 			DER = der;
 			Device = "DER";
-			Method = "?host=" + der.Host + "&port=" + der.Port;
+			Resources = "?host=" + der.Host + "&port=" + der.Port;
 		}
 	}
 }
