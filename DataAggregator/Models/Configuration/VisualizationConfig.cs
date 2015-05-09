@@ -9,34 +9,31 @@ namespace DataAggregator.Models.Configuration
 		public String Host;
 		public int Port;
 		public string Device;
-		public string Resources;
-		public string DER;
-		public string Method;
+
+		public string Params;
+
 		public string TitleHeading;
 		public int UpdateInterval;
-		public VisualizationConfig (string host,int port,string device,string method,string  titleHeading, int updateInterval)
+		public VisualizationConfig (string host,int port,string device,string parameters,string  titleHeading, int updateInterval)
 		{
 			
 			Host = host;
 			Port = port;
 			Device = device;
-			Resources = method;
-			Method = method;
-			DER = method;
+			Params = parameters;
 			TitleHeading = titleHeading;
 			UpdateInterval = updateInterval;
 		}
 
-		public VisualizationConfig (string host,int port,string device,string  method,string  titleHeading)
+		public VisualizationConfig (string host,int port,string device,string  parameters,string  titleHeading)
 		{
 
 			Host = host;
 			Port = port;
 			Device = device;
-			Resources = method;
-			Method = method;
-			DER = method;
+			Params = parameters;
 			TitleHeading = titleHeading;
+
 		}
 
 		public VisualizationConfig(){
