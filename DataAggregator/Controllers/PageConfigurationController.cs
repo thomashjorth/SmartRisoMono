@@ -96,7 +96,7 @@ namespace DataAggregator.Controllers
 				PageConfig emptyPage = new PageConfig (new List<VisualizationConfig> (){  });
 				PagesConfig pagesEmpty = new PagesConfig(new List<PageConfig>(){emptyPage});
 					response = Request.CreateResponse (
-					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (pagesWashingMachine)
+					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (pages)
 					);
 				}
 
