@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Collections.Generic;
 using System.Net;
 using System.IO;
+using DataAggregator.Models.Configuration;
 
 namespace DataAggregator.Controllers
 {

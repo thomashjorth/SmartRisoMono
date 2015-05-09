@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using DataAggregator.Models;
+using DataAggregator.Utils;
 using System.Net.Http;
 using System.Net;
 using DataModel;

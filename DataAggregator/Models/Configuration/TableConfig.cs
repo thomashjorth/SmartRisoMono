@@ -1,7 +1,4 @@
-﻿using System;
-using DataAggregator.Models;
-
-namespace DataAggregator
+﻿namespace DataAggregator.Models.Configuration
 {
 	public class TableConfig : VisualizationConfig
 	{

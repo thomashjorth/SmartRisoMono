@@ -2,11 +2,11 @@
 
 namespace DataModel
 {
-	public class TwoDTable
+	public class DoubleLabel
 	{
 		public string FirstField;
 		public string SecondField;
-		public TwoDTable (string firstField, string secondField)
+		public DoubleLabel (string firstField, string secondField)
 		{
 			FirstField = firstField;
 			SecondField = secondField;

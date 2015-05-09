@@ -105,7 +105,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\AggregationController.cs" />
-    <Compile Include="Models\SimpleStatistics.cs" />
     <Compile Include="Utils\Configuration.cs" />
     <Compile Include="Utils\WS.cs" />
     <Compile Include="Controllers\EEIController.cs" />
@@ -124,6 +123,7 @@
     <Compile Include="Models\Configuration\UnitConfig.cs" />
     <Compile Include="Controllers\WashingCycleController.cs" />
     <Compile Include="Models\Configuration\TableConfig.cs" />
+    <Compile Include="Utils\SimpleStatistics.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />

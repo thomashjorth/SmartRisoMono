@@ -6,7 +6,7 @@ using System.IO;
 using Newtonsoft.Json;
 using DataModel;
 
-namespace DataAggregator.Models
+namespace DataAggregator.Utils
 {
 	static class SimpleStatistics
 	{
@@ -18,9 +18,8 @@ namespace DataAggregator.Models
 			long lastTimestamp = 0;
 			foreach (DER d in ders) {
 				
-				value = WS.DownloadXML (d.Interface+"WS","getActivePower", 
-					d.Hostname, d.Port,
-					ParseType.CompositeMeasurement);
+				value = WS.GetCompositeMeasurement (d.Interface+"WS","getActivePower", 
+					d.Hostname, d.Port);
 				if(!value.Equals("NAN")){
 					using (var sr = new StringReader(value))
 					using (var jr = new JsonTextReader(sr))
@@ -52,7 +51,7 @@ namespace DataAggregator.Models
 
 			foreach (DER d in ders) {
 
-				value = WS.DownloadXML (d.Interface+"WS", "getActivePower", d.Hostname, d.Port, ParseType.CompositeMeasurement);
+				value = WS.GetCompositeMeasurement (d.Interface+"WS", "getActivePower", d.Hostname, d.Port);
 				System.Diagnostics.Debug.Write (value);
 				if (!value.Equals ("NAN")) {
 					using (var sr = new StringReader (value))

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataAggregator
+namespace DataAggregator.Models.Configuration
 {
 	public  class GaugeConfig : VisualizationConfig
 	{

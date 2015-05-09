@@ -41,7 +41,7 @@
     <Compile Include="DER.cs" />
     <Compile Include="EEI.cs" />
     <Compile Include="LabeledInstance.cs" />
-    <Compile Include="TwoDTable.cs" />
+    <Compile Include="DoubleLabel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
