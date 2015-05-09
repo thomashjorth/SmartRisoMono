@@ -68,7 +68,6 @@ namespace DataAggregator.Controllers
 				new BarConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=Count","Programs Count",0,10,2000,"Count"),
 				new BarConfig("127.0.0.1",9001,"Appliance","?item=AEC&attribute=ALL","Programs AEC",0,400,2000,"Count"),
 				new BarConfig("127.0.0.1",9001,"Appliance","?item=Score&attribute=ALL","Programs Score",0,100,2000,"Count"),
-
 				new GraphConfig("127.0.0.1",9001,"Realtime","getActivePower","Power 15s",4,0,1,15,
 					new VisualizationConfig("127.0.0.1",8080,"GenericLoadWS","getActivePower",""),2000,"mW"),
 				new GraphConfig("127.0.0.1",9001,"Realtime","getActivePower","Power 48h",4,0,1,3600*48,
