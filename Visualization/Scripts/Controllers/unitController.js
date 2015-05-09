@@ -3,10 +3,9 @@ VisualizeApp.controller('unitController', ['$scope','$interval', '$http', 'AppSe
     {
         $scope.dataHost = $scope.init.Host;
         $scope.dataPort = $scope.init.Port;
-        $scope.dataAggregation = 'Aggregation';
-        $scope.dataResource = $scope.init.DER;
+        $scope.dataAggregation = 'DER';
+        $scope.dataResource = $scope.init.Params;
         $scope.image = "Plug";
-
         var lastResponse;
         AppService.getData($scope.dataHost,$scope.dataPort,$scope.dataAggregation,$scope.dataResource)
             .success(function (response){
