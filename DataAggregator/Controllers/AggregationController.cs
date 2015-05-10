@@ -13,7 +13,24 @@ namespace DataAggregator.Controllers
 		List<string> functions = new List<string> { 
 			"DeviceList", "AvgActivePower", "AllActivePower"
 		};
+		public HttpResponseMessage Get(
+			[FromUri] string host, 
+			[FromUri] string port )
+		{
+			HttpResponseMessage response;
 
+			DER der = new DER (host, port);
+
+			response = Request.CreateResponse (
+				HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
+					der
+				));
+
+			response.Headers.Add ("Access-Control-Allow-Origin", "*");
+			response.Headers.Add ("Access-Control-Allow-Methods", "GET");
+
+			return response;
+		}
 		// GET: hostname:port/api/Aggregation/id
 		public HttpResponseMessage Get(string id)
 		{
