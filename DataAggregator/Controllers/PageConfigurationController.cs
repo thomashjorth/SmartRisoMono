@@ -51,19 +51,19 @@ namespace DataAggregator.Controllers
 
 			PageConfig page3 = new PageConfig (new List<VisualizationConfig> (){ 
 				
-				new PieConfig("127.0.0.1",9001,"WashingCycle","Count",2000,"Count"),
-				new PieConfig("127.0.0.1",9001,"WashingCycle","PowerCentroid",2000,"Power"),
-				new PieConfig("127.0.0.1",9001,"WashingCycle","EnergyCentroid",2000,"Energy"),
-				new BarConfig("127.0.0.1",9001,"WashingCycle","Count",2000,"Programs Count",0,10,"Count"),
-				new BarConfig("127.0.0.1",9001,"EEI","?id=AEC&situation=ALL",2000,"Programs AEC",0,400,"Count"),
-				new BarConfig("127.0.0.1",9001,"EEI","?id=Score&situation=ALL",2000,"Programs Score",0,100,"Count"),
+				new PieConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=Count",2000,"Count"),
+				new PieConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=PowerCentroid",2000,"Power"),
+				new PieConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=EnergyCentroid",2000,"Energy"),
+				new BarConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=Count",2000,"Programs Count",0,10,"Count"),
+				new BarConfig("127.0.0.1",9001,"Appliance","?item=AEC&attribute=ALL",2000,"Programs AEC",0,400,"Count"),
+				new BarConfig("127.0.0.1",9001,"Appliance","?item=Score&attribute=ALL",2000,"Programs Score",0,100,"Count"),
 				new GraphConfig("127.0.0.1",9001,"Realtime",
 					"?host=127.0.0.1&port=8080&wsInterface=GenericLoadWS&resource=getActivePower",2000, 
 					"Power 15s",0,1,15,"mW"), 
 				new GraphConfig("127.0.0.1",9001,"Realtime",
 					"?host=127.0.0.1&port=8080&wsInterface=GenericLoadWS&resource=getActivePower",2000, 
 					"Power 48h",0,1,3600*48,"mW"), 
-				new TableConfig("127.0.0.1",9001,"WashingCycle","Discovered",2000,"Detected")
+				new TableConfig("127.0.0.1",9001,"Appliance","?item=Program&attribute=Discovered",2000,"Detected")
 				}
 				
 
