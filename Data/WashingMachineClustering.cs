@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using DataAggregator.Models;
 using DataAggregator;
+using DataModel;
 
 namespace Data
 {
@@ -142,7 +143,7 @@ namespace Data
 			int currentClass = -1;
 			List<double[]> preparedData = new List<double[]>{ };
 
-			List<TwoDTable> discoveredCycles = new List<TwoDTable> (){ };
+			List<DoubleLabel> discoveredCycles = new List<DoubleLabel> (){ };
 
 			string res0 = "";
 			res0 += "Class;Duration;PowerkWh\n";
@@ -153,7 +154,7 @@ namespace Data
 					res0 += currentClass + "; " + duration + "; " + powerForDuration / 1000 / 60 / 60 / 60 + " " + epoch.AddSeconds (timeConcat [p] / 1000) + " " + TimeSpan.FromSeconds (duration) + "\n";
 					if (duration > 5) {
 						preparedData.Add (new double[]{ powerForDuration / duration, powerForDuration });
-						discoveredCycles.Add(new TwoDTable(epoch.AddSeconds (timeConcat [p] / 1000).ToString(),"Standby"));
+						discoveredCycles.Add(new DoubleLabel(epoch.AddSeconds (timeConcat [p] / 1000).ToString(),"Standby"));
 					}
 					duration = 0;
 					powerForDuration = 0.0;

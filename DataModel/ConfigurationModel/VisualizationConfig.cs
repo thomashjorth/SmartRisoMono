@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DataAggregator.Models.Configuration
+namespace DataModel.ConfigurationModel
 {
-	public class VisualizationConfig
+	public abstract class VisualizationConfig
 	{
 
 		public string VisualizationType;
@@ -27,4 +27,3 @@ namespace DataAggregator.Models.Configuration
 	}
 
 }
-

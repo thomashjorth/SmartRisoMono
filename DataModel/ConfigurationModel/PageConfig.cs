@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataAggregator.Models.Configuration
+namespace DataModel.ConfigurationModel
 {
 	public class PageConfig
 	{

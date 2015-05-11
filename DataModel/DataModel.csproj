@@ -42,6 +42,15 @@
     <Compile Include="EEI.cs" />
     <Compile Include="LabeledInstance.cs" />
     <Compile Include="DoubleLabel.cs" />
+    <Compile Include="ConfigurationModel\BarConfig.cs" />
+    <Compile Include="ConfigurationModel\GaugeConfig.cs" />
+    <Compile Include="ConfigurationModel\GraphConfig.cs" />
+    <Compile Include="ConfigurationModel\PageConfig.cs" />
+    <Compile Include="ConfigurationModel\PagesConfig.cs" />
+    <Compile Include="ConfigurationModel\PieConfig.cs" />
+    <Compile Include="ConfigurationModel\TableConfig.cs" />
+    <Compile Include="ConfigurationModel\UnitConfig.cs" />
+    <Compile Include="ConfigurationModel\VisualizationConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -110,15 +110,6 @@
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\PageConfigurationController.cs" />
     <Compile Include="Controllers\RealtimeController.cs" />
-    <Compile Include="Models\Configuration\BarConfig.cs" />
-    <Compile Include="Models\Configuration\GaugeConfig.cs" />
-    <Compile Include="Models\Configuration\GraphConfig.cs" />
-    <Compile Include="Models\Configuration\PageConfig.cs" />
-    <Compile Include="Models\Configuration\PagesConfig.cs" />
-    <Compile Include="Models\Configuration\PieConfig.cs" />
-    <Compile Include="Models\Configuration\VisualizationConfig.cs" />
-    <Compile Include="Models\Configuration\UnitConfig.cs" />
-    <Compile Include="Models\Configuration\TableConfig.cs" />
     <Compile Include="Utils\SimpleStatistics.cs" />
     <Compile Include="Controllers\ApplianceController.cs" />
   </ItemGroup>
@@ -149,7 +140,6 @@
     <Folder Include="Utils\" />
     <Folder Include="Images\" />
     <Folder Include="PageConfigurations\" />
-    <Folder Include="Models\Configuration\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -200,9 +190,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="PageConfigurations\pageConf.json" />
-    <None Include="PageConfigurations\singlePageAll.json" />
-    <None Include="PageConfigurations\pageConfNullGauge.json" />
     <None Include="PageConfigurations\washingMachine.json" />
+    <None Include="PageConfigurations\example.json" />
   </ItemGroup>
 </Project>

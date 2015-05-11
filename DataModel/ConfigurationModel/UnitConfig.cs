@@ -1,7 +1,6 @@
 ﻿using System;
-using DataAggregator.Models;
 
-namespace DataAggregator.Models.Configuration
+namespace DataModel.ConfigurationModel
 {
 	public class UnitConfig : VisualizationConfig
 	{

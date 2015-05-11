@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Collections.Generic;
 using System.Net;
 using System.IO;
-using DataAggregator.Models.Configuration;
+using DataModel.ConfigurationModel;
 
 namespace DataAggregator.Controllers
 {
@@ -88,7 +88,7 @@ namespace DataAggregator.Controllers
 				PageConfig emptyPage = new PageConfig (new List<VisualizationConfig> (){  });
 				PagesConfig pagesEmpty = new PagesConfig(new List<PageConfig>(){emptyPage});
 					response = Request.CreateResponse (
-					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (pages)
+					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (emptyPage)
 					);
 				}
 
