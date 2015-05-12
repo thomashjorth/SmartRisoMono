@@ -20,7 +20,6 @@ namespace DataAggregator.Controllers
 			 * http://127.0.0.1:9001/api/Realtime/?host=localhost&port=8080&wsInterface=GenericLoadWS&resource=getActivePower
 			*/
 
-
 			string data = WS.GetCompositeMeasurement (wsInterface, resource, host, port);
 			response = Request.CreateResponse(HttpStatusCode.Created,data);
 			//Double.Parse (Utils.WS.DownloadXML (id,"localhost","8085"))));
@@ -35,14 +34,22 @@ namespace DataAggregator.Controllers
 		}
 
 		// PUT: api/Realtime/5
-		public void Put(
+		public HttpResponseMessage Put(
 			[FromUri] string host, 
 			[FromUri] string port, 
 			[FromUri] string wsInterface, 
-			[FromUri] string resource, 
-			[FromBody]string value)
+			[FromUri] string resource)
 		{
-
+			using (var client = new HttpClient())    
+			{     
+				client.BaseAddress = new Uri("http://"+host+":"+port+"/");    
+				var r = client.PutAsync(wsInterface+"/"+resource,null).Result;
+				Console.Write (r.StatusCode.ToString());
+				if (r.IsSuccessStatusCode) {    
+					return Request.CreateErrorResponse (r.StatusCode, "");
+				} else
+					return Request.CreateResponse (r.StatusCode);
+			}  
 		}
 	}
 }
