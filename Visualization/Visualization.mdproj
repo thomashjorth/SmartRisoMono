@@ -2430,5 +2430,6 @@
     <None Include="Views\Visualization\table.html" />
     <None Include="Scripts\Controllers\tableController.js" />
     <None Include="Views\Visualization\basicControl.html" />
+    <None Include="Scripts\Controllers\tasksController.js" />
   </ItemGroup>
 </Project>
