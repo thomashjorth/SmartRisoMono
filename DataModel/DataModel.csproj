@@ -42,18 +42,21 @@
     <Compile Include="EEI.cs" />
     <Compile Include="LabeledInstance.cs" />
     <Compile Include="DoubleLabel.cs" />
-    <Compile Include="ConfigurationModel\BarConfig.cs" />
-    <Compile Include="ConfigurationModel\GaugeConfig.cs" />
-    <Compile Include="ConfigurationModel\GraphConfig.cs" />
-    <Compile Include="ConfigurationModel\PageConfig.cs" />
     <Compile Include="ConfigurationModel\PagesConfig.cs" />
-    <Compile Include="ConfigurationModel\PieConfig.cs" />
-    <Compile Include="ConfigurationModel\TableConfig.cs" />
-    <Compile Include="ConfigurationModel\UnitConfig.cs" />
     <Compile Include="ConfigurationModel\VisualizationConfig.cs" />
+    <Compile Include="ConfigurationModel\VisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\PageFactory.cs" />
+    <Compile Include="ConfigurationModel\Classes\BarConfig.cs" />
+    <Compile Include="ConfigurationModel\Classes\GaugeConfig.cs" />
+    <Compile Include="ConfigurationModel\Classes\GraphConfig.cs" />
+    <Compile Include="ConfigurationModel\Classes\PageConfig.cs" />
+    <Compile Include="ConfigurationModel\Classes\PieConfig.cs" />
+    <Compile Include="ConfigurationModel\Classes\TableConfig.cs" />
+    <Compile Include="ConfigurationModel\Classes\UnitConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="iec61850\" />
+    <Folder Include="ConfigurationModel\Classes\" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace DataModel.ConfigurationModel
+﻿namespace DataModel.ConfigurationModel.Classes
 {
 	public class TableConfig : VisualizationConfig
 	{

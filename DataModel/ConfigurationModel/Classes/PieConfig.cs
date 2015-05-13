@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataModel.ConfigurationModel
+namespace DataModel.ConfigurationModel.Classes
 {
 	public class PieConfig : VisualizationConfig
 	{

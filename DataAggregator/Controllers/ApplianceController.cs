@@ -17,7 +17,7 @@ namespace DataAggregator.Controllers
 
 
 		// GET: hostname:port/api/Aggregation/id
-		public HttpResponseMessage Get([FromUri] string item, [FromUri] string attribute)
+		public HttpResponseMessage Get([FromUri] string id, [FromUri] string attribute)
 		{
 			string openFile = "";
 			string read = "";
@@ -37,7 +37,7 @@ namespace DataAggregator.Controllers
 
 			HttpResponseMessage response;
 
-			if (item.Equals ("Rating")) {
+			if (id.Equals ("Rating")) {
 				string Rating = ""; 
 
 				if (attribute.Equals ("LOW")) {
@@ -58,7 +58,7 @@ namespace DataAggregator.Controllers
 				response.Headers.Add ("Access-Control-Allow-Methods", "GET");
 
 				return response;
-			} else if (item.Equals ("Score")) {
+			} else if (id.Equals ("Score")) {
 				
 				CompositeMeasurement Score;
 
@@ -94,7 +94,7 @@ namespace DataAggregator.Controllers
 				);
 
 				return response;
-			} else if (item.Equals ("AEC")) {
+			} else if (id.Equals ("AEC")) {
 
 				CompositeMeasurement AEC;
 
@@ -133,7 +133,7 @@ namespace DataAggregator.Controllers
 
 
 				return response;
-			} else if (item.Equals ("Program")) {
+			} else if (id.Equals ("Program")) {
 				if (attribute.Equals ("Count")) {
 					openFile = "/DataAggregatorData/WashingMachine/programsCount.json";
 				} else if (attribute.Equals ("PowerCentroid")) {

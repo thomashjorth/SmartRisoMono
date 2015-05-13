@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-
+using DataModel.ConfigurationModel;
 namespace Data
 {
 	class MainClass

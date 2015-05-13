@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataModel.ConfigurationModel
+namespace DataModel.ConfigurationModel.Classes
 {
 	public  class GaugeConfig : VisualizationConfig
 	{

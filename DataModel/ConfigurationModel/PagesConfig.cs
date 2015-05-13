@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DataModel.ConfigurationModel.Classes;
 
 namespace DataModel.ConfigurationModel
 {
