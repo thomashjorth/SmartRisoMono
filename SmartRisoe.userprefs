@@ -1,24 +1,26 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupItem="DataAggregator/DataAggregator.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataAggregator/Models/Configuration/VisualizationConfig.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="/usr/bin/google-chrome-stable" />
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="DataAggregator/Controllers/PageConfigurationController.cs" Line="94" Column="8" />
-      <File FileName="DataAggregator/Models/Configuration/VisualizationConfig.cs" Line="23" Column="24" />
-      <File FileName="DataAggregator/Models/Configuration/GraphConfig.cs" Line="20" Column="14" />
-      <File FileName="DataAggregator/Models/Configuration/BarConfig.cs" Line="21" Column="9" />
-      <File FileName="DataAggregator/Models/Configuration/GaugeConfig.cs" Line="25" Column="22" />
-      <File FileName="DataAggregator/PageConfigurations/washingMachine.json" Line="1" Column="1" />
-      <File FileName="DataAggregator/Controllers/ApplianceController.cs" Line="113" Column="5" />
-      <File FileName="DataAggregator/Models/Configuration/PageConfig.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Models/Configuration/PagesConfig.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Models/Configuration/PieConfig.cs" Line="8" Column="77" />
-      <File FileName="DataAggregator/Models/Configuration/UnitConfig.cs" Line="13" Column="19" />
+      <File FileName="DataAggregator/Models/Configuration/GaugeConfig.cs" Line="19" Column="24" />
+      <File FileName="DataAggregator/Models/Configuration/TableConfig.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Models/Configuration/PieConfig.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Models/Configuration/VisualizationConfig.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Models/Configuration/BarConfig.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Models/Configuration/GraphConfig.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Models/Configuration/UnitConfig.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Controllers/PageConfigurationController.cs" Line="1" Column="1" />
+      <File FileName="Data/Utils.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Controllers/AggregationController.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Controllers/DERController.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Controllers/ImageController.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Web.config" Line="63" Column="17" />
+      <File FileName="DataAggregator/Models/Configuration/ControlConfig.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Controllers/RealtimeController.cs" Line="29" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/Hjorth/SmartRisoMono/Data/WashingMachineClustering.cs" line="117" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

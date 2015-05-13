@@ -53,6 +53,7 @@
     <Compile Include="ConfigurationModel\Classes\PieConfig.cs" />
     <Compile Include="ConfigurationModel\Classes\TableConfig.cs" />
     <Compile Include="ConfigurationModel\Classes\UnitConfig.cs" />
+    <Compile Include="ConfigurationModel\Classes\ControlConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
