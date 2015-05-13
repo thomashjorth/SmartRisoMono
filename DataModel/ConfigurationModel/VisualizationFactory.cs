@@ -46,7 +46,11 @@ namespace DataModel.ConfigurationModel
 		}
 	}
 
-	public abstract class AbstractAggregationVisualizationFactory 
+	public abstract class AbstractVisualizationFactory{
+		
+	}
+
+	public abstract class AbstractAggregationVisualizationFactory : AbstractVisualizationFactory
 	{
 		public string Host;
 		public int Port;
@@ -54,7 +58,7 @@ namespace DataModel.ConfigurationModel
 		public string Parameters;
 	}
 
-	public abstract class AbstractApplianceVisualizationFactory 
+	public abstract class AbstractApplianceVisualizationFactory  : AbstractVisualizationFactory
 	{
 		public string Host;
 		public int Port;
@@ -78,7 +82,7 @@ namespace DataModel.ConfigurationModel
 	
 	}
 
-	public abstract class AbstractRealtimeVisualizationFactory
+	public abstract class AbstractRealtimeVisualizationFactory : AbstractVisualizationFactory
 	{
 		public string Host;
 		public int Port;
@@ -88,6 +92,7 @@ namespace DataModel.ConfigurationModel
 		public abstract VisualizationConfig CreateUnit (int updateInterval);
 		public abstract VisualizationConfig CreateGraph(RealtimeInterface derInterface, RealtimeData data,int updateInterval,string titleHeading,int yMin, int yMax, int xLength, string unit);
 		public abstract VisualizationConfig CreateGauge(RealtimeInterface derInterface, RealtimeData data,int updateInterval,string titleHeading,int valueMin, int valueMax, string unit);
+		public abstract VisualizationConfig CreateControl (RealtimeInterface deviceInterface);
 	}
 
 	public class RealtimeVisualizationFactory: AbstractRealtimeVisualizationFactory
@@ -114,6 +119,12 @@ namespace DataModel.ConfigurationModel
 			string ID = "g"+ Guid.NewGuid().ToString();
 			Parameters+= "&wsInterface="+deviceInterface+"&resource=get"+data;
 			return new GaugesConfig(new GaugeConfig(Host,Port,Device,Parameters,updateInterval,titleHeading,valueMin,valueMax,ID,unit),null);
+		}
+
+		public override VisualizationConfig CreateControl(RealtimeInterface deviceInterface)
+		{
+			Parameters+= "&wsInterface="+deviceInterface;
+			return new ControlConfig(Host,Port,Device,Parameters);
 		}
 	
 	}

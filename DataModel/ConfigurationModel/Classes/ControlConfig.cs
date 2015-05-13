@@ -1,7 +1,7 @@
 ﻿using System;
-using DataAggregator.Models;
+using DataModel.ConfigurationModel;
 
-namespace DataAggregator.Models.Configuration
+namespace DataModel.ConfigurationModel.Classes
 {
 	public class ControlConfig : VisualizationConfig
 	{

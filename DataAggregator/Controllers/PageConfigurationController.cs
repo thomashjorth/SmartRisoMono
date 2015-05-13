@@ -39,6 +39,7 @@ namespace DataAggregator.Controllers
 			AbstractPageFactory pageFactory = new EquallySized3x3PageFactory ();
 
 			PagesConfig facGenerated = pageFactory.Create3x3Pages(new List<VisualizationConfig> (){ 
+				realtime8080.CreateControl(RealtimeInterface.GenericLoadWS),
 				single.CreateGraph (SingleAggregation.AvgActivePower,1000, "Title", -10, 10, 15, "unit"),
 				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,10000, "Title",-10,10,15,"unit"), 
 				multi.CreateBar(MultiAggregation.AllActivePower,10000,"All",-2,2,"unit"),
