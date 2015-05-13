@@ -28,12 +28,8 @@ namespace DataAggregator.Controllers
 			return response;
 		}
 
-		// POST: api/Realtime
-		public void Post([FromBody]string value)
-		{
-		}
-
-		// PUT: api/Realtime/5
+		[AllowAnonymous]
+		[AcceptVerbs("OPTIONS")]
 		public HttpResponseMessage Put(
 			[FromUri] string host, 
 			[FromUri] string port, 
@@ -41,14 +37,14 @@ namespace DataAggregator.Controllers
 			[FromUri] string resource)
 		{
 			using (var client = new HttpClient())    
-			{     
+			{ 
 				client.BaseAddress = new Uri("http://"+host+":"+port+"/");    
 				var r = client.PutAsync(wsInterface+"/"+resource,null).Result;
 				Console.Write (r.StatusCode.ToString());
-				if (r.IsSuccessStatusCode) {    
-					return Request.CreateErrorResponse (r.StatusCode, "");
+				if (r.IsSuccessStatusCode) {
+					return new HttpResponseMessage(HttpStatusCode.OK);
 				} else
-					return Request.CreateResponse (r.StatusCode);
+					return new HttpResponseMessage(HttpStatusCode.InternalServerError);
 			}  
 		}
 	}

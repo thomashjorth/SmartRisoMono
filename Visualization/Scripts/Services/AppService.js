@@ -8,10 +8,12 @@
 			});
 		}
 		this.putData = function(host, port, apiController, params){
-			return $http({
+			alert("http://"+host+":"+port+"/api/"+apiController+"/"+params)
+			var temp = $http({
 				method: "put",
 				url: "http://"+host+":"+port+"/api/"+apiController+"/"+params
 			});
+			return temp;
 		}
 
 	}

@@ -1,6 +1,6 @@
 ﻿VisualizeApp.controller('configController', ['$scope','$interval', '$http', 'AppService', '$route', '$routeParams', '$location', function($scope, $interval, $http, AppService, $route, $routeParams, $location){
     $scope.params = $location.absUrl().split("?");
-    $scope.config = "sd";
+    $scope.config = "undefined";
     if($scope.params.length > 1){
     	$scope.params = $scope.params[1].split("&")
     	$scope.slides = [];
