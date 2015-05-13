@@ -38,7 +38,7 @@ namespace DataAggregator.Controllers
 			
 			AbstractPageFactory pageFactory = new EquallySized3x3PageFactory ();
 
-			PagesConfig facGenerated = pageFactory.Create3x3Pages(new List<VisualizationConfig> (){ 
+			PagesConfig facGenerated = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
 				realtime8080.CreateControl(RealtimeInterface.GenericLoadWS),
 				single.CreateGraph (SingleAggregation.AvgActivePower,1000, "Title", -10, 10, 15, "unit"),
 				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,10000, "Title",-10,10,15,"unit"), 
@@ -64,7 +64,7 @@ namespace DataAggregator.Controllers
 
 			AbstractApplianceVisualizationFactory appliance = VisFac.CreateApplianceVizualizationFactory ("127.0.0.1", 9001);
 
-			PagesConfig washingExample = pageFactory.Create3x3Pages (new List<VisualizationConfig> (){ 
+			PagesConfig washingExample = pageFactory.CreatePages (new List<VisualizationConfig> (){ 
 				
 				appliance.CreatePie(ApplianceData.Count,2000,"Count"),
 				appliance.CreatePie(ApplianceData.PowerCentroid,2000,"Power"),

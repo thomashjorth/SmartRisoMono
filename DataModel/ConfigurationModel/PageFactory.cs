@@ -6,12 +6,12 @@ namespace DataModel.ConfigurationModel
 {
 	public abstract class AbstractPageFactory
 	{
-		public abstract PageConfig Create3x3Page(List<VisualizationConfig> visualizations);
-		public abstract PagesConfig Create3x3Pages(List<VisualizationConfig> visualizations);
+		public abstract PageConfig CreatePage(List<VisualizationConfig> visualizations);
+		public abstract PagesConfig CreatePages(List<VisualizationConfig> visualizations);
 	}
 
 	public class EquallySized3x3PageFactory : AbstractPageFactory{
-		public override PageConfig Create3x3Page(List<VisualizationConfig> visualizations)
+		public override PageConfig CreatePage(List<VisualizationConfig> visualizations)
 		{
 			if (visualizations.Count < 10) {
 				return new PageConfig (visualizations);
@@ -21,7 +21,7 @@ namespace DataModel.ConfigurationModel
 
 		}
 
-		public override PagesConfig Create3x3Pages(List<VisualizationConfig> visualizations)
+		public override PagesConfig CreatePages(List<VisualizationConfig> visualizations)
 		{
 			EquallySized3x3PageFactory factory = new EquallySized3x3PageFactory ();
 			PagesConfig pages = new PagesConfig(new List<PageConfig>() { });
@@ -32,7 +32,7 @@ namespace DataModel.ConfigurationModel
 				count++;
 				if (count == 9) {
 					pages.Pages.Add(
-						factory.Create3x3Page (temp)
+						factory.CreatePage (temp)
 					);
 					temp = new List<VisualizationConfig> (){ };
 					count = 0;
@@ -41,7 +41,7 @@ namespace DataModel.ConfigurationModel
 			}
 			// The remains
 			pages.Pages.Add (
-				factory.Create3x3Page (temp));
+				factory.CreatePage (temp));
 			return pages;
 		}
 	

@@ -54,6 +54,15 @@
     <Compile Include="ConfigurationModel\Classes\TableConfig.cs" />
     <Compile Include="ConfigurationModel\Classes\UnitConfig.cs" />
     <Compile Include="ConfigurationModel\Classes\ControlConfig.cs" />
+    <Compile Include="ConfigurationModel\ApplianceVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\SAggregationVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\MAggregationVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\RealtimeVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\AbstractRealtimeVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\AbstractApplianceVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\AbstractAggregationVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\AbstractSingleAggregationVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\AbstractMultiAggregationVisualizationFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
