@@ -90,7 +90,7 @@
 
                svg.append("svg:g")
                    .attr("class", "title")
-                   .attr("transform", "translate(100,0)")
+                   .attr("transform", "translate("+width+",0)")
                    .append("text")
                         .attr("y", 6)
                         .attr("dy", ".71em")

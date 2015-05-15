@@ -23,7 +23,7 @@
 
 	public class VisualizationFactory 
 	{
-		
+
 		public SAggregationVisualizationFactory CreateSingleAggregationFactory(string dataAggregatorHost, int dataAggregatorPort)
 		{
 			return new SAggregationVisualizationFactory(dataAggregatorHost,dataAggregatorPort);
@@ -43,15 +43,5 @@
 			return new ApplianceVisualizationFactory (dataAggregatorHost, dataAggregatorPort);
 		}
 	}
-		
-
-
-
-
-
-
-
-
-
 }
 

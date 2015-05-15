@@ -6,7 +6,7 @@ namespace DataModel.ConfigurationModel
 	public class RealtimeVisualizationFactory: AbstractRealtimeVisualizationFactory
 	{
 		public RealtimeVisualizationFactory(string dataAggregatorHost, int dataAggregatorPort, string deviceHost, int devicePort)
-	{
+		{
 			Host = dataAggregatorHost;
 			Port = dataAggregatorPort;
 			Parameters = "?host=" + deviceHost + "&port=" + devicePort; 
@@ -26,7 +26,7 @@ namespace DataModel.ConfigurationModel
 		{
 			string ID = "g"+ Guid.NewGuid().ToString();
 			Parameters+= "&wsInterface="+deviceInterface+"&resource=get"+data;
-			return new GaugesConfig(new GaugeConfig(Host,Port,Device,Parameters,updateInterval,titleHeading,valueMin,valueMax,ID,unit),null);
+			return new GaugesConfig(new GaugeConfig(Host,Port,Device,Parameters,updateInterval,titleHeading,valueMin,valueMax,ID,unit));
 		}
 
 		public override VisualizationConfig CreateControl(RealtimeInterface deviceInterface)
@@ -34,7 +34,7 @@ namespace DataModel.ConfigurationModel
 			Parameters+= "&wsInterface="+deviceInterface;
 			return new ControlConfig(Host,Port,Device,Parameters);
 		}
-	
+
 	}
 
 }

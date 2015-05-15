@@ -220,7 +220,7 @@ VisualizeApp.directive('d3PieDirective', function($parse, $window){
                 svg.select(".title").select("text")
                     .remove();
                 svg.select(".title")
-                   .attr("transform", "translate(10,-10)")
+                   .attr("transform", "translate("+(width*0.4)+",-"+(height*0.4)+")")
                    .append("text")
                         .attr("y", 6)
                         .attr("dy", ".71em")

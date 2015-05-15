@@ -32,6 +32,12 @@ namespace DataModel.ConfigurationModel.Classes
 
 		}
 
+		public GaugesConfig(GaugeConfig g) : base(){
+			VisualizationType = "d3Gauge";
+			Gauges = new List<GaugeConfig>(){g};
+
+		}
+
 	}
 }
 

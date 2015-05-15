@@ -107,7 +107,7 @@
 
                 g.append("g")
                    .attr("class", "title")
-                   .attr("transform", "translate(50,-10)")
+                   .attr("transform", "translate("+(width*0.85)+",-10)")
                    .append("text")
                         .attr("y", 6)
                         .attr("dy", ".71em")
