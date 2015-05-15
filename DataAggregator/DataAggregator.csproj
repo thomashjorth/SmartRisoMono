@@ -184,13 +184,13 @@
   <Target Name="AfterBuild">
   </Target> -->
   <ItemGroup>
+    <None Include="PageConfigurations\washingMachine.json" />
+    <None Include="PageConfigurations\example.json" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\DataModel\DataModel.csproj">
       <Project>{30342368-B74C-4D53-8E84-0E507D8821D3}</Project>
       <Name>DataModel</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="PageConfigurations\washingMachine.json" />
-    <None Include="PageConfigurations\example.json" />
   </ItemGroup>
 </Project>
