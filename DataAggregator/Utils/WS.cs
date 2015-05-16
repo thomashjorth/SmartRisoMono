@@ -3,22 +3,11 @@ using System.Net;
 using System.Xml.Linq;
 using DataModel;
 using System.Globalization;
+using System.Collections.Generic;
+
+
 namespace DataAggregator.Utils
 {
-
-	public enum GenericLoadWSGET { getNodeConfiguration, getActiveOperatingMode, getActivePSchedules, 
-		getActivePower, getActiveQSchedules, getAvailableOperatingModes, getAvailableSchedules, 
-		getConstantP, getConstantQ, getFrequency, getGPSLocation, getInactivePValue, 
-		getInactiveQValue, getInstantaneous_P_U_Droop, getInstantaneous_P_f_Droop, 
-		getInstantaneous_Q_U_Droop, getInstantaneous_Q_f_Droop, getInstantaneous_U0, 
-		getInstantaneous_f0, getInterphaseVoltages, getLoadHealth, getLoadLogicalNameplate, 
-		getLoadName, getLoadPhysicalNameplate, getPAutocorrelation, getPMean, getPResponseTime, 
-		getPStdDeviation, getPStep, getP_U_Characteristics, getP_f_Characteristics, getPhaseCurrents, 
-		getQAutocorrelation, getQMean, getQResponseTime, getQStdDeviation, getQStep, 
-		getQ_U_Characteristics, getQ_f_Characteristics, getRatedP, getRatedQ, getReactivePower, 
-		isPControllable, isPStepped, isSchedulePaused, isQControllable, isQStepped, isReactiveLoad, 
-		isResistiveLoad, isScheduleExecuting, hasFFeedback, hasPFeedback, hasQFeedback, hasUFeedback, 
-		isLoadOn, hasFan, isFanRunning, getTemperature, hasTemperatureMeasurement };
 
 	public enum GenericPriceWSGET { getCurrentPrice,getDailyPriceAverage,getEnergyUnit,getMonetaryUnit,getScriptName,getUpdateInterval };
 
@@ -31,25 +20,82 @@ namespace DataAggregator.Utils
 	{ 
 
 		public static string GetCompositeMeasurement(string Interface, string function, string hostname, string port){
-			var compositeM = convertXMLToComposite (Interface, function, hostname, port);
+			var compositeM = convertXMLToCompositeMeasurement (Interface, function, hostname, port);
 			if (compositeM == null)
 				return "NAN";
 			return Newtonsoft.Json.JsonConvert.SerializeObject (compositeM);
-
 		}
 
-		public static CompositeMeasurement convertXMLToComposite(string Interface, string function, string hostname, string port){
+		public static string GetCompositeMeasurementList(string Interface, string function, string hostname, string port){
+			var compositeM = convertXMLToCompositeMeasurementList (Interface, function, hostname, port)[0];
+			if (compositeM == null)
+				return "NAN";
+			return Newtonsoft.Json.JsonConvert.SerializeObject (compositeM);
+		}
+
+		public static string GetCompositeBoolean(string Interface, string function, string hostname, string port){
+			var compositeM = convertXMLToCompositeBoolean (Interface, function, hostname, port);
+			if (compositeM == null)
+				return "NAN";
+			return Newtonsoft.Json.JsonConvert.SerializeObject (compositeM);
+		}
+
+		public static CompositeMeasurement convertXMLToCompositeMeasurement(string Interface, string function, string hostname, string port){
 			string xml = GetData(Interface,function,hostname,port);
 			if(xml == "NAN")
 				return null;
 			XDocument doc = XDocument.Parse(xml);
 
-			CompositeMeasurement activePower = new CompositeMeasurement ();			
-			activePower.value 			= Math.Round(Double.Parse(
-				doc.Root.Element("value").Value.Replace(',', '.'), 
-				CultureInfo.InvariantCulture
-			),2);
-			System.Diagnostics.Debug.Write (Double.Parse(doc.Root.Element	("value").Value.Substring (0, 4)));
+			CompositeMeasurement activePower = new CompositeMeasurement ();
+			if (doc.Root.Element ("value").Value == "0.0")
+				activePower.value = 0;
+			else {
+				activePower.value = Math.Round (Double.Parse (
+					doc.Root.Element ("value").Value.Replace (',', '.'), 
+					CultureInfo.InvariantCulture
+				), 2);
+			}
+			activePower.timestampMicros = long.Parse(doc.Root.Element	("timestampMicros").Value);
+			activePower.timePrecision 	= short.Parse(doc.Root.Element	("timePrecision").Value);
+			activePower.quality 		= byte.Parse(doc.Root.Element	("quality").Value);
+			activePower.validity 		= byte.Parse(doc.Root.Element	("validity").Value);
+			activePower.source 			= byte.Parse(doc.Root.Element	("source").Value);
+			return activePower;
+		}
+
+		public static List<CompositeMeasurement> convertXMLToCompositeMeasurementList(string Interface, string function, string hostname, string port){
+			string xml = GetData(Interface,function,hostname,port);
+			if(xml == "NAN")
+				return null;
+			XDocument document = XDocument.Parse(xml);
+			List<CompositeMeasurement> cmList = new List<CompositeMeasurement> ();
+			foreach(XElement element in document.Root.Elements()){
+				var doc = XDocument.Parse(element.ToString ());
+				System.Diagnostics.Debug.WriteLine (element.Document.ToString());
+				CompositeMeasurement cm = new CompositeMeasurement ();
+				cm.value 			= Math.Round(Double.Parse(
+					doc.Root.Element("value").Value.Replace(',', '.'), 
+					CultureInfo.InvariantCulture
+				),3);
+				System.Diagnostics.Debug.Write (Double.Parse(doc.Root.Element	("value").Value.Substring (0, 4)));
+				cm.timestampMicros = long.Parse(doc.Root.Element	("timestampMicros").Value);
+				cm.timePrecision 	= short.Parse(doc.Root.Element	("timePrecision").Value);
+				cm.quality 		= byte.Parse(doc.Root.Element	("quality").Value);
+				cm.validity 		= byte.Parse(doc.Root.Element	("validity").Value);
+				cm.source 			= byte.Parse(doc.Root.Element	("source").Value);
+				cmList.Add (cm);
+			}
+			return cmList;
+		}
+
+		public static CompositeBoolean convertXMLToCompositeBoolean(string Interface, string function, string hostname, string port){
+			string xml = GetData(Interface,function,hostname,port);
+			if(xml == "NAN")
+				return null;
+			XDocument doc = XDocument.Parse(xml);
+
+			CompositeBoolean activePower = new CompositeBoolean ();			
+			activePower.value 			= doc.Root.Element("value").Value == "true";
 			activePower.timestampMicros = long.Parse(doc.Root.Element	("timestampMicros").Value);
 			activePower.timePrecision 	= short.Parse(doc.Root.Element	("timePrecision").Value);
 			activePower.quality 		= byte.Parse(doc.Root.Element	("quality").Value);

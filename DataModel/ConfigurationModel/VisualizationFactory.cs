@@ -1,7 +1,7 @@
 ﻿namespace DataModel.ConfigurationModel
 {
 	public enum RealtimeData{
-		ActivePower
+		ActivePower, Frequency, ReactivePower, Temperature, InterphaseVoltages
 	}
 
 	public enum ApplianceData{

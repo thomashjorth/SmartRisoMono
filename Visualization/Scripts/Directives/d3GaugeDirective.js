@@ -1,4 +1,4 @@
-﻿﻿VisualizeApp.directive('d3GaugeDirective', function($parse, $window){
+﻿VisualizeApp.directive('d3GaugeDirective', function($parse, $window){
    return{
       restrict:'AEC',
       template:"<svg></svg>",
@@ -108,10 +108,10 @@
 
 				if (undefined != config.label)
 				{
-					var fontSize = Math.round(config.size / 9);
+					var fontSize = Math.round(config.size / 15);
 					this.body.append("svg:text")
 						.attr("x", config.cx)
-						.attr("y", (config.cy / 2 + fontSize / 2)*2.6)
+						.attr("y", (config.cy / 2 + fontSize / 2)*2.75)
 						.attr("dy", fontSize / 2)
 						.attr("text-anchor", "middle")
 						.text(config.label)
@@ -122,7 +122,7 @@
 
 				if (undefined != data.config.title)
 				{
-					var fontSize = Math.round(config.size / 9);
+					var fontSize = Math.round(config.size / 15);
 					this.body.append("svg:text")
 						.attr("x", config.cx)
 						.attr("y", (config.cy / 2 + fontSize / 2))
@@ -208,13 +208,13 @@
 					.style("stroke", "#666")
 					.style("opacity", 1);
 
-				var fontSize = Math.round(config.size / 10);
+				var fontSize = Math.round(config.size / 15);
 				pointerContainer.selectAll("text")
 					.data([midValue])
 					.enter()
 					.append("svg:text")
 					.attr("x", config.cx)
-					.attr("y", (config.size - config.cy / 4 - fontSize)*0.85)
+					.attr("y", (config.size - config.cy / 4 - fontSize)*0.80)
 					.attr("dy", fontSize / 2)
 					.attr("text-anchor", "middle")
 					.style("font-size", fontSize + "px")

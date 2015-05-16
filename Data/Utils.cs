@@ -9,7 +9,7 @@ namespace Data
 	{
 		public static double[] downloadReading(){
 			
-			CompositeMeasurement activePower = WS.convertXMLToComposite ("GenericLoadWS", "getActivePower", "localhost", "8080");
+			CompositeMeasurement activePower = WS.convertXMLToCompositeMeasurement ("GenericLoadWS", "getActivePower", "localhost", "8080");
 			if (activePower == null) {
 				Console.WriteLine ("Null reading");
 				return new double[] {

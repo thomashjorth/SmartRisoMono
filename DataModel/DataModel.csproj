@@ -63,6 +63,8 @@
     <Compile Include="ConfigurationModel\AbstractAggregationVisualizationFactory.cs" />
     <Compile Include="ConfigurationModel\AbstractSingleAggregationVisualizationFactory.cs" />
     <Compile Include="ConfigurationModel\AbstractMultiAggregationVisualizationFactory.cs" />
+    <Compile Include="CompositeBoolean.cs" />
+    <Compile Include="Delv.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

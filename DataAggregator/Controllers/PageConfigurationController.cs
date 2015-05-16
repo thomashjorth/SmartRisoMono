@@ -38,27 +38,14 @@ namespace DataAggregator.Controllers
 			
 			AbstractPageFactory pageFactory = new EquallySized3x3PageFactory ();
 
-			PagesConfig facGenerated = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
+			PagesConfig loadGenerated = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
+				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",0,100,"P [kW]"),
+				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ReactivePower,1000,"Reactive Power",-13,13,"Q [kVAr]"),
+				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Frequency,1000,"Frequency",45,55,"f [Hz]"),
+				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.InterphaseVoltages,1000,"Interphase Voltages",0,500,"U [V]"),
+				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Temperature,1000,"Temperature",0,300,"T [degC]"),
 				realtime8080.CreateControl(RealtimeInterface.GenericLoadWS),
-				single.CreateGraph (SingleAggregation.AvgActivePower,1000, "Title", -10, 10, 15, "unit"),
-				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,10000, "Title",-10,10,15,"unit"), 
-				multi.CreateBar(MultiAggregation.AllActivePower,10000,"All",-2,2,"unit"),
-				multi.CreatePie(MultiAggregation.AllActivePower,10000,"All"),
-				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,3000,"8080",0,1,"W"),
-				multi.CreateBar(MultiAggregation.AllActivePower,10000,"All",-1,1,"unit"),
-				realtime8080.CreateUnit(3000),
-				realtime8085.CreateUnit(3000),
-				realtime8090.CreateUnit(3000)	,
-				realtime8085.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,3000,"8080",0,1,"W"),
-				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,3000,"8080",0,1,10,"W"),
-				multi.CreateBar(MultiAggregation.AllActivePower,3000,"All Active Power",0,1,"W"),
-				realtime8085.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,3000,"8080",0,1,10,"W"),
-				realtime8085.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,3000,"8080",0,1,"W"),
-				realtime8090.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,3000,"8080",0,1,"W"),
-				realtime8080.CreateUnit(3000),
-				realtime8085.CreateUnit(3000),
-				realtime8090.CreateUnit(3000),
-				multi.CreatePie(MultiAggregation.AllActivePower,3000,"All Active Power")
+				realtime8080.CreateUnit(30000)
 
 			});
 
@@ -97,8 +84,8 @@ namespace DataAggregator.Controllers
 				}catch{
 					response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
-					facGenerated
-					//  washingExample
+					//loadGenerated
+					  washingExample
 					)
 					);
 				}
