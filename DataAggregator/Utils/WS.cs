@@ -31,9 +31,17 @@ namespace DataAggregator.Utils
 	{ 
 
 		public static string GetCompositeMeasurement(string Interface, string function, string hostname, string port){
+			var compositeM = convertXMLToComposite (Interface, function, hostname, port);
+			if (compositeM == null)
+				return "NAN";
+			return Newtonsoft.Json.JsonConvert.SerializeObject (compositeM);
+
+		}
+
+		public static CompositeMeasurement convertXMLToComposite(string Interface, string function, string hostname, string port){
 			string xml = GetData(Interface,function,hostname,port);
 			if(xml == "NAN")
-				return xml;
+				return null;
 			XDocument doc = XDocument.Parse(xml);
 
 			CompositeMeasurement activePower = new CompositeMeasurement ();			
@@ -47,8 +55,7 @@ namespace DataAggregator.Utils
 			activePower.quality 		= byte.Parse(doc.Root.Element	("quality").Value);
 			activePower.validity 		= byte.Parse(doc.Root.Element	("validity").Value);
 			activePower.source 			= byte.Parse(doc.Root.Element	("source").Value);
-			return Newtonsoft.Json.JsonConvert.SerializeObject (activePower);
-
+			return activePower;
 		}
 
 		public static string GetString(string Interface, string function, string hostname, string port){

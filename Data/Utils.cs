@@ -10,17 +10,13 @@ namespace Data
 		public static double[] downloadReading(){
 			string url = "http://localhost:8080/GenericLoadWS/getActivePower";
 			string xml;
-			using (var webClient = new WebClient ()) {
-				try {
-					xml = webClient.DownloadString (url);
-					return new double[] {
-						WS.ParseXmlCompositeMeasurement (xml).timestampMicros,
-						WS.ParseXmlCompositeMeasurement (xml).value
-					}; 
-				} catch {
-					return new double[]{ };
-				}
-			}
+
+			var activePower = WS.convertXMLToComposite ("GeneriLoadWS", "getActivePower", "localhost", "8080");
+
+			return new double[] {
+				activePower.timestampMicros,
+				activePower.value
+			}; 
 		}
 			public static double[][] readCSV(string CSVFilePathName ){
 			string[] Lines = File.ReadAllLines(CSVFilePathName);
