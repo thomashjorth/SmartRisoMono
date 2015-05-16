@@ -6,26 +6,27 @@ namespace DataModel.ConfigurationModel
 	public class ApplianceVisualizationFactory: AbstractApplianceVisualizationFactory
 	{
 		private string Parameters(ApplianceData data){
+			string method = "Get/";
 			switch (data) {
 			case ApplianceData.Count:
-				return "?id=Program&attribute=Count";
+				return method+"?id=Program&attribute=Count";
 	
 			case ApplianceData.Discovered:
-				return  "?id=Program&attribute=Discovered";
+				return  method+"?id=Program&attribute=Discovered";
 		
 			case ApplianceData.EnergyCentroid:
-				return  "?id=Program&attribute=EnergyCentroid";
+				return  method+"?id=Program&attribute=EnergyCentroid";
 		
 			case ApplianceData.PowerCentroid:
-				return  "?id=Program&attribute=PowerCentroid";
+				return  method+"?id=Program&attribute=PowerCentroid";
 			
 			case ApplianceData.Score:
-				return  "?id=Score&attribute=ALL";
+				return  method+"?id=Score&attribute=ALL";
 			
 			case ApplianceData.AEC:
-				return  "?id=AEC&attribute=ALL";
+				return  method+"?id=AEC&attribute=ALL";
 				default:
-				return "NAN";
+			return "NAN";
 			}
 		} 
 		public ApplianceVisualizationFactory(string dataAggregatorHost, int dataAggregatorPort){

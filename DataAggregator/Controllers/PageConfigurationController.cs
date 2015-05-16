@@ -84,8 +84,8 @@ namespace DataAggregator.Controllers
 				}catch{
 					response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
-					//loadGenerated
-					  washingExample
+					loadGenerated
+					//  washingExample
 					)
 					);
 				}

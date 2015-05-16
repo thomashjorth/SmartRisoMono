@@ -9,7 +9,7 @@ namespace DataAggregator.Controllers
 	public class RealtimeController : ApiController
 	{
 		// GET: api/Realtime/5
-		public HttpResponseMessage Get(
+		public HttpResponseMessage GetCompositeMeasurement(
 			[FromUri] string host, 
 			[FromUri] string port, 
 			[FromUri] string wsInterface, 
@@ -24,6 +24,24 @@ namespace DataAggregator.Controllers
 				data = WS.GetCompositeMeasurementList (wsInterface, resource, host, port);
 			else
 				data = WS.GetCompositeMeasurement (wsInterface, resource, host, port);
+			response = Request.CreateResponse(HttpStatusCode.Created,data);
+			//Double.Parse (Utils.WS.DownloadXML (id,"localhost","8085"))));
+			response.Headers.Add("Access-Control-Allow-Origin", "*");
+			response.Headers.Add("Access-Control-Allow-Methods", "GET");
+			return response;
+		}
+
+		public HttpResponseMessage GetCompositeBoolean(
+			[FromUri] string host, 
+			[FromUri] string port, 
+			[FromUri] string wsInterface, 
+			[FromUri] string resource)
+		{
+			HttpResponseMessage response;
+			/* Example use
+			 * http://127.0.0.1:9001/api/Realtime/?host=localhost&port=8080&wsInterface=GenericLoadWS&resource=getActivePower
+			*/
+			string data = WS.GetCompositeBoolean (wsInterface, resource, host, port);
 			response = Request.CreateResponse(HttpStatusCode.Created,data);
 			//Double.Parse (Utils.WS.DownloadXML (id,"localhost","8085"))));
 			response.Headers.Add("Access-Control-Allow-Origin", "*");

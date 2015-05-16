@@ -2,7 +2,7 @@
   <div id="unit" class="unit unit" ng-init="initialize()">
         <p>
       {{Der.Interface}} - {{Der.Hostname}} : {{Der.Port}}<br>
-      <img class="derImg" src="http://{{dataHost}}:{{dataPort}}/api/Image/{{Der.Interface}}">
+      <img class="derImg" src="http://{{dataHost}}:{{dataPort}}/api/Image/Get/{{Der.Interface}}">
       <div class="interfaces">
         <div ng-repeat="app in Der.Apps" class="status">
           <div class="state green" ng-if="app.Status" fill="green" ></div>

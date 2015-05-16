@@ -17,7 +17,7 @@
 
     $scope.dataHost = "localhost";
     $scope.dataPort = "9001";
-    $scope.controller = "PageConfiguration";
+    $scope.controller = "PageConfiguration/Get";
     $scope.current = 0;
     $scope.paused = false;
     AppService.getData($scope.dataHost,$scope.dataPort,$scope.controller,$scope.config)

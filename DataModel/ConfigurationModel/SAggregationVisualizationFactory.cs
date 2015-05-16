@@ -13,7 +13,7 @@ namespace DataModel.ConfigurationModel
 
 		public override VisualizationConfig CreateGraph( SingleAggregation data,int updateInterval,string titleHeading,int yMin, int yMax, int xLength, string unit)
 		{
-			Parameters = data.ToString();
+			Parameters = "Get/"+data.ToString();
 			return new GraphConfig (Host, Port, Device, Parameters, updateInterval, titleHeading, yMin, yMax, xLength, unit);
 		}
 		// Todo implement rest of Create functions.
