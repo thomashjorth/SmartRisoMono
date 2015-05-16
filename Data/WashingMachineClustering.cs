@@ -22,17 +22,13 @@ namespace Data
 			
 			while (!_shouldStop)
 			{
-				//Thread.Sleep (30000);
+				Console.WriteLine ("New Classification in 60 s");
+				Thread.Sleep (60000);
 				int numberOfPrograms = 4;
-				try{
-				string[] Lines = File.ReadAllLines(homePath+"/DataAggregatorData/WashingMachine/settings.csv");
-					 numberOfPrograms = int.Parse(Lines[0].Split(new char[] { ';' })[1]);
-				}catch(Exception e){
-					Console.WriteLine (e.ToString());
-				}
+
 				
 				ApplianceClustering (numberOfPrograms);
-				Thread.Sleep (60000);
+
 			}
 			Console.WriteLine("Collection Stopped");
 		}
@@ -151,7 +147,7 @@ namespace Data
 				if (currentClass != kmean.Clusters.Nearest (powerInput [p])) {
 					currentClass = kmean.Clusters.Nearest (powerInput [p]);
 					res0 += currentClass + "; " + duration + "; " + powerForDuration / 1000 / 60 / 60 / 60 + " " + epoch.AddSeconds (timeConcat [p] / 1000) + " " + TimeSpan.FromSeconds (duration) + "\n";
-					if (duration > 5) {
+					if (duration > 2) {
 						preparedData.Add (new double[]{ powerForDuration / duration, powerForDuration });
 						discoveredCycles.Add(new DoubleLabel(epoch.AddSeconds (timeConcat [p] / 1000).ToString(),"Standby"));
 					}

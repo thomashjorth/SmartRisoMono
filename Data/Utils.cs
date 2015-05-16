@@ -2,17 +2,19 @@
 using System.IO;
 using System.Net;
 using DataAggregator.Utils;
-
+using DataModel;
 namespace Data
 {
 	public static class Utils
 	{
 		public static double[] downloadReading(){
-			string url = "http://localhost:8080/GenericLoadWS/getActivePower";
-			string xml;
-
-			var activePower = WS.convertXMLToComposite ("GeneriLoadWS", "getActivePower", "localhost", "8080");
-
+			
+			CompositeMeasurement activePower = WS.convertXMLToComposite ("GenericLoadWS", "getActivePower", "localhost", "8080");
+			if (activePower == null) {
+				Console.WriteLine ("Null reading");
+				return new double[] {
+				}; 
+			}
 			return new double[] {
 				activePower.timestampMicros,
 				activePower.value

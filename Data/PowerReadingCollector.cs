@@ -43,8 +43,10 @@ namespace Data
 			int count = 0;
 			while (!_shouldStop)
 			{
+				
 				double[] readingDl = Utils.downloadReading ();
-				if (readingDl.Length != 0) {
+
+				if (readingDl!=null && readingDl.Length != 0) {
 					sb.AppendLine (readingDl [0] / 1000 + ";" + readingDl [1]); 
 				}		
 					Thread.Sleep(1000);
@@ -56,7 +58,7 @@ namespace Data
 					}
 
 
-			}
+				}
 			Console.WriteLine("Collection Stopped");
 		}
 		public void RequestStop()
