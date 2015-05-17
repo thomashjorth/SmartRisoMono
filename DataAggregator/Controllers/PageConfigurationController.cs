@@ -28,7 +28,7 @@ namespace DataAggregator.Controllers
 				VisFac.CreateSingleAggregationFactory ("127.0.0.1", 9001);
 
 			RealtimeVisualizationFactory realtime8080 = 
-				VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8080);
+				VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"192.168.0.101", 8080);
 			
 			RealtimeVisualizationFactory realtime8085 = 
 				VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8085);
@@ -39,11 +39,16 @@ namespace DataAggregator.Controllers
 			AbstractPageFactory pageFactory = new EquallySized3x3PageFactory ();
 
 			PagesConfig loadGenerated = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
-				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",0,100,"P [kW]"),
-				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ReactivePower,1000,"Reactive Power",-13,13,"Q [kVAr]"),
-				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Frequency,1000,"Frequency",45,55,"f [Hz]"),
-				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.InterphaseVoltages,1000,"Interphase Voltages",0,500,"U [V]"),
-				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Temperature,1000,"Temperature",0,300,"T [degC]"),
+				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",0,100,"P [kW]",
+					new double[,]{{0,80}},null,new double[,]{{80,100}}),
+				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ReactivePower,1000,"Reactive Power",-13,13,"Q [kVAr]",
+					new double[,]{{-10,10}},null,new double[,]{{-13,-10},{10,13}}),
+				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Frequency,1000,"Frequency",45,55,"f [Hz]",
+					new double[,]{{47.5,52.5}},null,new double[,]{{45.0,47.5},{52.5,55}}),
+				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.InterphaseVoltages,1000,"Interphase Voltages",0,500,"U [V]",
+					new double[,]{{360,440}},null,new double[,]{{0,360},{440,500}}),
+				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Temperature,1000,"Temperature",0,300,"T [degC]",
+					new double[,]{{0.0,100}},new double[,]{{100,150}},new double[,]{{150,300}}),
 				realtime8080.CreateControl(RealtimeInterface.GenericLoadWS),
 				realtime8080.CreateUnit(30000)
 
@@ -61,8 +66,8 @@ namespace DataAggregator.Controllers
 				appliance.CreateBar(ApplianceData.Score, 2000,"Score",0,100,""),
 				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,2000,"Active Power",-1,1,15,"mW"), 
 				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,2000,"Active Power",-1,1,7200,"mW"),
-				appliance.CreateTable(ApplianceData.Discovered, 2000,"Discovered Programs"),
-				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,2000,"test",-1,1,"W")
+				appliance.CreateTable(ApplianceData.Discovered, 2000,"Discovered Programs")
+				//realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,2000,"test",-1,1,"W")
 				}
 				
 

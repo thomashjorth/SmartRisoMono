@@ -9,15 +9,21 @@ namespace DataModel.ConfigurationModel.Classes
 		public double ValueMax;
 		public string ID, Unit;
 		public string TitleHeading;
+		public double[,] Green;
+		public double[,] Yellow;
+		public double[,] Red;
 
 		public GaugeConfig (string host, int port, string device, string parameters, int updateIterval, string titleHeading, 
-			double valueMin, double valueMax, string id, string unit) : base(host, port, device, parameters, updateIterval)
+			double valueMin, double valueMax, string id, string unit, double[,] green, double[,] yellow, double[,] red) : base(host, port, device, parameters, updateIterval)
 		{
 			TitleHeading = titleHeading;
 			ID = id;
 			ValueMin = valueMin;
 			ValueMax = valueMax;
 			Unit = unit;
+			Green = green;
+			Yellow = yellow;
+			Red = red;
 		}
 
 	}

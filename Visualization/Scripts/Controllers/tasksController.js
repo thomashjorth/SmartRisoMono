@@ -25,7 +25,7 @@ VisualizeApp.controller('tasksController', ['$scope','$interval', '$http', 'AppS
 
 	$scope.startUnit = function () {
 		AppService.putData($scope.init.Host,$scope.init.Port,$scope.init.Device,"Put/"+$scope.params+ "startLoad")
-			.error(function (error) {
+			.success(function (res) {
 			AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,"GetCompositeBoolean/"+$scope.params+ "isFanRunning")
 				.success(function (response){
 					var result = JSON.parse(response)
@@ -48,7 +48,7 @@ VisualizeApp.controller('tasksController', ['$scope','$interval', '$http', 'AppS
 
 	$scope.stopUnit = function () {
 		AppService.putData($scope.init.Host,$scope.init.Port,$scope.init.Device,"Put/"+$scope.params+"stopLoad")
-			.error(function (error) {
+			.success(function (res) {
 			AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,"GetCompositeBoolean/"+$scope.params+ "isFanRunning")
 				.success(function (response){
 					var result = JSON.parse(response)

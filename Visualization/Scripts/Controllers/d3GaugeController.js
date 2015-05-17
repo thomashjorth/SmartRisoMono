@@ -4,16 +4,15 @@ VisualizeApp.controller('d3GaugeController', ['$scope','$interval', '$http', 'Ap
   	{
         $scope.gauge = $scope.init.Gauges[gauge];
         
-        $scope.data={config: {label: $scope.gauge.Unit, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID, title: $scope.gauge.TitleHeading},
+        $scope.data={config: {label: $scope.gauge.Unit, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID, title: $scope.gauge.TitleHeading, green: $scope.gauge.Green, yellow: $scope.gauge.Yellow, red: $scope.gauge.Red},
             CompositeMeasurement: {v: 0,timestamp: $scope.firstTime} };
 
         $scope.Params = $scope.gauge.Params;
-
         $interval(function(){
             var h=Math.floor(Date.now()/1000)-$scope.firstTime;
             AppService.getData($scope.gauge.Host,$scope.gauge.Port,$scope.gauge.Device,$scope.Params)
                 .success(function (response){
-                $scope.data={config: {label: $scope.gauge.Unit, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID, title: $scope.gauge.TitleHeading}, 
+                $scope.data={config: {label: $scope.gauge.Unit, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID, title: $scope.gauge.TitleHeading, green: $scope.gauge.Green, yellow: $scope.gauge.Yellow, red: $scope.gauge.Red}, 
                     CompositeMeasurement: {v: JSON.parse(response).value, timestamp:h} };
 
             });

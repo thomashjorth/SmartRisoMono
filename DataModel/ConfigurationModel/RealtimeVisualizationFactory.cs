@@ -22,11 +22,11 @@ namespace DataModel.ConfigurationModel
 			var p = "GetCompositeMeasurement/"+Parameters+ "&wsInterface="+deviceInterface+"&resource=get"+data;
 			return new GraphConfig (Host, Port, Device, p, updateInterval, titleHeading, yMin, yMax, xLength, unit);
 		}
-		public override VisualizationConfig CreateGauge(RealtimeInterface deviceInterface, RealtimeData data, int updateInterval,string titleHeading,int valueMin, int valueMax, string unit)
+		public override VisualizationConfig CreateGauge(RealtimeInterface deviceInterface, RealtimeData data, int updateInterval,string titleHeading,int valueMin, int valueMax, string unit, double[,] green, double[,] yellow, double[,] red)
 		{
 			string ID = "g"+ Guid.NewGuid().ToString();
 			var p = "GetCompositeMeasurement/"+Parameters+ "&wsInterface="+deviceInterface+"&resource=get"+data;
-			return new GaugesConfig(new GaugeConfig(Host,Port,Device,p,updateInterval,titleHeading,valueMin,valueMax,ID,unit));
+			return new GaugesConfig(new GaugeConfig(Host,Port,Device,p,updateInterval,titleHeading,valueMin,valueMax,ID,unit,green,yellow,red));
 		}
 
 		public override VisualizationConfig CreateControl(RealtimeInterface deviceInterface)

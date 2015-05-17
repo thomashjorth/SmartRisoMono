@@ -3,12 +3,14 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using DataAggregator.Utils;
+using System.Threading.Tasks;
 
 namespace DataAggregator.Controllers
 {
 	public class RealtimeController : ApiController
 	{
 		// GET: api/Realtime/5
+		[HttpGet]
 		public HttpResponseMessage GetCompositeMeasurement(
 			[FromUri] string host, 
 			[FromUri] string port, 
@@ -49,23 +51,23 @@ namespace DataAggregator.Controllers
 			return response;
 		}
 
-		[AllowAnonymous]
+		[HttpPut]
 		[AcceptVerbs("OPTIONS")]
-		public HttpResponseMessage Put(
-			[FromUri] string host, 
-			[FromUri] string port, 
-			[FromUri] string wsInterface, 
-			[FromUri] string resource)
+		public HttpResponseMessage Put([FromUri] string host, [FromUri] string port, [FromUri] string wsInterface, [FromUri] string resource)
 		{
 			using (var client = new HttpClient())    
 			{ 
+				HttpResponseMessage response;
 				client.BaseAddress = new Uri("http://"+host+":"+port+"/");    
 				var r = client.PutAsync(wsInterface+"/"+resource,null).Result;
 				Console.Write (r.StatusCode.ToString());
 				if (r.IsSuccessStatusCode) {
-					return new HttpResponseMessage(HttpStatusCode.OK);
+					response = new HttpResponseMessage (HttpStatusCode.OK);
 				} else
-					return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+					response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+				response.Headers.Add("Access-Control-Allow-Origin", "*");
+				response.Headers.Add("Access-Control-Allow-Methods", "PUT");
+				return response;
 			}  
 		}
 	}

@@ -31,9 +31,11 @@
 						label: data.config.label,
 						min: data.config.min,
 						max: data.config.max,
-						minorTicks: 5
+						minorTicks: 5,
+						green: data.config.green,
+						yellow: data.config.yellow,
+						red: data.config.red
 					}
-
 					configure(config);
 					render();
 				}
@@ -56,6 +58,14 @@
 				this.config.majorTicks = configuration.majorTicks || 5;
 				this.config.minorTicks = configuration.minorTicks || 2;
 
+				//this.config.green = [[0,100]];
+				//this.config.yellow = [[100,150]];
+				//this.config.red = [[150,300]];
+
+				//this.config.range= this.config.max-this.config.min;
+				//this.config.yellowZones = [{ from: config.min + range*0.75, to: config.min + range*0.9 }];
+				//this.config.redZones = [{ from: config.min + range*0.9, to: config.min + range }];
+
 				this.config.greenColor 	= configuration.greenColor || "#109618";
 				this.config.yellowColor = configuration.yellowColor || "#FF9900";
 				this.config.redColor 	= configuration.redColor || "#DC3912";
@@ -65,6 +75,7 @@
          
 			function render()
 			{
+
 				this.body = svg
 					.attr("class", data.config.PlaceHolder)
 					.attr("width", config.size)
@@ -91,19 +102,19 @@
 					.style("stroke", "#e0e0e0")
 					.style("stroke-width", "2px");
 
-				for (var index in config.greenZones)
+				for (var index in config.green)
 				{
-					drawBand(config.greenZones[index].from, config.greenZones[index].to, self.config.greenColor);
+					drawBand(config.green[index][0], config.green[index][1], self.config.greenColor);
 				}
 
-				for (var index in config.yellowZones)
+				for (var index in config.yellow)
 				{
-					drawBand(config.yellowZones[index].from, config.yellowZones[index].to, self.config.yellowColor);
+					drawBand(config.yellow[index][0], config.yellow[index][1], self.config.yellowColor);
 				}
 
-				for (var index in config.redZones)
+				for (var index in config.red)
 				{
-					drawBand(config.redZones[index].from, config.redZones[index].to, self.config.redColor);
+					drawBand(config.red[index][0], config.red[index][1], self.config.redColor);
 				}
 
 				if (undefined != config.label)
@@ -168,6 +179,46 @@
 					{
 						var point = valueToPoint(major, 0.63);
 
+						this.body.append("svg:text")
+							.attr("x", point.x)
+							.attr("y", point.y)
+							.attr("dy", fontSize / 3)
+							.attr("text-anchor", major == config.min ? "start" : "end")
+							.attr("text-alignment", "center")
+							.text(major)
+							.style("font-size", fontSize + "px")
+							.style("fill", "#333")
+							.style("stroke-width", "0px");
+					}
+					else if(major == majorDelta*2+config.min){
+						var point = valueToPoint(major, 0.60);
+						var didgits=(""+major).length;
+						this.body.append("svg:text")
+							.attr("x", point.x+7.5*(didgits/3))
+							.attr("y", point.y)
+							.attr("dy", fontSize / 3)
+							.attr("text-anchor", major == config.min ? "start" : "end")
+							.text(major)
+							.style("font-size", fontSize + "px")
+							.style("fill", "#333")
+							.style("stroke-width", "0px");
+					}
+					else if(major == majorDelta+config.min){
+						var point = valueToPoint(major, 0.63);
+						var didgits=(""+major).replace(".","").length;
+						alert(didgits)
+						this.body.append("svg:text")
+							.attr("x", point.x+didgits*5)
+							.attr("y", point.y)
+							.attr("dy", fontSize / 3)
+							.attr("text-anchor", major == config.min ? "start" : "end")
+							.text(major)
+							.style("font-size", fontSize + "px")
+							.style("fill", "#333")
+							.style("stroke-width", "0px");
+					}
+					else{
+						var point = valueToPoint(major, 0.63);
 						this.body.append("svg:text")
 							.attr("x", point.x)
 							.attr("y", point.y)
@@ -257,7 +308,7 @@
 					.attr("d", d3.svg.arc()
 					.startAngle(valueToRadians(start))
 					.endAngle(valueToRadians(end))
-					.innerRadius(0.65 * config.raduis)
+					.innerRadius(0.70 * config.raduis)
 					.outerRadius(0.85 * config.raduis))
 					.attr("transform", function() { return "translate(" + config.cx + ", " + config.cy + ") rotate(270)" });
 			}
