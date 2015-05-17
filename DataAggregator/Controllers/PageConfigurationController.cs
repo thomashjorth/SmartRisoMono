@@ -49,9 +49,23 @@ namespace DataAggregator.Controllers
 					new double[,]{{360,440}},null,new double[,]{{0,360},{440,500}}),
 				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Temperature,1000,"Temperature",0,300,"T [degC]",
 					new double[,]{{0.0,100}},new double[,]{{100,150}},new double[,]{{150,300}}),
-				realtime8080.CreateControl(RealtimeInterface.GenericLoadWS),
+				realtime8085.CreateControl(RealtimeInterface.GaiaWindTurbineWS,"dumploadControl"),
 				realtime8080.CreateUnit(30000)
+			});
 
+			PagesConfig gaiaGenerated = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
+				realtime8085.CreateGauge(RealtimeInterface.GaiaWindTurbineWS, RealtimeData.InterphaseVoltages,1000,"Interphase Voltages",0,500,"U [V]",
+					new double[,]{{350,450}},null,new double[,]{{0,350},{450,500}}),
+				realtime8085.CreateGauge(RealtimeInterface.GaiaWindTurbineWS, RealtimeData.ActivePower,1000,"Active Power",-5,20,"P [kW]",
+					new double[,]{{0,11}},new double[,]{{-5,0},{11,15}},new double[,]{{15,20}}),
+				realtime8085.CreateGauge(RealtimeInterface.GaiaWindTurbineWS, RealtimeData.WindspeedOutsideNacelle,1000,"Windspeed",0,40,"v [m/s]",
+					new double[,]{{0,25}},new double[,]{{25,39}},new double[,]{{39,40}}),
+				realtime8085.CreateGauge(RealtimeInterface.GaiaWindTurbineWS, RealtimeData.RotorRPM,1000,"Rotor RPM",0,100,"RPM0 [1/min]",
+					new double[,]{{0,62}},new double[,]{{62,70}},new double[,]{{70,100}}),
+				realtime8085.CreateGauge(RealtimeInterface.GaiaWindTurbineWS, RealtimeData.GeneratorRPM,1000,"Generator RPM",0,1200,"RPM1 [1/min]",
+					new double[,]{{0,1040}},new double[,]{{1040,1100}},new double[,]{{1100,1200}}),
+				realtime8085.CreateControl(RealtimeInterface.GaiaWindTurbineWS,"gaiaControl"),
+				realtime8085.CreateUnit(30000)
 			});
 
 			AbstractApplianceVisualizationFactory appliance = VisFac.CreateApplianceVizualizationFactory ("127.0.0.1", 9001);
@@ -89,7 +103,8 @@ namespace DataAggregator.Controllers
 				}catch{
 					response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
-					loadGenerated
+						gaiaGenerated
+					//	loadGenerated
 					//  washingExample
 					)
 					);

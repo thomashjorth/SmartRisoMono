@@ -29,10 +29,10 @@ namespace DataModel.ConfigurationModel
 			return new GaugesConfig(new GaugeConfig(Host,Port,Device,p,updateInterval,titleHeading,valueMin,valueMax,ID,unit,green,yellow,red));
 		}
 
-		public override VisualizationConfig CreateControl(RealtimeInterface deviceInterface)
+		public override VisualizationConfig CreateControl(RealtimeInterface deviceInterface, string visualizationType)
 		{
 			var p = Parameters+ "&wsInterface="+deviceInterface;
-			return new ControlConfig(Host,Port,Device,p);
+			return new ControlConfig(Host,Port,Device,p,visualizationType);
 		}
 
 	}

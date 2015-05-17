@@ -1,7 +1,8 @@
 ﻿namespace DataModel.ConfigurationModel
 {
 	public enum RealtimeData{
-		ActivePower, Frequency, ReactivePower, Temperature, InterphaseVoltages
+		ActivePower, Frequency, ReactivePower, Temperature, InterphaseVoltages, 
+		WindspeedOutsideNacelle, RotorRPM, GeneratorRPM
 	}
 
 	public enum ApplianceData{
@@ -9,7 +10,7 @@
 	}
 
 	public enum RealtimeInterface{
-		GenericLoadWS
+		GenericLoadWS, GaiaWindTurbineWS
 	}
 
 	public enum SingleAggregation{

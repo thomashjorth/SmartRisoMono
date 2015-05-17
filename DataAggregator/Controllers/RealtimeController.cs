@@ -33,6 +33,7 @@ namespace DataAggregator.Controllers
 			return response;
 		}
 
+		[HttpGet]
 		public HttpResponseMessage GetCompositeBoolean(
 			[FromUri] string host, 
 			[FromUri] string port, 
@@ -40,10 +41,23 @@ namespace DataAggregator.Controllers
 			[FromUri] string resource)
 		{
 			HttpResponseMessage response;
-			/* Example use
-			 * http://127.0.0.1:9001/api/Realtime/?host=localhost&port=8080&wsInterface=GenericLoadWS&resource=getActivePower
-			*/
 			string data = WS.GetCompositeBoolean (wsInterface, resource, host, port);
+			response = Request.CreateResponse(HttpStatusCode.Created,data);
+			//Double.Parse (Utils.WS.DownloadXML (id,"localhost","8085"))));
+			response.Headers.Add("Access-Control-Allow-Origin", "*");
+			response.Headers.Add("Access-Control-Allow-Methods", "GET");
+			return response;
+		}
+
+		[HttpGet]
+		public HttpResponseMessage GetStatus(
+			[FromUri] string host, 
+			[FromUri] string port, 
+			[FromUri] string wsInterface, 
+			[FromUri] string resource)
+		{
+			HttpResponseMessage response;
+			string data = WS.GetStatus (wsInterface, resource, host, port);
 			response = Request.CreateResponse(HttpStatusCode.Created,data);
 			//Double.Parse (Utils.WS.DownloadXML (id,"localhost","8085"))));
 			response.Headers.Add("Access-Control-Allow-Origin", "*");

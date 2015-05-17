@@ -11,6 +11,10 @@ namespace DataModel.ConfigurationModel
 		{
 			Pages = pages;
 		}
+
+		public void addPagesConfig(PagesConfig pages){
+			Pages.AddRange (pages.Pages);
+		}
 	}
 }
 

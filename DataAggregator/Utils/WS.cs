@@ -34,10 +34,17 @@ namespace DataAggregator.Utils
 		}
 
 		public static string GetCompositeBoolean(string Interface, string function, string hostname, string port){
-			var compositeM = convertXMLToCompositeBoolean (Interface, function, hostname, port);
-			if (compositeM == null)
+			var compositeB = convertXMLToCompositeBoolean (Interface, function, hostname, port);
+			if (compositeB == null)
 				return "NAN";
-			return Newtonsoft.Json.JsonConvert.SerializeObject (compositeM);
+			return Newtonsoft.Json.JsonConvert.SerializeObject (compositeB);
+		}
+
+		public static string GetStatus(string Interface, string function, string hostname, string port){
+			var status = convertXMLToStatus (Interface, function, hostname, port);
+			if (status == null)
+				return "NAN";
+			return Newtonsoft.Json.JsonConvert.SerializeObject (status);
 		}
 
 		public static CompositeMeasurement convertXMLToCompositeMeasurement(string Interface, string function, string hostname, string port){
@@ -76,7 +83,7 @@ namespace DataAggregator.Utils
 				cm.value 			= Math.Round(Double.Parse(
 					doc.Root.Element("value").Value.Replace(',', '.'), 
 					CultureInfo.InvariantCulture
-				),3);
+				),2);
 				System.Diagnostics.Debug.Write (Double.Parse(doc.Root.Element	("value").Value.Substring (0, 4)));
 				cm.timestampMicros = long.Parse(doc.Root.Element	("timestampMicros").Value);
 				cm.timePrecision 	= short.Parse(doc.Root.Element	("timePrecision").Value);
@@ -94,14 +101,30 @@ namespace DataAggregator.Utils
 				return null;
 			XDocument doc = XDocument.Parse(xml);
 
-			CompositeBoolean activePower = new CompositeBoolean ();			
-			activePower.value 			= doc.Root.Element("value").Value == "true";
-			activePower.timestampMicros = long.Parse(doc.Root.Element	("timestampMicros").Value);
-			activePower.timePrecision 	= short.Parse(doc.Root.Element	("timePrecision").Value);
-			activePower.quality 		= byte.Parse(doc.Root.Element	("quality").Value);
-			activePower.validity 		= byte.Parse(doc.Root.Element	("validity").Value);
-			activePower.source 			= byte.Parse(doc.Root.Element	("source").Value);
-			return activePower;
+			CompositeBoolean boolean = new CompositeBoolean ();			
+			boolean.value 			= doc.Root.Element("value").Value == "true";
+			boolean.timestampMicros = long.Parse(doc.Root.Element	("timestampMicros").Value);
+			boolean.timePrecision 	= short.Parse(doc.Root.Element	("timePrecision").Value);
+			boolean.quality 		= byte.Parse(doc.Root.Element	("quality").Value);
+			boolean.validity 		= byte.Parse(doc.Root.Element	("validity").Value);
+			boolean.source 			= byte.Parse(doc.Root.Element	("source").Value);
+			return boolean;
+		}
+
+		public static Status convertXMLToStatus(string Interface, string function, string hostname, string port){
+			string xml = GetData(Interface,function,hostname,port);
+			if(xml == "NAN")
+				return null;
+			XDocument doc = XDocument.Parse(xml);
+
+			Status status = new Status ();			
+			status.status 			= int.Parse(doc.Root.Element("status").Element("status").Value);
+			status.timestampMicros = long.Parse(doc.Root.Element("status").Element	("timestampMicros").Value);
+			status.timePrecision 	= short.Parse(doc.Root.Element("status").Element	("timePrecision").Value);
+			status.quality 		= byte.Parse(doc.Root.Element("status").Element	("quality").Value);
+			status.validity 		= byte.Parse(doc.Root.Element("status").Element	("validity").Value);
+			status.source 			= byte.Parse(doc.Root.Element("status").Element	("source").Value);
+			return status;
 		}
 
 		public static string GetString(string Interface, string function, string hostname, string port){

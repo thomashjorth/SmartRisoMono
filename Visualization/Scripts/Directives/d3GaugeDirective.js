@@ -206,7 +206,6 @@
 					else if(major == majorDelta+config.min){
 						var point = valueToPoint(major, 0.63);
 						var didgits=(""+major).replace(".","").length;
-						alert(didgits)
 						this.body.append("svg:text")
 							.attr("x", point.x+didgits*5)
 							.attr("y", point.y)
@@ -265,7 +264,7 @@
 					.enter()
 					.append("svg:text")
 					.attr("x", config.cx)
-					.attr("y", (config.size - config.cy / 4 - fontSize)*0.80)
+					.attr("y", (config.size - config.cy / 4 - fontSize)*0.75)
 					.attr("dy", fontSize / 2)
 					.attr("text-anchor", "middle")
 					.style("font-size", fontSize + "px")

@@ -186,6 +186,7 @@
   <ItemGroup>
     <None Include="PageConfigurations\washingMachine.json" />
     <None Include="PageConfigurations\example.json" />
+    <None Include="PageConfigurations\Dumpload.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataModel\DataModel.csproj">

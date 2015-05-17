@@ -2429,7 +2429,9 @@
     <None Include="Views\Visualization\unit.html" />
     <None Include="Views\Visualization\table.html" />
     <None Include="Scripts\Controllers\tableController.js" />
-    <None Include="Views\Visualization\basicControl.html" />
-    <None Include="Scripts\Controllers\tasksController.js" />
+    <None Include="Views\Visualization\dumploadControl.html" />
+    <None Include="Views\Visualization\gaiaControl.html" />
+    <None Include="Scripts\Controllers\gaiaController.js" />
+    <None Include="Scripts\Controllers\dumploadController.js" />
   </ItemGroup>
 </Project>
