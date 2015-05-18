@@ -12,13 +12,9 @@ VisualizeApp.controller('gaiaController', ['$scope','$interval', '$http', 'AppSe
 		AppService.putData($scope.init.Host,$scope.init.Port,$scope.init.Device,"Put/"+$scope.params+ command)
 			.success(function (res) {	
 				$scope.messages();
-		});
-	}
-
-	$scope.stopUnit = function () {
-		AppService.putData($scope.init.Host,$scope.init.Port,$scope.init.Device,"Put/"+$scope.params+command)
-			.success(function (res) {
-				$scope.messages();
+		})
+		.error(function (error) {
+			$scope.error = "Error using " + command;
 		});
 	}
 

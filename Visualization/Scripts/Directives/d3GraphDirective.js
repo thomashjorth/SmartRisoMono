@@ -90,12 +90,22 @@
 
                svg.append("svg:g")
                    .attr("class", "title")
-                   .attr("transform", "translate("+width+",0)")
+                   .attr("transform", "translate("+(($('.box').outerHeight()*0.95)*1.92-10)+",0)")
                    .append("text")
                         .attr("y", 6)
                         .attr("dy", ".71em")
                         .style("text-anchor", "end")
                         .text(dataToPlot.config.title);
+
+               svg.append("svg:g")
+                   .attr("class", "data")
+                   .attr("transform", "translate("+(($('.box').outerHeight()*0.95)*1.92-10)+","+height*0.1+")")
+                   .append("text")
+                        .attr("y", 6)
+                        .attr("dy", ".71em")
+                        .style("text-anchor", "end")
+                        .style("font-size", (width*0.025))
+                        .text("AVG: 0.0, MIN: 0.0, MAX 0.0");
 
                svg.append("svg:path")
                    .attr({
@@ -124,6 +134,19 @@
                     if ( i == 0 ) {
                     //this.remove();
                     }});
+
+
+               svg.selectAll(".data").remove();
+
+               svg.append("svg:g")
+                   .attr("class", "data")
+                   .attr("transform", "translate("+(($('.box').outerHeight()*0.95)*1.92-10)+","+height*0.1+")")
+                   .append("text")
+                        .attr("y", 6)
+                        .attr("dy", ".71em")
+                        .style("text-anchor", "end")
+                        .style("font-size", (width*0.025))
+                        .text("AVG: "+Math.round(dataToPlot.statistics.avg * 100) / 100+", MIN: "+dataToPlot.statistics.min+", MAX "+dataToPlot.statistics.max+"");
            }
 
            drawLineChart();

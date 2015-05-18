@@ -28,7 +28,7 @@ namespace DataAggregator.Controllers
 				VisFac.CreateSingleAggregationFactory ("127.0.0.1", 9001);
 
 			RealtimeVisualizationFactory realtime8080 = 
-				VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"192.168.0.101", 8080);
+				VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8080);
 			
 			RealtimeVisualizationFactory realtime8085 = 
 				VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8085);
@@ -49,7 +49,7 @@ namespace DataAggregator.Controllers
 					new double[,]{{360,440}},null,new double[,]{{0,360},{440,500}}),
 				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Temperature,1000,"Temperature",0,300,"T [degC]",
 					new double[,]{{0.0,100}},new double[,]{{100,150}},new double[,]{{150,300}}),
-				realtime8085.CreateControl(RealtimeInterface.GaiaWindTurbineWS,"dumploadControl"),
+				realtime8080.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl"),
 				realtime8080.CreateUnit(30000)
 			});
 
@@ -64,6 +64,7 @@ namespace DataAggregator.Controllers
 					new double[,]{{0,62}},new double[,]{{62,70}},new double[,]{{70,100}}),
 				realtime8085.CreateGauge(RealtimeInterface.GaiaWindTurbineWS, RealtimeData.GeneratorRPM,1000,"Generator RPM",0,1200,"RPM1 [1/min]",
 					new double[,]{{0,1040}},new double[,]{{1040,1100}},new double[,]{{1100,1200}}),
+				realtime8085.CreateGraph(RealtimeInterface.GaiaWindTurbineWS, RealtimeData.InterphaseVoltages,5000,"Interphase Voltages",0,500,12,"U [V]"),
 				realtime8085.CreateControl(RealtimeInterface.GaiaWindTurbineWS,"gaiaControl"),
 				realtime8085.CreateUnit(30000)
 			});
@@ -101,11 +102,12 @@ namespace DataAggregator.Controllers
 					);
 					
 				}catch{
+
+				PagesConfig pages = new PagesConfig (gaiaGenerated.Pages);
+				pages.addPagesConfig (loadGenerated);
 					response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
-						gaiaGenerated
-					//	loadGenerated
-					//  washingExample
+						pages
 					)
 					);
 				}

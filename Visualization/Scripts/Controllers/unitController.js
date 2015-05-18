@@ -1,4 +1,5 @@
 VisualizeApp.controller('unitController', ['$scope','$interval', '$http', 'AppService', function($scope, $interval, $http, AppService){
+    
     $scope.initialize = function()
     {
         $scope.dataHost = $scope.init.Host;
@@ -10,6 +11,7 @@ VisualizeApp.controller('unitController', ['$scope','$interval', '$http', 'AppSe
         AppService.getData($scope.dataHost,$scope.dataPort,$scope.dataAggregation,$scope.dataResource)
             .success(function (response){
                 $scope.Der = JSON.parse(response)
+                $scope.size = (($(".state").height()/100)*75)/$scope.Der.Apps;
                 lastResponse = response;
            });
 

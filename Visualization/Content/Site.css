@@ -127,18 +127,19 @@ float: left;
 .state{
 	border-radius: 40px;
 	width: 20px;
-	height: 20px;
+	height: 10px;
 	border: 1px solid black;
 	display: inline-block;
 }
 .statetext{
 	margin-left: 30px;
-	margin-top: -18px;
-	height: 20px;
+	margin-top: -13px;
+	height: 15px;
+	font-size: 12px;
 	display: inline-block;
 }
 .status{
-	height: 25px;
+	height: 15px;
 }
 .interfaces{
 	height: 75%;

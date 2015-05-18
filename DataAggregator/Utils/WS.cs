@@ -78,7 +78,7 @@ namespace DataAggregator.Utils
 			List<CompositeMeasurement> cmList = new List<CompositeMeasurement> ();
 			foreach(XElement element in document.Root.Elements()){
 				var doc = XDocument.Parse(element.ToString ());
-				System.Diagnostics.Debug.WriteLine (element.Document.ToString());
+
 				CompositeMeasurement cm = new CompositeMeasurement ();
 				cm.value 			= Math.Round(Double.Parse(
 					doc.Root.Element("value").Value.Replace(',', '.'), 

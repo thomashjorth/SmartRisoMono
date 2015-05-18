@@ -11,14 +11,10 @@ VisualizeApp.controller('dumploadController', ['$scope','$interval', '$http', 'A
 		AppService.putData($scope.init.Host,$scope.init.Port,$scope.init.Device,"Put/"+$scope.params+ command)
 			.success(function (res) {	
 				$scope.messages();
-		});
-	}
-
-	$scope.stopUnit = function () {
-		AppService.putData($scope.init.Host,$scope.init.Port,$scope.init.Device,"Put/"+$scope.params+command)
-			.success(function (res) {
-				$scope.messages();
-		});
+			})
+			.error(function (error) {
+				$scope.error = "Error using " + command;
+			});
 	}
 
 
@@ -30,15 +26,21 @@ VisualizeApp.controller('dumploadController', ['$scope','$interval', '$http', 'A
 					$scope.dumpload = "Dumpload is on.";
 				else
 					$scope.dumpload = "Dumpload is off.";
+			})
+			.error(function (error) {
+				$scope.dumpload = "Error checking status of dumpload.";
 			});
 
 		AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,"GetCompositeBoolean/"+$scope.params+ "isLoadOn")
 			.success(function (response){
-			var result = JSON.parse(response)
-			if(result.value)
-				$scope.fan = "Fan is running."
-			else
-				$scope.fan = "Fan is not running."
-		});
+				var result = JSON.parse(response)
+				if(result.value)
+					$scope.fan = "Fan is running."
+				else
+					$scope.fan = "Fan is not running."
+			})
+			.error(function (error) {
+				$scope.fan = "Error checking status of fan.";
+			});
 	}
 }]);
