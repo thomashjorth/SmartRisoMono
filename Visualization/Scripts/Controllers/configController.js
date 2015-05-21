@@ -16,7 +16,7 @@
 	}
 
     $scope.dataHost = "192.168.0.117";
-    $scope.dataPort = "9001";
+    $scope.dataPort = "8080";
     $scope.controller = "PageConfiguration/Get";
     $scope.current = 0;
     $scope.paused = false;
