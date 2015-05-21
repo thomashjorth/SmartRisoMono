@@ -15,7 +15,7 @@
 	    }
 	}
 
-    $scope.dataHost = "localhost";
+    $scope.dataHost = "192.168.0.117";
     $scope.dataPort = "9001";
     $scope.controller = "PageConfiguration/Get";
     $scope.current = 0;
