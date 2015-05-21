@@ -52,7 +52,7 @@ namespace DataAggregator.Controllers
 				response.Headers.Add("Access-Control-Allow-Methods", "GET");
 				return response;
 			} 
-	
+
 			// "AllActivePower"
 			if (id == functions.ElementAt (2)) {
 				var response = Request.CreateResponse (
@@ -78,5 +78,43 @@ namespace DataAggregator.Controllers
 				return response;
 			}
 
+		}
+		[HttpGet]
+		public HttpResponseMessage GetUnitsMerged(
+			[FromUri] string hosts, 
+			[FromUri] string wsInterface, 
+			[FromUri] string resource)
+		{
+			HttpResponseMessage response;
+
+			var units = hosts.Split (';').ToList();
+
+			string data = "NAN";
+			if(units.Count() > 0)
+				data = Newtonsoft.Json.JsonConvert.SerializeObject (UnitMerging.CombineData (units, wsInterface, resource));
+			response = Request.CreateResponse(HttpStatusCode.Created,data);
+
+			response.Headers.Add("Access-Control-Allow-Origin", "*");
+			response.Headers.Add("Access-Control-Allow-Methods", "GET");
+			return response;
+		}
+
+		public HttpResponseMessage GetUnits(
+			[FromUri] string hosts, 
+			[FromUri] string wsInterface, 
+			[FromUri] string resource)
+		{
+			HttpResponseMessage response;
+
+			var units = hosts.Split (';').ToList();
+
+			string data = "NAN";
+			if(units.Count() > 0)
+				data = Newtonsoft.Json.JsonConvert.SerializeObject (UnitMerging.GetData (units, wsInterface, resource));
+			response = Request.CreateResponse(HttpStatusCode.Created,data);
+
+			response.Headers.Add("Access-Control-Allow-Origin", "*");
+			response.Headers.Add("Access-Control-Allow-Methods", "GET");
+			return response;
 		}
 	}}

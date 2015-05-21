@@ -28,13 +28,15 @@ namespace DataAggregator.Controllers
 				VisFac.CreateSingleAggregationFactory ("127.0.0.1", 9001);
 
 			RealtimeVisualizationFactory realtime8080 = 
-				VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8080);
+				//VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8080);
+				VisFac.CreateRealtimeVizualizationFactory ("192.168.0.101", 9001,"192.168.0.101", 8080);
 			
 			RealtimeVisualizationFactory realtime8085 = 
-				VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8085);
+				//VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8085);
+				VisFac.CreateRealtimeVizualizationFactory ("192.168.0.101", 9001,"192.168.0.101", 8085);
 			
 			RealtimeVisualizationFactory realtime8090 = 
-				VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8090);
+				VisFac.CreateRealtimeVizualizationFactory ("192.168.0.101", 9001,"192.168.0.101", 8085);
 			
 			AbstractPageFactory pageFactory = new EquallySized3x3PageFactory ();
 

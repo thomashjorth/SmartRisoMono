@@ -2433,5 +2433,8 @@
     <None Include="Views\Visualization\gaiaControl.html" />
     <None Include="Scripts\Controllers\gaiaController.js" />
     <None Include="Scripts\Controllers\dumploadController.js" />
+    <None Include="Scripts\Directives\d3MultiGraphDirective.js" />
+    <None Include="Scripts\Controllers\d3MultiGraphController.js" />
+    <None Include="Views\Visualization\d3MultiGraph.html" />
   </ItemGroup>
 </Project>

@@ -84,7 +84,7 @@ namespace DataAggregator.Utils
 					doc.Root.Element("value").Value.Replace(',', '.'), 
 					CultureInfo.InvariantCulture
 				),2);
-				System.Diagnostics.Debug.Write (Double.Parse(doc.Root.Element	("value").Value.Substring (0, 4)));
+				//System.Diagnostics.Debug.Write (Double.Parse(doc.Root.Element	("value").Value.Substring (0, 4)));
 				cm.timestampMicros = long.Parse(doc.Root.Element	("timestampMicros").Value);
 				cm.timePrecision 	= short.Parse(doc.Root.Element	("timePrecision").Value);
 				cm.quality 		= byte.Parse(doc.Root.Element	("quality").Value);
@@ -139,7 +139,7 @@ namespace DataAggregator.Utils
 			return Newtonsoft.Json.JsonConvert.SerializeObject (xmlDouble);
 		}
 
-		private static string GetData(string Interface, string function, string hostname, string port){
+		public static string GetData(string Interface, string function, string hostname, string port){
 			string url = "http://" + hostname + ":" + port + "/" + Interface + "/" + function;
 			string xml;
 			using (var webClient = new WebClient())

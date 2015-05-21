@@ -1,22 +1,20 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupItem="DataAggregator/DataAggregator.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="/usr/bin/google-chrome-stable" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="/usr/bin/google-chrome-stable" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataModel/ConfigurationModel/VisualizationFactory.cs">
     <Files>
-      <File FileName="DataAggregator/Models/Configuration/GaugeConfig.cs" Line="19" Column="24" />
-      <File FileName="DataAggregator/Models/Configuration/TableConfig.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Models/Configuration/PieConfig.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Models/Configuration/VisualizationConfig.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Models/Configuration/BarConfig.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Models/Configuration/GraphConfig.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Models/Configuration/UnitConfig.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Controllers/PageConfigurationController.cs" Line="1" Column="1" />
-      <File FileName="Data/Utils.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Controllers/AggregationController.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Controllers/DERController.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Controllers/ImageController.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Web.config" Line="63" Column="17" />
-      <File FileName="DataAggregator/Models/Configuration/ControlConfig.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Controllers/RealtimeController.cs" Line="29" Column="4" />
+      <File FileName="DataAggregator/Controllers/PageConfigurationController.cs" Line="117" Column="52" />
+      <File FileName="DataModel/ConfigurationModel/VisualizationFactory.cs" Line="13" Column="35" />
+      <File FileName="DataModel/ConfigurationModel/PagesConfig.cs" Line="1" Column="1" />
+      <File FileName="DataModel/ConfigurationModel/RealtimeVisualizationFactory.cs" Line="1" Column="1" />
+      <File FileName="DataModel/ConfigurationModel/Classes/ControlConfig.cs" Line="1" Column="1" />
+      <File FileName="DataModel/ConfigurationModel/AbstractRealtimeVisualizationFactory.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Utils/WS.cs" Line="81" Column="5" />
+      <File FileName="DataModel/Status.cs" Line="1" Column="1" />
+      <File FileName="Visualization/Views/Visualization/gaiaControl.html" Line="1" Column="1" />
+      <File FileName="Visualization/Scripts/Controllers/gaiaController.js" Line="1" Column="1" />
+      <File FileName="Visualization/Scripts/Controllers/dumploadController.js" Line="1" Column="1" />
+      <File FileName="DataAggregator/PageConfigurations/Dumpload.json" Line="1" Column="1" />
+      <File FileName="DataAggregator/Controllers/RealtimeController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

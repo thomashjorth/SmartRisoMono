@@ -112,6 +112,7 @@
     <Compile Include="Controllers\RealtimeController.cs" />
     <Compile Include="Utils\SimpleStatistics.cs" />
     <Compile Include="Controllers\ApplianceController.cs" />
+    <Compile Include="Utils\UnitMerging.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
