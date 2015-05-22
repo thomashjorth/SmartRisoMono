@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.IO;
 using DataModel.ConfigurationModel;
+using DataModel.ConfigurationModel.Factory;
 
 namespace DataAggregator.Controllers
 {
@@ -28,8 +29,8 @@ namespace DataAggregator.Controllers
 				VisFac.CreateSingleAggregationFactory ("127.0.0.1", 9001);
 
 			RealtimeVisualizationFactory realtime8080 = 
-				//VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8080);
-				VisFac.CreateRealtimeVizualizationFactory ("192.168.0.117", 8080,"192.168.0.101", 8080);
+				VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8080);
+				//VisFac.CreateRealtimeVizualizationFactory ("192.168.0.117", 8080,"192.168.0.101", 8080);
 			
 			RealtimeVisualizationFactory realtime8085 = 
 				//VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8085);
@@ -54,6 +55,19 @@ namespace DataAggregator.Controllers
 					new double[,]{{0.0,100}},new double[,]{{100,150}},new double[,]{{150,300}}),
 				realtime8080.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl"),
 				realtime8080.CreateUnit(30000)
+			});
+
+			PagesConfig testGauge = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
+				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Temperature,1000,"Temperature",0,300,"T [degC]",
+					new double[,]{{0.0,100}},new double[,]{{100,150}},new double[,]{{150,300}})
+			});
+
+			PagesConfig testControl = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
+				realtime8080.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl")
+			});
+
+			PagesConfig testPie = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
+				multi.CreatePie(MultiAggregation.AllActivePower,5000,"Active Power")
 			});
 
 			PagesConfig gaiaGenerated = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
@@ -106,11 +120,16 @@ namespace DataAggregator.Controllers
 					
 				}catch{
 
-				PagesConfig pages = new PagesConfig (gaiaGenerated.Pages);
-				pages.addPagesConfig (loadGenerated);
-					response = Request.CreateResponse (
+				PagesConfig test1 = new PagesConfig (gaiaGenerated.Pages);
+				test1.addPagesConfig (loadGenerated);
+
+				PagesConfig test2 = new PagesConfig(testGauge.Pages);
+				test2.addPagesConfig (testControl);
+				test2.addPagesConfig (testPie);
+
+				response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
-						pages
+						test2
 					)
 					);
 				}

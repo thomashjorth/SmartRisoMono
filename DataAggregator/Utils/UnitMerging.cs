@@ -1,5 +1,6 @@
 ﻿using System;
 using DataModel;
+using DataModel.Syslab;
 using System.Collections.Generic;
 
 namespace DataAggregator

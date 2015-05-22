@@ -2,7 +2,7 @@
 using DataModel.ConfigurationModel.Classes;
 using System.Collections.Generic;
 
-namespace DataModel.ConfigurationModel
+namespace DataModel.ConfigurationModel.Factory
 {
 	public abstract class AbstractPageFactory
 	{

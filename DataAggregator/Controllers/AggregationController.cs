@@ -99,6 +99,7 @@ namespace DataAggregator.Controllers
 			return response;
 		}
 
+		[HttpGet]
 		public HttpResponseMessage GetUnits(
 			[FromUri] string hosts, 
 			[FromUri] string wsInterface, 

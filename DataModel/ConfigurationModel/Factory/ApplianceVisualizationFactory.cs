@@ -1,6 +1,6 @@
 using System;
 using DataModel.ConfigurationModel.Classes;
-namespace DataModel.ConfigurationModel
+namespace DataModel.ConfigurationModel.Factory
 {
 
 	public class ApplianceVisualizationFactory: AbstractApplianceVisualizationFactory

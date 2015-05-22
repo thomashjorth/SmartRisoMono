@@ -2,7 +2,7 @@
 using System.IO;
 using System.Net;
 using DataAggregator.Utils;
-using DataModel;
+using DataModel.Syslab;
 namespace Data
 {
 	public static class Utils

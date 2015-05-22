@@ -1,4 +1,4 @@
-﻿namespace DataModel.ConfigurationModel
+﻿namespace DataModel.ConfigurationModel.Factory
 {
 	public enum RealtimeData{
 		ActivePower, Frequency, ReactivePower, Temperature, InterphaseVoltages, 

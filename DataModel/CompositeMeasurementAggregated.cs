@@ -1,4 +1,5 @@
 ﻿using System;
+using DataModel.Syslab;
 
 namespace DataModel
 {

@@ -4,6 +4,7 @@ using DataAggregator.Utils;
 using System.IO;
 using Newtonsoft.Json;
 using DataModel;
+using DataModel.Syslab;
 
 namespace DataAggregator.Utils
 {

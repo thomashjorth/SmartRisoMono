@@ -1,21 +1,56 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupItem="DataAggregator/DataAggregator.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="/usr/bin/google-chrome-stable" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataModel/ConfigurationModel/VisualizationFactory.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DataAggregator/PageConfigurations/test2.json">
     <Files>
-      <File FileName="DataAggregator/Controllers/PageConfigurationController.cs" Line="117" Column="52" />
-      <File FileName="DataModel/ConfigurationModel/VisualizationFactory.cs" Line="13" Column="35" />
-      <File FileName="DataModel/ConfigurationModel/PagesConfig.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Controllers/AggregationController.cs" Line="37" Column="1" />
+      <File FileName="DataAggregator/Utils/UnitMerging.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Utils/WS.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Utils/SimpleStatistics.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Controllers/PageConfigurationController.cs" Line="21" Column="32" />
+      <File FileName="Visualization/Scripts/Directives/d3GraphDirective.js" Line="1" Column="1" />
+      <File FileName="Visualization/Scripts/Directives/d3MultiGraphDirective.js" Line="1" Column="1" />
+      <File FileName="Visualization/Scripts/Controllers/d3MultiGraphController.js" Line="1" Column="1" />
+      <File FileName="Visualization/Views/Visualization/d3MultiGraph.html" Line="1" Column="1" />
+      <File FileName="DataModel/ConfigurationModel/Classes/BarConfig.cs" Line="1" Column="1" />
+      <File FileName="DataModel/ConfigurationModel/Classes/GraphConfig.cs" Line="1" Column="1" />
       <File FileName="DataModel/ConfigurationModel/RealtimeVisualizationFactory.cs" Line="1" Column="1" />
-      <File FileName="DataModel/ConfigurationModel/Classes/ControlConfig.cs" Line="1" Column="1" />
-      <File FileName="DataModel/ConfigurationModel/AbstractRealtimeVisualizationFactory.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Utils/WS.cs" Line="81" Column="5" />
-      <File FileName="DataModel/Status.cs" Line="1" Column="1" />
-      <File FileName="Visualization/Views/Visualization/gaiaControl.html" Line="1" Column="1" />
-      <File FileName="Visualization/Scripts/Controllers/gaiaController.js" Line="1" Column="1" />
-      <File FileName="Visualization/Scripts/Controllers/dumploadController.js" Line="1" Column="1" />
+      <File FileName="Visualization/Scripts/Controllers/configController.js" Line="1" Column="1" />
+      <File FileName="DataAggregator/Global.asax" Line="1" Column="1" />
+      <File FileName="DataAggregator/Global.asax.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Web.config" Line="7" Column="16" />
+      <File FileName="DataAggregator/Utils/Configuration.cs" Line="24" Column="1" />
+      <File FileName="DataAggregator/PageConfigurations/test2.json" Line="1" Column="903" />
       <File FileName="DataAggregator/PageConfigurations/Dumpload.json" Line="1" Column="1" />
-      <File FileName="DataAggregator/Controllers/RealtimeController.cs" Line="1" Column="1" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="SmartRisoe" expanded="True">
+            <Node name="DataAggregator" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="AggregationController.cs" selected="True" />
+              </Node>
+              <Node name="PageConfigurations" expanded="True" />
+              <Node name="Utils" expanded="True" />
+              <Node name="Global.asax" expanded="True" />
+            </Node>
+            <Node name="DataModel" expanded="True" />
+            <Node name="Visualization" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="Controllers" expanded="True" />
+                <Node name="Directives" expanded="True" />
+              </Node>
+              <Node name="Views" expanded="True">
+                <Node name="Visualization" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

@@ -4,6 +4,7 @@ using System.Web.Http;
 using System.Net;
 using System.Net.Http;
 using DataModel;
+using DataModel.Syslab;
 using System.IO;
 
 namespace DataAggregator.Controllers

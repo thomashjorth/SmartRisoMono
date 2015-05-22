@@ -36,16 +36,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="iec61850\GPSL.cs" />
     <Compile Include="iec61850\TSTP.cs" />
-    <Compile Include="CompositeData.cs" />
-    <Compile Include="CompositeMeasurement.cs" />
     <Compile Include="DER.cs" />
     <Compile Include="EEI.cs" />
     <Compile Include="LabeledInstance.cs" />
     <Compile Include="DoubleLabel.cs" />
     <Compile Include="ConfigurationModel\PagesConfig.cs" />
     <Compile Include="ConfigurationModel\VisualizationConfig.cs" />
-    <Compile Include="ConfigurationModel\VisualizationFactory.cs" />
-    <Compile Include="ConfigurationModel\PageFactory.cs" />
     <Compile Include="ConfigurationModel\Classes\BarConfig.cs" />
     <Compile Include="ConfigurationModel\Classes\GaugeConfig.cs" />
     <Compile Include="ConfigurationModel\Classes\GraphConfig.cs" />
@@ -54,23 +50,28 @@
     <Compile Include="ConfigurationModel\Classes\TableConfig.cs" />
     <Compile Include="ConfigurationModel\Classes\UnitConfig.cs" />
     <Compile Include="ConfigurationModel\Classes\ControlConfig.cs" />
-    <Compile Include="ConfigurationModel\ApplianceVisualizationFactory.cs" />
-    <Compile Include="ConfigurationModel\SAggregationVisualizationFactory.cs" />
-    <Compile Include="ConfigurationModel\MAggregationVisualizationFactory.cs" />
-    <Compile Include="ConfigurationModel\RealtimeVisualizationFactory.cs" />
-    <Compile Include="ConfigurationModel\AbstractRealtimeVisualizationFactory.cs" />
-    <Compile Include="ConfigurationModel\AbstractApplianceVisualizationFactory.cs" />
-    <Compile Include="ConfigurationModel\AbstractAggregationVisualizationFactory.cs" />
-    <Compile Include="ConfigurationModel\AbstractSingleAggregationVisualizationFactory.cs" />
-    <Compile Include="ConfigurationModel\AbstractMultiAggregationVisualizationFactory.cs" />
-    <Compile Include="CompositeBoolean.cs" />
-    <Compile Include="Status.cs" />
-    <Compile Include="MultiBattery.cs" />
     <Compile Include="CompositeMeasurementAggregated.cs" />
+    <Compile Include="Syslab\CompositeBoolean.cs" />
+    <Compile Include="Syslab\CompositeData.cs" />
+    <Compile Include="Syslab\CompositeMeasurement.cs" />
+    <Compile Include="Syslab\Status.cs" />
+    <Compile Include="ConfigurationModel\Factory\AbstractAggregationVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\Factory\AbstractApplianceVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\Factory\AbstractMultiAggregationVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\Factory\AbstractRealtimeVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\Factory\AbstractSingleAggregationVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\Factory\ApplianceVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\Factory\MAggregationVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\Factory\PageFactory.cs" />
+    <Compile Include="ConfigurationModel\Factory\RealtimeVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\Factory\VisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\Factory\SAggregationVisualizationFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="iec61850\" />
     <Folder Include="ConfigurationModel\Classes\" />
+    <Folder Include="Syslab\" />
+    <Folder Include="ConfigurationModel\Factory\" />
   </ItemGroup>
 </Project>

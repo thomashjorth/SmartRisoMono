@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataModel
+namespace DataModel.Syslab
 {
 	public class CompositeBoolean : CompositeData
 	{
