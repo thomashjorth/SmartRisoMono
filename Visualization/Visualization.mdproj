@@ -13,9 +13,9 @@
     <Folder Include="Views\" />
     <Folder Include="Content\" />
     <Folder Include="Scripts\" />
+    <Folder Include="Views\Pages\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Views\Visualization\config.html" />
     <None Include="Views\Visualization\d3Bar.html" />
     <None Include="Views\Visualization\d3Gauge.html" />
     <None Include="Views\Visualization\d3Graph.html" />
@@ -2436,5 +2436,7 @@
     <None Include="Scripts\Directives\d3MultiGraphDirective.js" />
     <None Include="Scripts\Controllers\d3MultiGraphController.js" />
     <None Include="Views\Visualization\d3MultiGraph.html" />
+    <None Include="Views\Pages\Grid3x3.html" />
+    <None Include="Views\Pages\config.html" />
   </ItemGroup>
 </Project>

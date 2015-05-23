@@ -1,5 +1,5 @@
 VisualizeApp.controller('unitController', ['$scope','$interval', '$http', 'AppService', function($scope, $interval, $http, AppService){
-    
+    $scope.run=true;
     $scope.initialize = function()
     {
         $scope.dataHost = $scope.init.Host;
@@ -16,13 +16,17 @@ VisualizeApp.controller('unitController', ['$scope','$interval', '$http', 'AppSe
            });
 
         $interval(function(){
-        AppService.getData($scope.dataHost,$scope.dataPort,$scope.dataAggregation,$scope.dataResource)
-            .success(function (response){
-            if(lastResponse != response){
-                $scope.Der = JSON.parse(response)
-                lastResponse = response;
-                }
-           });
+            if($scope.run){
+                $scope.run=false;
+            AppService.getData($scope.dataHost,$scope.dataPort,$scope.dataAggregation,$scope.dataResource)
+                .success(function (response){
+                    if(lastResponse != response){
+                        $scope.Der = JSON.parse(response)
+                        lastResponse = response;
+                    }
+                    $scope.run=true;
+                });
+            }
         }, 3000);
     };
 }]);
