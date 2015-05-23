@@ -66,6 +66,7 @@
     <Compile Include="ConfigurationModel\Factory\RealtimeVisualizationFactory.cs" />
     <Compile Include="ConfigurationModel\Factory\VisualizationFactory.cs" />
     <Compile Include="ConfigurationModel\Factory\SAggregationVisualizationFactory.cs" />
+    <Compile Include="ConfigurationModel\Classes\MultiGraphConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

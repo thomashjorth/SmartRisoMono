@@ -17,15 +17,22 @@
 
 			scope.$watchCollection(exp, function(newVal, oldVal){
 				config = newVal.config;
+				if(newVal == undefined){
+
+				}else if(oldVal == undefined){
 				dataToPlot=d3.nest()
 				    .key(function(d) {
 				        return d.name;
 				    })
 				    .entries(newVal.values);
-				if(newVal == oldVal){
 					drawLineChart();
 				}
 				else{
+				dataToPlot=d3.nest()
+				    .key(function(d) {
+				        return d.name;
+				    })
+				    .entries(newVal.values);
 					redrawLineChart();
 				}
 			});
@@ -140,8 +147,7 @@
 			   svg.selectAll("g.y.axis").call(yAxisGen);
 			   svg.selectAll("g.x.axis")
 				   .call(xAxisGen);
-
-			   svg.selectAll("path.line").remove();
+			   //svg.selectAll("path.line").remove();
 			   dataToPlot.forEach(function(d, i) {
 			   	//alert()
 			   		svg.selectAll("."+pathClass+i)

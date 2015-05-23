@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 
 namespace DataModel.Syslab
 {
@@ -26,6 +27,17 @@ namespace DataModel.Syslab
 
 		public CompositeData ()
 		{
+		}
+
+		public CompositeData (string xml)
+		{
+			XDocument doc = XDocument.Parse(xml);
+
+			timestampMicros = long.Parse(doc.Root.Element	("timestampMicros").Value);
+			timePrecision 	= short.Parse(doc.Root.Element	("timePrecision").Value);
+			quality 		= byte.Parse(doc.Root.Element	("quality").Value);
+			validity 		= byte.Parse(doc.Root.Element	("validity").Value);
+			source 			= byte.Parse(doc.Root.Element	("source").Value);
 		}
 	}
 }

@@ -51,23 +51,7 @@ namespace DataAggregator.Utils
 			string xml = GetData(Interface,function,hostname,port);
 			if(xml == "NAN")
 				return null;
-			XDocument doc = XDocument.Parse(xml);
-
-			CompositeMeasurement activePower = new CompositeMeasurement ();
-			if (doc.Root.Element ("value").Value == "0.0")
-				activePower.value = 0;
-			else {
-				activePower.value = Math.Round (Double.Parse (
-					doc.Root.Element ("value").Value.Replace (',', '.'), 
-					CultureInfo.InvariantCulture
-				), 2);
-			}
-			activePower.timestampMicros = long.Parse(doc.Root.Element	("timestampMicros").Value);
-			activePower.timePrecision 	= short.Parse(doc.Root.Element	("timePrecision").Value);
-			activePower.quality 		= byte.Parse(doc.Root.Element	("quality").Value);
-			activePower.validity 		= byte.Parse(doc.Root.Element	("validity").Value);
-			activePower.source 			= byte.Parse(doc.Root.Element	("source").Value);
-			return activePower;
+			return new CompositeMeasurement(xml);
 		}
 
 		public static List<CompositeMeasurement> convertXMLToCompositeMeasurementList(string Interface, string function, string hostname, string port){
@@ -77,20 +61,7 @@ namespace DataAggregator.Utils
 			XDocument document = XDocument.Parse(xml);
 			List<CompositeMeasurement> cmList = new List<CompositeMeasurement> ();
 			foreach(XElement element in document.Root.Elements()){
-				var doc = XDocument.Parse(element.ToString ());
-
-				CompositeMeasurement cm = new CompositeMeasurement ();
-				cm.value 			= Math.Round(Double.Parse(
-					doc.Root.Element("value").Value.Replace(',', '.'), 
-					CultureInfo.InvariantCulture
-				),2);
-				//System.Diagnostics.Debug.Write (Double.Parse(doc.Root.Element	("value").Value.Substring (0, 4)));
-				cm.timestampMicros = long.Parse(doc.Root.Element	("timestampMicros").Value);
-				cm.timePrecision 	= short.Parse(doc.Root.Element	("timePrecision").Value);
-				cm.quality 		= byte.Parse(doc.Root.Element	("quality").Value);
-				cm.validity 		= byte.Parse(doc.Root.Element	("validity").Value);
-				cm.source 			= byte.Parse(doc.Root.Element	("source").Value);
-				cmList.Add (cm);
+				cmList.Add (new CompositeMeasurement(element.ToString()));
 			}
 			return cmList;
 		}
@@ -99,32 +70,14 @@ namespace DataAggregator.Utils
 			string xml = GetData(Interface,function,hostname,port);
 			if(xml == "NAN")
 				return null;
-			XDocument doc = XDocument.Parse(xml);
-
-			CompositeBoolean boolean = new CompositeBoolean ();			
-			boolean.value 			= doc.Root.Element("value").Value == "true";
-			boolean.timestampMicros = long.Parse(doc.Root.Element	("timestampMicros").Value);
-			boolean.timePrecision 	= short.Parse(doc.Root.Element	("timePrecision").Value);
-			boolean.quality 		= byte.Parse(doc.Root.Element	("quality").Value);
-			boolean.validity 		= byte.Parse(doc.Root.Element	("validity").Value);
-			boolean.source 			= byte.Parse(doc.Root.Element	("source").Value);
-			return boolean;
+			return new CompositeBoolean(xml);
 		}
 
 		public static Status convertXMLToStatus(string Interface, string function, string hostname, string port){
 			string xml = GetData(Interface,function,hostname,port);
 			if(xml == "NAN")
 				return null;
-			XDocument doc = XDocument.Parse(xml);
-
-			Status status = new Status ();			
-			status.status 			= int.Parse(doc.Root.Element("status").Element("status").Value);
-			status.timestampMicros = long.Parse(doc.Root.Element("status").Element	("timestampMicros").Value);
-			status.timePrecision 	= short.Parse(doc.Root.Element("status").Element	("timePrecision").Value);
-			status.quality 		= byte.Parse(doc.Root.Element("status").Element	("quality").Value);
-			status.validity 		= byte.Parse(doc.Root.Element("status").Element	("validity").Value);
-			status.source 			= byte.Parse(doc.Root.Element("status").Element	("source").Value);
-			return status;
+			return new Status(xml);
 		}
 
 		public static string GetString(string Interface, string function, string hostname, string port){

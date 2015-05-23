@@ -33,8 +33,8 @@ namespace DataAggregator.Controllers
 				//VisFac.CreateRealtimeVizualizationFactory ("192.168.0.117", 8080,"192.168.0.101", 8080);
 			
 			RealtimeVisualizationFactory realtime8085 = 
-				//VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8085);
-				VisFac.CreateRealtimeVizualizationFactory ("192.168.0.117", 8080,"192.168.0.101", 8085);
+				VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8085);
+				//VisFac.CreateRealtimeVizualizationFactory ("192.168.0.117", 8080,"192.168.0.101", 8085);
 			
 			RealtimeVisualizationFactory realtime8090 = 
 				//VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8090);
@@ -68,6 +68,11 @@ namespace DataAggregator.Controllers
 
 			PagesConfig testPie = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
 				multi.CreatePie(MultiAggregation.AllActivePower,5000,"Active Power")
+			});
+
+			const string temperature = "Temperature";
+			PagesConfig testMultiGraph = pageFactory.CreatePages(new List<VisualizationConfig> (){
+				multi.CreateMultiGraph(new List<string>(){"localhost", "localhost", "localhost"},new List<int>(){8080,8085,8090},RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,50000,"Active Power",-1,1,12,"P [kW]")
 			});
 
 			PagesConfig gaiaGenerated = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
@@ -127,9 +132,11 @@ namespace DataAggregator.Controllers
 				test2.addPagesConfig (testControl);
 				test2.addPagesConfig (testPie);
 
+				PagesConfig test3 = new PagesConfig (testMultiGraph.Pages);
+
 				response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
-						test2
+						test3
 					)
 					);
 				}
