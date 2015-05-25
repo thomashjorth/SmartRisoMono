@@ -113,6 +113,7 @@
     <Compile Include="Utils\SimpleStatistics.cs" />
     <Compile Include="Controllers\ApplianceController.cs" />
     <Compile Include="Utils\UnitMerging.cs" />
+    <Compile Include="PageConfigurations\ExampleConfigurations.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
