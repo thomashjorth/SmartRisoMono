@@ -1,56 +1,19 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupItem="DataAggregator/DataAggregator.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="/usr/bin/google-chrome-stable" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DataAggregator/PageConfigurations/test2.json">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Visualization/Scripts/Controllers/configController.js">
     <Files>
-      <File FileName="DataAggregator/Controllers/AggregationController.cs" Line="37" Column="1" />
-      <File FileName="DataAggregator/Utils/UnitMerging.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Controllers/AggregationController.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Controllers/RealtimeController.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Utils/Configuration.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Controllers/ApplianceController.cs" Line="1" Column="1" />
       <File FileName="DataAggregator/Utils/WS.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Utils/SimpleStatistics.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Controllers/PageConfigurationController.cs" Line="21" Column="32" />
-      <File FileName="Visualization/Scripts/Directives/d3GraphDirective.js" Line="1" Column="1" />
-      <File FileName="Visualization/Scripts/Directives/d3MultiGraphDirective.js" Line="1" Column="1" />
-      <File FileName="Visualization/Scripts/Controllers/d3MultiGraphController.js" Line="1" Column="1" />
-      <File FileName="Visualization/Views/Visualization/d3MultiGraph.html" Line="1" Column="1" />
-      <File FileName="DataModel/ConfigurationModel/Classes/BarConfig.cs" Line="1" Column="1" />
-      <File FileName="DataModel/ConfigurationModel/Classes/GraphConfig.cs" Line="1" Column="1" />
-      <File FileName="DataModel/ConfigurationModel/RealtimeVisualizationFactory.cs" Line="1" Column="1" />
-      <File FileName="Visualization/Scripts/Controllers/configController.js" Line="1" Column="1" />
-      <File FileName="DataAggregator/Global.asax" Line="1" Column="1" />
-      <File FileName="DataAggregator/Global.asax.cs" Line="1" Column="1" />
-      <File FileName="DataAggregator/Web.config" Line="7" Column="16" />
-      <File FileName="DataAggregator/Utils/Configuration.cs" Line="24" Column="1" />
-      <File FileName="DataAggregator/PageConfigurations/test2.json" Line="1" Column="903" />
+      <File FileName="DataAggregator/Utils/UnitMerging.cs" Line="1" Column="1" />
+      <File FileName="DataAggregator/Controllers/PageConfigurationController.cs" Line="1" Column="1" />
+      <File FileName="Visualization/Scripts/Controllers/d3GaugeController.js" Line="1" Column="1" />
+      <File FileName="Visualization/Scripts/Controllers/d3GraphController.js" Line="1" Column="1" />
+      <File FileName="Visualization/Scripts/Controllers/configController.js" Line="15" Column="4" />
       <File FileName="DataAggregator/PageConfigurations/Dumpload.json" Line="1" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="SmartRisoe" expanded="True">
-            <Node name="DataAggregator" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="AggregationController.cs" selected="True" />
-              </Node>
-              <Node name="PageConfigurations" expanded="True" />
-              <Node name="Utils" expanded="True" />
-              <Node name="Global.asax" expanded="True" />
-            </Node>
-            <Node name="DataModel" expanded="True" />
-            <Node name="Visualization" expanded="True">
-              <Node name="Scripts" expanded="True">
-                <Node name="Controllers" expanded="True" />
-                <Node name="Directives" expanded="True" />
-              </Node>
-              <Node name="Views" expanded="True">
-                <Node name="Visualization" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

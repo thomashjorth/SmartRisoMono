@@ -15,7 +15,7 @@ VisualizeApp.controller('d3GaugeController', ['$scope','$interval', '$http', 'Ap
                 AppService.getData($scope.gauge.Host,$scope.gauge.Port,$scope.gauge.Device,$scope.Params)
                     .success(function (response){
                     $scope.data={config: {label: $scope.gauge.Unit, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID, title: $scope.gauge.TitleHeading, green: $scope.gauge.Green, yellow: $scope.gauge.Yellow, red: $scope.gauge.Red}, 
-                        CompositeMeasurement: {v: JSON.parse(response).value, timestamp:h} };
+                        CompositeMeasurement: {v: JSON.parse(response).value, timestamp: JSON.parse(response).timestampMicros/1000} };
                     $scope.run=true;
                 })
                 .error( function (response){

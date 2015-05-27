@@ -53,6 +53,7 @@ namespace DataAggregator.Controllers
 					new double[,]{{360,440}},null,new double[,]{{0,360},{440,500}}),
 				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Temperature,1000,"Temperature",0,300,"T [degC]",
 					new double[,]{{0.0,100}},new double[,]{{100,150}},new double[,]{{150,300}}),
+				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",-1,1,12,"P [kW]"),
 				realtime8080.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl"),
 				realtime8080.CreateUnit(30000)
 			});
@@ -132,7 +133,7 @@ namespace DataAggregator.Controllers
 				test2.addPagesConfig (testControl);
 				test2.addPagesConfig (testPie);
 
-				PagesConfig test3 = new PagesConfig (testMultiGraph.Pages);
+				PagesConfig test3 = new PagesConfig (loadGenerated.Pages);
 
 				response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
