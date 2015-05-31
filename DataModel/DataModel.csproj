@@ -7,6 +7,8 @@
     <OutputType>Library</OutputType>
     <RootNamespace>DataModel</RootNamespace>
     <AssemblyName>DataModel</AssemblyName>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,6 +69,7 @@
     <Compile Include="ConfigurationModel\Factory\VisualizationFactory.cs" />
     <Compile Include="ConfigurationModel\Factory\SAggregationVisualizationFactory.cs" />
     <Compile Include="ConfigurationModel\Classes\MultiGraphConfig.cs" />
+    <Compile Include="LabeledMeasurement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
