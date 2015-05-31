@@ -13,7 +13,7 @@ VisualizeApp.controller('dumploadController', ['$scope','$interval', '$http', 'A
 				$scope.messages();
 			})
 			.error(function (error) {
-				$scope.error = "Error using " + command;
+				$scope.messages();
 			});
 	}
 
