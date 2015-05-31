@@ -9,13 +9,13 @@ namespace DataAggregator
 	{
 
 		public static CompositeMeasurementAggregated CombineData(List<string> hosts, string device, string action){
-			List<CompositeMeasurement> measurements = GetData (hosts, device, action);
+			List<LabeledMeasurement> measurements = GetData (hosts, device, action);
 
 			CompositeMeasurementAggregated aggregated = new CompositeMeasurementAggregated ();
 
 			foreach (var measurement in measurements) {
-				aggregated.timestampMicros += measurement.timestampMicros;
-				aggregated.value += measurement.value;
+				aggregated.timestampMicros += measurement.measurement.timestampMicros;
+				aggregated.value += measurement.measurement.value;
 			}
 
 			aggregated.timestampMicros = aggregated.timestampMicros / measurements.Count;
@@ -25,12 +25,12 @@ namespace DataAggregator
 			return aggregated;
 		}
 
-		public static List<CompositeMeasurement> GetData(List<string> hosts, string device, string action){
+		public static List<LabeledMeasurement> GetData(List<string> hosts, string device, string action){
 
-			List<CompositeMeasurement> data = new List<CompositeMeasurement> ();
+			List<LabeledMeasurement> data = new List<LabeledMeasurement> ();
 			foreach(var host in hosts){
 				var temp = host.Split (':');
-				data.Add(Utils.WS.convertXMLToCompositeMeasurement(device, action, temp [0], temp [1]));
+				data.Add(new LabeledMeasurement(host,Utils.WS.convertXMLToCompositeMeasurement(device, action, temp [0], temp [1])));
 			}
 			return data;
 		}
