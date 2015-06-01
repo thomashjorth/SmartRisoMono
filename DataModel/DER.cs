@@ -6,7 +6,7 @@ namespace DataModel
 {
 
 	public enum Type {
-		NAN, GenericLoad, GenericPrice
+		NAN, GenericLoad, GenericPrice, GaiaWindTurbine
 	};
 	public enum Role {
 		PowerConsumer, NAN
@@ -110,7 +110,10 @@ namespace DataModel
 				} else if(app.Name.Contains ("Price signal server")){
 					Types.Add (Type.GenericPrice.ToString());
 					Interface= Type.GenericPrice.ToString();
-				} 
+				} else if(app.Name.Contains ("Gaia")){
+					Types.Add (Type.GaiaWindTurbine.ToString());
+					Interface= Type.GaiaWindTurbine.ToString();
+				}
 			}
 		}
 	}
