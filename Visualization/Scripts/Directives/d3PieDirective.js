@@ -15,9 +15,10 @@ VisualizeApp.directive('d3PieDirective', function($parse, $window){
 
             scope.$watchCollection(exp, function(newVal, oldVal){
                 PieChart=newVal;
-                if(newVal != undefined){
-                    var list = [];
-                    for (var i = 0; i < newVal.length; i++) {
+
+                var list = [];
+                if(PieChart!=undefined){
+                    for (var i = 0; i < newVal.LabeledInstance.length; i++) {
                         list.push(PieChart.LabeledInstance[i].label)
                     };
                     color = d3.scale.category20()
@@ -55,6 +56,7 @@ VisualizeApp.directive('d3PieDirective', function($parse, $window){
                 .value(function(d) {
 
                     for (var i = 0; i < PieChart.LabeledInstance.length; i++) {
+                            //alert(PieChart.LabeledInstance[i].measurement)
                         if(PieChart.LabeledInstance[i].label == d.label)
                             return Math.abs(PieChart.LabeledInstance[i].measurement.value);
                     };

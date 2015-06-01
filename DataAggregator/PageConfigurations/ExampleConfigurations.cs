@@ -26,10 +26,12 @@ namespace DataAggregator
 						new double[,]{{-10,-1}},new double[,]{{-1.0,1}},new double[,]{{1.0,10}}),
 					multi.CreateMultiGraph(new List<string>{"localhost","localhost"},new List<int>{8080,8085},
 						RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,
-						2000,"8080 and 8085 Power",-2,2,10,"mW"),
-					single.CreateGraph(SingleAggregation.AvgActivePower,2000,"Realtime Avg Power",-2,2,10,"mW"),
-					multi.CreateBar(MultiAggregation.AllActivePower,3000,"Power",-2,2,"mW"),
-					multi.CreatePie(MultiAggregation.AllActivePower,3000,"Power")
+						2000,"8080 and 8085 Power",-2,12,10,"mW"),
+					single.CreateGraph(SingleAggregation.AvgActivePower,2000,"Realtime Avg Power",-2,12,10,"mW"),
+				multi.CreateBar(new List<string>{"localhost","localhost"},new List<int>{8080,8085},
+				RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,3000,"Power",-2,12,"mW"),
+				multi.CreatePie(new List<string>{"localhost","localhost"},new List<int>{8080,8085},
+				RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,3000,"Power")
 
 				}
 			);

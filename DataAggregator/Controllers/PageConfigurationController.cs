@@ -98,7 +98,7 @@ namespace DataAggregator.Controllers
 			});
 
 			PagesConfig testPie = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
-				multi.CreatePie(MultiAggregation.AllActivePower,5000,"Active Power")
+	//			multi.CreatePie(MultiAggregation.AllActivePower,5000,"Active Power")
 			});
 
 			const string temperature = "Temperature";

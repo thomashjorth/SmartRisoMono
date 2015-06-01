@@ -41,18 +41,20 @@
                 BarChart=newVal;
 
                 var data = [];
-                for (var i = 0; i < newVal.LabeledInstance.length; i++) {
-                    data.push([BarChart.LabeledInstance[i].label, BarChart.LabeledInstance[i].value])
-                };
+                if(newVal != undefined){
+                    for (var i = 0; i < newVal.LabeledInstance.length; i++) {
+                        data.push([BarChart.LabeledInstance[i].label, BarChart.LabeledInstance[i].measurement.value])
+                    };
 
-                data = data.map(function(d, i) {
-                    return [xValue.call(data, d, i), yValue.call(data, d, i)];
-                });
+                    data = data.map(function(d, i) {
+                        return [xValue.call(data, d, i), yValue.call(data, d, i)];
+                    });
 
-                if(oldVal == null || BarChart.LabeledInstance.length != oldVal.LabeledInstance.length){
-                    draw(data)
-                }else {
-                    redraw(data)
+                    if(oldVal == null || BarChart.LabeledInstance.length != oldVal.LabeledInstance.length){
+                        draw(data)
+                    }else {
+                        redraw(data)
+                    }
                 }
             });
 
