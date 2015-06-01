@@ -29,6 +29,7 @@
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom);
 
+            var textPos=(($('.box').outerHeight()*0.95)*1.92-10);
            var parseDate = d3.time.format("%d-%b-%y").parse;
            function setChartParameters(){
 
@@ -90,7 +91,7 @@
 
                svg.append("svg:g")
                    .attr("class", "title")
-                   .attr("transform", "translate("+(($('.box').outerHeight()*0.95)*1.92-10)+",0)")
+                   .attr("transform", "translate("+textPos+",0)")
                    .append("text")
                         .attr("y", 6)
                         .attr("dy", ".71em")
@@ -99,7 +100,7 @@
 
                svg.append("svg:g")
                    .attr("class", "data")
-                   .attr("transform", "translate("+(($('.box').outerHeight()*0.95)*1.92-10)+","+height*0.1+")")
+                   .attr("transform", "translate("+textPos+","+height*0.1+")")
                    .append("text")
                         .attr("y", 6)
                         .attr("dy", ".71em")
@@ -140,7 +141,7 @@
 
                svg.append("svg:g")
                    .attr("class", "data")
-                   .attr("transform", "translate("+(($('.box').outerHeight()*0.95)*1.92-10)+","+height*0.1+")")
+                   .attr("transform", "translate("+textPos+","+height*0.1+")")
                    .append("text")
                         .attr("y", 6)
                         .attr("dy", ".71em")

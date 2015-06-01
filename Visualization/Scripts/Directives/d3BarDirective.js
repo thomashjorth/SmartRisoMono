@@ -42,7 +42,7 @@
 
                 var data = [];
                 for (var i = 0; i < newVal.LabeledInstance.length; i++) {
-                    data.push([BarChart.LabeledInstance[i].label, BarChart.LabeledInstance[i].value])
+                    data.push([BarChart.LabeledInstance[i].label, BarChart.LabeledInstance[i].measurement.value])
                 };
 
                 data = data.map(function(d, i) {
