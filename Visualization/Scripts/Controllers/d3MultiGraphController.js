@@ -10,7 +10,7 @@ VisualizeApp.controller('d3MultiGraphController', ['$scope','$interval', '$http'
             var json = JSON.parse(response);
             var temp = [];
             for (var i = 0; i < json.length; i++) {
-                temp.push({name: ""+i, timestamp: json[i].timestampMicros/1000, value: json[i].value});
+                temp.push({name: json[i].label, timestamp: json[i].measurement.timestampMicros/1000, value: json[i].measurement.value});
             }
             $scope.data = {config: {unit: $scope.init.Unit, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax, title: $scope.init.TitleHeading}, 
             values: temp};
@@ -30,7 +30,7 @@ VisualizeApp.controller('d3MultiGraphController', ['$scope','$interval', '$http'
                     }
                     
                     for (var i = 0; i < json.length; i++) {
-                        $scope.data.values.push({name: ""+i, timestamp: json[i].timestampMicros/1000, value: json[i].value});
+                        $scope.data.values.push({name: json[i].label, timestamp: json[i].measurement.timestampMicros/1000, value: json[i].measurement.value});
                     }
                     $scope.data = {config: {unit: $scope.init.Unit, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax, title: $scope.init.TitleHeading}, 
                     values: $scope.data.values};

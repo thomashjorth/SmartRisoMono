@@ -337,6 +337,9 @@
 						return function(step) 
 						{
 							var rotation = currentRotation + (targetRotation-currentRotation)*step;
+							if(step ==  NaN)
+								rotation = currentRotation + (targetRotation-currentRotation);
+							//alert(rotation)
 							return "translate(" + config.cx + ", " + config.cy + ") rotate(" + rotation + ")"; 
 						}
 					});

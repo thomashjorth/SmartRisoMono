@@ -4,7 +4,6 @@ VisualizeApp.controller('d3GaugeController', ['$scope','$interval', '$http', 'Ap
 	$scope.initialize = function(gauge)
   	{
         $scope.gauge = $scope.init.Gauges[gauge];
-        
         $scope.data={config: {label: $scope.gauge.Unit, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID, title: $scope.gauge.TitleHeading, green: $scope.gauge.Green, yellow: $scope.gauge.Yellow, red: $scope.gauge.Red},
             CompositeMeasurement: {v: 0,timestamp: $scope.firstTime} };
 

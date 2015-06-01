@@ -128,7 +128,7 @@
 
 					svg.append("svg:g")
 	                   	.attr("class", "data"+i)
-	                   	.attr("transform", "translate("+((($('.box').outerHeight()*0.5)-10)+(i*25))+","+height*0+")")
+	                   	.attr("transform", "translate("+((($('.box').outerHeight()*0.5)-10)+(30))+","+i*10+")")
 	                   	.append("text")
 	                        .attr("y", 6)
 	                        .attr("dy", ".71em")

@@ -15,19 +15,20 @@ VisualizeApp.directive('d3PieDirective', function($parse, $window){
 
             scope.$watchCollection(exp, function(newVal, oldVal){
                 PieChart=newVal;
+                if(newVal != undefined){
+                    var list = [];
+                    for (var i = 0; i < newVal.length; i++) {
+                        list.push(PieChart.LabeledInstance[i].label)
+                    };
+                    color = d3.scale.category20()
+                        .domain(list);
 
-                var list = [];
-                for (var i = 0; i < newVal.LabeledInstance.length; i++) {
-                    list.push(PieChart.LabeledInstance[i].label)
-                };
-                color = d3.scale.category20()
-                    .domain(list);
-
-                change(color.domain().map(function(label){
-                        return { label: label }
-                    }).sort(function(a,b) {
-                        return d3.ascending(a.label, b.label);
-                    }));
+                    change(color.domain().map(function(label){
+                            return { label: label }
+                        }).sort(function(a,b) {
+                            return d3.ascending(a.label, b.label);
+                        }));
+                }
             });
 
             var width = ($('.box').outerHeight()*0.95)*2.13,
