@@ -38,24 +38,54 @@ namespace DataAggregator.Controllers
 			
 			RealtimeVisualizationFactory realtime8090 = 
 				//VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8090);
-				VisFac.CreateRealtimeVizualizationFactory ("192.168.0.117", 8080,"192.168.0.101", 8090);
+				VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8090);
 			
 			AbstractPageFactory pageFactory = new EquallySized3x3PageFactory ();
 
 			PagesConfig loadGenerated = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
 				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",0,100,"P [kW]",
-					new double[,]{{0,80}},null,new double[,]{{80,100}}),
+				                         new double[,]{{0,80}},null,new double[,]{{80,100}}),
 				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ReactivePower,1000,"Reactive Power",-13,13,"Q [kVAr]",
-					new double[,]{{-10,10}},null,new double[,]{{-13,-10},{10,13}}),
+				                         new double[,]{{-10,10}},null,new double[,]{{-13,-10},{10,13}}),
 				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Frequency,1000,"Frequency",45,55,"f [Hz]",
-					new double[,]{{47.5,52.5}},null,new double[,]{{45.0,47.5},{52.5,55}}),
+				                         new double[,]{{47.5,52.5}},null,new double[,]{{45.0,47.5},{52.5,55}}),
 				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.InterphaseVoltages,1000,"Interphase Voltages",0,500,"U [V]",
-					new double[,]{{360,440}},null,new double[,]{{0,360},{440,500}}),
+				                         new double[,]{{360,440}},null,new double[,]{{0,360},{440,500}}),
 				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Temperature,1000,"Temperature",0,300,"T [degC]",
-					new double[,]{{0.0,100}},new double[,]{{100,150}},new double[,]{{150,300}}),
+				                         new double[,]{{0.0,100}},new double[,]{{100,150}},new double[,]{{150,300}}),
 				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",-1,1,12,"P [kW]"),
 				realtime8080.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl"),
 				realtime8080.CreateUnit(30000)
+			});
+			PagesConfig loadGenerated85 = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
+				realtime8085.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",0,100,"P [kW]",
+				                         new double[,]{{0,80}},null,new double[,]{{80,100}}),
+				realtime8085.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ReactivePower,1000,"Reactive Power",-13,13,"Q [kVAr]",
+				                         new double[,]{{-10,10}},null,new double[,]{{-13,-10},{10,13}}),
+				realtime8085.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Frequency,1000,"Frequency",45,55,"f [Hz]",
+				                         new double[,]{{47.5,52.5}},null,new double[,]{{45.0,47.5},{52.5,55}}),
+				realtime8085.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.InterphaseVoltages,1000,"Interphase Voltages",0,500,"U [V]",
+				                         new double[,]{{360,440}},null,new double[,]{{0,360},{440,500}}),
+				realtime8085.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Temperature,1000,"Temperature",0,300,"T [degC]",
+				                         new double[,]{{0.0,100}},new double[,]{{100,150}},new double[,]{{150,300}}),
+				realtime8085.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",-1,1,12,"P [kW]"),
+				realtime8085.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl"),
+				realtime8085.CreateUnit(30000)
+			});
+			PagesConfig loadGenerated90 = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
+				realtime8090.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",0,100,"P [kW]",
+				                         new double[,]{{0,80}},null,new double[,]{{80,100}}),
+				realtime8090.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ReactivePower,1000,"Reactive Power",-13,13,"Q [kVAr]",
+				                         new double[,]{{-10,10}},null,new double[,]{{-13,-10},{10,13}}),
+				realtime8090.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Frequency,1000,"Frequency",45,55,"f [Hz]",
+				                         new double[,]{{47.5,52.5}},null,new double[,]{{45.0,47.5},{52.5,55}}),
+				realtime8090.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.InterphaseVoltages,1000,"Interphase Voltages",0,500,"U [V]",
+				                         new double[,]{{360,440}},null,new double[,]{{0,360},{440,500}}),
+				realtime8090.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Temperature,1000,"Temperature",0,300,"T [degC]",
+				                         new double[,]{{0.0,100}},new double[,]{{100,150}},new double[,]{{150,300}}),
+				realtime8090.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",-1,1,12,"P [kW]"),
+				realtime8090.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl"),
+				realtime8090.CreateUnit(30000)
 			});
 
 			PagesConfig testGauge = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
@@ -107,17 +137,23 @@ namespace DataAggregator.Controllers
 				}catch{
 
 				PagesConfig test1 = new PagesConfig (gaiaGenerated.Pages);
-				test1.addPagesConfig (loadGenerated);
+				//test1.addPagesConfig (loadGenerated);
 
 				PagesConfig test2 = new PagesConfig(testGauge.Pages);
 				test2.addPagesConfig (testControl);
 				test2.addPagesConfig (testPie);
 
 				PagesConfig test3 = new PagesConfig (loadGenerated.Pages);
+				test3.addPagesConfig (loadGenerated85);
+				test3.addPagesConfig (loadGenerated90);
 
 				response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
+<<<<<<< Upstream, based on origin/master
 						ExampleConfigurations.Example1()
+=======
+						test1
+>>>>>>> 598a91e dsa
 					)
 					);
 				}
