@@ -121,6 +121,26 @@ namespace DataAggregator.Controllers
 				realtime8085.CreateControl(RealtimeInterface.GaiaWindTurbineWS,"gaiaControl"),
 				realtime8085.CreateUnit(30000)
 			});
+
+			AbstractApplianceVisualizationFactory appliance = VisFac.CreateApplianceVizualizationFactory ("127.0.0.1", 9001);
+
+			PagesConfig washingExample = pageFactory.CreatePages (new List<VisualizationConfig> (){ 
+				
+				appliance.CreatePie(ApplianceData.Count,2000,"Count"),
+				appliance.CreatePie(ApplianceData.PowerCentroid,2000,"Power"),
+				appliance.CreatePie(ApplianceData.EnergyCentroid,2000,"Energy"),
+				appliance.CreateBar(ApplianceData.Count,2000,"Count",0,10,"#"),
+				appliance.CreateBar(ApplianceData.AEC,2000,"AEC",0,400,"kWh"),
+				appliance.CreateBar(ApplianceData.Score, 2000,"Score",0,100,""),
+				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,2000,"Active Power",-1,1,15,"mW"), 
+				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,2000,"Active Power",-1,1,7200,"mW"),
+				appliance.CreateTable(ApplianceData.Discovered, 2000,"Discovered Programs")
+				//realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,2000,"test",-1,1,"W")
+				}
+				
+
+			);
+
 				try{
 					StreamReader file = File.OpenText (@"PageConfigurations/"+id+".json");
 					string read = file.ReadToEnd();
@@ -129,9 +149,8 @@ namespace DataAggregator.Controllers
 					read = read.Remove(read.Length-1,1);
 
 					response = Request.CreateResponse (
-						HttpStatusCode.Created, 
+						HttpStatusCode.Created,
 							read
-
 					);
 					
 				}catch{
@@ -149,11 +168,7 @@ namespace DataAggregator.Controllers
 
 				response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
-<<<<<<< Upstream, based on origin/master
-						ExampleConfigurations.Example1()
-=======
 						test1
->>>>>>> 598a91e dsa
 					)
 					);
 				}
