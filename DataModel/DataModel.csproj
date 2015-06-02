@@ -7,8 +7,6 @@
     <OutputType>Library</OutputType>
     <RootNamespace>DataModel</RootNamespace>
     <AssemblyName>DataModel</AssemblyName>
-    <ProductVersion>12.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,7 +38,6 @@
     <Compile Include="iec61850\TSTP.cs" />
     <Compile Include="DER.cs" />
     <Compile Include="EEI.cs" />
-    <Compile Include="LabeledInstance.cs" />
     <Compile Include="DoubleLabel.cs" />
     <Compile Include="ConfigurationModel\PagesConfig.cs" />
     <Compile Include="ConfigurationModel\VisualizationConfig.cs" />

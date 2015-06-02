@@ -43,9 +43,9 @@ namespace DataAggregator.Utils
 
 
 
-		public static List<LabeledInstance> AllActivePower(List<DER> ders){
+		public static List<LabeledMeasurement> AllActivePower(List<DER> ders){
 
-			List<LabeledInstance> res = new List<LabeledInstance> ();
+			List<LabeledMeasurement> res = new List<LabeledMeasurement> ();
 			string value;
 			//Random rnd = new Random();
 
@@ -58,9 +58,9 @@ namespace DataAggregator.Utils
 					using (var jr = new JsonTextReader (sr)) {
 						var js = new JsonSerializer ();
 						var composite = js.Deserialize<CompositeMeasurement> (jr);
-						res.Add (new LabeledInstance (
+						res.Add (new LabeledMeasurement (
 							d.Hostname + " : " + d.Port, 
-							composite.value));
+							new CompositeMeasurement(composite.value)));
 			
 							
 					}

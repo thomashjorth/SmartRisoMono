@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using DataAggregator;
 using DataModel;
-
+using DataModel.Syslab;
 namespace Data
 {
 	public class WashingMachineClustering
@@ -225,24 +225,24 @@ namespace Data
 			Console.WriteLine ("Rating" + eeiLOW.Rating());
 
 			// Saving Json with Power Centroids
-			List<LabeledInstance> centroidWithLabel = new List<LabeledInstance>{};
-			centroidWithLabel.Add(new LabeledInstance ("Standby + Misc", centroidsPower [0]));
-			centroidWithLabel.Add(new LabeledInstance ("Low: " + eeiLOW.Rating(), centroidsPower [1]));
-			centroidWithLabel .Add(new LabeledInstance ("Middle: " + eeiMIDDLE.Rating(), centroidsPower[2]));
+			List<LabeledMeasurement> centroidWithLabel = new List<LabeledMeasurement>{};
+			centroidWithLabel.Add(new LabeledMeasurement ("Standby + Misc", new CompositeMeasurement(centroidsPower [0])));
+			centroidWithLabel.Add(new LabeledMeasurement ("Low: " + eeiLOW.Rating(), new CompositeMeasurement(centroidsPower [1])));
+			centroidWithLabel .Add(new LabeledMeasurement ("Middle: " + eeiMIDDLE.Rating(),new CompositeMeasurement( centroidsPower[2])));
 			if (numberOfPrograms == 4) {
-				centroidWithLabel.Add (new LabeledInstance ("High: " + eeiHIGH.Rating(), centroidsPower [3]));
+				centroidWithLabel.Add (new LabeledMeasurement ("High: " + eeiHIGH.Rating(), new CompositeMeasurement(centroidsPower [3])));
 			}
 			string cenJSON = Newtonsoft.Json.JsonConvert.SerializeObject (centroidWithLabel);
 			File.Delete (homePath + "/DataAggregatorData/WashingMachine/centroidsPower.json");
 			File.AppendAllText (homePath+"/DataAggregatorData/WashingMachine/centroidsPower.json", cenJSON);
 
 			// Saving Json with Energy Centroids
-			List<LabeledInstance> centroidWithLabelEnergy = new List<LabeledInstance>{};
-			centroidWithLabelEnergy.Add(new LabeledInstance ("Standby + Other", centroidsEnergy [0]/60/60/1000000));
-			centroidWithLabelEnergy.Add(new LabeledInstance ("Low: " + eeiLOW.Rating(), centroidsEnergy [1]/60/60/1000000));
-			centroidWithLabelEnergy .Add(new LabeledInstance ("Middle: " + eeiMIDDLE.Rating(), centroidsEnergy[2]/60/60/1000000));
+			List<LabeledMeasurement> centroidWithLabelEnergy = new List<LabeledMeasurement>{};
+			centroidWithLabelEnergy.Add(new LabeledMeasurement ("Standby + Other", new CompositeMeasurement(centroidsEnergy [0]/60/60/1000000)));
+			centroidWithLabelEnergy.Add(new LabeledMeasurement ("Low: " + eeiLOW.Rating(), new CompositeMeasurement( centroidsEnergy [1]/60/60/1000000)));
+			centroidWithLabelEnergy .Add(new LabeledMeasurement ("Middle: " + eeiMIDDLE.Rating(), new CompositeMeasurement(centroidsEnergy[2]/60/60/1000000)));
 			if (numberOfPrograms == 4) {
-				centroidWithLabelEnergy.Add (new LabeledInstance ("High: " + eeiHIGH.Rating(), centroidsEnergy [3] / 60 / 60 / 1000000));
+				centroidWithLabelEnergy.Add (new LabeledMeasurement ("High: " + eeiHIGH.Rating(),new CompositeMeasurement( centroidsEnergy [3] / 60 / 60 / 1000000)));
 			}
 			string cenJSONEnergy = Newtonsoft.Json.JsonConvert.SerializeObject (centroidWithLabelEnergy);
 			File.Delete (homePath + "/DataAggregatorData/WashingMachine/centroidsEnergy.json");
@@ -251,23 +251,23 @@ namespace Data
 
 
 			// Saving count of programs detected
-			List<LabeledInstance> programsCountJSON = new List<LabeledInstance>{};
-			programsCountJSON.Add(new LabeledInstance("Low: " + eeiLOW.Rating(),0));
-			programsCountJSON.Add(new LabeledInstance("Middle: " + eeiMIDDLE.Rating(),0));
+			List<LabeledMeasurement> programsCountJSON = new List<LabeledMeasurement>{};
+			programsCountJSON.Add(new LabeledMeasurement("Low: " + eeiLOW.Rating(),new CompositeMeasurement(0)));
+			programsCountJSON.Add(new LabeledMeasurement("Middle: " + eeiMIDDLE.Rating(),new CompositeMeasurement(0)));
 			if (numberOfPrograms == 4) {
-				programsCountJSON.Add (new LabeledInstance ("High: " + eeiHIGH.Rating(), 0));
+				programsCountJSON.Add (new LabeledMeasurement ("High: " + eeiHIGH.Rating(),new CompositeMeasurement( 0)));
 			}
 			Console.WriteLine (preparedData.Count + " -----------" + discoveredCycles.Count);
 			for (int y=0;y<preparedData.Count;y++) {
 				if (kmean2.Clusters.Centroids[kmean2.Clusters.Nearest (preparedData[y])][0] == centroidsPower [1]) {
 					discoveredCycles[y].SecondField="Low: " + eeiLOW.Rating();
-					programsCountJSON [0].value++;
+					programsCountJSON [0].measurement.value++;
 				}else if(kmean2.Clusters.Centroids[kmean2.Clusters.Nearest (preparedData[y])][0] == centroidsPower [2]){
-					programsCountJSON [1].value++;
+					programsCountJSON [1].measurement.value++;
 					discoveredCycles[y].SecondField="Middle: " + eeiMIDDLE.Rating();
 				}if (numberOfPrograms == 4) {
 					if(kmean2.Clusters.Centroids[kmean2.Clusters.Nearest (preparedData[y])][0] == centroidsPower [3]){
-						programsCountJSON [2].value++;
+						programsCountJSON [2].measurement.value++;
 						discoveredCycles[y].SecondField="High: " + eeiHIGH.Rating();
 					}}
 			}

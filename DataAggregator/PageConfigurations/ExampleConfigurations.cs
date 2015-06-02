@@ -26,12 +26,15 @@ namespace DataAggregator
 						new double[,]{{-10,-1}},new double[,]{{-1.0,1}},new double[,]{{1.0,10}}),
 					multi.CreateMultiGraph(new List<string>{"localhost","localhost"},new List<int>{8080,8085},
 						RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,
-						2000,"8080 and 8085 Power",-2,12,10,"mW"),
-					single.CreateGraph(SingleAggregation.AvgActivePower,2000,"Realtime Avg Power",-2,12,10,"mW"),
-				multi.CreateBar(new List<string>{"localhost","localhost"},new List<int>{8080,8085},
-				RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,3000,"Power",-2,12,"mW"),
-				multi.CreatePie(new List<string>{"localhost","localhost"},new List<int>{8080,8085},
-				RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,3000,"Power")
+						2000,"8080 and 8085 Power",0,12,10,"mW"),
+					single.CreateGraph(SingleAggregation.AvgActivePower,2000,"Realtime Avg Power",0,12,10,"mW"),
+					multi.CreateMultiGraph(new List<string>{"localhost","localhost","localhost"},new List<int>{8080,8085,8090},
+						RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,
+						2000,"8080 and 8085 Power",0,12,10,"mW"),
+					multi.CreateBar(new List<string>{"localhost","localhost"},new List<int>{8080,8085},RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,2000,"Active Power",0,12,"mW"),
+					multi.CreatePie(new List<string>{"localhost","localhost"},new List<int>{8080,8085},RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,2000,"Active Power"),
+					multi.CreatePie(new List<string>{"localhost","localhost","localhost"},new List<int>{8080,8085,8090},RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,2000,"Active Power"),
+					multi.CreateBar(new List<string>{"localhost","localhost","localhost"},new List<int>{8080,8085,8090},RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,2000,"Active Power",0,12,"mW"),
 
 				}
 			);
@@ -45,7 +48,7 @@ namespace DataAggregator
 			AbstractRealtimeVisualizationFactory realtime8080 = 
 				VisFac.CreateRealtimeVizualizationFactory ("localhost", 9001, "localhost", 8080);
 			AbstractApplianceVisualizationFactory appliance = 
-				VisFac.CreateApplianceVizualizationFactory ("127.0.0.1", 9001);
+				VisFac.CreateApplianceVizualizationFactory ("localhost", 9001);
 
 			AbstractPageFactory pageFactory = new EquallySized3x3PageFactory ();
 

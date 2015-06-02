@@ -98,7 +98,7 @@ namespace DataAggregator.Controllers
 			});
 
 			PagesConfig testPie = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
-	//			multi.CreatePie(MultiAggregation.AllActivePower,5000,"Active Power")
+			//	multi.CreatePie(MultiAggregation.AllActivePower,2000,"Active Power")
 			});
 
 			const string temperature = "Temperature";
@@ -134,8 +134,8 @@ namespace DataAggregator.Controllers
 				appliance.CreateBar(ApplianceData.Score, 2000,"Score",0,100,""),
 				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,2000,"Active Power",-1,1,15,"mW"), 
 				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,2000,"Active Power",-1,1,7200,"mW"),
-				appliance.CreateTable(ApplianceData.Discovered, 2000,"Discovered Programs")
-				//realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,2000,"test",-1,1,"W")
+				appliance.CreateTable(ApplianceData.Discovered, 2000,"Discovered Programs"),
+	//			realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS,RealtimeData.ActivePower,2000,"Power",0,20,"mW",new double[,]{{0,2}},new double[,]{{2,5}},new double[,]{5,20})
 				}
 				
 
@@ -168,7 +168,7 @@ namespace DataAggregator.Controllers
 
 				response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
-						ExampleConfigurations.Example1()
+						ExampleConfigurations.WashingMachineExperiment()
 					)
 					);
 				}

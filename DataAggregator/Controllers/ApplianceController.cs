@@ -22,19 +22,19 @@ namespace DataAggregator.Controllers
 		{
 			string openFile = "";
 			string read = "";
-			List<LabeledInstance> programEnergy = new List<LabeledInstance>(){};
+			List<LabeledMeasurement> programEnergy = new List<LabeledMeasurement>(){};
 			try {
 				StreamReader file = File.OpenText (homePath + "/DataAggregatorData/WashingMachine/centroidsEnergy.json");
 				read = file.ReadToEnd();
-				programEnergy = Newtonsoft.Json.JsonConvert.DeserializeObject<List<LabeledInstance>>(read);
+				programEnergy = Newtonsoft.Json.JsonConvert.DeserializeObject<List<LabeledMeasurement>>(read);
 			
 			} catch(Exception e) {
-				read = e.ToString ();
+				read = "FEJL1"+e.ToString ();
 			}
-			EEI eeiEU = new EEI (7, new double[]{ programEnergy [1].value, programEnergy [2].value, programEnergy [3].value });
-			EEI eeiLOW = new EEI (7, new double[]{ programEnergy [1].value, programEnergy [1].value, programEnergy [1].value });
-			EEI eeiMIDDLE = new EEI (7, new double[]{ programEnergy [2].value, programEnergy [2].value, programEnergy [2].value });
-			EEI eeiHIGH = new EEI (7, new double[]{ programEnergy [3].value, programEnergy [3].value, programEnergy [3].value });
+			EEI eeiEU = new EEI (7, new double[]{ programEnergy [1].measurement.value, programEnergy [2].measurement.value, programEnergy [3].measurement.value });
+			EEI eeiLOW = new EEI (7, new double[]{ programEnergy [1].measurement.value, programEnergy [1].measurement.value, programEnergy [1].measurement.value });
+			EEI eeiMIDDLE = new EEI (7, new double[]{ programEnergy [2].measurement.value, programEnergy [2].measurement.value, programEnergy [2].measurement.value });
+			EEI eeiHIGH = new EEI (7, new double[]{ programEnergy [3].measurement.value, programEnergy [3].measurement.value, programEnergy [3].measurement.value });
 
 			HttpResponseMessage response;
 
@@ -70,11 +70,11 @@ namespace DataAggregator.Controllers
 				} else if (attribute.Equals ("HIGH")) {
 					Score = new CompositeMeasurement (eeiHIGH.EeiScore ());
 				} else if (attribute.Equals ("ALL")) {
-					List<LabeledInstance> allScore = new List<LabeledInstance> (){ };
-					allScore.Add (new LabeledInstance ("LOW: " + eeiLOW.Rating (), eeiLOW.EeiScore ()));
-					allScore.Add (new LabeledInstance ("MIDDLE: " + eeiMIDDLE.Rating (), eeiMIDDLE.EeiScore ()));
-					allScore.Add (new LabeledInstance ("HIGH: " + eeiHIGH.Rating (), eeiHIGH.EeiScore ()));
-					allScore.Add (new LabeledInstance ("EU: " + eeiEU.Rating (), eeiEU.EeiScore ()));
+					List<LabeledMeasurement> allScore = new List<LabeledMeasurement> (){ };
+					allScore.Add (new LabeledMeasurement ("LOW: " + eeiLOW.Rating (), new CompositeMeasurement (eeiLOW.EeiScore ())));
+						allScore.Add (new LabeledMeasurement ("MIDDLE: " + eeiMIDDLE.Rating (), new CompositeMeasurement (eeiMIDDLE.EeiScore ())));
+						allScore.Add (new LabeledMeasurement ("HIGH: " + eeiHIGH.Rating (), new CompositeMeasurement (eeiHIGH.EeiScore ())));
+						allScore.Add (new LabeledMeasurement ("EU: " + eeiEU.Rating (), new CompositeMeasurement (eeiEU.EeiScore ())));
 
 					response = Request.CreateResponse (
 						HttpStatusCode.Created,
@@ -106,11 +106,11 @@ namespace DataAggregator.Controllers
 				} else if (attribute.Equals ("HIGH")) {
 					AEC = new CompositeMeasurement (eeiHIGH.EeiScore ());
 				} else if (attribute.Equals ("ALL")) {
-					List<LabeledInstance> allAec = new List<LabeledInstance> (){ };
-					allAec.Add (new LabeledInstance ("LOW: " + eeiLOW.Rating (), eeiLOW.AEC ()));
-					allAec.Add (new LabeledInstance ("MIDDLE: " + eeiMIDDLE.Rating (), eeiMIDDLE.AEC ()));
-					allAec.Add (new LabeledInstance ("HIGH: " + eeiHIGH.Rating (), eeiHIGH.AEC ()));
-					allAec.Add (new LabeledInstance ("EU: " + eeiEU.Rating (), eeiEU.AEC ()));
+					List<LabeledMeasurement> allAec = new List<LabeledMeasurement> (){ };
+					allAec.Add (new LabeledMeasurement ("LOW: " + eeiLOW.Rating (), new CompositeMeasurement (eeiLOW.AEC ())));
+					allAec.Add (new LabeledMeasurement ("MIDDLE: " + eeiMIDDLE.Rating (), new CompositeMeasurement (eeiMIDDLE.AEC ())));
+					allAec.Add (new LabeledMeasurement ("HIGH: " + eeiHIGH.Rating (), new CompositeMeasurement (eeiHIGH.AEC ())));
+					allAec.Add (new LabeledMeasurement ("EU: " + eeiEU.Rating (), new CompositeMeasurement (eeiEU.AEC ())));
 				
 					response = Request.CreateResponse (
 						HttpStatusCode.Created,
@@ -150,14 +150,8 @@ namespace DataAggregator.Controllers
 					StreamReader file = File.OpenText (homePath + openFile);
 					read = file.ReadToEnd ();
 
-					response = Request.CreateResponse (
-						HttpStatusCode.Created, 
-						read
-
-					);
-
 				} catch (Exception e) {
-					read = e.ToString ();
+					read = "NAN";
 				}
 
 				response = Request.CreateResponse (
@@ -165,19 +159,24 @@ namespace DataAggregator.Controllers
 					read
 				);
 
+				response = Request.CreateResponse (
+					HttpStatusCode.Created, 
+					read
+
+				);
 				response.Headers.Add ("Access-Control-Allow-Origin", "*");
 				response.Headers.Add ("Access-Control-Allow-Methods", "GET");
 
 				return response;
-			} 
+			}
+
+
 			response = Request.CreateResponse (
 				HttpStatusCode.Created, 
 				"NAN"
 			);
-
 			response.Headers.Add ("Access-Control-Allow-Origin", "*");
 			response.Headers.Add ("Access-Control-Allow-Methods", "GET");
-
 			return response;
 			}
     }
