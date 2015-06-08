@@ -113,7 +113,8 @@
 			"Device":"DER",
 			"Params":"?host=localhost&port=8080",
 			"UpdateInterval":30000
-		}]
+		}],
+		"PageType":"Grid3x3"
 	},
 	{
 		"Page":[{
@@ -228,7 +229,8 @@
 			"Device":"DER",
 			"Params":"?host=localhost&port=8085",
 			"UpdateInterval":30000
-		}]
+		}],
+		"PageType":"Grid3x3"
 	},
 	{
 		"Page":[{
@@ -345,5 +347,7 @@
 			"Params":"?host=localhost&port=8090",
 			"UpdateInterval":30000
 		}
-	]}
+		],
+		"PageType":"Grid3x3"
+	}
 ]}"

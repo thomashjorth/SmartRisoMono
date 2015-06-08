@@ -56,7 +56,7 @@ namespace DataAggregator.Controllers
 				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",-1,1,12,"P [kW]"),
 				realtime8080.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl"),
 				realtime8080.CreateUnit(30000)
-			});
+			},"Grid3x3");
 			PagesConfig loadGenerated85 = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
 				realtime8085.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",0,100,"P [kW]",
 				                         new double[,]{{0,80}},null,new double[,]{{80,100}}),
@@ -71,7 +71,7 @@ namespace DataAggregator.Controllers
 				realtime8085.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",-1,1,12,"P [kW]"),
 				realtime8085.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl"),
 				realtime8085.CreateUnit(30000)
-			});
+			},"Grid3x3");
 			PagesConfig loadGenerated90 = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
 				realtime8090.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",0,100,"P [kW]",
 				                         new double[,]{{0,80}},null,new double[,]{{80,100}}),
@@ -86,25 +86,25 @@ namespace DataAggregator.Controllers
 				realtime8090.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",-1,1,12,"P [kW]"),
 				realtime8090.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl"),
 				realtime8090.CreateUnit(30000)
-			});
+			},"Grid3x3");
 
 			PagesConfig testGauge = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
 				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Temperature,1000,"Temperature",0,300,"T [degC]",
 					new double[,]{{0.0,100}},new double[,]{{100,150}},new double[,]{{150,300}})
-			});
+			},"Grid3x3");
 
 			PagesConfig testControl = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
 				realtime8080.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl")
-			});
+			},"Grid3x3");
 
 			PagesConfig testPie = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
 			//	multi.CreatePie(MultiAggregation.AllActivePower,2000,"Active Power")
-			});
+			},"Grid3x3");
 
 			const string temperature = "Temperature";
 			PagesConfig testMultiGraph = pageFactory.CreatePages(new List<VisualizationConfig> (){
 				multi.CreateMultiGraph(new List<string>(){"localhost", "localhost", "localhost"},new List<int>(){8080,8085,8090},RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,50000,"Active Power",-1,1,12,"P [kW]")
-			});
+			},"Grid3x3");
 
 			PagesConfig gaiaGenerated = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
 				realtime8085.CreateGauge(RealtimeInterface.GaiaWindTurbineWS, RealtimeData.InterphaseVoltages,1000,"Interphase Voltages",0,500,"U [V]",
@@ -120,7 +120,7 @@ namespace DataAggregator.Controllers
 				realtime8085.CreateGraph(RealtimeInterface.GaiaWindTurbineWS, RealtimeData.InterphaseVoltages,5000,"Interphase Voltages",0,500,12,"U [V]"),
 				realtime8085.CreateControl(RealtimeInterface.GaiaWindTurbineWS,"gaiaControl"),
 				realtime8085.CreateUnit(30000)
-			});
+			},"Grid3x3");
 
 			AbstractApplianceVisualizationFactory appliance = VisFac.CreateApplianceVizualizationFactory ("127.0.0.1", 9001);
 
@@ -136,7 +136,7 @@ namespace DataAggregator.Controllers
 				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,2000,"Active Power",-1,1,7200,"mW"),
 				appliance.CreateTable(ApplianceData.Discovered, 2000,"Discovered Programs"),
 	//			realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS,RealtimeData.ActivePower,2000,"Power",0,20,"mW",new double[,]{{0,2}},new double[,]{{2,5}},new double[,]{5,20})
-				}
+			},"Grid3x3"
 				
 
 			);

@@ -6,9 +6,11 @@ namespace DataModel.ConfigurationModel.Classes
 	public class PageConfig
 	{
 		public List<VisualizationConfig> Page;
-		public PageConfig (List<VisualizationConfig> page)
+		public string PageType;
+		public PageConfig (List<VisualizationConfig> page, string pageType)
 		{
 			Page = page;
+			PageType = pageType;
 		}
 	
 	}

@@ -36,7 +36,7 @@ namespace DataAggregator
 					multi.CreatePie(new List<string>{"localhost","localhost","localhost"},new List<int>{8080,8085,8090},RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,2000,"Active Power"),
 					multi.CreateBar(new List<string>{"localhost","localhost","localhost"},new List<int>{8080,8085,8090},RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,2000,"Active Power",0,12,"mW"),
 
-				}
+			},"Grid3x3"
 			);
 
 			return pages;
@@ -66,7 +66,7 @@ namespace DataAggregator
 
 				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,2000,"Active Power",-5,5,7200,"mW"),
 				appliance.CreateTable(ApplianceData.Discovered, 2000,"Discovered Programs")
-			});
+			},"Grid3x3");
 			return washingExample;
 		}
 
@@ -89,7 +89,7 @@ namespace DataAggregator
 				realtime8080.CreateGraph(RealtimeInterface.GaiaWindTurbineWS, RealtimeData.InterphaseVoltages,1000,"Interphase Voltages",0,500,12,"U [V]"),
 				realtime8080.CreateControl(RealtimeInterface.GaiaWindTurbineWS,"gaiaControl"),
 				realtime8080.CreateUnit(30000)
-			});
+			},"Grid3x3");
 			string serializedGaiaConf = Newtonsoft.Json.JsonConvert.SerializeObject (gaia);
 			File.Delete ("PageConfigurations/gaia.json");
 			File.AppendAllText ("PageConfigurations/gaia.json", serializedGaiaConf);
@@ -129,7 +129,7 @@ namespace DataAggregator
 				realtime8080.CreateGraph(RealtimeInterface.GaiaWindTurbineWS, RealtimeData.InterphaseVoltages,1000,"Interphase Voltages",0,500,12,"U [V]"),
 				realtime8080.CreateControl(RealtimeInterface.GaiaWindTurbineWS,"gaiaControl"),
 				realtime8080.CreateUnit(30000)
-			});
+			},"Grid3x3");
 			string serializedGaiaConf = Newtonsoft.Json.JsonConvert.SerializeObject (gaia);
 			File.Delete ("PageConfigurations/testMultiGaiaWashing.json");
 			File.AppendAllText ("PageConfigurations/testMultiGaiaWashing.json", serializedGaiaConf);
@@ -141,7 +141,7 @@ namespace DataAggregator
 			AbstractPageFactory pageFactory = new EquallySized3x3PageFactory ();
 			PagesConfig gaia= pageFactory.CreatePages(new List<VisualizationConfig> (){ 
 				
-			});
+			},"Grid3x3");
 			return gaia;
 		}
 	}

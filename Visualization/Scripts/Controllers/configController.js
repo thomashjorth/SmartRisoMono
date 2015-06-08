@@ -30,6 +30,7 @@
 				if($scope.slides == undefined || $scope.slides.length == 0){
 					slides=config;
 					for(var j = 0; j < slides.Pages.length; j ++){
+						slides.Pages[j].PageType="Views/Pages/"+slides.Pages[j].PageType +".html";
 						for(var i = 0; i < slides.Pages[j].Page.length; i ++){
 							slides.Pages[j].Page[i].id="box"+(i+1);
 							slides.Pages[j].Page[i].VisualizationType="Views/Visualization/"+slides.Pages[j].Page[i].VisualizationType +".html";
@@ -46,6 +47,7 @@
 					}
 
 					for(var j = 0; j < $scope.slides.length; j ++){
+						slides.Pages[j].PageType="Views/Pages/"+slides.Pages[j].PageType +".html";
 						for(var i = 0; i < slides[j].Page.length; i ++){
 							slides[j].Page[i].id="box"+(i+1);
 							slides[j].Page[i].VisualizationType="Views/Visualization/"+slides[j].Page[i].VisualizationType +".html";

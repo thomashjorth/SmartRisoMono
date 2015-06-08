@@ -21,7 +21,8 @@
 			"Device":null,
 			"Params":null,
 			"UpdateInterval":0
-		}]
+		}],
+		"PageType":"Grid3x3"
 	},
 	{"Page":[{
 		"VisualizationType":"dumploadControl",
@@ -29,7 +30,8 @@
 		"Port":9001,
 		"Device":"Realtime",
 		"Params":"?host=localhost&port=8080&wsInterface=GenericLoadWS",
-		"UpdateInterval":0}]},
+		"UpdateInterval":0}],
+		"PageType":"Grid3x3"},
 	{"Page":[{
 		"TitleHeading":"Active Power",
 		"VisualizationType":"d3Pie",
@@ -37,6 +39,7 @@
 		"Port":9001,
 		"Device":"Aggregation",
 		"Params":"Get/AllActivePower",
-		"UpdateInterval":60000}]
+		"UpdateInterval":60000}],
+		"PageType":"Grid3x3"
 	}]
 }"

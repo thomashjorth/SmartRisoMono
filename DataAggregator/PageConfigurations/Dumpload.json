@@ -117,5 +117,7 @@
 			"Params":"?host=localhost&port=8080",
 			"UpdateInterval":30000
 		}
-	]}
+		],
+		"PageType":"Grid3x3"
+	}
 ]}"

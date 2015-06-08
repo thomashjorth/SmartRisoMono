@@ -2,7 +2,7 @@
 	<!--<div id="sideBar" ng-include="'Views/Visualization/sideBar.html'"></div>-->
 
 	<div id="visualization">
-		<ng-include id="boxAll" ng-repeat="pages in include track by $index" src="'Views/Pages/Grid3x3.html'" ng-show="pages.Current">
+		<ng-include id="boxAll" ng-repeat="pages in include track by $index" src="config.Pages[$index].PageType" ng-show="pages.Current">
 			
 		</ng-include>
 		<div id="boxBottom" ng-if="include.length > 1">
