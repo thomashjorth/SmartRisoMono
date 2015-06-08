@@ -84,5 +84,24 @@ namespace DataAggregator.Controllers
 				return response;
 			}  
 		}
+
+		[HttpPut]
+		[AcceptVerbs("OPTIONS")]
+		public HttpResponseMessage PutParam([FromUri] string host, [FromUri] string port, [FromUri] string wsInterface, [FromUri] string resource, [FromUri] string param)
+		{
+			using (var client = new HttpClient())    
+			{ 
+				HttpResponseMessage response;
+				client.BaseAddress = new Uri("http://"+host+":"+port+"/");    
+				var r = client.PutAsync(wsInterface+"/"+resource+"/"+param,null).Result;
+				if (r.IsSuccessStatusCode) {
+					response = new HttpResponseMessage (HttpStatusCode.OK);
+				} else
+					response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+				response.Headers.Add("Access-Control-Allow-Origin", "*");
+				response.Headers.Add("Access-Control-Allow-Methods", "PUT");
+				return response;
+			}  
+		}
 	}
 }
