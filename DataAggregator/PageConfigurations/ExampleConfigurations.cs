@@ -150,43 +150,43 @@ namespace DataAggregator
 
 			PageFactory pageFactory = new PageFactory ();
 
-			RealtimeVisualizationFactory realtime = new RealtimeVisualizationFactory ("localhost", 9001, "localhost", 8080);
-			RealtimeVisualizationFactory realtime2 = new RealtimeVisualizationFactory ("localhost", 9001, "localhost", 8085);
-			RealtimeVisualizationFactory realtime3 = new RealtimeVisualizationFactory ("localhost", 9001, "localhost", 8090);
+			RealtimeVisualizationFactory realtime = new RealtimeVisualizationFactory ("127.0.0.1", 9001, "127.0.0.1", 8080);
+			RealtimeVisualizationFactory realtime2 = new RealtimeVisualizationFactory ("127.0.0.1", 9001, "127.0.0.1", 8085);
+			RealtimeVisualizationFactory realtime3 = new RealtimeVisualizationFactory ("127.0.0.1", 9001, "127.0.0.1", 8090);
 
 			List<ExperimentConfig> experiments = new List<ExperimentConfig>{
 				new ExperimentConfig(
-					"localhost",
-					9001,
-					"Realtime",
-					"GetCompositeMeasurement/?host=localhost&port=8080&wsInterface=GenericLoadWS&resource=getActivePower"
+					"127.0.0.1",
+					8080,
+					"GenericLoadWS",
+					"getActivePower"
 					,5000,
 					realtime.CreateGraph(RealtimeInterface.GenericLoadWS,RealtimeData.ActivePower,3000,"Power",-10,10,10,"mW"),
 					realtime.CreateGraph(RealtimeInterface.GenericLoadWS,RealtimeData.ReactivePower,3000,"Power",-10,10,10,"mW")
 				)
 			,
 				new ExperimentConfig(
-					"localhost",
-					9001,
-					"Realtime",
-					"GetCompositeMeasurement/?host=localhost&port=8085&wsInterface=GenericLoadWS&resource=getActivePower"
+					"127.0.0.1",
+					8085,
+					"GaiaWindTurbineWS",
+					"getActivePower"
 					,5000,
 					realtime2.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.RotorRPM,3000,"Power",-10,10,10,"mW"),
 					realtime2.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,3000,"Power",-10,10,10,"mW")
 						)
 				,
 				new ExperimentConfig(
-					"localhost",
+					"127.0.0.1",
 					8090,
-					"Realtime",
-					"GetCompositeMeasurement/?host=localhost&port=8090&wsInterface=GenericLoadWS&resource=getActivePower"
+					"LithiumBatteryWS",
+					"getSOC"
 					,5000,
 					realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.SOC,3000,"Power",-10,10,10,"mW"),
 					realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,3000,"Power",-10,10,10,"mW")
 						)
 			};
 			ExperimentPageConfig b = new ExperimentPageConfig (experiments, "Experiment");
-			b.HostAgg = "localhost";
+			b.HostAgg = "127.0.0.1";
 			b.PortAgg = 9001;
 
 
