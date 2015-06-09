@@ -23,11 +23,12 @@ namespace Data
 			while (!_shouldStop)
 			{
 				Console.WriteLine ("New Classification in 60 s");
-				Thread.Sleep (60000);
+
 				int numberOfPrograms = 4;
 
 				
 				ApplianceClustering (numberOfPrograms);
+				Thread.Sleep (60000);
 
 			}
 			Console.WriteLine("Collection Stopped");
@@ -147,7 +148,7 @@ namespace Data
 				if (currentClass != kmean.Clusters.Nearest (powerInput [p])) {
 					currentClass = kmean.Clusters.Nearest (powerInput [p]);
 					res0 += currentClass + "; " + duration + "; " + powerForDuration / 1000 / 60 / 60 / 60 + " " + epoch.AddSeconds (timeConcat [p] / 1000) + " " + TimeSpan.FromSeconds (duration) + "\n";
-					if (duration > 2) {
+					if (powerForDuration/duration > kmean.Clusters.Centroids[0][0]*0.50 && powerForDuration/duration > kmean.Clusters.Centroids[1][0]*0.50) {
 						preparedData.Add (new double[]{ powerForDuration / duration, powerForDuration });
 						discoveredCycles.Add(new DoubleLabel(epoch.AddSeconds (timeConcat [p] / 1000).ToString(),"Standby"));
 					}
@@ -166,25 +167,36 @@ namespace Data
 			// CLustering with k=4
 			KMeans	kmean2 = new KMeans (numberOfPrograms
 				, Distance.Euclidean);
-			kmean2.Compute (preparedData.ToArray ());
+
+			List<double[]> preparedDataOnlyEnergy = new List<double[]>{ };
+			foreach (double[] data in preparedData) {
+				preparedDataOnlyEnergy.Add(new double[]{data[1]});
+			}
+
+			kmean2.Compute (preparedDataOnlyEnergy.ToArray ());
 			string res = "";
 			res += "cluster;duration;power\n";
+			try{
 			foreach (double[] data in preparedData) {
 				res +=
 				kmean2.Clusters.Nearest (data) + "; " + data [0] + "; " + data [1] + "\n"; 
 			}
 			Console.WriteLine (res);
-
+			}catch(Exception e){
+				Console.WriteLine ("Error");
+			}
 
 			// Centroids to json
 			List<double> centroidsPower = new List<double>{};
 			List<double> centroidsEnergy = new List<double>{};
-
+			try{
 			foreach (double[] cen in kmean2.Clusters.Centroids) {
 				centroidsPower.Add (cen[0]);
 				centroidsEnergy.Add (cen[1]);
 			}
-
+			}catch{
+				Console.WriteLine ("Error 2");
+			}
 			centroidsPower.Sort ();
 			centroidsEnergy.Sort ();
 

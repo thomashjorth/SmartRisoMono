@@ -15,7 +15,7 @@ namespace Data
 
 			PowerReadingCollector powerCollector = new PowerReadingCollector();
 			Thread powerThread = new Thread(powerCollector.DoWork);
-			powerThread.Start();
+			//powerThread.Start();
 
 
 			WashingMachineClustering washing = new WashingMachineClustering();

@@ -7,8 +7,8 @@ namespace DataModel.ConfigurationModel
 {
 	public class PagesConfig
 	{
-		public List<PageConfig> Pages = new List<PageConfig>(){};
-		public PagesConfig (List<PageConfig> pages)
+		public List<MasterPageConfig> Pages = new List<MasterPageConfig>(){};
+		public PagesConfig (List<MasterPageConfig> pages)
 		{
 			Pages = pages;
 		}

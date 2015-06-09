@@ -40,9 +40,9 @@ namespace DataAggregator.Controllers
 				//VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8090);
 				VisFac.CreateRealtimeVizualizationFactory ("127.0.0.1", 9001,"localhost", 8090);
 			
-			AbstractPageFactory pageFactory = new EquallySized3x3PageFactory ();
+			PageFactory pageFactory = new PageFactory ();
 
-			PagesConfig loadGenerated = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
+			PagesConfig loadGenerated = pageFactory.Create3x3Pages(new List<VisualizationConfig> (){ 
 				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",0,100,"P [kW]",
 				                         new double[,]{{0,80}},null,new double[,]{{80,100}}),
 				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ReactivePower,1000,"Reactive Power",-13,13,"Q [kVAr]",
@@ -57,7 +57,7 @@ namespace DataAggregator.Controllers
 				realtime8080.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl"),
 				realtime8080.CreateUnit(30000)
 			},"Grid3x3");
-			PagesConfig loadGenerated85 = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
+			PagesConfig loadGenerated85 = pageFactory.Create3x3Pages(new List<VisualizationConfig> (){ 
 				realtime8085.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",0,100,"P [kW]",
 				                         new double[,]{{0,80}},null,new double[,]{{80,100}}),
 				realtime8085.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ReactivePower,1000,"Reactive Power",-13,13,"Q [kVAr]",
@@ -72,7 +72,7 @@ namespace DataAggregator.Controllers
 				realtime8085.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl"),
 				realtime8085.CreateUnit(30000)
 			},"Grid3x3");
-			PagesConfig loadGenerated90 = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
+			PagesConfig loadGenerated90 = pageFactory.Create3x3Pages(new List<VisualizationConfig> (){ 
 				realtime8090.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",0,100,"P [kW]",
 				                         new double[,]{{0,80}},null,new double[,]{{80,100}}),
 				realtime8090.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.ReactivePower,1000,"Reactive Power",-13,13,"Q [kVAr]",
@@ -88,25 +88,25 @@ namespace DataAggregator.Controllers
 				realtime8090.CreateUnit(30000)
 			},"Grid3x3");
 
-			PagesConfig testGauge = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
+			PagesConfig testGauge = pageFactory.Create3x3Pages(new List<VisualizationConfig> (){ 
 				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS, RealtimeData.Temperature,1000,"Temperature",0,300,"T [degC]",
 					new double[,]{{0.0,100}},new double[,]{{100,150}},new double[,]{{150,300}})
 			},"Grid3x3");
 
-			PagesConfig testControl = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
+			PagesConfig testControl = pageFactory.Create3x3Pages(new List<VisualizationConfig> (){ 
 				realtime8080.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl")
 			},"Grid3x3");
 
-			PagesConfig testPie = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
+			PagesConfig testPie = pageFactory.Create3x3Pages(new List<VisualizationConfig> (){ 
 			//	multi.CreatePie(MultiAggregation.AllActivePower,2000,"Active Power")
 			},"Grid3x3");
 
 			const string temperature = "Temperature";
-			PagesConfig testMultiGraph = pageFactory.CreatePages(new List<VisualizationConfig> (){
+			PagesConfig testMultiGraph = pageFactory.Create3x3Pages(new List<VisualizationConfig> (){
 				multi.CreateMultiGraph(new List<string>(){"localhost", "localhost", "localhost"},new List<int>(){8080,8085,8090},RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,50000,"Active Power",-1,1,12,"P [kW]")
 			},"Grid3x3");
 
-			PagesConfig gaiaGenerated = pageFactory.CreatePages(new List<VisualizationConfig> (){ 
+			PagesConfig gaiaGenerated = pageFactory.Create3x3Pages(new List<VisualizationConfig> (){ 
 				realtime8085.CreateGauge(RealtimeInterface.GaiaWindTurbineWS, RealtimeData.InterphaseVoltages,1000,"Interphase Voltages",0,500,"U [V]",
 					new double[,]{{350,450}},null,new double[,]{{0,350},{450,500}}),
 				realtime8085.CreateGauge(RealtimeInterface.GaiaWindTurbineWS, RealtimeData.ActivePower,1000,"Active Power",-5,20,"P [kW]",
@@ -124,7 +124,7 @@ namespace DataAggregator.Controllers
 
 			AbstractApplianceVisualizationFactory appliance = VisFac.CreateApplianceVizualizationFactory ("127.0.0.1", 9001);
 
-			PagesConfig washingExample = pageFactory.CreatePages (new List<VisualizationConfig> (){ 
+			PagesConfig washingExample = pageFactory.Create3x3Pages (new List<VisualizationConfig> (){ 
 				
 				appliance.CreatePie(ApplianceData.Count,2000,"Count"),
 				appliance.CreatePie(ApplianceData.PowerCentroid,2000,"Power"),
@@ -168,7 +168,7 @@ namespace DataAggregator.Controllers
 
 				response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
-						ExampleConfigurations.WashingMachineExperiment()
+						ExampleConfigurations.Experiement()
 					)
 					);
 				}
