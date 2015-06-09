@@ -31,10 +31,14 @@
 					slides=config;
 					for(var j = 0; j < slides.Pages.length; j ++){
 						slides.Pages[j].PageType="Views/Pages/"+slides.Pages[j].PageType +".html";
-						for(var i = 0; i < slides.Pages[j].Page.length; i ++){
-							slides.Pages[j].Page[i].id="box"+(i+1);
-							slides.Pages[j].Page[i].VisualizationType="Views/Visualization/"+slides.Pages[j].Page[i].VisualizationType +".html";
-							n.push(slides.Pages[j].Page[i]);
+						if(slides.Pages[j].PageType == "Views/Pages/Grid3x3.html"){
+							for(var i = 0; i < slides.Pages[j].Page.length; i ++){
+								slides.Pages[j].Page[i].id="box"+(i+1);
+								slides.Pages[j].Page[i].VisualizationType="Views/Visualization/"+slides.Pages[j].Page[i].VisualizationType +".html";
+								n.push(slides.Pages[j].Page[i]);
+							}
+						}else{
+							n = slides.Pages[j];
 						}
 						n.Current=false;
 						include.push(n);
@@ -48,10 +52,14 @@
 
 					for(var j = 0; j < $scope.slides.length; j ++){
 						slides.Pages[j].PageType="Views/Pages/"+slides.Pages[j].PageType +".html";
-						for(var i = 0; i < slides[j].Page.length; i ++){
-							slides[j].Page[i].id="box"+(i+1);
-							slides[j].Page[i].VisualizationType="Views/Visualization/"+slides[j].Page[i].VisualizationType +".html";
-							n.push(slides[j].Page[i]);
+						if(slides.Pages[j].PageType == "Views/Pages/Grid3x3.html"){
+							for(var i = 0; i < slides.Pages[j].Page.length; i ++){
+								slides.Pages[j].Page[i].id="box"+(i+1);
+								slides.Pages[j].Page[i].VisualizationType="Views/Visualization/"+slides.Pages[j].Page[i].VisualizationType +".html";
+								n.push(slides.Pages[j].Page[i]);
+							}
+						}else if(slides.Pages[j].PageType == "Views/Pages/Experiment.html"){
+							n = slides.Pages[j];
 						}
 						n.Current=false;
 						include.push(n);

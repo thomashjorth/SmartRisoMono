@@ -3,6 +3,12 @@ VisualizeApp.controller('experimentController', ['$scope','$interval', '$http', 
     $scope.run = true;
 	$scope.initialize = function()
   	{
+
+		$scope.Hosts = "";
+		$scope.Devices = "";
+		$scope.Resources = "";
+
+		$scope.Units = [];
   		for(int i = 0; i < $scope.init.Units.length; i ++){
   			$scope.Hosts += $scope.init.Units[i].Host + ":" + $scope.init.Units[i].Port + ";";
   			$scope.Devices += $scope.init.Units[i].Device +";";
@@ -12,6 +18,9 @@ VisualizeApp.controller('experimentController', ['$scope','$interval', '$http', 
   				Visualization1: $scope.init.Units[i].Visualization1, 
   				Visualization2: $scope.init.Units[i].Visualization2})
   		}
+		$scope.Hosts = $scope.Hosts.substring(0, $scope.Hosts.length - 1);
+		$scope.Devices = $scope.Devices.substring(0, $scope.Devices.length - 1);
+		$scope.Resources = $scope.Resources.substring(0, $scope.Resources.length - 1);
 
   		$scope.data = {config: {units: $scope.Units, 
             values: []};
@@ -23,14 +32,14 @@ VisualizeApp.controller('experimentController', ['$scope','$interval', '$http', 
             var json = JSON.parse(response);
             var temp = [];
             for (var i = 0; i < json.length; i++) {
-                temp.push({name: json[i].label, timestamp: json[i].measurement.timestampMicros/1000, value: json[i].measurement.value});
+                temp.push({timestamp: json[i].measurement.timestampMicros/1000, value: json[i].measurement.value});
             }
             $scope.data = {config: {unit: $scope.init.Unit, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax, title: $scope.init.TitleHeading}, 
             values: temp};
         });
 
         $interval(function(){
-
+        	
         }, 10000);
     };
 }]);
