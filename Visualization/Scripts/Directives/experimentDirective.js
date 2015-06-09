@@ -26,7 +26,7 @@ VisualizeApp.directive('experimentDirective', function($parse, $window){
 
             }
 
-            function addVisualization(unit, visualization, data) {
+            function addVisualization(device, visualization, data) {
 
             }
 

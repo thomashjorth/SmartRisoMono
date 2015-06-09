@@ -9,7 +9,13 @@ namespace DataAggregator
 	{
 
 		public static CompositeMeasurementAggregated CombineData(List<string> hosts, string device, string action){
-			List<LabeledMeasurement> measurements = GetData (hosts, device, action);
+			List<string> actions = new List<string> ();
+			List<string> devices = new List<string> ();
+			foreach (var host in hosts) {
+				actions.Add (action);
+				devices.Add (device);
+			}
+			List<LabeledMeasurement> measurements = GetData (hosts, devices, actions);
 
 			CompositeMeasurementAggregated aggregated = new CompositeMeasurementAggregated ();
 
@@ -25,12 +31,20 @@ namespace DataAggregator
 			return aggregated;
 		}
 
-		public static List<LabeledMeasurement> GetData(List<string> hosts, string device, string action){
-
+		public static List<LabeledMeasurement> GetData(List<string> hosts, List<string> devices, List<string> actions){
 			List<LabeledMeasurement> data = new List<LabeledMeasurement> ();
-			foreach(var host in hosts){
-				var temp = host.Split (':');
-				data.Add(new LabeledMeasurement(host,Utils.WS.convertXMLToCompositeMeasurement(device, action, temp [0], temp [1])));
+			if (actions.Count == 1) {
+				foreach (var host in hosts) {
+					var temp = host.Split (':');
+					data.Add (new LabeledMeasurement (host, Utils.WS.convertXMLToCompositeMeasurement (devices[0], actions [0], temp [0], temp [1])));
+				}
+			} else {
+				int i = 0;
+				foreach (var host in hosts) {
+					var temp = host.Split (':');
+					data.Add (new LabeledMeasurement (host, Utils.WS.convertXMLToCompositeMeasurement (devices[i], actions [i], temp [0], temp [1])));
+					i++;
+				}
 			}
 			return data;
 		}

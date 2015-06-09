@@ -102,16 +102,18 @@ namespace DataAggregator.Controllers
 		[HttpGet]
 		public HttpResponseMessage GetUnits(
 			[FromUri] string hosts, 
-			[FromUri] string wsInterface, 
-			[FromUri] string resource)
+			[FromUri] string wsInterfaces, 
+			[FromUri] string resources)
 		{
 			HttpResponseMessage response;
-
+			
 			var units = hosts.Split (';').ToList();
+			var devices = wsInterfaces.Split (';').ToList();
+			var actions = resources.Split (';').ToList();
 
 			string data = "NAN";
 			if(units.Count() > 0)
-				data = Newtonsoft.Json.JsonConvert.SerializeObject (UnitMerging.GetData (units, wsInterface, resource));
+				data = Newtonsoft.Json.JsonConvert.SerializeObject (UnitMerging.GetData (units, devices, actions));
 			response = Request.CreateResponse(HttpStatusCode.Created,data);
 
 			response.Headers.Add("Access-Control-Allow-Origin", "*");

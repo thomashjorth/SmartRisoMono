@@ -7,6 +7,8 @@ namespace DataModel.ConfigurationModel.Pages
 	public class ExperimentPageConfig : MasterPageConfig
 	{
 
+		public string HostAgg;
+		public int PortAgg;
 		public List<ExperimentConfig> Units = new List<ExperimentConfig>();
 
 		public ExperimentPageConfig (List<ExperimentConfig> units, string pageType) : base(pageType)

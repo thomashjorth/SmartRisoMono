@@ -72,7 +72,7 @@
     <Compile Include="ConfigurationModel\Pages\PageConfig.cs" />
     <Compile Include="ConfigurationModel\Pages\MasterPageConfig.cs" />
     <Compile Include="ConfigurationModel\Pages\ExperimentPageConfig.cs" />
-    <Compile Include="ConfigurationModel\Classes\ExperimentUnit.cs" />
+    <Compile Include="ConfigurationModel\Classes\ConnectioConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
