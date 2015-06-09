@@ -8,6 +8,7 @@ namespace DataModel.ConfigurationModel.Classes
 		public double ValueMin, ValueMax;
 		public string TitleHeading;
 		public string Unit;
+		public string VisualizationType;
 		public GraphConfig ( string host, int port, string device, string parameters, int updateIterval, 
 			string titleHeading, int yMin, int yMax, int xLength, string unit)
 			: base(host, port, device, parameters, updateIterval)

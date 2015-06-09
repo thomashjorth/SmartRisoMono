@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DataModel.ConfigurationModel.Classes;
+using DataModel.ConfigurationModel.Pages;
 
 namespace DataModel.ConfigurationModel
 {

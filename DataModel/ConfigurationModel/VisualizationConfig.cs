@@ -5,8 +5,7 @@ namespace DataModel.ConfigurationModel
 	public abstract class VisualizationConfig
 	{
 
-		public string VisualizationType;
-		public String Host;
+		public string Host;
 		public int Port;
 		public string Device;
 		public string Params;

@@ -46,7 +46,6 @@
     <Compile Include="ConfigurationModel\Classes\BarConfig.cs" />
     <Compile Include="ConfigurationModel\Classes\GaugeConfig.cs" />
     <Compile Include="ConfigurationModel\Classes\GraphConfig.cs" />
-    <Compile Include="ConfigurationModel\Classes\PageConfig.cs" />
     <Compile Include="ConfigurationModel\Classes\PieConfig.cs" />
     <Compile Include="ConfigurationModel\Classes\TableConfig.cs" />
     <Compile Include="ConfigurationModel\Classes\UnitConfig.cs" />
@@ -69,6 +68,11 @@
     <Compile Include="ConfigurationModel\Factory\SAggregationVisualizationFactory.cs" />
     <Compile Include="ConfigurationModel\Classes\MultiGraphConfig.cs" />
     <Compile Include="LabeledMeasurement.cs" />
+    <Compile Include="ConfigurationModel\Classes\ExperimentConfig.cs" />
+    <Compile Include="ConfigurationModel\Pages\PageConfig.cs" />
+    <Compile Include="ConfigurationModel\Pages\MasterPageConfig.cs" />
+    <Compile Include="ConfigurationModel\Pages\ExperimentPageConfig.cs" />
+    <Compile Include="ConfigurationModel\Classes\ExperimentUnit.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -76,5 +80,6 @@
     <Folder Include="ConfigurationModel\Classes\" />
     <Folder Include="Syslab\" />
     <Folder Include="ConfigurationModel\Factory\" />
+    <Folder Include="ConfigurationModel\Pages\" />
   </ItemGroup>
 </Project>

@@ -5,6 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ItemType>GenericProject</ItemType>
     <ProjectGuid>{524CB2CB-F33B-4978-9BBA-7A2BFED5A37F}</ProjectGuid>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Default|AnyCPU' ">
     <OutputPath>.</OutputPath>
@@ -2438,5 +2440,8 @@
     <None Include="Views\Visualization\d3MultiGraph.html" />
     <None Include="Views\Pages\Grid3x3.html" />
     <None Include="Views\Pages\config.html" />
+    <None Include="Scripts\Controllers\experimentController.js" />
+    <None Include="Scripts\Directives\experimentDirective.js" />
+    <None Include="Views\Pages\Experiment.html" />
   </ItemGroup>
 </Project>

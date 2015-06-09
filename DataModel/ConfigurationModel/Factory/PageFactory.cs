@@ -1,5 +1,6 @@
 ﻿using System;
 using DataModel.ConfigurationModel.Classes;
+using DataModel.ConfigurationModel.Pages;
 using System.Collections.Generic;
 
 namespace DataModel.ConfigurationModel.Factory

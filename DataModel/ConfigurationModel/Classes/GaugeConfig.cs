@@ -31,6 +31,7 @@ namespace DataModel.ConfigurationModel.Classes
 	public class GaugesConfig : VisualizationConfig{
 
 		public List<GaugeConfig> Gauges;
+		public string VisualizationType;
 
 		public GaugesConfig(GaugeConfig g1, GaugeConfig g2) : base(){
 			VisualizationType = "d3Gauge";
