@@ -11,9 +11,11 @@ namespace DataModel.ConfigurationModel.Pages
 		public int PortAgg;
 		public List<ExperimentConfig> Units = new List<ExperimentConfig>();
 
-		public ExperimentPageConfig (List<ExperimentConfig> units, string pageType) : base(pageType)
+		public ExperimentPageConfig (List<ExperimentConfig> units, string pageType, string hostAgg, int portAgg) : base(pageType)
 		{
 			this.Units = units;
+			this.HostAgg = hostAgg;
+			this.PortAgg = portAgg;
 		}
 	}
 }

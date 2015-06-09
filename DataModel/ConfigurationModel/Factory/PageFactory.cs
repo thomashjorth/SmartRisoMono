@@ -18,10 +18,10 @@ namespace DataModel.ConfigurationModel.Factory
 			}
 
 		}
-		public  MasterPageConfig CreateExperimentPage(List<ExperimentConfig> visualizations, string pageType)
+		public  MasterPageConfig CreateExperimentPage(List<ExperimentConfig> visualizations, string pageType,string hostAgg, int portAgg)
 		{
 			
-			return new ExperimentPageConfig (visualizations,pageType);
+			return new ExperimentPageConfig (visualizations,pageType,hostAgg,portAgg);
 		}
 
 		public  PagesConfig CreatePages(List<MasterPageConfig> pages)

@@ -185,12 +185,52 @@ namespace DataAggregator
 					realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,3000,"Power",-10,10,10,"mW")
 						)
 			};
-			ExperimentPageConfig b = new ExperimentPageConfig (experiments, "Experiment");
-			b.HostAgg = "127.0.0.1";
-			b.PortAgg = 9001;
+			ExperimentPageConfig b = new ExperimentPageConfig (experiments, "Experiment","127.0.0.1",9001);
+
 
 
 			return pageFactory.CreatePages (new List<MasterPageConfig> (){ b });
+		}
+
+		public static PagesConfig ExperiementAndWashingMachine(){
+
+			PageFactory pageFactory = new PageFactory ();
+
+			RealtimeVisualizationFactory realtime = new RealtimeVisualizationFactory ("127.0.0.1", 9001, "127.0.0.1", 8080);
+			RealtimeVisualizationFactory realtime2 = new RealtimeVisualizationFactory ("127.0.0.1", 9001, "127.0.0.1", 8085);
+			RealtimeVisualizationFactory realtime3 = new RealtimeVisualizationFactory ("127.0.0.1", 9001, "127.0.0.1", 8090);
+
+		
+
+			List<ExperimentConfig> experiments = new List<ExperimentConfig>{
+				realtime.CreateExperiment (
+					RealtimeInterface.GenericLoadWS,
+					RealtimeData.ActivePower, 
+					5000,
+					realtime.CreateGraph (RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower, 6000, "Power", -10, 10, 10, "mW"),
+					realtime.CreateGraph(RealtimeInterface.GenericLoadWS,RealtimeData.ReactivePower,6000,"Power",-10,10,10,"mW")
+				)
+				,
+				realtime2.CreateExperiment (
+					RealtimeInterface.GaiaWindTurbineWS,
+					RealtimeData.ActivePower, 
+					5000,
+					realtime.CreateGraph (RealtimeInterface.GaiaWindTurbineWS, RealtimeData.RotorRPM, 6000, "Power", -10, 10, 10, "mW"),
+					realtime.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,6000,"Power",-10,10,10,"mW")
+				),
+				realtime3.CreateExperiment (
+					RealtimeInterface.GaiaWindTurbineWS,
+					RealtimeData.ActivePower, 
+					5000,
+					realtime.CreateGraph (RealtimeInterface.LithiumBatteryWS, RealtimeData.SOC, 6000, "Power", -10, 10, 10, "mW"),
+					realtime.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,6000,"Power",-10,10,10,"mW")
+				)
+			};
+			ExperimentPageConfig b = new ExperimentPageConfig (experiments, "Experiment","127.0.0.1",9001);
+
+			PagesConfig c = WashingMachineExperiment ();
+
+			return pageFactory.CreatePages (new List<MasterPageConfig> (){ b, c.Pages[0] });
 		}
 	}
 }

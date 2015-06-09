@@ -5,11 +5,15 @@ namespace DataModel.ConfigurationModel.Factory
 
 	public class RealtimeVisualizationFactory: AbstractRealtimeVisualizationFactory
 	{
+		string DeviceHost;
+		int DevicePort;
 		public RealtimeVisualizationFactory(string dataAggregatorHost, int dataAggregatorPort, string deviceHost, int devicePort)
 		{
 			Host = dataAggregatorHost;
 			Port = dataAggregatorPort;
 			Parameters = "?host=" + deviceHost + "&port=" + devicePort; 
+			DeviceHost = deviceHost;
+			DevicePort = devicePort;
 
 		}
 
@@ -33,6 +37,12 @@ namespace DataModel.ConfigurationModel.Factory
 		{
 			var p = Parameters+ "&wsInterface="+deviceInterface;
 			return new ControlConfig(Host,Port,Device,p,visualizationType);
+		}
+
+		public override ExperimentConfig CreateExperiment(RealtimeInterface deviceInterface, RealtimeData data,int  updateInterval, VisualizationConfig visualization1, VisualizationConfig visualization2)
+		{
+			
+			return new ExperimentConfig (DeviceHost, DevicePort, deviceInterface.ToString(), data.ToString(), updateInterval, visualization1, visualization2);
 		}
 
 	}
