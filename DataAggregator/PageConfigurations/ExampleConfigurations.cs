@@ -185,14 +185,7 @@ namespace DataAggregator
 					realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,3000,"Power",-10,10,10,"mW")
 						)
 			};
-<<<<<<< Upstream, based on origin/master
 			ExperimentPageConfig b = new ExperimentPageConfig (experiments, "Experiment","127.0.0.1",9001);
-
-=======
-			ExperimentPageConfig b = new ExperimentPageConfig (experiments, "Experiment");
-			b.HostAgg = "localhost";
-			b.PortAgg = 9001;
->>>>>>> 8cb18bb sdf
 
 
 			return pageFactory.CreatePages (new List<MasterPageConfig> (){ b });
@@ -236,7 +229,7 @@ namespace DataAggregator
 
 			PagesConfig c = WashingMachineExperiment ();
 
-			return pageFactory.CreatePages (new List<MasterPageConfig> (){ b, c.Pages[0] });
+			return pageFactory.CreatePages (new List<MasterPageConfig> (){ b });
 		}
 	}
 }
