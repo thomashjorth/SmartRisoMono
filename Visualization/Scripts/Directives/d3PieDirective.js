@@ -11,6 +11,9 @@ VisualizeApp.directive('d3PieDirective', function($parse, $window){
             var rawSvg=elem.find('svg');
             var svg = d3.select(rawSvg[0]);
 
+            var parentHeight = svg.node().parentNode.getBoundingClientRect().height;
+            if(parentHeight == 0)
+              parentHeight = $('.boxAll').outerHeight()*0.3*0.95;
             var color;
 
             scope.$watchCollection(exp, function(newVal, oldVal){
@@ -32,8 +35,8 @@ VisualizeApp.directive('d3PieDirective', function($parse, $window){
                 }
             });
 
-            var width = ($('.box').outerHeight()*0.95)*2.13,
-            height = $('.box').outerHeight()*0.95,
+            var width = (parentHeight)*2.13,
+            height = parentHeight,
             radius = Math.min(width, height) / 2;
 
             svg

@@ -20,7 +20,7 @@ VisualizeApp.controller('experimentController', ['$scope','$interval', '$http', 
           Device: config.Units[i].Device.substring(0, config.Units[i].Device.length - 2),
           Method: config.Units[i].Params})
   		}
-
+      alert($scope.Units[3].Visualization1)
 		$scope.Hosts = $scope.Hosts.substring(0, $scope.Hosts.length - 1);
 		$scope.Devices = $scope.Devices.substring(0, $scope.Devices.length - 1);
 		$scope.Resources = $scope.Resources.substring(0, $scope.Resources.length - 1);

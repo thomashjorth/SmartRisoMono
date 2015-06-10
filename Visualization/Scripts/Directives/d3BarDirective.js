@@ -12,9 +12,12 @@
             var svg = d3.select(rawSvg[0]);
             var x, y;
 
-            var margin = {top: ($('.box').outerHeight()*0.95)*0.06, right: ($('.box').outerHeight()*0.95)*0.02, bottom: ($('.box').outerHeight()*0.95)*0.02, left: ($('.box').outerHeight()*0.95)*0.16},
-                width = ($('.box').outerHeight()*0.95)*1.92 - margin.left - margin.right,
-                height = $('.box').outerHeight()*0.95 - margin.top - margin.bottom,
+            var parentHeight = svg.node().parentNode.getBoundingClientRect().height;
+            if(parentHeight == 0)
+              parentHeight = $('.boxAll').outerHeight()*0.3*0.95;
+            var margin = {top: (parentHeight)*0.06, right: (parentHeight)*0.02, bottom: (parentHeight)*0.02, left: (parentHeight)*0.16},
+                width = (parentHeight)*1.92 - margin.left - margin.right,
+                height = parentHeight - margin.top - margin.bottom,
                 xValue = function(d) { return d[0]; },
                 yValue = function(d) { return d[1]; },
                 xScale = d3.scale.ordinal(),

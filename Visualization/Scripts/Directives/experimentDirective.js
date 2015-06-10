@@ -36,14 +36,14 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                 } else {
                     for(var i = 0; i < upper; i++){
 
-                        var t = div.append("ng-include")
+                        div.append("ng-include")
                             .attr("class", "exp upper1"+i)
                             .attr("z-index", "-1")
                             .style("width", height/4.5*2)
                             .style("height", height/4.5)
                             .style("position", "absolute")
                             .style("top","25px")
-                            .style("left",width/(upper)*(i)+(width/(upper))/3+125+"px")
+                            .style("left",width/(upper)*(i)+125+"px")
                             .attr("src", "'Views/Visualization/"+"d3Graph"+".html'")
                             .attr("ng-init", "init.push(Units["+i+"].Visualization1)");//Units["+i+"].Visualization1");
 
@@ -54,7 +54,7 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                             .style("height", height/4.5)
                             .style("position", "absolute")
                             .style("top",height/4.5+25)
-                            .style("left",width/(upper)*(i)+(width/(upper))/3+125+"px")
+                            .style("left",width/(upper)*(i)+125+"px")
                             .attr("src", "'Views/Visualization/"+"d3Graph"+".html'")
                             .attr("ng-init", "init.push(Units["+i+"].Visualization2)");//Units["+i+"].Visualization2");
 
@@ -63,20 +63,20 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                             .attr("width","150px")
                             .attr("height","150px")
                             .style("y", 50+"px")
-                            .style("x", width/(upper)*(i)+(width/(upper))/3+"px");
+                            .style("x", width/(upper)*(i)+"px");
 
                         svg.append("line")
-                            .attr("x1",width/(upper)*(i)+(width/(upper))/3+75)
+                            .attr("x1",width/(upper)*(i)+75)
                             .attr("y1",225)
-                            .attr("x2",width/(upper)*(i)+(width/(upper))/3+75)
+                            .attr("x2",width/(upper)*(i)+75)
                             .attr("y2",height/2)
                             .style("stroke","rgb(0,0,0)")
                             .style("stroke-width",2);
 
                         svg.append("svg:g")
-                            .attr("class", "data")
+                            .attr("class", "databla")
                             .append("text")
-                                .attr("x", width/(upper)*(i)+(width/(upper))/3+70)
+                                .attr("x", width/(upper)*(i)+70)
                                 .attr("y", 230)
                                 .attr("dy", ".71em")
                                 .style("text-anchor", "end")
@@ -92,9 +92,9 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                             .style("height", height/4.5)
                             .style("position", "absolute")
                             .style("bottom",height/4.5+25)
-                            .style("left",width/(lower)*(i)+(width/(lower))/3+145+"px")
+                            .style("left",width/(lower)*(i)+145+"px")
                             .attr("src", "'Views/Visualization/"+"d3Graph"+".html'")
-                            .attr("ng-init", "init.push(Units["+i+upper+"].Visualization1)");//Units["+i+"].Visualization1");
+                            .attr("ng-init", "init.push(Units["+(i+upper)+"].Visualization1)");//Units["+i+"].Visualization1");
 
                         div.append("ng-include")
                             .attr("class", "exp lower2"+i)
@@ -103,29 +103,29 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                             .style("height", height/4.5)
                             .style("position", "absolute")
                             .style("bottom","25px")
-                            .style("left",width/(lower)*(i)+(width/(lower))/3+145+"px")
+                            .style("left",width/(lower)*(i)+145+"px")
                             .attr("src", "'Views/Visualization/"+"d3Graph"+".html'")
-                            .attr("ng-init", "init.push(Units["+i+upper+"].Visualization2)");//Units["+i+"].Visualization2");
+                            .attr("ng-init", "init.push(Units["+(i+upper)+"].Visualization2)");//Units["+i+"].Visualization2");
 
                         svg.append("image")
                             .attr("xlink:href","http://"+data[i].Host+":"+data[i].Port+"/api/Image/Get/"+data[i].Device)
                             .attr("width","150px")
                             .attr("height","150px")
                             .style("y", height-200+"px")
-                            .style("x", width/(lower)*(i)+(width/(lower))/3+"px");
+                            .style("x", width/(lower)*(i)+"px");
 
                         svg.append("line")
-                            .attr("x1",width/(lower)*(i)+(width/(lower))/3+75)
+                            .attr("x1",width/(lower)*(i)+75)
                             .attr("y1",height/2)
-                            .attr("x2",width/(lower)*(i)+(width/(lower))/3+75)
+                            .attr("x2",width/(lower)*(i)+75)
                             .attr("y2",height-225)
                             .style("stroke","rgb(0,0,0)")
                             .style("stroke-width",2);
 
                         svg.append("svg:g")
-                            .attr("class", "data")
+                            .attr("class", "databla")
                             .append("text")
-                                .attr("x", width/(lower)*(i)+(width/(lower))/3+70)
+                                .attr("x", width/(lower)*(i)+70)
                                 .attr("y", height-240)
                                 .attr("dy", ".71em")
                                 .style("text-anchor", "end")
@@ -134,9 +134,9 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                     }
                 }
                 svg.append("line")
-                    .attr("x1",75+(width/(upper))/3)
+                    .attr("x1",75)
                     .attr("y1",height/2)
-                    .attr("x2",width/(upper)*(upper-1)+(width/(upper))/3+75)
+                    .attr("x2",width/(upper)*(upper-1)+75)
                     .attr("y2",height/2)
                     .style("stroke","rgb(0,0,0)")
                     .style("stroke-width",2);

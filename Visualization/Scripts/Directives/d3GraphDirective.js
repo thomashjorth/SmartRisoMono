@@ -14,7 +14,8 @@
             var rawSvg=elem.find('svg');
             var svg = d3.select(rawSvg[0]);
             var parentHeight = svg.node().parentNode.getBoundingClientRect().height;
-
+            if(parentHeight == 0)
+              parentHeight = $('.boxAll').outerHeight()*0.3*0.95;
             scope.$watchCollection(exp, function(newVal, oldVal){
                 dataToPlot=newVal;
                 redrawLineChart();

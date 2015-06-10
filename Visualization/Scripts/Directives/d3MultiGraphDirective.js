@@ -13,7 +13,10 @@
 			var d3 = $window.d3;
 			var rawSvg=elem.find('svg');
 			var svg = d3.select(rawSvg[0]);
-
+			
+            var parentHeight = svg.node().parentNode.getBoundingClientRect().height;
+            if(parentHeight == 0)
+              parentHeight = $('.boxAll').outerHeight()*0.3*0.95;
 
 			scope.$watchCollection(exp, function(newVal, oldVal){
 				config = newVal.config;
@@ -38,9 +41,9 @@
 			});
 
 
-			var margin = {top: ($('.box').outerHeight()*0.95)*0.04, right: ($('.box').outerHeight()*0.95)*0.16, bottom: ($('.box').outerHeight()*0.95)*0.06, left: ($('.box').outerHeight()*0.95)*0.1},
-				width = ($('.box').outerHeight()*0.95)*1.92 - margin.left - margin.right,
-				height = $('.box').outerHeight()*0.95 - margin.top - margin.bottom;
+			var margin = {top: (parentHeight)*0.04, right: (parentHeight)*0.16, bottom: (parentHeight)*0.06, left: (parentHeight)*0.1},
+				width = (parentHeight)*1.92 - margin.left - margin.right,
+				height = parentHeight - margin.top - margin.bottom;
 
 			svg
 				.attr("width", width + margin.left + margin.right)
@@ -107,7 +110,7 @@
 
 			   svg.append("svg:g")
 				   .attr("class", "title")
-				   .attr("transform", "translate("+(($('.box').outerHeight()*0.95)*1.92-10)+",0)")
+				   .attr("transform", "translate("+((parentHeight)*1.92-10)+",0)")
 				   .append("text")
 						.attr("y", 6)
 						.attr("dy", ".71em")
@@ -128,7 +131,7 @@
 
 					svg.append("svg:g")
 	                   	.attr("class", "data"+i)
-	                   	.attr("transform", "translate("+((($('.box').outerHeight()*0.5)-10)+(30))+","+i*10+")")
+	                   	.attr("transform", "translate("+(((parentHeight-10)+(30))+","+i*10+")")
 	                   	.append("text")
 	                        .attr("y", 6)
 	                        .attr("dy", ".71em")

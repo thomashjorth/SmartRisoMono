@@ -12,9 +12,12 @@
 			var svg = d3.select(rawSvg[0]);
 			var _currentRotation;
 			var self = this;
+            var parentHeight = svg.node().parentNode.getBoundingClientRect().height;
+            if(parentHeight == 0)
+              parentHeight = $('.boxAll').outerHeight()*0.3*0.95;
 			var config = 
 			{
-				size: $('.box').outerHeight()*0.95,
+				size: parentHeight,
 				label: 'Power',
 				min: -1,
 				max: 1,
@@ -27,7 +30,7 @@
 				if(oldVal == newVal){
 					config = 
 					{
-						size: $('.box').outerHeight()*0.95,
+						size: parentHeight,
 						label: data.config.label,
 						min: data.config.min,
 						max: data.config.max,
