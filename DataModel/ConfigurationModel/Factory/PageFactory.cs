@@ -54,8 +54,10 @@ namespace DataModel.ConfigurationModel.Factory
 
 			}
 			// The remains
-			pages.Pages.Add (
-				factory.Create3x3Page (temp,pageType));
+			if (temp.Count != 0) {
+				pages.Pages.Add (
+					factory.Create3x3Page (temp, pageType));
+			}
 			return pages;
 		}
 	
