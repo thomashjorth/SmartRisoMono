@@ -214,12 +214,12 @@ namespace DataAggregator
 					RealtimeInterface.GaiaWindTurbineWS,
 					RealtimeData.ActivePower, 
 					5000,
-					realtime.CreateGraph (RealtimeInterface.GaiaWindTurbineWS, RealtimeData.RotorRPM, 6000, "Power", -10, 10, 10, "mW"),
-					realtime.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,6000,"Power",-10,10,10,"mW")
+					realtime.CreateGraph (RealtimeInterface.GaiaWindTurbineWS, RealtimeData.ActivePower, 6000, "Power", -10, 10, 10, "mW"),
+					realtime.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.GeneratorRPM,6000,"Power",-10,10,10,"mW")
 				),
 				realtime3.CreateExperiment (
-					RealtimeInterface.GaiaWindTurbineWS,
-					RealtimeData.ActivePower, 
+					RealtimeInterface.LithiumBatteryWS,
+					RealtimeData.SOC, 
 					5000,
 					realtime.CreateGraph (RealtimeInterface.LithiumBatteryWS, RealtimeData.SOC, 6000, "Power", -10, 10, 10, "mW"),
 					realtime.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,6000,"Power",-10,10,10,"mW")

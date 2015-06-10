@@ -11,7 +11,6 @@ VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', 'Ap
         $scope.data={config: {unit: $scope.init.Unit, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax, title: $scope.init.TitleHeading}, values: [
             {timestamp: $scope.firstTime/1000,value: 0}
         ]};
-
         $scope.Params = $scope.init.Params;
 
         AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,$scope.Params)

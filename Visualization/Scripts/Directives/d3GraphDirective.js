@@ -13,7 +13,7 @@
             var d3 = $window.d3;
             var rawSvg=elem.find('svg');
             var svg = d3.select(rawSvg[0]);
-
+            var parentHeight = svg.node().parentNode.getBoundingClientRect().height;
 
             scope.$watchCollection(exp, function(newVal, oldVal){
                 dataToPlot=newVal;
@@ -21,15 +21,15 @@
             });
 
 
-            var margin = {top: ($('.box').outerHeight()*0.95)*0.04, right: ($('.box').outerHeight()*0.95)*0.16, bottom: ($('.box').outerHeight()*0.95)*0.06, left: ($('.box').outerHeight()*0.95)*0.1},
-                width = ($('.box').outerHeight()*0.95)*1.92 - margin.left - margin.right,
-                height = $('.box').outerHeight()*0.95 - margin.top - margin.bottom;
+            var margin = {top: (parentHeight*0.95)*0.04, right: (parentHeight*0.95)*0.16, bottom: (parentHeight*0.95)*0.06, left: (parentHeight*0.95)*0.1},
+                width = (parentHeight*0.95)*1.92 - margin.left - margin.right,
+                height = parentHeight*0.95 - margin.top - margin.bottom;
 
             svg
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom);
 
-            var textPos=(($('.box').outerHeight()*0.95)*1.92-10);
+            var textPos=((parentHeight*0.95)*1.92-10);
            var parseDate = d3.time.format("%d-%b-%y").parse;
            function setChartParameters(){
 
@@ -89,6 +89,9 @@
                         .style("text-anchor", "end")
                         .text(dataToPlot.config.unit);
 
+               svg.selectAll(".tick").each(function (d, i) {
+                      d3.select(this).style("font-size", (width*0.025));
+                    });
                svg.append("svg:g")
                    .attr("class", "title")
                    .attr("transform", "translate("+textPos+",0)")
@@ -131,10 +134,10 @@
                    .attr({
                        d: lineFun(dataToPlot.values)
                    });
-               svg.selectAll(".tick").each(function (d, i) {
-                    if ( i == 0 ) {
-                    //this.remove();
-                    }});
+               svg.select("g.x.axis")
+                .selectAll("text")
+                .style("font-size",(width*0.025)); //To change the font size of texts
+
 
 
                svg.selectAll(".data").remove();
