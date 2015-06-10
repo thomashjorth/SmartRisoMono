@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using DataModel.ConfigurationModel.Factory;
 using DataModel.ConfigurationModel;
 using System.Collections.Generic;
@@ -150,9 +150,9 @@ namespace DataAggregator
 
 			PageFactory pageFactory = new PageFactory ();
 
-			RealtimeVisualizationFactory realtime = new RealtimeVisualizationFactory ("127.0.0.1", 9001, "127.0.0.1", 8080);
-			RealtimeVisualizationFactory realtime2 = new RealtimeVisualizationFactory ("127.0.0.1", 9001, "127.0.0.1", 8085);
-			RealtimeVisualizationFactory realtime3 = new RealtimeVisualizationFactory ("127.0.0.1", 9001, "127.0.0.1", 8090);
+			RealtimeVisualizationFactory realtime = new RealtimeVisualizationFactory ("127.0.0.1", 9001, "localhost", 8080);
+			RealtimeVisualizationFactory realtime2 = new RealtimeVisualizationFactory ("127.0.0.1", 9001, "localhost", 8085);
+			RealtimeVisualizationFactory realtime3 = new RealtimeVisualizationFactory ("127.0.0.1", 9001, "localhost", 8090);
 
 			List<ExperimentConfig> experiments = new List<ExperimentConfig>{
 				new ExperimentConfig(
@@ -185,8 +185,14 @@ namespace DataAggregator
 					realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,3000,"Power",-10,10,10,"mW")
 						)
 			};
+<<<<<<< Upstream, based on origin/master
 			ExperimentPageConfig b = new ExperimentPageConfig (experiments, "Experiment","127.0.0.1",9001);
 
+=======
+			ExperimentPageConfig b = new ExperimentPageConfig (experiments, "Experiment");
+			b.HostAgg = "localhost";
+			b.PortAgg = 9001;
+>>>>>>> 8cb18bb sdf
 
 
 			return pageFactory.CreatePages (new List<MasterPageConfig> (){ b });
