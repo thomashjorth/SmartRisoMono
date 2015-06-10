@@ -6,7 +6,8 @@ VisualizeApp.controller('experimentController', ['$scope','$interval', '$http', 
 		$scope.Hosts = "";
 		$scope.Devices = "";
 		$scope.Resources = "";
-		$scope.Units = [];
+    $scope.Units = [];
+    $scope.init = [];
   		for(var i = 0; i < config.Units.length; i++){
   			$scope.Hosts += config.Units[i].Host + ":" + config.Units[i].Port + ";";
   			$scope.Devices += config.Units[i].Device +";";
@@ -20,7 +21,6 @@ VisualizeApp.controller('experimentController', ['$scope','$interval', '$http', 
           Method: config.Units[i].Params})
   		}
 
-        alert($scope.Units[0].Visualization1.Params)
 		$scope.Hosts = $scope.Hosts.substring(0, $scope.Hosts.length - 1);
 		$scope.Devices = $scope.Devices.substring(0, $scope.Devices.length - 1);
 		$scope.Resources = $scope.Resources.substring(0, $scope.Resources.length - 1);

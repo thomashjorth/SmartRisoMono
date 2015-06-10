@@ -8,12 +8,16 @@ VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', 'Ap
     $scope.run = true;
 	$scope.initialize = function()
   	{
-        $scope.data={config: {unit: $scope.init.Unit, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax, title: $scope.init.TitleHeading}, values: [
+        $scope.temp = $scope.init;
+        if($scope.init.length != undefined){
+            $scope.temp=$scope.init.shift();
+        }
+        $scope.data={config: {unit: $scope.temp.Unit, yMin: $scope.temp.ValueMin, yMax: $scope.temp.ValueMax, title: $scope.temp.TitleHeading}, values: [
             {timestamp: $scope.firstTime/1000,value: 0}
         ]};
-        $scope.Params = $scope.init.Params;
+        $scope.Params = $scope.temp.Params;
 
-        AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,$scope.Params)
+        AppService.getData($scope.temp.Host,$scope.temp.Port,$scope.temp.Device,$scope.Params)
                 .success(function (response){
                 var result = JSON.parse(response);
                 $scope.min = result.value;
@@ -21,15 +25,15 @@ VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', 'Ap
                 $scope.sum = result.value;
                 $scope.count = 1;
 
-                $scope.data = {config: {unit: $scope.init.Unit, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax, title: $scope.init.TitleHeading}, values: [{timestamp: JSON.parse(response).timestampMicros/1000, value: JSON.parse(response).value}], statistics: {min: $scope.min, max: $scope.max, avg: $scope.sum/$scope.count}};
+                $scope.data = {config: {unit: $scope.temp.Unit, yMin: $scope.temp.ValueMin, yMax: $scope.temp.ValueMax, title: $scope.temp.TitleHeading}, values: [{timestamp: JSON.parse(response).timestampMicros/1000, value: JSON.parse(response).value}], statistics: {min: $scope.min, max: $scope.max, avg: $scope.sum/$scope.count}};
             });
 
         $interval(function(){
             if($scope.run){
                 $scope.run=false;
-                AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,$scope.Params)
+                AppService.getData($scope.temp.Host,$scope.temp.Port,$scope.temp.Device,$scope.Params)
                     .success(function (response){
-                    if($scope.data.values.length > $scope.init.XLength){
+                    if($scope.data.values.length > $scope.temp.XLength){
                         $scope.data.values.shift();
                     }
                     var result = JSON.parse(response);
@@ -40,7 +44,7 @@ VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', 'Ap
                     $scope.sum += result.value;
                     $scope.count += 1;
                     $scope.data.values.push({timestamp: result.timestampMicros/1000, value: result.value});
-                    $scope.data = {config: {unit: $scope.init.Unit, yMin: $scope.init.ValueMin, yMax: $scope.init.ValueMax, title: $scope.init.TitleHeading}, values: $scope.data.values, 
+                    $scope.data = {config: {unit: $scope.temp.Unit, yMin: $scope.temp.ValueMin, yMax: $scope.temp.ValueMax, title: $scope.temp.TitleHeading}, values: $scope.data.values, 
                         statistics: {min: $scope.min, max: $scope.max, avg: $scope.sum/$scope.count}};
                     $scope.run=true;
                 })
@@ -48,7 +52,7 @@ VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', 'Ap
                     $scope.run=true;
                 });
             }
-        }, $scope.init.UpdateInterval);
+        }, $scope.temp.UpdateInterval);
   	};
 
 }]);

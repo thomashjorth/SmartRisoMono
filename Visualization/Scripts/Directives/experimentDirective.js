@@ -36,8 +36,8 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                 } else {
                     for(var i = 0; i < upper; i++){
 
-                        div.append("ng-include")
-                            .attr("class", "exp")
+                        var t = div.append("ng-include")
+                            .attr("class", "exp upper1"+i)
                             .attr("z-index", "-1")
                             .style("width", height/4.5*2)
                             .style("height", height/4.5)
@@ -45,10 +45,10 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                             .style("top","25px")
                             .style("left",width/(upper)*(i)+(width/(upper))/3+125+"px")
                             .attr("src", "'Views/Visualization/"+"d3Graph"+".html'")
-                            .attr("ng-init", "init=Units["+i+"].Visualization1");
+                            .attr("ng-init", "init.push(Units["+i+"].Visualization1)");//Units["+i+"].Visualization1");
 
                         div.append("ng-include")
-                            .attr("class", "exp")
+                            .attr("class", "exp upper2"+i)
                             .attr("z-index", "-1")
                             .style("width", height/4.5*2)
                             .style("height", height/4.5)
@@ -56,7 +56,7 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                             .style("top",height/4.5+25)
                             .style("left",width/(upper)*(i)+(width/(upper))/3+125+"px")
                             .attr("src", "'Views/Visualization/"+"d3Graph"+".html'")
-                            .attr("ng-init", "init=Units["+i+"].Visualization2");
+                            .attr("ng-init", "init.push(Units["+i+"].Visualization2)");//Units["+i+"].Visualization2");
 
                         svg.append("image")
                             .attr("xlink:href","http://"+data[i].Host+":"+data[i].Port+"/api/Image/Get/"+data[i].Device)
@@ -86,7 +86,7 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                     }
                     for(var i = 0; i < lower; i++){
                         div.append("ng-include")
-                            .attr("class", "exp")
+                            .attr("class", "exp lower1"+i)
                             .attr("z-index", "-1")
                             .style("width", height/4.5*2)
                             .style("height", height/4.5)
@@ -94,10 +94,10 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                             .style("bottom",height/4.5+25)
                             .style("left",width/(lower)*(i)+(width/(lower))/3+145+"px")
                             .attr("src", "'Views/Visualization/"+"d3Graph"+".html'")
-                            .attr("ng-init", "init=Units["+i+"].Visualization1");
+                            .attr("ng-init", "init.push(Units["+i+upper+"].Visualization1)");//Units["+i+"].Visualization1");
 
                         div.append("ng-include")
-                            .attr("class", "exp")
+                            .attr("class", "exp lower2"+i)
                             .attr("z-index", "-1")
                             .style("width", height/4.5*2)
                             .style("height", height/4.5)
@@ -105,7 +105,7 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                             .style("bottom","25px")
                             .style("left",width/(lower)*(i)+(width/(lower))/3+145+"px")
                             .attr("src", "'Views/Visualization/"+"d3Graph"+".html'")
-                            .attr("ng-init", "init=Units["+i+"].Visualization2");
+                            .attr("ng-init", "init.push(Units["+i+upper+"].Visualization2)");//Units["+i+"].Visualization2");
 
                         svg.append("image")
                             .attr("xlink:href","http://"+data[i].Host+":"+data[i].Port+"/api/Image/Get/"+data[i].Device)
@@ -140,7 +140,6 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                     .attr("y2",height/2)
                     .style("stroke","rgb(0,0,0)")
                     .style("stroke-width",2);
-
                 $compile(elem.contents())(scope)
             }
 

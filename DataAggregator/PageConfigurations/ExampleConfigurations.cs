@@ -206,23 +206,23 @@ namespace DataAggregator
 					RealtimeInterface.GenericLoadWS,
 					RealtimeData.ActivePower, 
 					5000,
-					realtime.CreateGraph (RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower, 6000, "Power", -10, 10, 10, "mW"),
-					realtime.CreateGraph(RealtimeInterface.GenericLoadWS,RealtimeData.ReactivePower,6000,"Power",-10,10,10,"mW")
+					realtime.CreateGraph (RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower, 6000, "ActivePower", -1, 1, 10, "mW"),
+					realtime.CreateGraph(RealtimeInterface.GenericLoadWS,RealtimeData.ReactivePower,6000,"ReactivePower",-1,1,10,"mW")
 				)
 				,
 				realtime2.CreateExperiment (
 					RealtimeInterface.GaiaWindTurbineWS,
 					RealtimeData.ActivePower, 
 					5000,
-					realtime.CreateGraph (RealtimeInterface.GaiaWindTurbineWS, RealtimeData.ActivePower, 6000, "Power", -10, 10, 10, "mW"),
-					realtime.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.GeneratorRPM,6000,"Power",-10,10,10,"mW")
+					realtime2.CreateGraph (RealtimeInterface.GaiaWindTurbineWS, RealtimeData.ActivePower, 6000, "ActivePower", -5, 15, 10, "mW"),
+					realtime2.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.GeneratorRPM,6000,"GeneratorRPM",1000,1050,10,"mW")
 				),
 				realtime3.CreateExperiment (
 					RealtimeInterface.LithiumBatteryWS,
 					RealtimeData.SOC, 
 					5000,
-					realtime.CreateGraph (RealtimeInterface.LithiumBatteryWS, RealtimeData.SOC, 6000, "Power", -10, 10, 10, "mW"),
-					realtime.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,6000,"Power",-10,10,10,"mW")
+					realtime3.CreateGraph (RealtimeInterface.LithiumBatteryWS, RealtimeData.SOC, 6000, "SOC", 0, 100, 10, "mW"),
+					realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,6000,"Temperature",0,100,10,"mW")
 				)
 			};
 			ExperimentPageConfig b = new ExperimentPageConfig (experiments, "Experiment","127.0.0.1",9001);
