@@ -12,6 +12,9 @@ VisualizeApp.controller('experimentController', ['$scope','$interval', '$http', 
   			$scope.Hosts += config.Units[i].Host + ":" + config.Units[i].Port + ";";
   			$scope.Devices += config.Units[i].Device +";";
   			$scope.Resources += "get"+config.Units[i].Params +";";
+        config.Units[i].Visualization1.VisualizationType="'Views/Visualization/"+config.Units[i].Visualization1.VisualizationType +".html'";
+        config.Units[i].Visualization2.VisualizationType="'Views/Visualization/"+config.Units[i].Visualization2.VisualizationType +".html'";
+
   			$scope.Units.push({Id: config.Units[i].Id, 
   				Visualization1: config.Units[i].Visualization1, 
   				Visualization2: config.Units[i].Visualization2,

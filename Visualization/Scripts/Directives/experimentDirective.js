@@ -44,7 +44,7 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                             .style("position", "absolute")
                             .style("top","25px")
                             .style("left",width/(upper)*(i)+125+"px")
-                            .attr("src", "'Views/Visualization/"+"d3Graph"+".html'")
+                            .attr("src", data[i].Visualization1.VisualizationType)
                             .attr("ng-init", "init.push(Units["+i+"].Visualization1)");//Units["+i+"].Visualization1");
 
                         div.append("ng-include")
@@ -55,7 +55,7 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                             .style("position", "absolute")
                             .style("top",height/4.5+25)
                             .style("left",width/(upper)*(i)+125+"px")
-                            .attr("src", "'Views/Visualization/"+"d3Graph"+".html'")
+                            .attr("src", data[i].Visualization2.VisualizationType)
                             .attr("ng-init", "init.push(Units["+i+"].Visualization2)");//Units["+i+"].Visualization2");
 
                         svg.append("image")
@@ -93,7 +93,7 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                             .style("position", "absolute")
                             .style("bottom",height/4.5+25)
                             .style("left",width/(lower)*(i)+145+"px")
-                            .attr("src", "'Views/Visualization/"+"d3Graph"+".html'")
+                            .attr("src", data[i].Visualization1.VisualizationType)
                             .attr("ng-init", "init.push(Units["+(i+upper)+"].Visualization1)");//Units["+i+"].Visualization1");
 
                         div.append("ng-include")
@@ -104,7 +104,7 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                             .style("position", "absolute")
                             .style("bottom","25px")
                             .style("left",width/(lower)*(i)+145+"px")
-                            .attr("src", "'Views/Visualization/"+"d3Graph"+".html'")
+                            .attr("src", data[i].Visualization2.VisualizationType)
                             .attr("ng-init", "init.push(Units["+(i+upper)+"].Visualization2)");//Units["+i+"].Visualization2");
 
                         svg.append("image")
