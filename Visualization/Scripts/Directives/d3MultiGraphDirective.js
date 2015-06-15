@@ -131,7 +131,7 @@
 
 					svg.append("svg:g")
 	                   	.attr("class", "data"+i)
-	                   	.attr("transform", "translate("+(((parentHeight-10)+(30))+","+i*10+")")
+	                   	.attr("transform", "translate("+((parentHeight-10)+(30))+","+i*10+")")
 	                   	.append("text")
 	                        .attr("y", 6)
 	                        .attr("dy", ".71em")

@@ -62,8 +62,8 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                             .attr("xlink:href","http://"+data[i].Host+":"+data[i].Port+"/api/Image/Get/"+data[i].Device)
                             .attr("width","150px")
                             .attr("height","150px")
-                            .style("y", 50+"px")
-                            .style("x", width/(upper)*(i)+"px");
+                            .attr("y", 50+"px")
+                            .attr("x", width/(upper)*(i)+"px");
 
                         svg.append("line")
                             .attr("x1",width/(upper)*(i)+75)
@@ -81,7 +81,7 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                                 .attr("dy", ".71em")
                                 .style("text-anchor", "end")
                                 .style("font-size", (width*0.01))
-                                .text("-2.0 mW");
+                                .text("0 mW");
 
                     }
                     for(var i = 0; i < lower; i++){
@@ -111,8 +111,8 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                             .attr("xlink:href","http://"+data[i].Host+":"+data[i].Port+"/api/Image/Get/"+data[i].Device)
                             .attr("width","150px")
                             .attr("height","150px")
-                            .style("y", height-200+"px")
-                            .style("x", width/(lower)*(i)+"px");
+                            .attr("y", height-200+"px")
+                            .attr("x", width/(lower)*(i)+"px");
 
                         svg.append("line")
                             .attr("x1",width/(lower)*(i)+75)
@@ -130,7 +130,7 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                                 .attr("dy", ".71em")
                                 .style("text-anchor", "end")
                                 .style("font-size", (width*0.01))
-                                .text("-2.0 mW");
+                                .text("0 mW");
                     }
                 }
                 svg.append("line")

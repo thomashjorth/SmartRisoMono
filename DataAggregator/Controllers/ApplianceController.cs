@@ -31,10 +31,25 @@ namespace DataAggregator.Controllers
 			} catch(Exception e) {
 				read = "FEJL1"+e.ToString ();
 			}
-			EEI eeiEU = new EEI (7, new double[]{ programEnergy [1].measurement.value, programEnergy [2].measurement.value, programEnergy [3].measurement.value });
-			EEI eeiLOW = new EEI (7, new double[]{ programEnergy [1].measurement.value, programEnergy [1].measurement.value, programEnergy [1].measurement.value });
-			EEI eeiMIDDLE = new EEI (7, new double[]{ programEnergy [2].measurement.value, programEnergy [2].measurement.value, programEnergy [2].measurement.value });
-			EEI eeiHIGH = new EEI (7, new double[]{ programEnergy [3].measurement.value, programEnergy [3].measurement.value, programEnergy [3].measurement.value });
+
+			List<LabeledMeasurement> programCount = new List<LabeledMeasurement>(){};
+			try {
+				StreamReader file = File.OpenText (homePath + "/DataAggregatorData/WashingMachine/programsCount.json");
+				read = file.ReadToEnd();
+				programCount = Newtonsoft.Json.JsonConvert.DeserializeObject<List<LabeledMeasurement>>(read);
+
+			} catch(Exception e) {
+				read = "FEJL1"+e.ToString ();
+			}
+
+			EEI eeiEU = new EEI (7, new double[]{ programEnergy [0].measurement.value, programEnergy [1].measurement.value, programEnergy [2].measurement.value });
+			EEI eeiLOW = new EEI (7, new double[]{ programEnergy [0].measurement.value, programEnergy [1].measurement.value, programEnergy [2].measurement.value },1,0,0);
+			EEI eeiMIDDLE = new EEI (7, new double[]{ programEnergy [0].measurement.value, programEnergy [1].measurement.value, programEnergy [2].measurement.value },0,1,0);
+			EEI eeiHIGH = new EEI (7, new double[]{ programEnergy [0].measurement.value, programEnergy [1].measurement.value, programEnergy [2].measurement.value },0,0,1);
+			EEI eeiYou = new EEI (7, new double[]{ programEnergy [0].measurement.value, programEnergy [1].measurement.value, programEnergy [2].measurement.value },
+				(int)programCount[0].measurement.value,
+				(int)programCount[1].measurement.value,
+				(int)programCount[2].measurement.value);
 
 			HttpResponseMessage response;
 
@@ -75,6 +90,7 @@ namespace DataAggregator.Controllers
 						allScore.Add (new LabeledMeasurement ("MIDDLE: " + eeiMIDDLE.Rating (), new CompositeMeasurement (eeiMIDDLE.EeiScore ())));
 						allScore.Add (new LabeledMeasurement ("HIGH: " + eeiHIGH.Rating (), new CompositeMeasurement (eeiHIGH.EeiScore ())));
 						allScore.Add (new LabeledMeasurement ("EU: " + eeiEU.Rating (), new CompositeMeasurement (eeiEU.EeiScore ())));
+						allScore.Add (new LabeledMeasurement ("You: " + eeiYou.Rating (), new CompositeMeasurement (eeiYou.EeiScore ())));
 
 					response = Request.CreateResponse (
 						HttpStatusCode.Created,
@@ -111,7 +127,8 @@ namespace DataAggregator.Controllers
 					allAec.Add (new LabeledMeasurement ("MIDDLE: " + eeiMIDDLE.Rating (), new CompositeMeasurement (eeiMIDDLE.AEC ())));
 					allAec.Add (new LabeledMeasurement ("HIGH: " + eeiHIGH.Rating (), new CompositeMeasurement (eeiHIGH.AEC ())));
 					allAec.Add (new LabeledMeasurement ("EU: " + eeiEU.Rating (), new CompositeMeasurement (eeiEU.AEC ())));
-				
+					allAec.Add (new LabeledMeasurement ("You: " + eeiYou.Rating (), new CompositeMeasurement (eeiYou.AEC ())));
+
 					response = Request.CreateResponse (
 						HttpStatusCode.Created,
 						Newtonsoft.Json.JsonConvert.SerializeObject (allAec)

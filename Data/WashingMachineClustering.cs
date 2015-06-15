@@ -151,14 +151,19 @@ namespace Data
 
 
 						
-					
+
 					if (
 						
 						duration < 120*60 && 
 						powerForDuration > 0.95*kmean.Clusters.Centroids[0][0] * duration && 
-						powerForDuration > 0.9*kmean.Clusters.Centroids[1][0] * duration) 
+						powerForDuration > 0.95*kmean.Clusters.Centroids[1][0] * duration 
+
+					) 
+
+
 					{
-						
+
+						Console.WriteLine (powerForDuration / duration + " " + 0.95 * kmean.Clusters.Centroids [0] [0]);
 					//	if (powerForDuration / duration > 0.8 * kmean.Clusters.Centroids [0][0]  &&
 					//	   powerForDuration / duration > 0.8 * kmean.Clusters.Centroids [1][0] ) {
 						preparedData.Add (new double[]{  powerForDuration});

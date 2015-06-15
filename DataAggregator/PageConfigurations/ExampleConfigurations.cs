@@ -55,18 +55,17 @@ namespace DataAggregator
 
 			PagesConfig washingExample = pageFactory.Create3x3Pages (new List<VisualizationConfig> (){ 
 
-				appliance.CreatePie(ApplianceData.Count,2000,"Count"),
-				appliance.CreatePie(ApplianceData.PowerCentroid,2000,"Power"),
-				appliance.CreatePie(ApplianceData.EnergyCentroid,2000,"Energy"),
-				appliance.CreateBar(ApplianceData.Count,2000,"Count",0,10,"#"),
-				appliance.CreateBar(ApplianceData.AEC,2000,"AEC",0,400,"kWh"),
-				appliance.CreateBar(ApplianceData.Score, 2000,"Score",0,100,""),
-				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS,RealtimeData.ActivePower,2000,"Power",-5,5,"mW",
-					new double[,]{{-5.0,1}},
-					new double[,]{{1.0,2.0}},new double[,]{{2.0,5.0}}),
+				appliance.CreatePie(ApplianceData.Count,1000,"Count"),
+				appliance.CreatePie(ApplianceData.EnergyCentroid,1000,"Energy"),
+				appliance.CreateBar(ApplianceData.Count,1000,"Count",0,5,"#"),
+				appliance.CreateBar(ApplianceData.AEC,1000,"AEC",0,400,"kWh"),
+				appliance.CreateBar(ApplianceData.Score, 1000,"Score",0,100,""),
+				realtime8080.CreateGauge(RealtimeInterface.GenericLoadWS,RealtimeData.ActivePower,1000,"Power",0,3000000,"mW",
+					new double[,]{{0.0,2000000.0}},
+					new double[,]{{0.0,0.0}},new double[,]{{2000000.0,3000000.0}}),
 
-				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,2000,"Active Power",-5,5,7200,"mW"),
-				appliance.CreateTable(ApplianceData.Discovered, 2000,"Discovered Programs")
+				realtime8080.CreateGraph(RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower,1000,"Active Power",-5,5,7200,"mW"),
+				appliance.CreateTable(ApplianceData.Discovered, 1000,"Discovered Programs"),
 			},"Grid3x3");
 			return washingExample;
 		}
