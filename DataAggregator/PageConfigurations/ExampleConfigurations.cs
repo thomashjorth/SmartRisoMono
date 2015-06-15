@@ -244,6 +244,37 @@ namespace DataAggregator
 
 			return pageFactory.CreatePages (new List<MasterPageConfig> (){ b, c.Pages[0] });
 		}
+
+		public static PagesConfig BatteryPage(){
+
+			PageFactory pageFactory = new PageFactory ();
+
+			RealtimeVisualizationFactory realtime3 = new RealtimeVisualizationFactory ("127.0.0.1", 9001, "127.0.0.1", 8090);
+			MAggregationVisualizationFactory multi = new MAggregationVisualizationFactory ("127.0.0.1", 9001);
+
+
+			List<VisualizationConfig> visualizations = new List<VisualizationConfig>{
+				realtime3.CreateUnit(3000),
+				realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.ActiveEnergyExport,3000,"Export",0,10,10,"W"),
+				realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.ActiveEnergyImport,3000,"Import",0,10,10,"W"),
+
+
+				realtime3.CreateControl(RealtimeInterface.LithiumBatteryWS,"Control Battery"),
+
+				realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.ACReactivePower,3000,"AC Reactive Power",0,10,10,"W"),
+				realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.ACFrequency,3000,"AC Frequency",0,10,10,"W"),
+				realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.ACActivePower,3000,"AC Active Power",0,10,10,"W")
+
+
+
+			};
+			ExperimentPageConfig b = new ExperimentPageConfig (visualizations, "Experiment","127.0.0.1",9001);
+
+			PagesConfig c = WashingMachineExperiment ();
+
+			return pageFactory.CreatePages (new List<MasterPageConfig> (){ b, c.Pages[0] });
+		}
+
 	}
 }
 

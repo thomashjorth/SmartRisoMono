@@ -2,7 +2,10 @@
 {
 	public enum RealtimeData{
 		ActivePower, Frequency, ReactivePower, Temperature, InterphaseVoltages, 
-		WindspeedOutsideNacelle, RotorRPM, GeneratorRPM, SOC
+		WindspeedOutsideNacelle, RotorRPM, GeneratorRPM, SOC, 
+
+		ActiveEnergyImport, ActiveEnergyExport,
+		ACActivePower, ACFrequency, ACReactivePower
 	}
 
 	public enum ApplianceData{
