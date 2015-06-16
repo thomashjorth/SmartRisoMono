@@ -22,6 +22,11 @@ namespace DataAggregator
 			string realtimeHost2 = "syslab-03"; int realtimePort2 = 8080; // Gaia
 			string realtimeHost3 = "syslab-22"; int realtimePort3 = 8080; // Battery
 
+			// 07 10 sol
+			// 12 vrbbattery
+			// 16 18 mobileload
+			// 27 dump
+
 			string realtimeHost4 = "syslab-08"; int realtimePort4 = 8080; // Flexhouse
 			string realtimeHost5 = ""; int realtimePort5 = 8080; // 
 			string realtimeHost6 = ""; int realtimePort6 = 8080; // 
