@@ -5,7 +5,22 @@
 		WindspeedOutsideNacelle, RotorRPM, GeneratorRPM, SOC, 
 
 		ActiveEnergyImport, ActiveEnergyExport,
-		ACActivePower, ACFrequency, ACReactivePower
+		ACActivePower, ACFrequency, ACReactivePower,
+
+		// Flexhouse
+		ActivePowerPhaseA,
+		ActivePowerPhaseB,
+		ActivePowerPhaseC,
+		ReactivePowerPhaseA,
+		ReactivePowerPhaseB,
+		ReactivePowerPhaseC,
+		ReactiveEnergyImport,
+		OutsideTemperature,
+		OutsideWindspeed,
+		OutsideWindDirection,
+		SolarIrradiation
+
+
 	}
 
 	public enum ApplianceData{
@@ -13,7 +28,7 @@
 	}
 
 	public enum RealtimeInterface{
-		GenericLoadWS, GaiaWindTurbineWS, LithiumBatteryWS
+		GenericLoadWS, GaiaWindTurbineWS, LithiumBatteryWS, FlexHouseWS
 	}
 
 	public enum SingleAggregation{

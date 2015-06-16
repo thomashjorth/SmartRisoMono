@@ -168,7 +168,7 @@ namespace DataAggregator.Controllers
 
 				response = Request.CreateResponse (
 					HttpStatusCode.Created, Newtonsoft.Json.JsonConvert.SerializeObject (
-						ExampleConfigurations.ExperiementAndWashingMachine()
+						ExampleConfigurations.ExamPresentation()
 					)
 					);
 				}

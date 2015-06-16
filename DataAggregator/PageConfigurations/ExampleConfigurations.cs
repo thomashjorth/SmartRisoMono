@@ -10,6 +10,118 @@ namespace DataAggregator
 {
 	public static class ExampleConfigurations
 	{
+		public static PagesConfig ExamPresentation(){
+
+			PageFactory pageFactory = new PageFactory ();
+
+			int updateInterval = 2000;
+
+			string aggregatorHost= "localhost"; int aggregatorPort = 9001;
+
+			string realtimeHost1 = "syslab-05"; int realtimePort1 = 8080; // Dumpload
+			string realtimeHost2 = "syslab-03"; int realtimePort2 = 8080; // Gaia
+			string realtimeHost3 = "syslab-22"; int realtimePort3 = 8080; // Battery
+
+			string realtimeHost4 = "syslab-08"; int realtimePort4 = 8080; // Flexhouse
+			string realtimeHost5 = ""; int realtimePort5 = 8080; // 
+			string realtimeHost6 = ""; int realtimePort6 = 8080; // 
+
+			VisualizationFactory VisFac = new VisualizationFactory ();
+			AbstractApplianceVisualizationFactory appliance = 
+				VisFac.CreateApplianceVizualizationFactory (aggregatorHost, aggregatorPort); // Washing Machine Experiment
+			
+			RealtimeVisualizationFactory realtime1 = new RealtimeVisualizationFactory (aggregatorHost, aggregatorPort, realtimeHost1, realtimePort1);
+			RealtimeVisualizationFactory realtime2 = new RealtimeVisualizationFactory (aggregatorHost, aggregatorPort,realtimeHost2, realtimePort2);
+			RealtimeVisualizationFactory realtime3 = new RealtimeVisualizationFactory (aggregatorHost, aggregatorPort, realtimeHost3, realtimePort3);
+			RealtimeVisualizationFactory realtime4 = new RealtimeVisualizationFactory (aggregatorHost, aggregatorPort, realtimeHost4, realtimePort4);
+
+
+			MAggregationVisualizationFactory multi = new MAggregationVisualizationFactory (aggregatorHost, aggregatorPort);
+			SAggregationVisualizationFactory single = new SAggregationVisualizationFactory (aggregatorHost, aggregatorPort);
+
+			// Page 1
+			List<ExperimentConfig> visualizations1 = new List<ExperimentConfig>{
+				realtime1.CreateExperiment (
+					RealtimeInterface.GenericLoadWS,
+					RealtimeData.ActivePower, 
+					updateInterval,
+					realtime1.CreateGraph (RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower, updateInterval, 
+						"ActivePower", -1, 1, 10, "mW"),
+					realtime1.CreateGraph(RealtimeInterface.GenericLoadWS,RealtimeData.ReactivePower,updateInterval,
+						"ReactivePower",-1,1,10,"mW")
+				)
+				,
+				realtime2.CreateExperiment (
+					RealtimeInterface.GaiaWindTurbineWS,
+					RealtimeData.ActivePower, 
+					updateInterval,
+					realtime2.CreateGraph (RealtimeInterface.GaiaWindTurbineWS, RealtimeData.ActivePower, updateInterval, 
+						"ActivePower", -5, 15, 10, "mW"),
+					realtime2.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.GeneratorRPM,updateInterval,
+						"GeneratorRPM",1000,1050,10,"mW")
+				),
+				realtime3.CreateExperiment (
+					RealtimeInterface.LithiumBatteryWS,
+					RealtimeData.SOC, 
+					updateInterval,
+					realtime3.CreateGraph (RealtimeInterface.LithiumBatteryWS, RealtimeData.SOC, updateInterval, 
+						"SOC", 0, 100, 10, "mW"),
+					realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,updateInterval,
+						"Temperature",0,100,10,"mW")
+				),
+				realtime2.CreateExperiment (
+					RealtimeInterface.GaiaWindTurbineWS,
+					RealtimeData.ActivePower, 
+					updateInterval,
+					realtime2.CreateGraph (RealtimeInterface.GaiaWindTurbineWS, RealtimeData.ActivePower, updateInterval, 
+						"ActivePower", -5, 15, 10, "mW"),
+					realtime2.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.GeneratorRPM,updateInterval,
+						"GeneratorRPM",1000,1050,10,"mW")
+				),
+				realtime3.CreateExperiment (
+					RealtimeInterface.LithiumBatteryWS,
+					RealtimeData.SOC, 
+					updateInterval,
+					realtime3.CreateGraph (RealtimeInterface.LithiumBatteryWS, RealtimeData.SOC, updateInterval, 
+						"SOC", 0, 100, 10, "mW"),
+					realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,updateInterval,
+						"Temperature",0,100,10,"mW")
+				)
+			};
+			ExperimentPageConfig page1 = new ExperimentPageConfig (visualizations1, "Experiment",aggregatorHost,aggregatorPort);
+
+			// Page 2 // Washing Machine
+			PageConfig page2 = pageFactory.Create3x3Page (new List<VisualizationConfig> (){ 
+				appliance.CreateBar(ApplianceData.Count,1000,"Count",0,5,"#"),
+				appliance.CreateBar(ApplianceData.AEC,1000,"AEC",0,400,"kWh"),
+				appliance.CreateBar(ApplianceData.Score, 1000,"Score",0,100,""),
+				appliance.CreatePie(ApplianceData.Count,1000,"Count"),
+				appliance.CreatePie(ApplianceData.EnergyCentroid,1000,"Energy"),
+				appliance.CreateTable(ApplianceData.Discovered, 1000,"Discovered Programs"),
+			},"Grid3x3");
+
+			// Page 3
+
+			// Page 4
+
+			// Page 5
+			List<VisualizationConfig> visualizations5 = new List<VisualizationConfig>{
+				realtime1.CreateControl(RealtimeInterface.LithiumBatteryWS,"Battery Control")
+			};
+			PageConfig page5 = pageFactory.Create3x3Page (visualizations5,"Grid3x3");
+
+			// Page 6 Flexhouse
+			List<VisualizationConfig> visualizations6 = new List<VisualizationConfig>{
+				realtime4.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.OutsideWindspeed,updateInterval,
+					"Outsie Temp",-20,40,"C",
+					new double[,]{{10,40}},new double[,]{{0,10}},new double[,]{{-20,0}})
+			};
+			ExperimentPageConfig page6 = new ExperimentPageConfig (visualizations1, "Experiment",aggregatorHost,aggregatorPort);
+
+			PagesConfig pages = pageFactory.CreatePages (new List<MasterPageConfig> (){ page1, page2, page5, page6 });
+			return pages;
+		}
+
 		public static PagesConfig Example1(){
 
 			PageFactory pageFactory = new PageFactory ();
@@ -244,7 +356,7 @@ namespace DataAggregator
 
 			return pageFactory.CreatePages (new List<MasterPageConfig> (){ b, c.Pages[0] });
 		}
-
+		/*
 		public static PagesConfig BatteryPage(){
 
 			PageFactory pageFactory = new PageFactory ();
@@ -258,14 +370,11 @@ namespace DataAggregator
 				realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.ActiveEnergyExport,3000,"Export",0,10,10,"W"),
 				realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.ActiveEnergyImport,3000,"Import",0,10,10,"W"),
 
-
-				realtime3.CreateControl(RealtimeInterface.LithiumBatteryWS,"Control Battery"),
-
 				realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.ACReactivePower,3000,"AC Reactive Power",0,10,10,"W"),
 				realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.ACFrequency,3000,"AC Frequency",0,10,10,"W"),
-				realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.ACActivePower,3000,"AC Active Power",0,10,10,"W")
+				realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.ACActivePower,3000,"AC Active Power",0,10,10,"W"),
 
-
+				realtime3.CreateControl(RealtimeInterface.LithiumBatteryWS,"Control Battery")
 
 			};
 			ExperimentPageConfig b = new ExperimentPageConfig (visualizations, "Experiment","127.0.0.1",9001);
@@ -274,6 +383,8 @@ namespace DataAggregator
 
 			return pageFactory.CreatePages (new List<MasterPageConfig> (){ b, c.Pages[0] });
 		}
+*/
+
 
 	}
 }
