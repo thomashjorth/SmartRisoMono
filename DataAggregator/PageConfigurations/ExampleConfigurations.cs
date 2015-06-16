@@ -16,11 +16,12 @@ namespace DataAggregator
 
 			int updateInterval = 2000;
 
-			string aggregatorHost= "localhost"; int aggregatorPort = 9001;
+			string aggregatorHost= "192.168.0.74"; int aggregatorPort = 8080;
 
 			string realtimeHost1 = "syslab-05"; int realtimePort1 = 8080; // Dumpload
 			string realtimeHost2 = "syslab-03"; int realtimePort2 = 8080; // Gaia
-			string realtimeHost3 = "syslab-22"; int realtimePort3 = 8080; // Battery
+			string realtimeHost3 = "syslab-07"; int realtimePort3 = 8080; // PV
+			string realtimeHost5 = "syslab-10"; int realtimePort5 = 8080; // PV
 
 			// 07 10 sol
 			// 12 vrbbattery
@@ -28,8 +29,8 @@ namespace DataAggregator
 			// 27 dump
 
 			string realtimeHost4 = "syslab-08"; int realtimePort4 = 8080; // Flexhouse
-			string realtimeHost5 = ""; int realtimePort5 = 8080; // 
-			string realtimeHost6 = ""; int realtimePort6 = 8080; // 
+		//	string realtimeHost5 = ""; int realtimePort5 = 8080; // 
+		//	string realtimeHost6 = ""; int realtimePort6 = 8080; // 
 
 			VisualizationFactory VisFac = new VisualizationFactory ();
 			AbstractApplianceVisualizationFactory appliance = 
@@ -123,7 +124,7 @@ namespace DataAggregator
 			};
 			ExperimentPageConfig page6 = new ExperimentPageConfig (visualizations1, "Experiment",aggregatorHost,aggregatorPort);
 
-			PagesConfig pages = pageFactory.CreatePages (new List<MasterPageConfig> (){ page1, page2, page5, page6 });
+			PagesConfig pages = pageFactory.CreatePages (new List<MasterPageConfig> (){ page1, page2 });
 			return pages;
 		}
 
