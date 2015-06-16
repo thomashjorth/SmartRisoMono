@@ -28,7 +28,7 @@
 	}
 
 	public enum RealtimeInterface{
-		GenericLoadWS, GaiaWindTurbineWS, LithiumBatteryWS, FlexHouseWS
+		GenericLoadWS, GaiaWindTurbineWS, LithiumBatteryWS, FlexHouseWS, VRBBatteryWS, PVSystemWS
 	}
 
 	public enum SingleAggregation{
