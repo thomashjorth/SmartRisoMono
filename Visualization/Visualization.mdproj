@@ -2443,5 +2443,6 @@
     <None Include="Scripts\Controllers\experimentController.js" />
     <None Include="Scripts\Directives\experimentDirective.js" />
     <None Include="Views\Pages\Experiment.html" />
+    <None Include="Views\Visualization\d3GaugeExp.html" />
   </ItemGroup>
 </Project>

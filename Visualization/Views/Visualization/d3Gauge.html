@@ -1,3 +1,3 @@
 ﻿<div class="controllerGauge" ng-repeat="gauge in init.Gauges track by $index" ng-controller="d3GaugeController">
-  <div class="d3gauge gauge" d3-gauge-directive chart-data="data" ng-init="initialize($index)"></div>
+  <div class="d3gauge gauge" d3-gauge-directive chart-data="data" ng-init="initialize(gauge)"></div>
 </div>

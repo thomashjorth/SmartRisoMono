@@ -1,7 +1,10 @@
 VisualizeApp.controller('gaiaController', ['$scope','$interval', '$http', 'AppService', function($scope, $interval, $http, AppService){
+	$scope.temp = $scope.init;
+    if($scope.init.length != undefined){
+        $scope.temp=$scope.init.shift();
+    }
 
-
-	$scope.params = $scope.init.Params + "&resource="
+	$scope.params = $scope.temp.Params + "&resource="
 
 		//$scope.messages();
 	$interval(function(){
@@ -9,7 +12,7 @@ VisualizeApp.controller('gaiaController', ['$scope','$interval', '$http', 'AppSe
 	}, 10000);
 
 	$scope.commandUnit = function (command) {
-		AppService.putData($scope.init.Host,$scope.init.Port,$scope.init.Device,"Put/"+$scope.params+ command)
+		AppService.putData($scope.temp.Host,$scope.temp.Port,$scope.temp.Device,"Put/"+$scope.params+ command)
 			.success(function (res) {	
 				$scope.messages();
 		})
@@ -20,7 +23,7 @@ VisualizeApp.controller('gaiaController', ['$scope','$interval', '$http', 'AppSe
 
 
 	$scope.messages = function () {
-		AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,"GetStatus/"+$scope.params+ "getTurbineStatus")
+		AppService.getData($scope.temp.Host,$scope.temp.Port,$scope.temp.Device,"GetStatus/"+$scope.params+ "getTurbineStatus")
 			.success(function (response){
 				var result = JSON.parse(response)
 				if(result.status != undefined)

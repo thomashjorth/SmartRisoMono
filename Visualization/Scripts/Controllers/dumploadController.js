@@ -1,14 +1,17 @@
-VisualizeApp.controller('dumploadController', ['$scope','$interval', '$http', 'AppService', function($scope, $interval, $http, AppService){
+VisualizeApp.controller('dumploadController', ['$scope', '$element','$interval', '$http', 'AppService', function($scope, $element,$interval, $http, AppService){
 
-
-	$scope.params = $scope.init.Params + "&resource="
+	$scope.temp = $scope.init;
+    if($scope.init.length != undefined){
+            $scope.temp=$scope.init[$element[0].parentNode.attributes['value'].value]
+        }
+	$scope.params = $scope.temp.Params + "&resource="
 
 	$interval(function(){
 		$scope.messages();
 	}, 10000);
 
 	$scope.commandUnit = function (command) {
-		AppService.putData($scope.init.Host,$scope.init.Port,$scope.init.Device,"Put/"+$scope.params+ command)
+		AppService.putData($scope.temp.Host,$scope.temp.Port,$scope.temp.Device,"Put/"+$scope.params+ command)
 			.success(function (res) {	
 				$scope.messages();
 			})
@@ -19,7 +22,7 @@ VisualizeApp.controller('dumploadController', ['$scope','$interval', '$http', 'A
 
 
 	$scope.messages = function () {
-		AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,"GetCompositeBoolean/"+$scope.params+ "isFanRunning")
+		AppService.getData($scope.temp.Host,$scope.temp.Port,$scope.temp.Device,"GetCompositeBoolean/"+$scope.params+ "isFanRunning")
 			.success(function (response){
 				var result = JSON.parse(response)
 				if(result.value)
@@ -31,7 +34,7 @@ VisualizeApp.controller('dumploadController', ['$scope','$interval', '$http', 'A
 				$scope.dumpload = "Error checking status of dumpload.";
 			});
 
-		AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,"GetCompositeBoolean/"+$scope.params+ "isLoadOn")
+		AppService.getData($scope.temp.Host,$scope.temp.Port,$scope.temp.Device,"GetCompositeBoolean/"+$scope.params+ "isLoadOn")
 			.success(function (response){
 				var result = JSON.parse(response)
 				if(result.value)

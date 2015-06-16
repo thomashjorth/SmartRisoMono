@@ -1,9 +1,14 @@
-VisualizeApp.controller('d3GaugeController', ['$scope','$interval', '$http', 'AppService', function($scope, $interval, $http, AppService, d3GaugeDirective){
+VisualizeApp.controller('d3GaugeController', ['$scope','$element','$interval', '$http', 'AppService', function($scope, $element, $interval, $http, AppService, d3GaugeDirective){
 	$scope.firstTime = Math.floor(Date.now()/1000);
     $scope.run = true;
-	$scope.initialize = function(gauge)
+	$scope.initialize = function()
   	{
-        $scope.gauge = $scope.init.Gauges[gauge];
+        //$scope.init.shift();
+
+        if($scope.init.length != undefined){
+            $scope.temp=$scope.init[$element[0].parentNode.attributes['value'].value]
+        }
+        $scope.gauge = $scope.temp.Gauges[0];
         $scope.data={config: {label: $scope.gauge.Unit, min: $scope.gauge.ValueMin, max: $scope.gauge.ValueMax, PlaceHolder: $scope.gauge.ID, title: $scope.gauge.TitleHeading, green: $scope.gauge.Green, yellow: $scope.gauge.Yellow, red: $scope.gauge.Red},
             CompositeMeasurement: {v: 0,timestamp: $scope.firstTime} };
 

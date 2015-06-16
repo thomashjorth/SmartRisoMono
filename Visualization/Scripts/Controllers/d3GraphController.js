@@ -1,4 +1,4 @@
-VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', 'AppService', function($scope, $interval, $http, AppService, d3GraphDirective){
+VisualizeApp.controller('d3GraphController', ['$scope', '$element', '$interval', '$http', 'AppService', function($scope, $element, $interval, $http, AppService, d3GraphDirective){
 	$scope.firstTime = Math.floor(Date.now());
 
     $scope.min = 0;
@@ -8,9 +8,11 @@ VisualizeApp.controller('d3GraphController', ['$scope','$interval', '$http', 'Ap
     $scope.run = true;
 	$scope.initialize = function()
   	{
+        //alert($scope.init.length)
         $scope.temp = $scope.init;
         if($scope.init.length != undefined){
-            $scope.temp=$scope.init.shift();
+            $scope.temp=$scope.init[$element[0].parentNode.attributes['value'].value];
+            //alert(JSON.stringify($scope.temp))
         }
         $scope.data={config: {unit: $scope.temp.Unit, yMin: $scope.temp.ValueMin, yMax: $scope.temp.ValueMax, title: $scope.temp.TitleHeading}, values: [
             {timestamp: $scope.firstTime/1000,value: 0}

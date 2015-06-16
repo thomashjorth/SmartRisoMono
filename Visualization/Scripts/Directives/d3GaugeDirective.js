@@ -26,7 +26,6 @@
 
 			scope.$watchCollection(exp, function(newVal, oldVal){
 				data=newVal;
-
 				if(oldVal == newVal){
 					config = 
 					{

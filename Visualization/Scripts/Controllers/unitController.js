@@ -2,10 +2,14 @@ VisualizeApp.controller('unitController', ['$scope','$interval', '$http', 'AppSe
     $scope.run=true;
     $scope.initialize = function()
     {
-        $scope.dataHost = $scope.init.Host;
-        $scope.dataPort = $scope.init.Port;
+        $scope.temp = $scope.init;
+        if($scope.init.length != undefined){
+            $scope.temp=$scope.init.shift();
+        }
+        $scope.dataHost = $scope.temp.Host;
+        $scope.dataPort = $scope.temp.Port;
         $scope.dataAggregation = 'Aggregation';
-        $scope.dataResource = $scope.init.Params;
+        $scope.dataResource = $scope.temp.Params;
         $scope.image = "Plug";
         var lastResponse;
         AppService.getData($scope.dataHost,$scope.dataPort,$scope.dataAggregation,$scope.dataResource)

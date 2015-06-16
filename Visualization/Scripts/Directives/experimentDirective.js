@@ -35,28 +35,31 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                     }
                 } else {
                     for(var i = 0; i < upper; i++){
-
+                        //alert(scope.Units[i].Visualization1.VisualizationType)
+                        //scope.init.push(scope.Units[i].Visualization1)
                         div.append("ng-include")
                             .attr("class", "exp upper1"+i)
                             .attr("z-index", "-1")
+                            .attr("value", i*2)
                             .style("width", height/4.5*2)
                             .style("height", height/4.5)
                             .style("position", "absolute")
                             .style("top","25px")
                             .style("left",width/(upper)*(i)+125+"px")
-                            .attr("src", data[i].Visualization1.VisualizationType)
-                            .attr("ng-init", "init.push(Units["+i+"].Visualization1)");//Units["+i+"].Visualization1");
+                            .attr("src", data[i].Visualization1.VisualizationType);
+                            //.attr("ng-init", "init.push(Units["+i+"].Visualization1)");//Units["+i+"].Visualization1");
 
                         div.append("ng-include")
                             .attr("class", "exp upper2"+i)
                             .attr("z-index", "-1")
+                            .attr("value", i*2+1)
                             .style("width", height/4.5*2)
                             .style("height", height/4.5)
                             .style("position", "absolute")
                             .style("top",height/4.5+25)
                             .style("left",width/(upper)*(i)+125+"px")
-                            .attr("src", data[i].Visualization2.VisualizationType)
-                            .attr("ng-init", "init.push(Units["+i+"].Visualization2)");//Units["+i+"].Visualization2");
+                            .attr("src", data[i].Visualization2.VisualizationType);
+                            //.attr("ng-init", "init.push(Units["+i+"].Visualization2)");//Units["+i+"].Visualization2");
 
                         svg.append("image")
                             .attr("xlink:href","http://"+data[i].Host+":"+data[i].Port+"/api/Image/Get/"+data[i].Device)
@@ -88,27 +91,29 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                         div.append("ng-include")
                             .attr("class", "exp lower1"+i)
                             .attr("z-index", "-1")
+                            .attr("value", (i+upper)*2)
                             .style("width", height/4.5*2)
                             .style("height", height/4.5)
                             .style("position", "absolute")
                             .style("bottom",height/4.5+25)
                             .style("left",width/(lower)*(i)+145+"px")
-                            .attr("src", data[i].Visualization1.VisualizationType)
-                            .attr("ng-init", "init.push(Units["+(i+upper)+"].Visualization1)");//Units["+i+"].Visualization1");
+                            .attr("src", data[i+upper].Visualization1.VisualizationType);
+                            //.attr("ng-init", "init.push(Units["+(i+upper)+"].Visualization1)");//Units["+i+"].Visualization1");
 
                         div.append("ng-include")
                             .attr("class", "exp lower2"+i)
                             .attr("z-index", "-1")
+                            .attr("value", (i+upper)*2+1)
                             .style("width", height/4.5*2)
                             .style("height", height/4.5)
                             .style("position", "absolute")
                             .style("bottom","25px")
                             .style("left",width/(lower)*(i)+145+"px")
-                            .attr("src", data[i].Visualization2.VisualizationType)
-                            .attr("ng-init", "init.push(Units["+(i+upper)+"].Visualization2)");//Units["+i+"].Visualization2");
+                            .attr("src", data[i+upper].Visualization2.VisualizationType);
+                            //.attr("ng-init", "init.push(Units["+(i+upper)+"].Visualization2)");//Units["+i+"].Visualization2");
 
                         svg.append("image")
-                            .attr("xlink:href","http://"+data[i].Host+":"+data[i].Port+"/api/Image/Get/"+data[i].Device)
+                            .attr("xlink:href","http://"+data[i+upper].Host+":"+data[i+upper].Port+"/api/Image/Get/"+data[i+upper].Device)
                             .attr("width","150px")
                             .attr("height","150px")
                             .attr("y", height-200+"px")

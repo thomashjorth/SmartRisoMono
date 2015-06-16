@@ -2,20 +2,24 @@
     $scope.run = true;
     $scope.initialize = function()
     {
+        $scope.temp = $scope.init;
+        if($scope.init.length != undefined){
+            $scope.temp=$scope.init.shift();
+        }
 
-        AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,$scope.init.Params)
+        AppService.getData($scope.temp.Host,$scope.temp.Port,$scope.temp.Device,$scope.temp.Params)
             .success(function (response){
 
-                $scope.data = {config: {label: $scope.init.Unit, min: $scope.init.ValueMin, max: $scope.init.ValueMax, title: $scope.init.TitleHeading}, 
+                $scope.data = {config: {label: $scope.temp.Unit, min: $scope.temp.ValueMin, max: $scope.temp.ValueMax, title: $scope.temp.TitleHeading}, 
                     LabeledInstance: JSON.parse(response) };
 
             });
         $interval(function(){
             if($scope.run){
                 $scope.run = false;
-                AppService.getData($scope.init.Host,$scope.init.Port,$scope.init.Device,$scope.init.Params)
+                AppService.getData($scope.temp.Host,$scope.temp.Port,$scope.temp.Device,$scope.temp.Params)
                     .success(function (response){
-                    $scope.data = {config: {label: $scope.init.Unit, min: $scope.init.ValueMin, max: $scope.init.ValueMax, title: $scope.init.TitleHeading}, 
+                    $scope.data = {config: {label: $scope.temp.Unit, min: $scope.temp.ValueMin, max: $scope.temp.ValueMax, title: $scope.temp.TitleHeading}, 
                         LabeledInstance: JSON.parse(response) };
                     $scope.run = true;
                 })
@@ -23,6 +27,6 @@
                     $scope.run=true;
                 });
             }
-        }, $scope.init.UpdateInterval);
+        }, $scope.temp.UpdateInterval);
     };
 }]);
