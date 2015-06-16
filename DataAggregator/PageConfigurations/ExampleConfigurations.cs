@@ -118,10 +118,39 @@ namespace DataAggregator
 
 			// Page 6 Flexhouse
 			List<VisualizationConfig> visualizations6 = new List<VisualizationConfig>{
-				realtime4.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.OutsideWindspeed,updateInterval,
+
+				realtime4.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ActivePowerPhaseA,updateInterval,
 					"Outsie Temp",-20,40,"C",
-					new double[,]{{10,40}},new double[,]{{0,10}},new double[,]{{-20,0}})
+					new double[,]{{10,40}},new double[,]{{0,10}},new double[,]{{-20,0}}),
+				realtime4.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ActivePowerPhaseB,updateInterval,
+					"Outsie Temp",-20,40,"C",
+					new double[,]{{10,40}},new double[,]{{0,10}},new double[,]{{-20,0}}),
+				realtime4.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ActivePowerPhaseC,updateInterval,
+					"Outsie Temp",-20,40,"C",
+					new double[,]{{10,40}},new double[,]{{0,10}},new double[,]{{-20,0}}),
+				realtime4.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ReactivePowerPhaseA,updateInterval,
+					"Outsie Temp",-20,40,"C",
+					new double[,]{{10,40}},new double[,]{{0,10}},new double[,]{{-20,0}}),
+				realtime4.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ReactivePowerPhaseB,updateInterval,
+					"Outsie Temp",-20,40,"C",
+					new double[,]{{10,40}},new double[,]{{0,10}},new double[,]{{-20,0}}),
+				realtime4.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ReactivePowerPhaseC,updateInterval,
+					"Outsie Temp",-20,40,"C",
+					new double[,]{{10,40}},new double[,]{{0,10}},new double[,]{{-20,0}}),
+
+				realtime4.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ReactiveEnergyImport,updateInterval,
+					"Outsie Temp",-20,40,"C",
+					new double[,]{{10,40}},new double[,]{{0,10}},new double[,]{{-20,0}}),
+				realtime4.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ActiveEnergyImport,updateInterval,
+					"Outsie Temp",-20,40,"C",
+					new double[,]{{10,40}},new double[,]{{0,10}},new double[,]{{-20,0}}),
+				realtime4.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ActiveEnergyExport,updateInterval,
+					"Outsie Temp",-20,40,"C",
+					new double[,]{{10,40}},new double[,]{{0,10}},new double[,]{{-20,0}}),
 			};
+
+
+
 			ExperimentPageConfig page6 = new ExperimentPageConfig (visualizations1, "Experiment",aggregatorHost,aggregatorPort);
 
 			PagesConfig pages = pageFactory.CreatePages (new List<MasterPageConfig> (){ page1, page2 });
