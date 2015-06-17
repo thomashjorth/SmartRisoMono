@@ -19,6 +19,7 @@ namespace DataAggregator
 			string aggregatorHost= "192.168.0.74"; int aggregatorPort = 8080;
 
 			string realtimeHost05 = "syslab-05"; int realtimePort05 = 8080; // Dumpload
+			string realtimeHost05Simul = "localhost"; int realtimePort05Simul = 8080; // Dumpload
 			string realtimeHost03 = "syslab-03"; int realtimePort03 = 8080; // Gaia
 			string realtimeHost07 = "syslab-07"; int realtimePort07 = 8080; // PV
 			string realtimeHost10 = "syslab-10"; int realtimePort10 = 8080; // PV
@@ -27,7 +28,7 @@ namespace DataAggregator
 			string realtimeHost18 = "syslab-18"; int realtimePort18 = 8080; // mobileload
 			string realtimeHost27 = "syslab-27"; int realtimePort27 = 8080; // dump
 
-			string realtimeHost08 = "syslab-08"; int realtimePort08 = 8080; // Flexhouse
+			string realtimeHost08 = "syslab-08"; int realtimePort08 = 8085; // Flexhouse
 
 			VisualizationFactory VisFac = new VisualizationFactory ();
 			AbstractApplianceVisualizationFactory appliance = 
@@ -43,11 +44,13 @@ namespace DataAggregator
 			RealtimeVisualizationFactory realtime18 = new RealtimeVisualizationFactory (aggregatorHost, aggregatorPort, realtimeHost18, realtimePort18);
 			RealtimeVisualizationFactory realtime27 = new RealtimeVisualizationFactory (aggregatorHost, aggregatorPort, realtimeHost27, realtimePort27);
 
+			RealtimeVisualizationFactory realtime05Simul = new RealtimeVisualizationFactory (aggregatorHost, aggregatorPort, realtimeHost05Simul, realtimePort05Simul);
+
 
 			MAggregationVisualizationFactory multi = new MAggregationVisualizationFactory (aggregatorHost, aggregatorPort);
 			SAggregationVisualizationFactory single = new SAggregationVisualizationFactory (aggregatorHost, aggregatorPort);
 
-			// Page 1
+			// Page 1 Dumpload
 			List<ExperimentConfig> visualizations1 = new List<ExperimentConfig>{
 				realtime05.CreateExperiment (
 					RealtimeInterface.GenericLoadWS,
@@ -110,33 +113,33 @@ namespace DataAggregator
 
 			// Page 3
 			List<VisualizationConfig> visualizations3 = new List<VisualizationConfig>{
-				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActivePower,updateInterval,"ActivePower",-1000,2000,10,"W"),
-				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACFrequency,updateInterval,"ActivePower",-1000,2000,10,"W"),
-				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACReactivePower,updateInterval,"ActivePower",-1000,2000,10,"W"),
-				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ReactiveEnergyImport,updateInterval,"ActivePower",-1000,2000,10,"W"),
-				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActiveEnergyExport,updateInterval,"ActivePower",-1000,2000,10,"W"),
-				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActiveEnergyImport,updateInterval,"ActivePower",-1000,2000,10,"W"),
+				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActivePower,updateInterval,"PV-10 ActivePower",-1000,2000,10,"W"),
+				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACFrequency,updateInterval,"PV-10 ACFrequency",-1000,2000,10,"W"),
+				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACReactivePower,updateInterval,"PV-10 ACReactivePower",-1000,2000,10,"W"),
+				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ReactiveEnergyImport,updateInterval,"PV-10 ReactiveEnergyImport",-1000,2000,10,"W"),
+				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActiveEnergyExport,updateInterval,"PV-10 ActiveEnergyExport",-1000,2000,10,"W"),
+				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActiveEnergyImport,updateInterval,"PV-10 ActiveEnergyImport",-1000,2000,10,"W"),
 			};
 			PageConfig page3 = pageFactory.Create3x3Page (visualizations3,"Grid3x3");
 			// Page 4
 			List<VisualizationConfig> visualizations4 = new List<VisualizationConfig>{
-				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActivePower,updateInterval,"ActivePower",-1000,2000,10,"W"),
-				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACFrequency,updateInterval,"ActivePower",-1000,2000,10,"W"),
-				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACReactivePower,updateInterval,"ActivePower",-1000,2000,10,"W"),
-				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ReactiveEnergyImport,updateInterval,"ActivePower",-1000,2000,10,"W"),
-				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActiveEnergyExport,updateInterval,"ActivePower",-1000,2000,10,"W"),
-				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActiveEnergyImport,updateInterval,"ActivePower",-1000,2000,10,"W"),
+				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActivePower,updateInterval,"PV-07 ActivePower",-1000,2000,10,"W"),
+				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACFrequency,updateInterval,"PV-07 ACFrequency",-1000,2000,10,"W"),
+				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACReactivePower,updateInterval,"PV-07 ACReactivePower",-1000,2000,10,"W"),
+				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ReactiveEnergyImport,updateInterval,"PV-07 ReactiveEnergyImport",-1000,2000,10,"W"),
+				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActiveEnergyExport,updateInterval,"PV-07 ActiveEnergyExport",-1000,2000,10,"W"),
+				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActiveEnergyImport,updateInterval,"PV-07 ActiveEnergyImport",-1000,2000,10,"W"),
 			};
 			PageConfig page4 = pageFactory.Create3x3Page (visualizations4,"Grid3x3");
 
 			// Page 5
 			List<VisualizationConfig> visualizations5 = new List<VisualizationConfig>{
-				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ActivePower,updateInterval,"ActivePower",-1000,2000,10,"W"),
-				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ACFrequency,updateInterval,"ActivePower",-1000,2000,10,"W"),
-				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ACReactivePower,updateInterval,"ActivePower",-1000,2000,10,"W"),
-				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ReactiveEnergyImport,updateInterval,"ActivePower",-1000,2000,10,"W"),
-				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ActiveEnergyExport,updateInterval,"ActivePower",-1000,2000,10,"W"),
-				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ActiveEnergyImport,updateInterval,"ActivePower",-1000,2000,10,"W"),
+				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ActivePower,updateInterval,"Battery-12 ActivePower",-1000,2000,10,"W"),
+				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ACFrequency,updateInterval,"Battery-12 ACFrequency",-1000,2000,10,"W"),
+				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ACReactivePower,updateInterval,"Battery-12 ACReactivePower",-1000,2000,10,"W"),
+				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ReactiveEnergyImport,updateInterval,"Battery-12 ReactiveEnergyImport",-1000,2000,10,"W"),
+				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ActiveEnergyExport,updateInterval,"Battery-12 ActiveEnergyExport",-1000,2000,10,"W"),
+				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ActiveEnergyImport,updateInterval,"Battery-12 ActiveEnergyImport",-1000,2000,10,"W"),
 			};
 			PageConfig page5 = pageFactory.Create3x3Page (visualizations5,"Grid3x3");
 
@@ -144,37 +147,105 @@ namespace DataAggregator
 			List<VisualizationConfig> visualizations6 = new List<VisualizationConfig>{
 
 				realtime08.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ActivePowerPhaseA,updateInterval,
-					"ActivePowerPhaseA",-2000,2000,"W",
+					"Flexhouse-08 ActivePowerPhaseA",-2000,2000,"W",
 					new double[,]{{-2000,0}},new double[,]{{0,1000}},new double[,]{{1000,2000}}),
 				realtime08.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ActivePowerPhaseB,updateInterval,
-					"ActivePowerPhaseB",-2000,2000,"W",
+					"Flexhouse-08 ActivePowerPhaseB",-2000,2000,"W",
 					new double[,]{{-2000,0}},new double[,]{{0,1000}},new double[,]{{1000,2000}}),
 				realtime08.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ActivePowerPhaseC,updateInterval,
-					"ActivePowerPhaseC",-2000,2000,"W",
+					"Flexhouse-08 ActivePowerPhaseC",-2000,2000,"W",
 					new double[,]{{-2000,0}},new double[,]{{0,1000}},new double[,]{{1000,2000}}),
 				realtime08.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ReactivePowerPhaseA,updateInterval,
-					"ReactivePowerPhaseA",-2000,2000,"W",
+					"Flexhouse-08 ReactivePowerPhaseA",-2000,2000,"W",
 					new double[,]{{-2000,0}},new double[,]{{0,1000}},new double[,]{{1000,2000}}),
 				realtime08.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ReactivePowerPhaseB,updateInterval,
-					"ReactivePowerPhaseB",-2000,2000,"W",
+					"Flexhouse-08 ReactivePowerPhaseB",-2000,2000,"W",
 					new double[,]{{-2000,0}},new double[,]{{0,1000}},new double[,]{{1000,2000}}),
 				realtime08.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ReactivePowerPhaseC,updateInterval,
-					"ReactivePowerPhaseC",-2000,2000,"W",
+					"Flexhouse-08 ReactivePowerPhaseC",-2000,2000,"W",
 					new double[,]{{-2000,0}},new double[,]{{0,1000}},new double[,]{{1000,2000}}),
 				realtime08.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ReactiveEnergyImport,updateInterval,
-					"ReactiveEnergyImport",-2000,2000,"W",
+					"Flexhouse-08 ReactiveEnergyImport",-2000,2000,"W",
 					new double[,]{{-2000,0}},new double[,]{{0,1000}},new double[,]{{1000,2000}}),
 				realtime08.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ActiveEnergyImport,updateInterval,
-					"ActiveEnergyImport",-2000,2000,"W",
+					"Flexhouse-08 ActiveEnergyImport",-2000,2000,"W",
 					new double[,]{{-2000,0}},new double[,]{{0,1000}},new double[,]{{1000,2000}}),
 				realtime08.CreateGauge(RealtimeInterface.FlexHouseWS,RealtimeData.ActiveEnergyExport,updateInterval,
-					"ActiveEnergyExport",-2000,2000,"W",
+					"Flexhouse-08 ActiveEnergyExport",-2000,2000,"W",
 					new double[,]{{-2000,0}},new double[,]{{0,1000}},new double[,]{{1000,2000}}),
 			};
 
 			PageConfig page6 = new PageConfig (visualizations6,"Grid3x3");
 
-			PagesConfig pages = pageFactory.CreatePages (new List<MasterPageConfig> (){ page1, page2,page3, page4, page5, page6 });
+			// Page 7 Simul Dumpload
+			List<VisualizationConfig> visualizations7 = new List<VisualizationConfig>{
+
+				realtime05Simul.CreateGauge(RealtimeInterface.GenericLoadWS,RealtimeData.ActivePower,updateInterval,
+					"Flexhouse-08 ActivePowerPhaseA",-1,2,"W",
+					new double[,]{{-1,0}},new double[,]{{0,1}},new double[,]{{1,2}}),
+				realtime05Simul.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl")
+		
+			};
+
+			PageConfig page7 = new PageConfig (visualizations7,"Grid3x3");
+
+			// Page 8 Dumpload
+			List<ExperimentConfig> visualizations8 = new List<ExperimentConfig>{
+				realtime05Simul.CreateExperiment (
+					RealtimeInterface.GenericLoadWS,
+					RealtimeData.ActivePower, 
+					updateInterval,
+					realtime05Simul.CreateGraph (RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower, updateInterval, 
+						"ActivePower", -1, 1, 10, "mW"),
+					realtime05Simul.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl")
+				)
+				,
+				realtime03.CreateExperiment (
+					RealtimeInterface.GaiaWindTurbineWS,
+					RealtimeData.ActivePower, 
+					updateInterval,
+					realtime03.CreateGraph (RealtimeInterface.GaiaWindTurbineWS, RealtimeData.ActivePower, updateInterval, 
+						"ActivePower", -5, 15, 10, "mW"),
+					realtime03.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.GeneratorRPM,updateInterval,
+						"GeneratorRPM",1000,1050,10,"mW")
+				),
+				realtime07.CreateExperiment (
+					RealtimeInterface.LithiumBatteryWS,
+					RealtimeData.SOC, 
+					updateInterval,
+					realtime07.CreateGraph (RealtimeInterface.LithiumBatteryWS, RealtimeData.SOC, updateInterval, 
+						"SOC", 0, 100, 10, "mW"),
+					realtime07.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,updateInterval,
+						"Temperature",0,100,10,"mW")
+				),
+				realtime03.CreateExperiment (
+					RealtimeInterface.GaiaWindTurbineWS,
+					RealtimeData.ActivePower, 
+					updateInterval,
+					realtime03.CreateGraph (RealtimeInterface.GaiaWindTurbineWS, RealtimeData.ActivePower, updateInterval, 
+						"ActivePower", -5, 15, 10, "mW"),
+					realtime03.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.GeneratorRPM,updateInterval,
+						"GeneratorRPM",1000,1050,10,"mW")
+				),
+				realtime07.CreateExperiment (
+					RealtimeInterface.LithiumBatteryWS,
+					RealtimeData.SOC, 
+					updateInterval,
+					realtime07.CreateGraph (RealtimeInterface.LithiumBatteryWS, RealtimeData.SOC, updateInterval, 
+						"SOC", 0, 100, 10, "mW"),
+					realtime07.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,updateInterval,
+						"Temperature",0,100,10,"mW")
+				)
+			};
+			ExperimentPageConfig page8 = new ExperimentPageConfig (visualizations8, "Experiment",aggregatorHost,aggregatorPort);
+
+
+
+			PagesConfig pages = pageFactory.CreatePages (new List<MasterPageConfig> (){ page1, page2,page3, page4, page5, page6,page7 ,page8});
+
+			string serializedGaiaConf = Newtonsoft.Json.JsonConvert.SerializeObject (pages);
+			File.Delete ("PageConfigurations/BigPres.json");
+			File.AppendAllText ("PageConfigurations/BigPres.json", serializedGaiaConf);
 			return pages;
 		}
 
