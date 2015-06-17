@@ -84,7 +84,7 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                                 .attr("dy", ".71em")
                                 .style("text-anchor", "end")
                                 .style("font-size", (width*0.01))
-                                .text("0 mW");
+                                .text("0 " + data[i].Unit);
 
                     }
                     for(var i = 0; i < lower; i++){
@@ -135,7 +135,7 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                                 .attr("dy", ".71em")
                                 .style("text-anchor", "end")
                                 .style("font-size", (width*0.01))
-                                .text("0 mW");
+                                .text("0 "+data[i+upper].Unit);
                     }
                 }
                 svg.append("line")
@@ -158,7 +158,15 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
 
             function updateValues(data) {
                 svg.selectAll("text").each(function (d, i) {
-                        d3.select(this).text(data[i].measurement.value+" mW")
+                        if(data[i].measurement.value > 0){
+                            d3.select(this)
+                                .style("fill", "green")
+                                .text(data[i].measurement.value+" "+Data.config.units[i].Unit)
+                        } else{
+                            d3.select(this)
+                                .style("fill", "red")
+                                .text(data[i].measurement.value+" "+Data.config.units[i].Unit)
+                        }
                     });
                 
             }

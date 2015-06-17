@@ -104,12 +104,12 @@
 
                svg.append("svg:g")
                    .attr("class", "data")
-                   .attr("transform", "translate("+textPos+","+height*0.1+")")
+                   .attr("transform", "translate("+textPos+","+height*0.15+")")
                    .append("text")
                         .attr("y", 6)
                         .attr("dy", ".71em")
                         .style("text-anchor", "end")
-                        .style("font-size", (width*0.025))
+                        .style("font-size", (width*0.035))
                         .text("AVG: 0.0, MIN: 0.0, MAX 0.0");
 
                svg.append("svg:path")
@@ -137,7 +137,7 @@
                    });
                svg.select("g.x.axis")
                 .selectAll("text")
-                .style("font-size",(width*0.025)); //To change the font size of texts
+                .style("font-size",(width*0.035)); //To change the font size of texts
 
 
 
@@ -145,12 +145,12 @@
 
                svg.append("svg:g")
                    .attr("class", "data")
-                   .attr("transform", "translate("+textPos+","+height*0.1+")")
+                   .attr("transform", "translate("+textPos+","+height*0.15+")")
                    .append("text")
                         .attr("y", 6)
                         .attr("dy", ".71em")
                         .style("text-anchor", "end")
-                        .style("font-size", (width*0.025))
+                        .style("font-size", (width*0.035))
                         .text("AVG: "+Math.round(dataToPlot.statistics.avg * 100) / 100+", MIN: "+dataToPlot.statistics.min+", MAX "+dataToPlot.statistics.max+"");
            }
 

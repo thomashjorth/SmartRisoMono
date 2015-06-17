@@ -26,7 +26,8 @@ VisualizeApp.controller('experimentController', ['$scope','$interval', '$http', 
           Host: config.HostAgg,
           Port: config.PortAgg,
           Device: config.Units[i].Device.substring(0, config.Units[i].Device.length - 2),
-          Method: config.Units[i].Params})
+          Method: config.Units[i].Params,
+          Unit: config.Units[i].Unit})
   		}
       for (var i = 0; i < $scope.Units.length; i++) {
         $scope.init.push($scope.Units[i].Visualization1)

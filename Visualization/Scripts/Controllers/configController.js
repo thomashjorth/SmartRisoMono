@@ -1,6 +1,8 @@
 ﻿VisualizeApp.controller('configController', ['$scope','$interval', '$http', 'AppService', '$route', '$routeParams', '$location', function($scope, $interval, $http, AppService, $route, $routeParams, $location){
     $scope.params = $location.absUrl().split("?");
     $scope.config = "undefined";
+    $scope.server = "localhost"
+    $scope.port = "9001"
     if($scope.params.length > 1){
     	$scope.params = $scope.params[1].split("&")
     	$scope.slides = [];
@@ -12,11 +14,17 @@
 	    	else if(p[0] == "config"){
     			$scope.config = p[1];
 	    	}
+	    	else if(p[0] == "server"){
+    			$scope.server = p[1];
+	    	}
+	    	else if(p[0] == "port"){
+    			$scope.port = p[1];
+	    	}
 	    }
 	}
 
-    $scope.dataHost = "192.168.0.74";
-    $scope.dataPort = "8080";
+    $scope.dataHost = $scope.server;//"localhost";//"192.168.0.74";
+    $scope.dataPort = $scope.port;//"9001";//"8080";
     $scope.controller = "PageConfiguration/Get";
     $scope.current = 0;
     $scope.paused = false;

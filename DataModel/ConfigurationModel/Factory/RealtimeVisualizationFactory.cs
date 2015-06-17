@@ -39,10 +39,10 @@ namespace DataModel.ConfigurationModel.Factory
 			return new ControlConfig(Host,Port,Device,p,visualizationType);
 		}
 
-		public override ExperimentConfig CreateExperiment(RealtimeInterface deviceInterface, RealtimeData data,int  updateInterval, VisualizationConfig visualization1, VisualizationConfig visualization2)
+		public override ExperimentConfig CreateExperiment(RealtimeInterface deviceInterface, RealtimeData data,int  updateInterval, string unit, VisualizationConfig visualization1, VisualizationConfig visualization2)
 		{
 			
-			return new ExperimentConfig (DeviceHost, DevicePort, deviceInterface.ToString(), data.ToString(), updateInterval, visualization1, visualization2);
+			return new ExperimentConfig (DeviceHost, DevicePort, deviceInterface.ToString(), data.ToString(), updateInterval,unit, visualization1, visualization2);
 		}
 
 	}
