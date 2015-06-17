@@ -119,6 +119,7 @@ namespace DataAggregator
 				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ReactiveEnergyImport,updateInterval,"PV-10 ReactiveEnergyImport",-1000,2000,10,"W"),
 				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActiveEnergyExport,updateInterval,"PV-10 ActiveEnergyExport",-1000,2000,10,"W"),
 				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActiveEnergyImport,updateInterval,"PV-10 ActiveEnergyImport",-1000,2000,10,"W"),
+				realtime10.CreateUnit(3000)
 			};
 			PageConfig page3 = pageFactory.Create3x3Page (visualizations3,"Grid3x3");
 			// Page 4
@@ -129,6 +130,7 @@ namespace DataAggregator
 				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ReactiveEnergyImport,updateInterval,"PV-07 ReactiveEnergyImport",-1000,2000,10,"W"),
 				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActiveEnergyExport,updateInterval,"PV-07 ActiveEnergyExport",-1000,2000,10,"W"),
 				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ActiveEnergyImport,updateInterval,"PV-07 ActiveEnergyImport",-1000,2000,10,"W"),
+				realtime07.CreateUnit(3000)
 			};
 			PageConfig page4 = pageFactory.Create3x3Page (visualizations4,"Grid3x3");
 
@@ -140,6 +142,7 @@ namespace DataAggregator
 				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ReactiveEnergyImport,updateInterval,"Battery-12 ReactiveEnergyImport",-1000,2000,10,"W"),
 				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ActiveEnergyExport,updateInterval,"Battery-12 ActiveEnergyExport",-1000,2000,10,"W"),
 				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ActiveEnergyImport,updateInterval,"Battery-12 ActiveEnergyImport",-1000,2000,10,"W"),
+				realtime12.CreateUnit(3000)
 			};
 			PageConfig page5 = pageFactory.Create3x3Page (visualizations5,"Grid3x3");
 
@@ -241,7 +244,7 @@ namespace DataAggregator
 
 
 
-			PagesConfig pages = pageFactory.CreatePages (new List<MasterPageConfig> (){ page1, page2,page3, page4, page5, page6,page7 ,page8});
+			PagesConfig pages = pageFactory.CreatePages (new List<MasterPageConfig> (){ page1, page2,page3, page4, page5,page7 ,page8});
 
 			string serializedGaiaConf = Newtonsoft.Json.JsonConvert.SerializeObject (pages);
 			File.Delete ("PageConfigurations/BigPres.json");
