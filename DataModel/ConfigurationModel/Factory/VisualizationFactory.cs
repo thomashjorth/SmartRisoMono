@@ -2,7 +2,7 @@
 {
 	public enum RealtimeData{
 		ActivePower, Frequency, ReactivePower, Temperature, InterphaseVoltages, 
-		WindspeedOutsideNacelle, RotorRPM, GeneratorRPM, SOC, 
+		WindspeedOutsideNacelle, RotorRPM, GeneratorRPM, SOC, EngineRPM, BusbarFrequency, BusbarInterphaseVoltages,
 
 		ActiveEnergyImport, ActiveEnergyExport,
 		ACActivePower, ACFrequency, ACReactivePower,
@@ -28,7 +28,7 @@
 	}
 
 	public enum RealtimeInterface{
-		GenericLoadWS, GaiaWindTurbineWS, LithiumBatteryWS, FlexHouseWS, VRBBatteryWS, PVSystemWS
+		GenericLoadWS, GaiaWindTurbineWS, LithiumBatteryWS, FlexHouseWS, VRBBatteryWS, PVSystemWS, DEIFDieselGensetWS
 	}
 
 	public enum SingleAggregation{

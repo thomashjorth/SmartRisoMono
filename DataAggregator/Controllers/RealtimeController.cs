@@ -22,7 +22,7 @@ namespace DataAggregator.Controllers
 			 * http://127.0.0.1:9001/api/Realtime/?host=localhost&port=8080&wsInterface=GenericLoadWS&resource=getActivePower
 			*/
 			string data = "NAN";
-			if(resource == "getInterphaseVoltages")
+			if(resource == "getInterphaseVoltages" || resource == "getBusbarInterphaseVoltages")
 				data = WS.GetCompositeMeasurementList (wsInterface, resource, host, port);
 			else
 				data = WS.GetCompositeMeasurement (wsInterface, resource, host, port);

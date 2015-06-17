@@ -17,7 +17,8 @@ namespace DataAggregator
 			int updateInterval = 2000;
 
 			string aggregatorHost= "192.168.0.74"; int aggregatorPort = 8080;
-
+			
+			string realtimeHost02 = "syslab-02"; int realtimePort02 = 8080; // Dumpload
 			string realtimeHost05 = "syslab-05"; int realtimePort05 = 8080; // Dumpload
 			string realtimeHost05Simul = "localhost"; int realtimePort05Simul = 8080; // Dumpload
 			string realtimeHost03 = "syslab-03"; int realtimePort03 = 8080; // Gaia
@@ -34,6 +35,7 @@ namespace DataAggregator
 			AbstractApplianceVisualizationFactory appliance = 
 				VisFac.CreateApplianceVizualizationFactory (aggregatorHost, aggregatorPort); // Washing Machine Experiment
 			
+			RealtimeVisualizationFactory realtime02 = new RealtimeVisualizationFactory (aggregatorHost, aggregatorPort, realtimeHost02, realtimePort02);
 			RealtimeVisualizationFactory realtime05 = new RealtimeVisualizationFactory (aggregatorHost, aggregatorPort, realtimeHost05, realtimePort05);
 			RealtimeVisualizationFactory realtime03 = new RealtimeVisualizationFactory (aggregatorHost, aggregatorPort,realtimeHost03, realtimePort03);
 			RealtimeVisualizationFactory realtime07 = new RealtimeVisualizationFactory (aggregatorHost, aggregatorPort, realtimeHost07, realtimePort07);
@@ -56,6 +58,7 @@ namespace DataAggregator
 					RealtimeInterface.GenericLoadWS,
 					RealtimeData.ActivePower, 
 					updateInterval,
+					"mW",
 					realtime05.CreateGraph (RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower, updateInterval, 
 						"ActivePower", -1, 1, 10, "mW"),
 					realtime05.CreateGraph(RealtimeInterface.GenericLoadWS,RealtimeData.ReactivePower,updateInterval,
@@ -66,6 +69,7 @@ namespace DataAggregator
 					RealtimeInterface.GaiaWindTurbineWS,
 					RealtimeData.ActivePower, 
 					updateInterval,
+					"mW",
 					realtime03.CreateGraph (RealtimeInterface.GaiaWindTurbineWS, RealtimeData.ActivePower, updateInterval, 
 						"ActivePower", -5, 15, 10, "mW"),
 					realtime03.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.GeneratorRPM,updateInterval,
@@ -75,6 +79,7 @@ namespace DataAggregator
 					RealtimeInterface.LithiumBatteryWS,
 					RealtimeData.SOC, 
 					updateInterval,
+					"mW",
 					realtime07.CreateGraph (RealtimeInterface.LithiumBatteryWS, RealtimeData.SOC, updateInterval, 
 						"SOC", 0, 100, 10, "mW"),
 					realtime07.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,updateInterval,
@@ -84,6 +89,7 @@ namespace DataAggregator
 					RealtimeInterface.GaiaWindTurbineWS,
 					RealtimeData.ActivePower, 
 					updateInterval,
+					"mW",
 					realtime03.CreateGraph (RealtimeInterface.GaiaWindTurbineWS, RealtimeData.ActivePower, updateInterval, 
 						"ActivePower", -5, 15, 10, "mW"),
 					realtime03.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.GeneratorRPM,updateInterval,
@@ -93,6 +99,7 @@ namespace DataAggregator
 					RealtimeInterface.LithiumBatteryWS,
 					RealtimeData.SOC, 
 					updateInterval,
+					"mW",
 					realtime07.CreateGraph (RealtimeInterface.LithiumBatteryWS, RealtimeData.SOC, updateInterval, 
 						"SOC", 0, 100, 10, "mW"),
 					realtime07.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,updateInterval,
@@ -182,69 +189,25 @@ namespace DataAggregator
 
 			// Page 7 Simul Dumpload
 			List<VisualizationConfig> visualizations7 = new List<VisualizationConfig>{
-
-				realtime05Simul.CreateGauge(RealtimeInterface.GenericLoadWS,RealtimeData.ActivePower,updateInterval,
-					"Flexhouse-08 ActivePowerPhaseA",-1,2,"W",
-					new double[,]{{-1,0}},new double[,]{{0,1}},new double[,]{{1,2}}),
-				realtime05Simul.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl")
-		
+				realtime02.CreateGauge(RealtimeInterface.DEIFDieselGensetWS,RealtimeData.BusbarInterphaseVoltages,1000,"BusbarInterphaseVoltages",0,500, "U [v]",
+				                       new double[,]{{0,48}},new double[,]{{48,55}},new double[,]{{55,60}}),
+				realtime02.CreateGauge(RealtimeInterface.DEIFDieselGensetWS,RealtimeData.ActivePower,1000,"Active Power",0,60, "P [kW]",
+				                       new double[,]{{0,48}},new double[,]{{48,55}},new double[,]{{55,60}}),
+				realtime02.CreateGauge(RealtimeInterface.DEIFDieselGensetWS,RealtimeData.ReactivePower,1000,"Reactive Power",-80,80, "Q [kVAr]",
+				                       new double[,]{{-60,60}},new double[,]{{-65,-60},{60,65}},new double[,]{{-80,-65},{65,80}}),
+				realtime02.CreateGauge(RealtimeInterface.DEIFDieselGensetWS,RealtimeData.EngineRPM,1000,"Engine RPM",0,2000, "RPM [1/min]",
+				                       new double[,]{{0,1700}},new double[,]{{1700,1800}},new double[,]{{1800,2000}}),
+				realtime02.CreateGauge(RealtimeInterface.DEIFDieselGensetWS,RealtimeData.BusbarFrequency,1000,"Busbar Frequency",30,70, "f [Hz]",
+				                       new double[,]{{48,52}},new double[,]{{45,48},{52,55}},new double[,]{{30,45},{55,70}}),
+				realtime02.CreateControl(RealtimeInterface.DEIFDieselGensetWS,"dieselControl")
 			};
 
 			PageConfig page7 = new PageConfig (visualizations7,"Grid3x3");
 
 			// Page 8 Dumpload
-			List<ExperimentConfig> visualizations8 = new List<ExperimentConfig>{
-				realtime05Simul.CreateExperiment (
-					RealtimeInterface.GenericLoadWS,
-					RealtimeData.ActivePower, 
-					updateInterval,
-					realtime05Simul.CreateGraph (RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower, updateInterval, 
-						"ActivePower", -1, 1, 10, "mW"),
-					realtime05Simul.CreateControl(RealtimeInterface.GenericLoadWS,"dumploadControl")
-				)
-				,
-				realtime03.CreateExperiment (
-					RealtimeInterface.GaiaWindTurbineWS,
-					RealtimeData.ActivePower, 
-					updateInterval,
-					realtime03.CreateGraph (RealtimeInterface.GaiaWindTurbineWS, RealtimeData.ActivePower, updateInterval, 
-						"ActivePower", -5, 15, 10, "mW"),
-					realtime03.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.GeneratorRPM,updateInterval,
-						"GeneratorRPM",1000,1050,10,"mW")
-				),
-				realtime07.CreateExperiment (
-					RealtimeInterface.LithiumBatteryWS,
-					RealtimeData.SOC, 
-					updateInterval,
-					realtime07.CreateGraph (RealtimeInterface.LithiumBatteryWS, RealtimeData.SOC, updateInterval, 
-						"SOC", 0, 100, 10, "mW"),
-					realtime07.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,updateInterval,
-						"Temperature",0,100,10,"mW")
-				),
-				realtime03.CreateExperiment (
-					RealtimeInterface.GaiaWindTurbineWS,
-					RealtimeData.ActivePower, 
-					updateInterval,
-					realtime03.CreateGraph (RealtimeInterface.GaiaWindTurbineWS, RealtimeData.ActivePower, updateInterval, 
-						"ActivePower", -5, 15, 10, "mW"),
-					realtime03.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.GeneratorRPM,updateInterval,
-						"GeneratorRPM",1000,1050,10,"mW")
-				),
-				realtime07.CreateExperiment (
-					RealtimeInterface.LithiumBatteryWS,
-					RealtimeData.SOC, 
-					updateInterval,
-					realtime07.CreateGraph (RealtimeInterface.LithiumBatteryWS, RealtimeData.SOC, updateInterval, 
-						"SOC", 0, 100, 10, "mW"),
-					realtime07.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,updateInterval,
-						"Temperature",0,100,10,"mW")
-				)
-			};
-			ExperimentPageConfig page8 = new ExperimentPageConfig (visualizations8, "Experiment",aggregatorHost,aggregatorPort);
 
 
-
-			PagesConfig pages = pageFactory.CreatePages (new List<MasterPageConfig> (){ page1, page2,page3, page4, page5,page7 ,page8});
+			PagesConfig pages = pageFactory.CreatePages (new List<MasterPageConfig> (){ page1, page2,page3, page4, page5,page7});
 
 			string serializedGaiaConf = Newtonsoft.Json.JsonConvert.SerializeObject (pages);
 			File.Delete ("PageConfigurations/BigPres.json");
@@ -402,6 +365,7 @@ namespace DataAggregator
 					"GenericLoadWS",
 					"getActivePower"
 					,5000,
+					"mW",
 					realtime.CreateGraph(RealtimeInterface.GenericLoadWS,RealtimeData.ActivePower,3000,"Power",-10,10,10,"mW"),
 					realtime.CreateGraph(RealtimeInterface.GenericLoadWS,RealtimeData.ReactivePower,3000,"Power",-10,10,10,"mW")
 				)
@@ -412,6 +376,7 @@ namespace DataAggregator
 					"GaiaWindTurbineWS",
 					"getActivePower"
 					,5000,
+					"mW",
 					realtime2.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.RotorRPM,3000,"Power",-10,10,10,"mW"),
 					realtime2.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.ActivePower,3000,"Power",-10,10,10,"mW")
 						)
@@ -422,6 +387,7 @@ namespace DataAggregator
 					"LithiumBatteryWS",
 					"getSOC"
 					,5000,
+					"mW",
 					realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.SOC,3000,"Power",-10,10,10,"mW"),
 					realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,3000,"Power",-10,10,10,"mW")
 						)
@@ -447,6 +413,7 @@ namespace DataAggregator
 					RealtimeInterface.GenericLoadWS,
 					RealtimeData.ActivePower, 
 					5000,
+					"mW",
 					realtime.CreateGraph (RealtimeInterface.GenericLoadWS, RealtimeData.ActivePower, 6000, "ActivePower", -1, 1, 10, "mW"),
 					realtime.CreateGraph(RealtimeInterface.GenericLoadWS,RealtimeData.ReactivePower,6000,"ReactivePower",-1,1,10,"mW")
 				)
@@ -455,6 +422,7 @@ namespace DataAggregator
 					RealtimeInterface.GaiaWindTurbineWS,
 					RealtimeData.ActivePower, 
 					5000,
+					"mW",
 					realtime2.CreateGraph (RealtimeInterface.GaiaWindTurbineWS, RealtimeData.ActivePower, 6000, "ActivePower", -5, 15, 10, "mW"),
 					realtime2.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.GeneratorRPM,6000,"GeneratorRPM",1000,1050,10,"mW")
 					),
@@ -462,6 +430,7 @@ namespace DataAggregator
 					RealtimeInterface.LithiumBatteryWS,
 					RealtimeData.SOC, 
 					5000,
+					"mW",
 					realtime3.CreateGraph (RealtimeInterface.LithiumBatteryWS, RealtimeData.SOC, 6000, "SOC", 0, 100, 10, "mW"),
 					realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,6000,"Temperature",0,100,10,"mW")
 					),
@@ -469,6 +438,7 @@ namespace DataAggregator
 					RealtimeInterface.GaiaWindTurbineWS,
 					RealtimeData.ActivePower, 
 					5000,
+					"mW",
 					realtime2.CreateGraph (RealtimeInterface.GaiaWindTurbineWS, RealtimeData.ActivePower, 6000, "ActivePower", -5, 15, 10, "mW"),
 					realtime2.CreateGraph(RealtimeInterface.GaiaWindTurbineWS,RealtimeData.GeneratorRPM,6000,"GeneratorRPM",1000,1050,10,"mW")
 					),
@@ -476,6 +446,7 @@ namespace DataAggregator
 					RealtimeInterface.LithiumBatteryWS,
 					RealtimeData.SOC, 
 					5000,
+					"mW",
 					realtime3.CreateGraph (RealtimeInterface.LithiumBatteryWS, RealtimeData.SOC, 6000, "SOC", 0, 100, 10, "mW"),
 					realtime3.CreateGraph(RealtimeInterface.LithiumBatteryWS,RealtimeData.Temperature,6000,"Temperature",0,100,10,"mW")
 					)

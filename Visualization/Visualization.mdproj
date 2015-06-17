@@ -2426,7 +2426,6 @@
     <None Include="Scripts\Libraries\d3\d3.js" />
     <None Include="Scripts\Libraries\d3\d3.min.js" />
     <None Include="Scripts\Services\AppService.js" />
-    <None Include="Index.html" />
     <None Include="Scripts\Controllers\unitController.js" />
     <None Include="Views\Visualization\unit.html" />
     <None Include="Views\Visualization\table.html" />
@@ -2444,5 +2443,8 @@
     <None Include="Scripts\Directives\experimentDirective.js" />
     <None Include="Views\Pages\Experiment.html" />
     <None Include="Views\Visualization\d3GaugeExp.html" />
+    <None Include="Scripts\Controllers\dieselController.js" />
+    <None Include="Views\Visualization\dieselControl.html" />
+    <None Include="index.html" />
   </ItemGroup>
 </Project>
