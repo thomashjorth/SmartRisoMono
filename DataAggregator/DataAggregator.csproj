@@ -193,6 +193,7 @@
     <None Include="PageConfigurations\Dumpload.json" />
     <None Include="PageConfigurations\test2.json" />
     <None Include="PageConfigurations\dumploads.json" />
+    <None Include="PageConfigurations\exam.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataModel\DataModel.csproj">

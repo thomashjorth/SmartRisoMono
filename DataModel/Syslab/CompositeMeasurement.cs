@@ -23,6 +23,8 @@ namespace DataModel.Syslab
 
 			if (doc.Root.Element ("value").Value == "0.0")
 				value = 0;
+			else if (doc.Root.Element ("value").Value == "NaN")
+				value = 0;
 			else {
 				value = Math.Round (Double.Parse (
 					doc.Root.Element ("value").Value.Replace (',', '.'), 

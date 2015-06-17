@@ -31,7 +31,7 @@
     AppService.getData($scope.dataHost,$scope.dataPort,$scope.controller,$scope.config)
 			.success(function (response){
 				var config = JSON.parse(response);
-				var slides = [];
+				var slides = {Pages: []};
 
 				var include = [];
 				var n = [];
@@ -55,7 +55,7 @@
 				}
 				else{
 					for (var i = 0; i < $scope.slides.length; i++) {
-						slides.push(config.Pages[$scope.slides[i]]);
+						slides.Pages.push(config.Pages[$scope.slides[i]]);
 					}
 
 					for(var j = 0; j < $scope.slides.length; j ++){

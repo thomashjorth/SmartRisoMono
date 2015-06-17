@@ -158,6 +158,7 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
 
             function updateValues(data) {
                 svg.selectAll("text").each(function (d, i) {
+                    if(data[i].measurement != null){
                         if(data[i].measurement.value > 0){
                             d3.select(this)
                                 .style("fill", "green")
@@ -167,6 +168,7 @@ VisualizeApp.directive('experimentDirective', function($parse, $window, $compile
                                 .style("fill", "red")
                                 .text(data[i].measurement.value+" "+Data.config.units[i].Unit)
                         }
+                    }
                     });
                 
             }
