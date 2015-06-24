@@ -11,11 +11,8 @@ namespace DataAggregator.Controllers
 	{
 		// GET: api/Realtime/5
 		[HttpGet]
-		public HttpResponseMessage GetCompositeMeasurement(
-			[FromUri] string host, 
-			[FromUri] string port, 
-			[FromUri] string wsInterface, 
-			[FromUri] string resource)
+		public HttpResponseMessage GetCompositeMeasurement([FromUri] string host, [FromUri] string port, 
+			[FromUri] string wsInterface, [FromUri] string resource)
 		{
 			HttpResponseMessage response;
 			/* Example use

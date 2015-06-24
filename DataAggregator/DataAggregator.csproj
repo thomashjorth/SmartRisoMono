@@ -17,6 +17,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -135,7 +137,6 @@
     <Content Include="Images\GridComponent.jpg" />
     <Content Include="Images\GenericPrice.jpg" />
     <Content Include="Images\LithiumBattery.jpg" />
-    <Content Include="Images\PVSystem.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -175,7 +176,7 @@
       </FlavorProperties>
     </VisualStudio>
     <MonoDevelop>
-      <Properties>
+      <Properties VerifyCodeBehindFields="True" VerifyCodeBehindEvents="True">
         <XspParameters Port="9001" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
       </Properties>
     </MonoDevelop>
@@ -193,6 +194,7 @@
     <None Include="PageConfigurations\test2.json" />
     <None Include="PageConfigurations\dumploads.json" />
     <None Include="PageConfigurations\exam.json" />
+    <None Include="PageConfigurations\BigPres.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataModel\DataModel.csproj">

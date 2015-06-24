@@ -6,7 +6,7 @@ namespace DataModel
 {
 
 	public enum Type {
-		NAN, GenericLoad, GenericPrice, GaiaWindTurbine
+		NAN, GenericLoad, GenericPrice, GaiaWindTurbine, PVSystem, VBRBattery
 	};
 	public enum Role {
 		PowerConsumer, NAN
@@ -113,6 +113,12 @@ namespace DataModel
 				} else if(app.Name.Contains ("Gaia")){
 					Types.Add (Type.GaiaWindTurbine.ToString());
 					Interface= Type.GaiaWindTurbine.ToString();
+				} else if(app.Name.Contains ("PV")){
+					Types.Add (Type.PVSystem.ToString());
+					Interface= Type.PVSystem.ToString();
+				} else if(app.Name.Contains ("Battery")){
+					Types.Add (Type.VBRBattery.ToString());
+					Interface= Type.VBRBattery.ToString();
 				}
 			}
 		}

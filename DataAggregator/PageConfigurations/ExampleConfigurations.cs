@@ -81,7 +81,7 @@ namespace DataAggregator
 					updateInterval,
 					"mW",
 					realtime02.CreateGraph (RealtimeInterface.DEIFDieselGensetWS, RealtimeData.EngineRPM, updateInterval, 
-						"Engine", 0, 100, 10, "rpm"),
+						"Engine", 0, 1200, 10, "rpm"),
 					realtime02.CreateControl(RealtimeInterface.DEIFDieselGensetWS,"dieselControl")
 				),
 				realtime07.CreateExperiment (
@@ -109,20 +109,20 @@ namespace DataAggregator
 
 			// Page 3 PV 10 03 and VRBBatteryW 12
 			List<VisualizationConfig> visualizations3 = new List<VisualizationConfig>{
-				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACFrequency,updateInterval,"PV-10 ACFrequency",40,70,100,"W"),
+				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACFrequency,updateInterval,"PV-10 ACFrequency",0,70,100,"Hz"),
 				realtime10.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACReactivePower,updateInterval,"PV-10 ACReactivePower",0,2000,10,"W"),
 				realtime10.CreateUnit(3000),
-				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACFrequency,updateInterval,"PV-07 ACFrequency",40,70,100,"W"),
+				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACFrequency,updateInterval,"PV-07 ACFrequency",40,70,100,"Hz"),
 				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACReactivePower,updateInterval,"PV-07 ACReactivePower",0,2000,10,"W"),
 				realtime07.CreateUnit(3000),
-				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ACFrequency,updateInterval,"Battery-12 ACFrequency",40,70,10,"W"),
+				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ACFrequency,updateInterval,"Battery-12 ACFrequency",40,70,10,"Hz"),
 				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ACReactivePower,updateInterval,"Battery-12 ACReactivePower",-2000,2000,10,"W"),
 				realtime12.CreateUnit(3000)
 			};
 			PageConfig page3 = pageFactory.Create3x3Page (visualizations3,"Grid3x3");
 			// Page 4 PV 03 
 			List<VisualizationConfig> visualizations4 = new List<VisualizationConfig>{
-				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACFrequency,updateInterval,"PV-07 ACFrequency",40,70,100,"W"),
+				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACFrequency,updateInterval,"PV-07 ACFrequency",40,70,100,"Hz"),
 				realtime07.CreateGraph(RealtimeInterface.PVSystemWS,RealtimeData.ACReactivePower,updateInterval,"PV-07 ACReactivePower",0,2000,10,"W"),
 				realtime07.CreateUnit(3000)
 			};
@@ -130,30 +130,11 @@ namespace DataAggregator
 
 			// Page 5 VNR BAttery
 			List<VisualizationConfig> visualizations5 = new List<VisualizationConfig>{
-				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ACFrequency,updateInterval,"Battery-12 ACFrequency",40,70,10,"W"),
+				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ACFrequency,updateInterval,"Battery-12 ACFrequency",40,70,10,"Hz"),
 				realtime12.CreateGraph(RealtimeInterface.VRBBatteryWS,RealtimeData.ACReactivePower,updateInterval,"Battery-12 ACReactivePower",-2000,2000,10,"W"),
 				realtime12.CreateUnit(3000)
 			};
 			PageConfig page5 = pageFactory.Create3x3Page (visualizations5,"Grid3x3");
-
-			// Page 7 Simul Dumpload
-			/*
-			List<VisualizationConfig> visualizations7 = new List<VisualizationConfig>{
-				realtime02.CreateGauge(RealtimeInterface.DEIFDieselGensetWS,RealtimeData.BusbarInterphaseVoltages,1000,"BusbarInterphaseVoltages",0,500, "U [v]",
-				                       new double[,]{{0,48}},new double[,]{{48,55}},new double[,]{{55,60}}),
-				realtime02.CreateGauge(RealtimeInterface.DEIFDieselGensetWS,RealtimeData.ActivePower,1000,"Active Power",0,60, "P [kW]",
-				                       new double[,]{{0,48}},new double[,]{{48,55}},new double[,]{{55,60}}),
-				realtime02.CreateGauge(RealtimeInterface.DEIFDieselGensetWS,RealtimeData.ReactivePower,1000,"Reactive Power",-80,80, "Q [kVAr]",
-				                       new double[,]{{-60,60}},new double[,]{{-65,-60},{60,65}},new double[,]{{-80,-65},{65,80}}),
-				realtime02.CreateGauge(RealtimeInterface.DEIFDieselGensetWS,RealtimeData.EngineRPM,1000,"Engine RPM",0,2000, "RPM [1/min]",
-				                       new double[,]{{0,1700}},new double[,]{{1700,1800}},new double[,]{{1800,2000}}),
-				realtime02.CreateGauge(RealtimeInterface.DEIFDieselGensetWS,RealtimeData.BusbarFrequency,1000,"Busbar Frequency",30,70, "f [Hz]",
-				                       new double[,]{{48,52}},new double[,]{{45,48},{52,55}},new double[,]{{30,45},{55,70}}),
-				realtime02.CreateControl(RealtimeInterface.DEIFDieselGensetWS,"dieselControl")
-			};
-
-			PageConfig page7 = new PageConfig (visualizations7,"Grid3x3");
-			*/
 
 			// Page 8: Gaia Visualization from report
 			List<VisualizationConfig> visualizations8 = new List<VisualizationConfig> (){ 
@@ -174,8 +155,25 @@ namespace DataAggregator
 		
 			PageConfig page8 = new PageConfig (visualizations8,"Grid3x3");
 
+			// Page 7 Diesel
 
-			PagesConfig pages = pageFactory.CreatePages (new List<MasterPageConfig> (){ page1, page2,page3, page8});
+			List<VisualizationConfig> visualizations7 = new List<VisualizationConfig>{
+				realtime02.CreateGauge(RealtimeInterface.DEIFDieselGensetWS,RealtimeData.BusbarInterphaseVoltages,1000,"BusbarInterphaseVoltages",0,500, "U [v]",
+				                       new double[,]{{350,450}},new double[,]{},new double[,]{{0,350},{450,500}}),
+				realtime02.CreateGauge(RealtimeInterface.DEIFDieselGensetWS,RealtimeData.ActivePower,1000,"Active Power",0,60, "P [kW]",
+				                       new double[,]{{0,48}},new double[,]{{48,55}},new double[,]{{55,60}}),
+				realtime02.CreateGauge(RealtimeInterface.DEIFDieselGensetWS,RealtimeData.ReactivePower,1000,"Reactive Power",-80,80, "Q [kVAr]",
+				                       new double[,]{{-60,60}},new double[,]{{-65,-60},{60,65}},new double[,]{{-80,-65},{65,80}}),
+				realtime02.CreateGauge(RealtimeInterface.DEIFDieselGensetWS,RealtimeData.EngineRPM,1000,"Engine RPM",0,2000, "RPM [1/min]",
+				                       new double[,]{{0,1700}},new double[,]{{1700,1800}},new double[,]{{1800,2000}}),
+				realtime02.CreateGauge(RealtimeInterface.DEIFDieselGensetWS,RealtimeData.BusbarFrequency,1000,"Busbar Frequency",30,70, "f [Hz]",
+				                       new double[,]{{48,52}},new double[,]{{45,48},{52,55}},new double[,]{{30,45},{55,70}}),
+				realtime02.CreateControl(RealtimeInterface.DEIFDieselGensetWS,"dieselControl")
+			};
+
+			PageConfig page7 = new PageConfig (visualizations7,"Grid3x3");
+
+			PagesConfig pages = pageFactory.CreatePages (new List<MasterPageConfig> (){ page1, page2,page3,page7, page8});
 
 			string serializedGaiaConf = Newtonsoft.Json.JsonConvert.SerializeObject (pages);
 			File.Delete ("PageConfigurations/BigPres.json");
